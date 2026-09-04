@@ -251,7 +251,7 @@ Illustrative shape:
 ```json
 {
   "episode_id": "E0001",
-  "style_version": "INSTATOON_STYLE_v1.0",
+  "style_version": "INSTATOON_STYLE_v1.1",
   "visual_grammar_version": "INSTATOON_VISUAL_GRAMMAR_v0.1",
   "format": "STORY_ARC",
   "continuity_mode": "LIGHT",
