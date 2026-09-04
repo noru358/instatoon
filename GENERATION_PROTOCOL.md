@@ -1,6 +1,6 @@
 # GENERATION_PROTOCOL.md
 
-# Generation & QC protocol — INSTATOON_STYLE_v1.1 / VISUAL_GRAMMAR_v0.1
+# Generation & QC protocol — INSTATOON_STYLE_v1.2 / VISUAL_GRAMMAR_v0.1
 
 This protocol prevents style drift, page-grammar drift, and wasteful generation.
 
@@ -135,6 +135,26 @@ A failed preflight frame must never be promoted to the sole reference for the ne
 
 ---
 
+### Canonical five-reference selection
+
+The approved reference set lives in `assets/style_refs/`.
+
+Choose references by risk:
+
+- portrait / character: REF_01;
+- full body: REF_02 + REF_01 face support;
+- two-person interaction: REF_03 + REF_01 face support;
+- indoor: REF_04 + REF_01 face support when needed;
+- outdoor / environment-heavy / off-axis gaze: REF_05 + REF_01 face support.
+
+REF_01 is the strongest general face-grammar anchor.
+REF_05 is the empirically corrected outdoor anchor.
+
+These style anchors are distinct from episode-local identity references.
+
+For a production face, append `FACE_LOCK_BLOCK`.
+For an environment-heavy render, append `BACKGROUND_DENSITY_LOCK`.
+
 ## 7. Two-slide render preflight
 
 The entire episode is planned first.
@@ -189,7 +209,10 @@ Immediately reject or repair if:
 - global paper/grain/watercolor/pencil texture appears;
 - hair uses visible hatch/strand texture;
 - night/interior lighting becomes atmospheric or cinematic;
-- background shop products/fixtures gain unnecessary individual detail.
+- background shop products/fixtures gain unnecessary individual detail;
+- a small/full-body face becomes more polished or generic than a closer face;
+- off-axis gaze changes tiny solid-dark eyes into longer/detailed eyes or visible sclera/pupil construction;
+- environment complexity causes the background to gain detail while character-style control weakens.
 
 ---
 
