@@ -39,11 +39,10 @@ The production architecture is defined in `TOON_SYSTEM_V0_1.md`.
 7. Individual slides are rendered only after the whole episode plan is coherent.
 8. All important text, speech bubbles, labels, arrows, emphasis and SFX are separate editable vector layers.
 9. Community/news/personal material is a **source mode**, not an output format.
-10. v0.1 narrative formats are:
-    - `STORY_ARC`
-    - `OBSERVATION_SET`
-    - `EXPLAINER_CAUSAL`
-    - `CONTRAST_REFRAME`
+10. v0.1 active narrative formats are deliberately narrow:
+    - `STORY_ARC` — anecdotes / experiences / incidents
+    - `RELATABLE_SCENARIO` — dramatized everyday relatability
+    - `OBSERVATION_SET`, `EXPLAINER_CAUSAL`, and `CONTRAST_REFRAME` are dormant/future expansion.
 11. Paid image generation is used only when illustration materially improves the slide.
 12. Multi-agent debate/swarm architecture is not the default. One orchestrator + typed stages + deterministic validation is preferred to reduce token cost and drift.
 13. Human taste approval stays explicit during v0.1.
@@ -71,12 +70,14 @@ These findings align with the existing warm, low-density style lock.
 
 1. `STYLE_LOCK.md` — illustration style authority
 2. `VISUAL_GRAMMAR.md` — episode/page/sequential grammar authority
-3. `TOON_SYSTEM_V0_1.md` — production-system architecture and data flow
-4. `MASTER_PROMPTS.md` — canonical style prompt blocks
-5. `GENERATION_PROTOCOL.md` — execution/QC procedure
-6. `REFERENCE_ANALYSIS.md` — style-analysis rationale
-7. `CURRENT_STATE.md` — current handoff / next action
-8. episode-specific content and prompts
+3. `STORY_GRAMMAR.md` — active v0.1 anecdote/relatable editorial grammar
+4. `SOURCE_STORY_PIPELINE.md` — source selection → whole-story planning flow
+5. `TOON_SYSTEM_V0_1.md` — production-system architecture and data flow
+6. `MASTER_PROMPTS.md` — canonical style prompt blocks
+7. `GENERATION_PROTOCOL.md` — execution/QC procedure
+8. `REFERENCE_ANALYSIS.md` — style-analysis rationale
+9. `CURRENT_STATE.md` — current handoff / next action
+10. episode-specific content and prompts
 
 ---
 
@@ -86,7 +87,10 @@ Do **not** build recurring character masters as the next mandatory step.
 
 Instead:
 
-1. Build three prototype episodes representing different narrative topologies.
+1. Build three prototype episodes focused only on the active v0.1 editorial scope:
+   - one sourced anecdote/incident using `STORY_ARC`;
+   - one error/misunderstanding/embarrassment story using `STORY_ARC`;
+   - one everyday `RELATABLE_SCENARIO`.
 2. For each prototype:
    - create CONTENT_MASTER;
    - select angle;
@@ -109,4 +113,4 @@ Instead:
    - where automation saves time vs hurts taste.
 4. Then finalize machine-readable JSON schemas and implement the deterministic vector renderer.
 
-The first prototype may later use P002 material, but the system design is not coupled to P002.
+P002 is no longer the preferred first prototype because it is mainly a social/market phenomenon rather than the v0.1 target of anecdote/experience/incident/relatable storytelling. Keep it as a future-format candidate.
