@@ -1,81 +1,143 @@
 # CURRENT_STATE.md
 
-# Current state — 2026-09-04
+# LIVE STATE — 2026-09-04
 
-Repository: `noru358/instatoon`
+Repository: noru358/instatoon
 
 ## Big flow
 
-**Style reset complete → real omnibus pilot production → QC / voice learning → repeat prototypes → automation implementation**
+Style reset complete → real omnibus pilot E002 → dialogue/layout refinement → character-anchor repair → first publishable episode → repeat prototypes → automation implementation.
 
-## Current detailed step
+## Current detailed position
 
-The previous visual style has been abandoned.
-INSTATOON_STYLE_v2.0 is now the approved visual direction.
-
-Passed tests:
-- two user-provided character-sheet references established the target face/line/color grammar;
-- background-style sample passed;
-- main-cast sheet passed after Harin sock correction and Taemin identity replacement;
-- three-person interaction + indoor environment test passed.
-
-Therefore visual-style exploration is closed unless a real production failure reveals a new systemic issue.
-
-## Content definition
-
-The channel is an omnibus short-story / situation comic system.
-Sources may come from internet communities, SNS, comments, submissions, real-life observations, or limited original creation.
-
-Main cast may recur but is not mandatory in every episode.
-Episode-only characters are expected.
-
-Default distribution:
-- Instagram toon/carousel: 4:5, 1080×1350;
-- Reels/Shorts: 9:16, 1080×1920;
-- 16:9 only when explicitly needed.
-
-Fixed background anchors are not a required production stage.
-Story determines the environment; recurring locations may receive anchors later if continuity requires them.
-
-## Story / dialogue architecture
-
-Canonical layered flow:
-source collection → selection → source facts + source voice → story beats → dialogue draft → dialogue humanization → USER VOICE GATE → Voice Ledger update → storyboard → image/video → QC → performance feedback.
-
-The USER VOICE GATE is intentionally manual during the learning period because the user wants to remove AI-sounding dialogue structurally rather than repair it ad hoc forever.
-
-## Active pilot episode
-
-Working concept: blind-date phone self-follow anecdote.
-
-Casting:
-- female: Harin (main cast);
-- male: episode-only one-off character.
+Visual-style exploration itself is no longer the main task.
 
 Approved:
-- concept;
-- Harin + one-off male casting;
-- 7-beat structure;
-- 4:5 primary format;
-- casual/unpolished dialogue direction.
+- v2 character style;
+- v2 background direction;
+- Gaeun / Harin / Taemin main-cast sheet after corrections;
+- 3-person interaction test;
+- 4:5 feed/carousel as primary format;
+- 9:16 Reels/Shorts derivative;
+- omnibus content model;
+- source-voice / dialogue-humanization / USER VOICE GATE workflow.
 
-A first-pass 4:5 art sequence has been generated.
-It is NOT yet publish-locked.
-Next action: perform whole-sequence QC for story logic, dialogue naturalness, Harin identity continuity, one-off male continuity, scene order, style drift, text accuracy, and composition; then repair only named failures.
+Active episode: episodes/E002/README.md
 
-## Visual authority
+## E002 — current diagnosis
 
-`MASTER_PROMPTS.md` = single canonical production prompt.
-`STYLE_LOCK.md` = normative pass/fail style boundary.
-`SOURCE_STORY_PIPELINE.md` = content + dialogue layer architecture.
-`GENERATION_PROTOCOL.md` = render/QC procedure.
+Working story:
+blind-date man borrows Harin's phone and uses her account to follow himself.
 
-IMPORTANT:
-The old files under `assets/style_refs/` belong to the pre-reset style unless REFERENCE_SET.md explicitly promotes a replacement asset.
-Do not use legacy assets as current visual authority.
+Casting:
+- Harin = recurring main character;
+- blind-date man = episode-only character in THIS episode.
 
-## Automation status
+Important clarification:
+There is no global Taemin ban.
+Future episodes may use Taemin when story/context calls for him.
+E002 specifically uses a different one-off man.
 
-Still semi-manual.
-The goal remains eventual Python/state-machine automation with repository locks/prompts as configuration and explicit stage outputs.
-Do not automate away the USER VOICE GATE until enough preference data has accumulated.
+### First visual pass
+
+Strengths:
+- scene composition;
+- café staging;
+- shot variety;
+- Harin expression;
+- overall comic-scene feel
+
+were better than later retries.
+
+Problems:
+- male visually drifted too close to Taemin/main-cast solution;
+- text was too small / too detached as top narration;
+- coloring/background had some generic AI-like warm texture/atmosphere;
+- final two beats were accidentally reversed.
+
+Correct ending order:
+REVEAL / self-follow → AFTERMATH / “아 집가고 싶다”.
+
+### Later retry
+
+Improved:
+- larger mobile-readable text;
+- more explicit speech-bubble treatment.
+
+Regressed:
+- male face became a generic smooth AI-like one-off face;
+- character drawing became awkward;
+- composition, scene design and visual rhythm became substantially worse than first pass;
+- the retry should NOT become the new visual anchor.
+
+## Current hard lesson
+
+Do not solve one local problem by fully regenerating a good frame.
+
+Use:
+LAST_KNOWN_GOOD → local change only.
+
+For a new non-main person appearing in 2+ cuts:
+CHARACTER ANCHOR FIRST → story frames second.
+
+This applies across future sessions and episodes.
+
+## Exact next action
+
+1. Do NOT continue from the visually regressed E002 retry.
+2. Internally create an E002-only blind-date-man character anchor.
+   - fits a plausible blind-date context;
+   - distinct from Taemin;
+   - current v2 visual style;
+   - no generic smooth AI face.
+3. QC that anchor internally.
+4. Return to the visually stronger first-pass E002 scene compositions as LAST_KNOWN_GOOD bases.
+5. Replace only the male identity while preserving:
+   - Harin;
+   - composition;
+   - camera;
+   - scene blocking;
+   - good background structure;
+   - story action.
+6. Remove final semantic text from raster production art.
+7. Reapply the improved text system as editable layout:
+   - larger type;
+   - narration / speech bubble / reaction roles separated.
+8. Enforce numeric slide order and correct last two beats.
+9. Run whole-sequence QC.
+10. Present the repaired sequence for user taste gate.
+
+## Current visual risk to watch
+
+The main remaining visual drift is not the core face grammar; it is:
+- generic AI-like new-person face design;
+- blanket beige/sepia atmosphere;
+- soft global texture;
+- over-rendered environment;
+- full-scene regeneration during local repair.
+
+## Current content / dialogue state
+
+The rough story and dialogue direction passed.
+The system now structurally separates:
+source facts → source voice → story beats → dialogue draft → humanization → USER VOICE GATE → Voice Ledger.
+
+Dialogue is not final until the user taste gate passes.
+
+## Repository authority after cleanup
+
+Read:
+1. README.md
+2. this file
+3. SOURCE_STORY_PIPELINE.md
+4. MASTER_PROMPTS.md
+5. VISUAL_GRAMMAR.md
+6. GENERATION_PROTOCOL.md
+7. REFERENCE_SET.md
+
+Legacy overlapping root documents are being retired/merged; Git history preserves them.
+
+## Binary reference note
+
+The approved v2 image references from this session are not yet committed as binaries through the available GitHub connector.
+Do not fall back to legacy v1 style references in a clean environment.
