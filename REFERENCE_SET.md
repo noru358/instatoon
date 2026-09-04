@@ -1,96 +1,61 @@
 # REFERENCE_SET.md
 
-# Canonical visual reference set — INSTATOON_STYLE_v1.2
+# Reference-set status — INSTATOON_STYLE_v2.0
+Updated: 2026-09-04
 
-**Status:** APPROVED  
-**Effective:** 2026-09-04
+## Critical status
 
-This file defines the approved visual anchor set used for production rendering.
+The pre-reset assets currently stored under `assets/style_refs/` are LEGACY and NON-CANONICAL.
+They must not be used to define the current style.
 
-These images are style authorities, not a requirement that unrelated episodes reuse the same recurring character.
+Current visual authority was approved in the 2026-09-04 style-reset session and consists conceptually of:
 
-## Approved assets
+1. USER_REF_A — brown-bob female character sheet:
+   - large round eyes;
+   - simple black pupil/iris + tiny highlight;
+   - simple nose/mouth;
+   - black hand-drawn outline;
+   - flat color;
+   - minimal shading;
+   - full body / gestures / seated / expression vocabulary.
 
-1. `assets/style_refs/INSTATOON_REF_01_CHARACTER.webp`
-   - Role: primary face / hair / close-to-medium character anchor.
-   - Use when facial grammar is at risk.
-   - Strongest authority for tiny solid-dark eyes, rounded face, minimal nose/mouth, blush, and broad hair massing.
+2. USER_REF_B — long-wavy-black-hair female character sheet:
+   - same drawing grammar as USER_REF_A;
+   - confirms style across different hair/clothing identity.
 
-2. `assets/style_refs/INSTATOON_REF_02_FULLBODY.webp`
-   - Role: full-body proportion / silhouette / outfit-scale anchor.
-   - Use for standing full-body and medium-full scenes.
+3. APPROVED_BACKGROUND_STYLE_SAMPLE:
+   - home, bedroom, desk, café, office, classroom, subway, street, restaurant, park, shop, night-city examples;
+   - simple black outline;
+   - flat muted fill;
+   - low detail;
+   - same-illustrator feel between character and environment.
 
-3. `assets/style_refs/INSTATOON_REF_03_INTERACTION.png`
-   - Role: two-person interaction + outdoor environment balance.
-   - Use for social interaction, handoff gestures, and small-group staging.
+4. APPROVED_MAIN_CAST_SHEET:
+   - Gaeun / Harin / Taemin in v2 style;
+   - Harin black socks;
+   - Taemin replaced with the approved black-haired male identity.
 
-4. `assets/style_refs/INSTATOON_REF_04_INDOOR.webp`
-   - Role: indoor environment density / seated scene anchor.
-   - Use for sofa, home, cafe, desk, and other interior scenes.
+5. APPROVED_3P_INTERACTION_TEST:
+   - Gaeun + Harin + Taemin in an indoor conversation scene;
+   - verified multi-character + background compatibility.
 
-5. `assets/style_refs/INSTATOON_REF_05_OUTDOOR_APPROVED.png`
-   - Role: corrected outdoor full-body + side-gaze / environment-heavy anchor.
-   - Use for residential streets, outdoor full-body framing, or scenes where the face is small in frame.
+## Binary-asset note
 
-## Asset integrity
+The text locks have been updated immediately.
+The approved v2 binary images from the current chat still need to be materialized into the repository before a future fully self-contained automated renderer can rely on GitHub alone.
 
-The set currently contains three 360×450 WebP anchors and two 1122×1402 PNG anchors. REF_03 and REF_05 were replaced by higher-resolution equivalents and visually checked against the same v1.2 style family during the E001 production pass. Their exact identities are locked below.
+Until that binary ingest is complete:
+- do NOT fall back to the legacy `assets/style_refs/` images;
+- use MASTER_PROMPTS.md + the approved v2 images when supplied in the active environment;
+- if no approved v2 image is available and exact style fidelity is critical, stop rather than silently using legacy references.
 
-| Asset | Format / dimensions | SHA-256 |
-|---|---|---|
-| `INSTATOON_REF_01_CHARACTER.webp` | WebP / 360×450 | `6243d1d58d64f0752f64177b0228c5c0b5b32569c26bd30d5620d9d0a6c478e2` |
-| `INSTATOON_REF_02_FULLBODY.webp` | WebP / 360×450 | `be289521db188e009541b8a36cb4dccd41b5ead7f8b8a296d5beed11819d720d` |
-| `INSTATOON_REF_03_INTERACTION.png` | PNG / 1122×1402 | `41ff0316f62b8ae238acf9e1f9941a96d188a46e02054a6cedb4a069582cf3f7` |
-| `INSTATOON_REF_04_INDOOR.webp` | WebP / 360×450 | `fae356fcd276b28b39b9ad75a72b2f221be2dd215ccbe04bfcdb82cd0dda6412` |
-| `INSTATOON_REF_05_OUTDOOR_APPROVED.png` | PNG / 1122×1402 | `de836129fc2fe816df12b7a35dbe11fe1c754e7512028be0e79174e9fbe49128` |
+## Future target paths
 
-If a file's hash differs, do not treat it as the approved canonical binary until the change is explicitly reviewed and versioned.
+When binary ingest is available, use names such as:
+- `assets/style_refs_v2/REF_A_BROWN_BOB_CHARACTER_SHEET.*`
+- `assets/style_refs_v2/REF_B_WAVY_BLACK_CHARACTER_SHEET.*`
+- `assets/style_refs_v2/REF_C_BACKGROUND_STYLE_SAMPLE.*`
+- `assets/characters/MAIN_CAST_V2.*`
+- `assets/style_refs_v2/REF_D_3P_INTERACTION_APPROVED.*`
 
-### Current watch item
-
-The two high-resolution PNG anchors expose slightly more surface texture and detail than the three smaller WebP anchors. E001 remains inside the intended family, but Gate C must explicitly decide whether that faint texture is acceptable or whether all five anchors should be normalized before Prototype 2. Do not silently mix or replace these binaries again.
-
-## Reference selection rule
-
-Use the most relevant scene anchor plus REF_01 when facial drift is plausible.
-
-Recommended combinations:
-- portrait / close character → REF_01
-- full body → REF_02 + REF_01
-- two-person interaction → REF_03 + REF_01
-- indoor → REF_04 + REF_01 when needed
-- outdoor / environment-heavy / side gaze → REF_05 + REF_01
-
-## Validated drift lesson
-
-The first outdoor full-body attempt was rejected.
-
-Failure combination:
-- distant/full-body face
-- environment-heavy outdoor scene
-- off-axis gaze
-
-Observed result:
-- generic GPT/editorial/webtoon facial prior
-- eye redesign
-- slightly more polished facial construction
-- background detail competing with style control
-
-Corrective rule:
-> Farther character = simpler face, never more generic/detail-rich face.
-
-And:
-> As environment complexity rises, incidental background density should fall.
-
-The corrected REF_05 is the approved outdoor anchor.
-
-## Non-canonical material
-
-The rejected first outdoor variant is intentionally not part of this set and must never be used as a production style anchor.
-
-## Authority
-
-When a production scene includes another continuity/reference image:
-- canonical style refs control line, face grammar, hair rendering, palette, shading, texture, and density;
-- continuity refs control identity/clothing/scene facts only;
-- scene text may not override the canonical rendering language.
+After upload, record exact filenames + hashes here and remove the temporary binary-asset warning.
