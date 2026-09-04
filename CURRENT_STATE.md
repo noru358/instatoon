@@ -207,3 +207,79 @@ This evidence is now folded into `INSTATOON_STYLE_v1.2`, `MASTER_PROMPTS.md`, an
 The E001 style-preflight blocker can now be retried using actual canonical binary references rather than text-only style descriptions.
 
 The five images are **style anchors**, not a mandate to use a recurring character in every episode.
+
+
+---
+
+## Production run 002 — 2026-09-04 (E001 slide-1 retry)
+
+First attempt to render E001 with actual canonical binary references.
+
+### Decisions taken
+- Worker is now fixed as an **early-20s Korean woman** (short-to-shoulder flat dark
+  hair, light gray-blue work vest over warm off-white shirt). The source does not
+  specify a gender, and the surviving reference set only carries female face
+  grammar, so this keeps the first style gate to one variable.
+- The references are attached as **style anchors only**. Every production prompt
+  now opens with an explicit REFERENCE ROLE block forbidding reuse of the
+  reference person's hair, clothing, accessories, pose or identity.
+- Renderer: Topview `image_edit`, model **Nano Banana Pro**, 4:5, 2K.
+  Measured output 1856×2304. **Measured cost: 0.8 credit per image.**
+  At that rate a 7-slide episode costs ≈5.6 credits; balance was 41.84.
+
+### Artefacts created
+- `episodes/E001/prompts/_BLOCKS_COMMON.txt` — assembled style/negative/anti-GPT blocks;
+- `episodes/E001/prompts/_CAST.txt` — episode-local continuity cast sheet;
+- `episodes/E001/prompts/SLIDE_0{1..7}_SCENE.txt` and `SLIDE_0{1..7}_PROMPT.txt`;
+- `episodes/E001/RENDER_MANIFEST.json` — task ids, file ids, cost, blockers.
+
+### BLOCKER EGRESS_001 — output cannot be retrieved (open)
+
+Slide 1 generated successfully (task `3e37d3c71fea4c82ae4f9afdf0360d08`, 0.8 credit),
+but the result binary **cannot be downloaded into this environment**.
+
+Both result hosts are denied by the session's egress policy:
+- `api.topview.ai:443` — 403 to CONNECT;
+- `du9d8548ooqnc.cloudfront.net:443` — 403 to CONNECT.
+
+The upload host `aigc.s3.amazonaws.com` **is** permitted, so style references can be
+sent but results cannot be fetched back.
+
+Consequence: the render cannot be QC'd against §9/§10, cannot be committed to the
+repository, and therefore **cannot be promoted to an accepted slide**. This repeats
+the E001 failure pattern of unpreserved binaries, for a different reason.
+
+Resolution requires one of:
+1. allowlisting the Topview result hosts in the environment's egress policy;
+2. running production renders from an environment that can retrieve its own output;
+3. the user QC-ing in the Topview board and re-supplying the accepted file.
+
+`GENERATION_PROTOCOL.md` §18 now requires proving the output path before spending.
+
+### BLOCKER REFS_001 — two canonical references are corrupt (open)
+
+`assets/style_refs/` was decoded rather than merely listed:
+
+| asset | state |
+|---|---|
+| `INSTATOON_REF_01_CHARACTER.webp` | OK (360×450) |
+| `INSTATOON_REF_02_FULLBODY.webp` | OK (360×450) |
+| `INSTATOON_REF_03_INTERACTION.webp` | **undecodable — VP8 bitstream corrupt, total loss** |
+| `INSTATOON_REF_04_INDOOR.webp` | OK (360×450) |
+| `INSTATOON_REF_05_OUTDOOR_APPROVED.webp` | **1-byte truncated; decodes after padding but lower ~55% is block-corrupted** |
+
+`REFERENCE_SET.md` still lists all five as approved. Three are actually usable.
+
+Impact:
+- REF_03 (two-person interaction anchor) is gone — E001 slides 2, 3 and 6 must fall
+  back to REF_04 + REF_01;
+- REF_05 (corrected outdoor anchor, and the carrier of the validated outdoor
+  drift lesson) is gone — future outdoor episodes have no approved anchor.
+
+Both must be re-supplied by the user and re-verified by decoding before
+`REFERENCE_SET.md` can honestly claim a five-image set.
+
+### Next action
+1. Unblock EGRESS_001, then QC slide 1 and run the slide-5 half of the cost gate.
+2. Re-supply REF_03 and REF_05.
+3. Only then bulk-render slides 2, 3, 4, 6, 7 and build the vector lettering layer.

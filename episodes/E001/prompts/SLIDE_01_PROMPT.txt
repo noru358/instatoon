@@ -1,0 +1,85 @@
+SCENE:
+One young Korean woman in her early twenties, a convenience-store part-time worker, stands behind an ordinary convenience-store counter, facing the viewer.
+She has short-to-shoulder-length dark hair tucked simply behind her ears (NOT long wavy hair) and wears a plain light gray-blue work vest over a simple warm off-white shirt.
+She holds one opened ice bar in each hand, raised just above counter height so both bars are clearly separate and clearly visible.
+The ice bar in her right hand has one small bite missing from the top; the other is untouched.
+Her expression is frozen, blank and mildly confused: flat small mouth, slightly raised inner eyebrows, tiny solid-dark dot eyes looking straight ahead.
+Nobody else is in the frame.
+Behind her is a very plain convenience-store back wall: a simple counter edge in front, one flat simplified cigarette-shelf block and one flat simplified drink-fridge block behind, all reduced to soft blocks of flat muted color.
+Eye-level medium shot, straight-on, waist-up.
+The upper third of the image must stay a calm, almost empty warm cream wall area with no objects, reserved for a title that will be added later.
+
+STORY CLARITY:
+The single beat is: she is standing there holding TWO separate opened ice bars, one bitten, and she does not know what just happened.
+Exactly two ice bars. One in each hand. Both hands occupied. One bite mark only.
+Do not add extra people, extra props, extra merchandise detail, or decorative clutter.
+REFERENCE ROLE — READ FIRST:
+The attached images are CANONICAL STYLE ANCHORS ONLY.
+Copy their drawing language: line weight, face grammar, eye construction, hair massing, color restraint, shading restraint, background density, overall level of finish.
+Do NOT copy the person in the references. Do NOT reuse her hairstyle, her clothing, her accessories, her pose, or her identity.
+The characters in this scene are different people described below.
+
+REFERENCE PRIORITY:
+Treat the attached canonical style reference as the primary and non-optional visual authority for production.
+Match its line weight, facial simplification, eye size, hair massing, color restraint, shading restraint, background density and overall level of finish.
+Do not improve, beautify, modernize, glamorize, render, texture, or reinterpret the reference style.
+Do not substitute a generic Korean webtoon, anime, or GPT illustration aesthetic.
+Preserve the intentionally modest low-detail drawing language.
+
+FACE LOCK — MANDATORY:
+Preserve the canonical face grammar at every camera distance.
+- soft rounded oval face;
+- rounded jaw and small rounded chin;
+- tiny simple solid-dark oval/dot eyes;
+- thin short eyebrows;
+- tiny minimal nose mark;
+- very small simple mouth;
+- subtle peach cheek blush;
+- broad simple near-black hair masses around the face.
+Camera distance must never cause a more detailed or generic face.
+If the face is smaller in frame, simplify it further.
+SIDE-GAZE RULE: do not lengthen or redesign the eyes to indicate gaze. Do not add visible sclera, detailed irises, eyelid anatomy, glossy highlights, or a generic attractive webtoon/anime eye shape. Prefer a slight head turn and minimal positional change of the tiny eye marks.
+Farther character = simpler face, never more generic/detail-rich face.
+
+BACKGROUND DENSITY LOCK:
+Keep the environment narratively readable but intentionally simpler than a generic AI illustration.
+Preserve only story-relevant anchors.
+Reduce incidental architectural and decorative detail.
+Shelves, refrigerators, merchandise, counter equipment, signage and fixtures must be simplified icon-like blocks of flat color with NO individual product labels, NO readable packaging, NO brand marks.
+Background lines and micro-detail remain lighter and quieter than the character.
+Remove roughly 30-40% of incidental detail.
+
+STYLE LOCK:
+Use thin, softly imperfect hand-drawn digital linework, not bold ink.
+Character outlines are dark warm charcoal-brown rather than pure black.
+Background outlines are significantly thinner, lighter, and lower contrast.
+Characters have simplified adult proportions, approximately 6 to 6.5 heads tall, with slightly oversized heads, narrow shoulders, slender limbs, small hands, and understated body shapes.
+Do not exaggerate the chest, hips, muscles, or fashion-model proportions.
+Faces are extremely simple and understated: soft oval faces, rounded jawlines, small rounded chins, tiny simple solid-dark oval/dot eyes; ordinary eyes are NOT constructed as white sclera with separate black pupils; no detailed irises; no eye highlights; almost no eyelashes; thin short eyebrows; a tiny minimal nose or nearly invisible nose; and a very small curved mouth or small oval mouth.
+Use subtle soft peach-pink blush on both cheeks.
+Facial emotion is communicated mainly through eyebrow angle, mouth shape, head tilt, and simple eye shape rather than facial detail.
+Hair is rendered as a few large, clean, flat near-black charcoal shapes. Minimal internal hair lines. No hatch texture, pencil texture, scratch texture, or tonal scribbling in the hair. No individual strand rendering. No shiny anime highlights.
+Clothing is simplified into clean flat silhouettes. Very few fabric folds. No textile texture. No glossy material rendering.
+COLOR: warm, muted pastel palette dominated by creamy ivory, warm off-white, pale peach beige, dusty salmon, light warm wood, muted sage green, pale desaturated blue and charcoal gray. Avoid highly saturated colors. White objects should be warm creamy off-white rather than pure white.
+RENDERING: clean flat digital color fills. No global paper/canvas texture. No watercolor wash, pencil shading, crosshatching, stippling, or grain. Mostly flat colors. Extremely restrained shading. At most one faint soft shadow region on each major form. No dramatic shading. No hard cel shadows. No glossy highlights. No realistic light simulation. Skin is a clean flat warm peach tone with almost no texture.
+COMPOSITION: clear narrative storytelling composition. Eye-level camera. Mostly straight-on or mild three-quarter views. No dramatic lens distortion. Comfortable negative space around the characters. Simple readable poses and gestures.
+OVERALL FEEL: gentle, ordinary, warm, understated, slightly naive but clean, like a calm Korean everyday anecdote comic, intentionally low visual density, modest and restrained rather than polished or glamorous.
+
+ANTI-GPT DEFAULT:
+Do not substitute a generic AI illustration aesthetic.
+The image must look flatter, simpler, quieter, and less rendered than a typical AI-generated webtoon/editorial illustration.
+Eyes: tiny solid dark marks; no default white-eye + pupil construction.
+Hair: broad flat near-black masses; no strand texture, hatching, scratch detail, or highlight bands.
+Surface: clean flat digital fills; no paper grain, canvas grain, watercolor wash, pencil shading, stippling, or crosshatching.
+Lighting: no cozy atmospheric glow, cinematic night lighting, rim light, or modeled ambient illumination. The convenience store is evenly and flatly lit.
+Skin/clothes: no tonal rendering or texture beyond one extremely faint simple shadow if absolutely needed.
+Background: only story-essential geometry; shop merchandise becomes simplified blocks with no label/detail rendering.
+Do not make the picture prettier, richer, more atmospheric, or more finished than the canonical reference.
+
+NEGATIVE:
+NO anime style, NO manga rendering, NO polished romance webtoon style, NO glamorous character design, NO large eyes, NO sparkling eyes, NO detailed irises, NO eye highlights, NO long eyelashes, NO sharp V-line face, NO detailed nose, NO realistic lips, NO glossy lips, NO shiny skin, NO detailed hair strands, NO glossy anime hair, NO elaborate hairstyles, NO photorealism, NO semi-realistic rendering, NO 3D, NO CGI, NO painterly rendering, NO oil painting, NO watercolor texture of any strength, NO paper grain, NO canvas grain, NO pencil shading, NO crosshatching, NO stippling, NO scratch texture, NO textured editorial-illustration finish, NO thick black outlines, NO brush-ink lines, NO dramatic cel shading, NO hard shadows, NO cozy atmospheric lighting treatment, NO cinematic lighting, NO rim lighting, NO volumetric light, NO depth of field, NO bokeh, NO high contrast, NO saturated colors, NO hyper-detailed background, NO complex furniture, NO detailed fabric texture, NO excessive clothing folds, NO fashion illustration proportions, NO muscular anatomy, NO exaggerated curves, NO perfect architectural rendering, NO over-polishing, NO visual clutter.
+
+NO TEXT RULE:
+Render illustration only.
+Do NOT draw any letters, words, captions, dialogue, speech bubbles, sound effects, signage text, price tags, product names, logos, or watermarks anywhere in the image.
+All text will be added later as a separate vector layer.

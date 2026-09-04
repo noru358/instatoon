@@ -1,6 +1,6 @@
 {
   "episode_id": "E001",
-  "style_version": "INSTATOON_STYLE_v1.1",
+  "style_version": "INSTATOON_STYLE_v1.2",
   "visual_grammar_version": "INSTATOON_VISUAL_GRAMMAR_v0.1",
   "story_grammar_version": "INSTATOON_STORY_GRAMMAR_v0.1",
   "format": "STORY_ARC",
@@ -9,7 +9,7 @@
   "slide_count": 7,
   "episode_rhythm": "aftermath close scene → ordinary wide → calm two-shot → serious close-up → object/action focus → awkward two-shot → quiet aftermath",
   "episode_local_continuity": {
-    "worker": "20s convenience-store worker; simple everyday workwear/vest; same hair/clothes across episode",
+    "worker": "early-20s Korean woman convenience-store worker; short-to-shoulder dark hair tucked behind ears; light gray-blue work vest over warm off-white shirt; same hair/clothes across episode",
     "customer": "middle-aged male regular; visibly but not grotesquely tipsy; simple everyday clothing; same outfit across episode",
     "location": "ordinary low-detail Korean convenience store; counter + freezer/refrigerated area as only major anchors"
   },
@@ -61,7 +61,7 @@
           "worker",
           "customer"
         ],
-        "action": "customer at counter; worker subtly braces himself",
+        "action": "customer at counter; worker subtly braces herself",
         "location": "same convenience store",
         "composition": "medium-wide two-shot, customer foreground side, worker behind counter",
         "negative_space": {
@@ -283,5 +283,6 @@
     "cover_slide": 1,
     "representative_risk_slide": 5,
     "reason": "Slide 5 tests continuity, two-person hand interaction, exact two-object count, and negative-space control."
-  }
+  },
+  "reference_set_version": "REFERENCE_SET 2026-09-04 (approved)"
 }

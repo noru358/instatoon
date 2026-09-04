@@ -1,0 +1,61 @@
+{
+  "episode_id": "E001",
+  "style_version": "INSTATOON_STYLE_v1.2",
+  "reference_set": "REFERENCE_SET.md 2026-09-04 (approved)",
+  "renderer": {
+    "provider": "topview",
+    "task_type": "image_edit",
+    "model": "Nano Banana Pro",
+    "backend_model_code": "nano_banana2",
+    "aspect_ratio": "4:5",
+    "resolution": "2K",
+    "measured_output_px": "1856x2304",
+    "measured_cost_credit_per_image": 0.8,
+    "board_id": "d8a0b446f8ec4bf6853364d9d3f0e3e3"
+  },
+  "uploaded_style_reference_file_ids": {
+    "INSTATOON_REF_01_CHARACTER": "06819ec4ba794fb7a906698cff4074ee",
+    "INSTATOON_REF_04_INDOOR": "083dc21ba9194cd8a10eb8080ce829ad"
+  },
+  "renders": [
+    {
+      "slide": 1,
+      "attempt": 2,
+      "prompt_file": "episodes/E001/prompts/SLIDE_01_PROMPT.txt",
+      "style_reference_file_ids": [
+        "06819ec4ba794fb7a906698cff4074ee",
+        "083dc21ba9194cd8a10eb8080ce829ad"
+      ],
+      "task_id": "3e37d3c71fea4c82ae4f9afdf0360d08",
+      "board_task_id": "f992b8e45d96459d803d1b4c3de2a730",
+      "result_file_id": "4020e4eb1b6f4c22987635e2e7b69d24",
+      "result_resource_id": "ff00f39bf9f848e1bd035087f0ae10ad",
+      "status": "GENERATED_BUT_NOT_RETRIEVED",
+      "qc_verdict": "PENDING — binary unreachable from this environment",
+      "cost_credit": 0.8
+    }
+  ],
+  "blockers": [
+    {
+      "id": "EGRESS_001",
+      "kind": "environment",
+      "summary": "Generated raster output cannot be downloaded into the session or preserved in the repository.",
+      "denied_hosts": [
+        "api.topview.ai:443",
+        "du9d8548ooqnc.cloudfront.net:443"
+      ],
+      "proxy_response": "403 to CONNECT (organization egress policy denial)",
+      "note": "Upload host aigc.s3.amazonaws.com is permitted, so style references can be sent but results cannot be fetched back."
+    },
+    {
+      "id": "REFS_001",
+      "kind": "asset_integrity",
+      "summary": "Two of five canonical style references stored in assets/style_refs/ are corrupt.",
+      "details": {
+        "INSTATOON_REF_03_INTERACTION.webp": "VP8 bitstream undecodable; container length correct; total loss",
+        "INSTATOON_REF_05_OUTDOOR_APPROVED.webp": "RIFF declares 13090 bytes, file is 13089 (1-byte truncation); decodes after padding but lower ~55% of the image is visibly corrupted"
+      },
+      "impact": "REF_03 (two-person interaction anchor) is unavailable for E001 slides 2, 3 and 6; REF_05 is unusable as an outdoor anchor for future episodes."
+    }
+  ]
+}

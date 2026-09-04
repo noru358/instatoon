@@ -1,6 +1,6 @@
 # E001 — 편의점 음유시인
 
-Status: **PREFLIGHT REJECTED — GLOBAL STYLE RECOVERY REQUIRED**
+Status: **PREFLIGHT BLOCKED — generated output not retrievable from this environment**
 
 This is the first real TOON SYSTEM v0.1 prototype.
 
@@ -92,3 +92,31 @@ Do not spend another production generation until the approved reference image is
 4. QC style fingerprint;
 5. only if Slide 1 passes, run Slide 5 with canonical style reference as style authority and accepted Slide 1 only as episode-continuity aid;
 6. do not bulk-render remaining slides until both pass.
+
+
+---
+
+## Preflight retry — run 002, 2026-09-04
+
+First retry using actual canonical binary style references (the blocker from run 001).
+
+Setup:
+- worker fixed as an early-20s Korean woman (see `EPISODE_PLAN.json` continuity);
+- style anchors: `INSTATOON_REF_01_CHARACTER` + `INSTATOON_REF_04_INDOOR`, uploaded and attached;
+- prompts assembled deterministically from `prompts/SLIDE_01_SCENE.txt` + `prompts/_BLOCKS_COMMON.txt`;
+- new leading REFERENCE ROLE block forbids reusing the reference person's identity;
+- renderer: Topview `image_edit`, Nano Banana Pro, 4:5, 2K.
+
+Result:
+- task `3e37d3c71fea4c82ae4f9afdf0360d08` — **generation succeeded**, 0.8 credit,
+  1856×2304;
+- the result binary **could not be downloaded** — both Topview result hosts are
+  denied by this environment's egress policy (403 to CONNECT).
+
+Verdict: **NOT ASSESSED.** No QC verdict may be recorded for a frame that could
+not be retrieved and inspected. The slide is neither accepted nor rejected.
+
+See `RENDER_MANIFEST.json` blockers `EGRESS_001` and `REFS_001`.
+
+Slides 2–7 are fully prompt-assembled and ready to submit the moment slide 1 and
+slide 5 clear the cost gate.

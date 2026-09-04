@@ -342,3 +342,34 @@ Update:
 - rationale / test evidence.
 
 Never silently mutate a locked standard.
+
+
+---
+
+## 18. Environment preflight — before any paid generation
+
+Reference preflight (§6) only proves the *input* side. Before spending on
+production art, also prove the *output* side:
+
+1. the renderer's result host is reachable from the executing environment;
+2. a generated file can actually be downloaded into the workspace;
+3. the downloaded binary can be decoded and inspected for QC;
+4. the binary can be committed to the repository.
+
+If any of these fails, the render is unverifiable and unpreservable.
+**STOP before paid generation** and fix the environment, or execute the render
+from an environment that can retrieve its own output.
+
+A generation whose output cannot be retrieved still costs credits and still
+cannot pass QC. It is a wasted spend, not a partial success.
+
+### Asset-integrity check
+
+Canonical reference binaries must be decoded — not merely listed — before use:
+
+- verify each file decodes to a full image;
+- verify the container's declared length matches the file length;
+- visually inspect for block corruption.
+
+A reference that fails to decode is not a canonical reference, regardless of
+what `REFERENCE_SET.md` claims. Repository presence is not integrity.
