@@ -1,80 +1,94 @@
 # instatoon
 
-Semi-automated Instagram-toon production system.
+Semi-automated omnibus Instagram-toon / short-form production system.
 
-The project is built around **style reproducibility + whole-episode visual grammar**. The durable identity is the overall drawing language and page/sequential grammar, not a requirement for recurring characters.
+The project turns anecdotes, community/SNS material, everyday situations, user stories, and selected original premises into short comics and vertical short-form adaptations.
 
-## Authoritative hierarchy
+The durable identity is:
+1. the approved drawing language;
+2. the page/sequential grammar;
+3. the editorial voice;
+4. recurring characters when the story calls for them.
 
-When documents conflict, use this precedence:
+Main characters are reusable assets, not mandatory cast. Episode-specific characters are normal.
 
-1. **STYLE_LOCK.md** — normative illustration-style authority: what counts as a pass or fail.
-2. **REFERENCE_SET.md** — approved binary style anchors and their production roles. For an actual render, the selected binary reference is the primary visual input; it is interpreted under `STYLE_LOCK.md`.
-3. **VISUAL_GRAMMAR.md** — episode/page/sequential-grammar authority.
-4. **STORY_GRAMMAR.md** — active anecdote/experience/incident/relatable story grammar.
-5. **SOURCE_STORY_PIPELINE.md** — source filtering, human-interest gate, and whole-story planning.
-6. **TOON_SYSTEM_V0_1.md** — current semi-automated system architecture, data flow, automation/cost policy.
-7. **AUTOMATION_TRANSITION.md** — future implementation contract for converting the validated manual/chat protocol into Python/CLI/server AutoPipeline execution. It does not override current prototype gates.
-8. **MASTER_PROMPTS.md** — canonical reusable prompt blocks that implement the style lock.
-9. **GENERATION_PROTOCOL.md** — generation, preflight, repair, and QC procedure.
-10. **REFERENCE_ANALYSIS.md** — detailed visual deconstruction and test rationale.
-11. **CURRENT_STATE.md** — live handoff, implementation status, blocker, and exact next action.
-12. **WORKFLOW_PROTOCOL.md** — cross-environment continuity and `갱신` procedure.
-13. Episode-specific source, plan, execution evidence, and tool prompts.
+## Mandatory restore order
 
-A lower layer may add content but may not weaken or reinterpret a higher layer.
+A clean session must NOT start production after reading only one random file.
 
-## Core rules
+Minimum restore pack:
+1. CURRENT_STATE.md — exact live stage and next action.
+2. SOURCE_STORY_PIPELINE.md — content, dialogue, cast-routing, and agent/layer workflow.
+3. MASTER_PROMPTS.md — single canonical visual-generation prompt authority.
+4. VISUAL_GRAMMAR.md — 4:5 page, lettering, composition, and sequence rules.
+5. GENERATION_PROTOCOL.md — anchor/render/edit/QC procedure.
+6. REFERENCE_SET.md — which visual references are current vs legacy.
 
-> Plan the whole episode before rendering any individual slide.
+Read AUTOMATION_TRANSITION.md only when implementing the CLI/server pipeline.
+Read WORKFLOW_PROTOCOL.md when restoring across environments or when the user says 갱신.
 
-> Preserve the visual language before optimizing beauty, detail, novelty, speed, or tool-specific aesthetics.
+## Authority order
 
-> Keep semantic text in editable vector layers rather than baking it into generated art.
+When current documents conflict:
 
-The target illustration language is a warm, restrained, low-detail Korean everyday anecdote-comic style with thin charcoal-brown linework, muted warm colors, minimal shading, quiet low-detail backgrounds, and controlled visual density. Production rendering uses the approved five-image canonical reference set in `assets/style_refs/` together with an explicit face-distance/gaze lock.
+1. MASTER_PROMPTS.md — canonical visual prompt implementation.
+2. STYLE_LOCK.md — visual pass/fail boundary.
+3. REFERENCE_SET.md — approved/legacy binary reference status.
+4. SOURCE_STORY_PIPELINE.md — story/dialogue/cast/agent workflow.
+5. VISUAL_GRAMMAR.md — sequential, composition, and text-layout grammar.
+6. GENERATION_PROTOCOL.md — rendering, character-anchor, minimal-edit, and QC execution.
+7. CURRENT_STATE.md — exact current episode and next action.
+8. WORKFLOW_PROTOCOL.md — cross-session reconciliation.
+9. AUTOMATION_TRANSITION.md — future executable implementation contract.
+10. episode-local artifacts.
 
-The active v0.1 narrative formats are deliberately narrow:
-- **STORY_ARC** — anecdotes, experiences, incidents
-- **RELATABLE_SCENARIO** — one familiar behavior/situation dramatized as a mini-scene
+A lower file may add detail but may not silently override a higher current rule.
 
-Dormant for future expansion:
-- OBSERVATION_SET
-- EXPLAINER_CAUSAL
-- CONTRAST_REFRAME
+## Current production shape
 
-Community/news/personal material is a source type, not a visual format.
+### Content
+- omnibus;
+- STORY_ARC and RELATABLE_SCENARIO are active;
+- source may be community/SNS/anecdote/observation/user story/original;
+- source facts and source voice are separated;
+- dialogue passes Humanization + USER VOICE GATE during the learning phase.
 
-## Change control
+### Cast
+Story/context decides cast per episode.
+- use Gaeun/Harin/Taemin only when editorially appropriate;
+- never insert a main character merely because a scene needs a person of that gender;
+- new episode-only characters are allowed;
+- any newly introduced important person who appears in 2+ cuts gets an episode-local character anchor BEFORE production frames.
 
-Locked art-style and visual-grammar rules are versioned.
+### Visual
+- current style: INSTATOON_STYLE_v2.0;
+- previous tiny-eye/thin-brown-line v1.x style is retired;
+- 4:5 (1080×1350) is the feed/carousel master;
+- 9:16 (1080×1920) is the Reels/Shorts derivative;
+- 16:9 is not a default;
+- final semantic text should be editable, not baked into the raster master;
+- background is story-specific, not a mandatory fixed-set library.
 
-Do not mutate them because a model/tool appears to produce a “prettier” result or because one post performs differently.
+### Production principle
 
-Current versions:
-- **INSTATOON_STYLE_v1.2 — 2026-09-04**
-- **INSTATOON_VISUAL_GRAMMAR_v0.1 — 2026-09-04**
-- **INSTATOON_STORY_GRAMMAR_v0.1 — 2026-09-04**
+Plan the story first. Lock any new recurring-for-the-episode character next. Render text-free art. Add typography deterministically. Repair locally from the last known good frame.
 
-## Resume work
+## Root files
 
-1. Read `CURRENT_STATE.md` for the live stage and exact next action.
-2. Read the active episode's `README.md`, `CONTENT_MASTER.json`, `STORY_PLAN.json`, and `EPISODE_PLAN.json`.
-3. Before production rendering, verify the selected files from `REFERENCE_SET.md` are available and use the current style version.
-4. Do not infer current state from an older failure section when a later section explicitly marks the blocker resolved.
-5. If the task is automation implementation / CLI / server conversion, also read `AUTOMATION_TRANSITION.md` before writing code.
+- CURRENT_STATE.md
+- MASTER_PROMPTS.md
+- STYLE_LOCK.md
+- REFERENCE_SET.md
+- SOURCE_STORY_PIPELINE.md
+- VISUAL_GRAMMAR.md
+- GENERATION_PROTOCOL.md
+- WORKFLOW_PROTOCOL.md
+- AUTOMATION_TRANSITION.md
 
-## Files
+Old overlapping root specifications are merged/retired; Git history is the archive.
 
-- [STYLE_LOCK.md](STYLE_LOCK.md)
-- [REFERENCE_SET.md](REFERENCE_SET.md) — approved canonical visual anchors, roles, and hashes
-- [VISUAL_GRAMMAR.md](VISUAL_GRAMMAR.md)
-- [STORY_GRAMMAR.md](STORY_GRAMMAR.md)
-- [SOURCE_STORY_PIPELINE.md](SOURCE_STORY_PIPELINE.md)
-- [TOON_SYSTEM_V0_1.md](TOON_SYSTEM_V0_1.md)
-- [AUTOMATION_TRANSITION.md](AUTOMATION_TRANSITION.md) — future executable AutoPipeline migration contract
-- [MASTER_PROMPTS.md](MASTER_PROMPTS.md)
-- [GENERATION_PROTOCOL.md](GENERATION_PROTOCOL.md)
-- [REFERENCE_ANALYSIS.md](REFERENCE_ANALYSIS.md)
-- [CURRENT_STATE.md](CURRENT_STATE.md)
-- [WORKFLOW_PROTOCOL.md](WORKFLOW_PROTOCOL.md)
+## Current episode
+
+See episodes/E002/README.md.
+
+episodes/E001/ is preserved as a historical pre-v2 prototype and is not current style authority.
