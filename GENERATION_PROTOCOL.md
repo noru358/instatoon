@@ -1,6 +1,6 @@
 # GENERATION_PROTOCOL.md
 
-# Generation & QC protocol — INSTATOON_STYLE_v1.0 / VISUAL_GRAMMAR_v0.1
+# Generation & QC protocol — INSTATOON_STYLE_v1.1 / VISUAL_GRAMMAR_v0.1
 
 This protocol prevents style drift, page-grammar drift, and wasteful generation.
 
@@ -49,11 +49,16 @@ Use only when the current episode requires the same person/object/location acros
 This is not a recurring-character brand lock.
 
 ### D. Stable style
+Production raster generation requires an **actual approved canonical style reference image**.
+
+Text-only generation may be used for exploration, but it may not be accepted as a production style pass.
+
 Append:
 - REFERENCE_OBEDIENCE_BLOCK if applicable;
 - IDENTITY_PRESERVATION_BLOCK only when a specific existing person/character must be preserved;
 - MASTER_STYLE_PROMPT;
-- NEGATIVE_STYLE_PROMPT.
+- NEGATIVE_STYLE_PROMPT;
+- ANTI_GPT_DEFAULT_BLOCK for production.
 
 Do not rewrite the full style from scratch for each slide.
 
@@ -110,7 +115,27 @@ Beauty remains last.
 
 ---
 
-## 6. Two-slide render preflight
+## 6. Reference preflight — before any scene render
+
+Before the two-slide preflight:
+
+1. verify the canonical style-reference image file is available in the current environment;
+2. verify it is the same approved reference used to define STYLE_LOCK;
+3. attach it to every production render;
+4. separate its role from any episode continuity/scene reference.
+
+Authority:
+`canonical style reference > STYLE_LOCK/MASTER_PROMPTS > episode continuity reference > scene text`
+
+A continuity image controls who/clothing/broad pose/location continuity. It does **not** redefine face grammar, line, hair treatment, texture, rendering density, or lighting style.
+
+If the canonical style image is unavailable: **STOP — do not generate production art from text alone.**
+
+A failed preflight frame must never be promoted to the sole reference for the next frame.
+
+---
+
+## 7. Two-slide render preflight
 
 The entire episode is planned first.
 
@@ -129,7 +154,7 @@ This is a cost gate, not slide-by-slide planning.
 
 ---
 
-## 7. First-pass render policy
+## 8. First-pass render policy
 
 After preflight passes:
 - generate each planned raster slide once;
@@ -143,7 +168,7 @@ Prefer targeted edit over full regeneration.
 
 ---
 
-## 8. First-pass QC — style and grammar
+## 9. First-pass QC — style and grammar
 
 Immediately reject or repair if:
 - eyes are too large/detailed;
@@ -159,11 +184,16 @@ Immediately reject or repair if:
 - the main beat is visually ambiguous;
 - a slide is subdivided more than necessary;
 - two visual focal points compete;
-- the rendered composition no longer serves the planned slide role.
+- the rendered composition no longer serves the planned slide role;
+- eyes are drawn with default visible white sclera + separate pupils;
+- global paper/grain/watercolor/pencil texture appears;
+- hair uses visible hatch/strand texture;
+- night/interior lighting becomes atmospheric or cinematic;
+- background shop products/fixtures gain unnecessary individual detail.
 
 ---
 
-## 9. Second-pass QC — defects / continuity
+## 10. Second-pass QC — defects / continuity
 
 After style and grammar pass, check:
 - hands and object contact;
@@ -180,7 +210,7 @@ Do not enforce strict continuity when the format intentionally uses independent 
 
 ---
 
-## 10. Vector-layer QC
+## 11. Vector-layer QC
 
 Check deterministically where possible:
 - text overflow;
@@ -198,7 +228,7 @@ All important wording must remain editable without regenerating art.
 
 ---
 
-## 11. Repair strategy
+## 12. Repair strategy
 
 ### If global style drift appears
 Stop the batch and fix canonical reference/prompt assembly.
@@ -217,7 +247,7 @@ Do **not** ask an automated QC agent to “make it more engaging” by rewriting
 
 ---
 
-## 12. Episode-local person continuity
+## 13. Episode-local person continuity
 
 Recurring character masters are optional, not required.
 
@@ -231,7 +261,7 @@ The project identity remains the overall style and page grammar.
 
 ---
 
-## 13. Environment continuity
+## 14. Environment continuity
 
 For recurring locations within a chronological episode:
 - preserve only story-relevant anchors;
@@ -241,7 +271,7 @@ For recurring locations within a chronological episode:
 
 ---
 
-## 14. Minimal-change edit rule
+## 15. Minimal-change edit rule
 
 When editing an accepted slide:
 
@@ -251,7 +281,7 @@ A successful correction must not introduce a new style interpretation.
 
 ---
 
-## 15. Automation rule
+## 16. Automation rule
 
 Automation may generate:
 - source normalization;
@@ -275,7 +305,7 @@ No performance-feedback loop may mutate the core style/grammar by itself.
 
 ---
 
-## 16. Versioning
+## 17. Versioning
 
 Material art-style changes:
 - version `STYLE_LOCK.md`.
