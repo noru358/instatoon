@@ -18,7 +18,7 @@ This project is independent from the Talkshow video pipeline.
 **Foundation → visual-language + sequential-grammar lock → prototype extraction**
 
 ### Current detailed step
-The canonical art style is now hardened as `INSTATOON_STYLE_v1.1`, and the episode/page grammar is now locked as `INSTATOON_VISUAL_GRAMMAR_v0.1`.
+The canonical art style is now hardened as `INSTATOON_STYLE_v1.2`, and the episode/page grammar is now locked as `INSTATOON_VISUAL_GRAMMAR_v0.1`.
 
 The production architecture is defined in `TOON_SYSTEM_V0_1.md`.
 
@@ -150,7 +150,7 @@ The first two generated frames matched scene semantics but failed the visual ide
 
 Root cause: the production render used summarized text instead of the true canonical style reference; Slide 5 then inherited Slide 1's already-wrong style.
 
-**Current blocker:** there is no verified canonical style-reference image binary in the inspected repository tree. Text-only style documentation is not considered lossless production authority.
+**Canonical-style blocker: RESOLVED.** A five-image user-approved reproduction-test reference set has been locked and is being stored under `assets/style_refs/`. Text remains reinforcement; the binary references are the production rendering authority.
 
 
 ## Canonical style-reference recovery status — 2026-09-04
@@ -177,3 +177,33 @@ They match the intended style family materially better than the rejected E001 pr
 Normal/neutral faces primarily use tiny dark eye marks. Some strong surprise expressions may temporarily use visible white sclera + dark pupils. Therefore white sclera is not an absolute ban; it is a **special-expression exception**, not the default face construction.
 
 Do not declare these files repository-canonical until the binary paths above exist remotely and their hashes are verified.
+
+
+---
+
+## Approved five-image style reproduction set — 2026-09-04
+
+A supplied character was tested across portrait, full-body, two-person interaction, indoor, and outdoor conditions.
+
+Accepted canonical assets:
+
+- `assets/style_refs/INSTATOON_REF_01_CHARACTER.webp` — character/face anchor;
+- `assets/style_refs/INSTATOON_REF_02_FULLBODY.webp` — full-body anchor;
+- `assets/style_refs/INSTATOON_REF_03_INTERACTION.webp` — two-person/outdoor interaction anchor;
+- `assets/style_refs/INSTATOON_REF_04_INDOOR.webp` — indoor anchor;
+- `assets/style_refs/INSTATOON_REF_05_OUTDOOR_APPROVED.webp` — corrected outdoor full-body anchor.
+
+The first outdoor attempt was rejected because a full-body + environment-heavy + side-gaze combination caused generic GPT/webtoon facial drift.
+
+The corrected outdoor render passed after adding:
+- explicit face-distance/gaze lock;
+- explicit background-density lock;
+- accepted 1–4 images as anchors.
+
+This evidence is now folded into `INSTATOON_STYLE_v1.2`, `MASTER_PROMPTS.md`, and `GENERATION_PROTOCOL.md`.
+
+### Production implication
+
+The E001 style-preflight blocker can now be retried using actual canonical binary references rather than text-only style descriptions.
+
+The five images are **style anchors**, not a mandate to use a recurring character in every episode.
