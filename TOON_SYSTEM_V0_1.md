@@ -608,6 +608,8 @@ It may not automatically mutate `STYLE_LOCK.md` or `VISUAL_GRAMMAR.md`.
 
 Do not build the full application yet.
 
+The eventual manual/chat → executable migration contract is maintained in `AUTOMATION_TRANSITION.md`. This section controls **when implementation starts**; that document controls **how the validated protocol should be converted into code**.
+
 1. Lock visual grammar.
 2. Create three prototype episodes across the active formats and distinct story shapes.
 3. Manually inspect which page archetypes and render modes recur.
@@ -616,7 +618,9 @@ Do not build the full application yet.
 6. Implement prompt assembler.
 7. Add render manifest / budget tracking.
 8. Add deterministic QC.
-9. Only then add source automation and performance feedback.
+9. Wrap the proven components in the first local CLI/state-machine execution slice described in `AUTOMATION_TRANSITION.md`.
+10. Only then add source automation and performance feedback.
+11. Add durable server execution / dashboard only after the local engine path is reliable.
 
 The first prototypes are for extracting the production system, not proving that an autonomous agent can publish unattended.
 

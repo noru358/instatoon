@@ -87,6 +87,21 @@ The repository currently contains the design baseline, canonical references, one
 
 Therefore the current system is a **structured, manually operated production protocol under prototype validation**, not an end-to-end automation application.
 
+### Preserved automation target
+
+`AUTOMATION_TRANSITION.md` now records the future migration contract discussed during the manual prototype phase. It defines the intended separation of responsibilities:
+
+- project locks/prompts/config define **what is correct**;
+- Python/state-machine code defines **when/how stages execute, retry, stop, persist, and advance**;
+- the orchestrator owns workflow order while models reason inside typed stages;
+- exact prompts/references/versions are loaded from repository authorities, not chat memory;
+- runtime execution state eventually moves to a DB rather than using Git as a job queue;
+- integration priority is official API → MCP when interoperability matters → internal adapter → browser automation fallback;
+- CLI end-to-end execution is the first implementation milestone; web dashboard comes later;
+- QC diagnoses/routes and must not free-form rewrite the episode or loop indefinitely.
+
+This is a future implementation authority, not permission to skip the current three-prototype extraction program or current human gates.
+
 ---
 
 ## Prototype program
@@ -101,7 +116,7 @@ Use the three prototypes to discover stable page archetypes, useful text-density
 
 P002 is not the preferred first prototype because it is primarily a social/market phenomenon rather than a v0.1 anecdote/experience/incident/relatable story. Keep it as a future-format candidate.
 
-After all three prototypes, finalize schemas and implement the deterministic vector renderer, prompt assembler, render manifest, and deterministic QC in the order defined by `TOON_SYSTEM_V0_1.md`.
+After all three prototypes, finalize schemas and implement the deterministic vector renderer, prompt assembler, render manifest, and deterministic QC in the order defined by `TOON_SYSTEM_V0_1.md`. Then follow `AUTOMATION_TRANSITION.md` to wrap those proven components in the first local `autopipeline run instatoon` CLI/state-machine slice before building a web control plane.
 
 ---
 

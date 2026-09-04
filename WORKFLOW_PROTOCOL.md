@@ -66,7 +66,8 @@ Before substantive work:
 4. follow the authority hierarchy from those files;
 5. read the active episode/experiment package;
 6. inspect recent relevant commits when needed;
-7. do not re-plan from scratch if the repository already defines the state.
+7. do not re-plan from scratch if the repository already defines the state;
+8. if the requested work is executable automation / CLI / server migration, read `AUTOMATION_TRANSITION.md` before changing architecture or writing generic engine code.
 
 If another model/session changed the repo, fetch remote state again before acting.
 
@@ -190,7 +191,26 @@ git submodule update --init --recursive
 
 Child-specific authorities remain inside each child repository.
 
-## 10. Definition of "lossless"
+## 10. Automation-transition preservation
+
+If current manual work discovers a rule that will matter to future executable automation, do not leave it only in chat.
+
+Update the appropriate current authority and, when it changes the future code/architecture contract, reconcile `AUTOMATION_TRANSITION.md`.
+
+Examples:
+- a newly stable QC failure class;
+- a retry route that repeatedly works;
+- a gate proven safe/unsafe to automate;
+- a required prompt-assembly input;
+- provider/API constraints;
+- execution metadata required for reproducibility;
+- a distinction between project policy and generic engine logic.
+
+The automation document must describe the future implementation contract without pretending unvalidated prototype behavior is already stable software.
+
+---
+
+## 11. Definition of "lossless"
 
 "Lossless" means a competent model/person in a clean environment can determine:
 - what the project is;

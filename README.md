@@ -13,13 +13,14 @@ When documents conflict, use this precedence:
 3. **VISUAL_GRAMMAR.md** — episode/page/sequential-grammar authority.
 4. **STORY_GRAMMAR.md** — active anecdote/experience/incident/relatable story grammar.
 5. **SOURCE_STORY_PIPELINE.md** — source filtering, human-interest gate, and whole-story planning.
-6. **TOON_SYSTEM_V0_1.md** — system architecture, data flow, automation/cost policy.
-7. **MASTER_PROMPTS.md** — canonical reusable prompt blocks that implement the style lock.
-8. **GENERATION_PROTOCOL.md** — generation, preflight, repair, and QC procedure.
-9. **REFERENCE_ANALYSIS.md** — detailed visual deconstruction and test rationale.
-10. **CURRENT_STATE.md** — live handoff, implementation status, blocker, and exact next action.
-11. **WORKFLOW_PROTOCOL.md** — cross-environment continuity and `갱신` procedure.
-12. Episode-specific source, plan, execution evidence, and tool prompts.
+6. **TOON_SYSTEM_V0_1.md** — current semi-automated system architecture, data flow, automation/cost policy.
+7. **AUTOMATION_TRANSITION.md** — future implementation contract for converting the validated manual/chat protocol into Python/CLI/server AutoPipeline execution. It does not override current prototype gates.
+8. **MASTER_PROMPTS.md** — canonical reusable prompt blocks that implement the style lock.
+9. **GENERATION_PROTOCOL.md** — generation, preflight, repair, and QC procedure.
+10. **REFERENCE_ANALYSIS.md** — detailed visual deconstruction and test rationale.
+11. **CURRENT_STATE.md** — live handoff, implementation status, blocker, and exact next action.
+12. **WORKFLOW_PROTOCOL.md** — cross-environment continuity and `갱신` procedure.
+13. Episode-specific source, plan, execution evidence, and tool prompts.
 
 A lower layer may add content but may not weaken or reinterpret a higher layer.
 
@@ -61,6 +62,7 @@ Current versions:
 2. Read the active episode's `README.md`, `CONTENT_MASTER.json`, `STORY_PLAN.json`, and `EPISODE_PLAN.json`.
 3. Before production rendering, verify the selected files from `REFERENCE_SET.md` are available and use the current style version.
 4. Do not infer current state from an older failure section when a later section explicitly marks the blocker resolved.
+5. If the task is automation implementation / CLI / server conversion, also read `AUTOMATION_TRANSITION.md` before writing code.
 
 ## Files
 
@@ -70,6 +72,7 @@ Current versions:
 - [STORY_GRAMMAR.md](STORY_GRAMMAR.md)
 - [SOURCE_STORY_PIPELINE.md](SOURCE_STORY_PIPELINE.md)
 - [TOON_SYSTEM_V0_1.md](TOON_SYSTEM_V0_1.md)
+- [AUTOMATION_TRANSITION.md](AUTOMATION_TRANSITION.md) — future executable AutoPipeline migration contract
 - [MASTER_PROMPTS.md](MASTER_PROMPTS.md)
 - [GENERATION_PROTOCOL.md](GENERATION_PROTOCOL.md)
 - [REFERENCE_ANALYSIS.md](REFERENCE_ANALYSIS.md)
