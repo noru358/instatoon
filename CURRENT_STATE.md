@@ -18,7 +18,7 @@ This project is independent from the Talkshow video pipeline.
 **Foundation → visual-language + sequential-grammar lock → prototype extraction**
 
 ### Current detailed step
-The canonical art style is locked as `INSTATOON_STYLE_v1.0`, and the episode/page grammar is now locked as `INSTATOON_VISUAL_GRAMMAR_v0.1`.
+The canonical art style is now hardened as `INSTATOON_STYLE_v1.1`, and the episode/page grammar is now locked as `INSTATOON_VISUAL_GRAMMAR_v0.1`.
 
 The production architecture is defined in `TOON_SYSTEM_V0_1.md`.
 
@@ -128,10 +128,26 @@ First real source-gate run completed:
 - `STORY_PLAN.json` created;
 - `EPISODE_PLAN.json` created.
 
-E001 is now at **Human Gate B**: whole-story / whole-visual-plan review before raster spend.
+E001 whole-story / whole-visual plan passed into raster preflight, but Slide 1 and Slide 5 were **rejected for systemic visual-style drift**.
 
-If approved, the production preflight is:
-1. render Slide 1;
-2. render Slide 5 (highest interaction/object-count risk);
-3. QC style + visual grammar + text-safe space;
-4. only then render remaining planned raster slides.
+Current production state:
+1. **STOP bulk generation.**
+2. Preserve/verify the actual canonical style-reference image(s) as repository assets.
+3. Retry Slide 1 with the canonical image as primary style authority + STYLE v1.1 hardening.
+4. Only after Slide 1 passes, retry Slide 5 with canonical style reference + accepted Slide 1 as continuity aid.
+5. Only then render remaining slides.
+
+
+### E001 style-preflight diagnosis
+The first two generated frames matched scene semantics but failed the visual identity:
+- generic white-eye/pupil construction;
+- textured/strand-heavy hair;
+- paper/grain/pencil-like texture;
+- excessive shading;
+- atmospheric convenience-store lighting;
+- over-detailed retail background;
+- overall generic GPT/editorial/anime-adjacent finish.
+
+Root cause: the production render used summarized text instead of the true canonical style reference; Slide 5 then inherited Slide 1's already-wrong style.
+
+**Current blocker:** there is no verified canonical style-reference image binary in the inspected repository tree. Text-only style documentation is not considered lossless production authority.
