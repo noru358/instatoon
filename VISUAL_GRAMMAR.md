@@ -1,434 +1,294 @@
 # VISUAL_GRAMMAR.md
 
-# INSTATOON_VISUAL_GRAMMAR_v0.1 — AUTHORITATIVE SEQUENTIAL / LAYOUT LOCK
+# INSTATOON_VISUAL_GRAMMAR_v0.2 — SEQUENCE / COMPOSITION / LETTERING
+Updated: 2026-09-04
 
-**Status:** LOCKED BASELINE  
-**Effective:** 2026-09-04  
-**Scope:** episode-level visual grammar, slide/page grammar, lettering/layout behavior  
-**Art-style authority:** `STYLE_LOCK.md`
-
-This file defines **how an Instagram-toon episode reads**, while `STYLE_LOCK.md` defines **how the illustration looks**.
-
-The project does **not** depend on recurring-character identity. The recurring identity is the **overall drawing language and page grammar**.
-
----
+STYLE authority: STYLE_LOCK.md / MASTER_PROMPTS.md
+CONTENT authority: SOURCE_STORY_PIPELINE.md
 
 ## 0. Core principle
 
-> Plan the entire episode first. Render individual slides only after the full narrative and visual plan is coherent.
+Plan the entire episode first.
+Render individual slides only after the sequence, cast, text roles, and visual rhythm are coherent.
 
-No slide is planned in isolation.
+A slide exists because it performs one story job.
 
-A slide exists because it has a specific cognitive/narrative job inside the full sequence.
+## 1. Canvas / distribution
 
----
-
-## 1. Primary identity
-
-The project identity is:
-
-1. the locked illustration style in `STYLE_LOCK.md`;
-2. the recurring page rhythm and layout language in this file;
-3. the editorial voice / topic selection;
-4. consistent vector lettering and graphic treatment.
-
-Recurring characters may appear, but they are optional content elements rather than the main brand lock.
-
-Episode-specific characters may be one-off, anonymous, symbolic, or omitted entirely.
-
----
-
-## 2. Default canvas
-
-Canonical feed master:
-- 1080 × 1350 px
+Primary feed/carousel master:
+- 1080 × 1350
 - 4:5 portrait
 
-The renderer must keep important art and all vector text away from vulnerable outer edges.
+Vertical derivative:
+- 1080 × 1920
+- 9:16 Reels/Shorts
 
-A platform-specific export may be derived later, but the Instagram-toon project itself does not depend on a video workflow.
+16:9 is not the default.
 
----
+All slides within one carousel should share one ratio.
 
-## 3. Episode grammar
+## 2. Episode length
 
-Default episode length:
-- 5–9 slides
-- 6–8 is the normal target
-- shorter is preferred when the idea lands cleanly
+Typical:
+- 5–9 slides;
+- 6–8 common;
+- shorter preferred when the story lands cleanly.
 
-The system must not pad an idea to reach a slide count.
+No padding to meet a quota.
 
-Each slide must have **one primary cognitive beat**.
+Each slide has:
+- one primary beat;
+- at most one supporting reaction/cue;
+- short text.
 
-Allowed secondary detail:
-- one supporting reaction;
-- one supporting visual cue;
-- one short subordinate line.
+## 3. Cover / hook
 
-If a slide carries two independent ideas, split it.
+Slide 1 is a hook, not a summary.
 
----
-
-## 4. Cover grammar
-
-Slide 1 is a **cover/hook**, not an executive summary.
-
-It should:
-- state or imply one tension, question, surprise, contradiction, or emotionally recognizable situation;
-- leave a meaningful gap that slide 2 can answer or complicate;
-- use one dominant visual focal point;
-- remain readable at feed-thumbnail size.
-
-Default:
-- one short title/hook;
-- one dominant illustration or graphic;
-- minimal explanatory copy.
+Preferred:
+- short specific hook;
+- one dominant scene or focal object;
+- strong phone-size legibility;
+- enough unanswered information to justify the next swipe.
 
 Avoid:
-- full summary;
-- dense context;
+- executive-summary text;
+- long context;
 - multiple claims;
-- decorative clutter;
-- table-of-contents behavior.
+- decorative title-card treatment.
 
----
+The cover can be text-led, but it must still feel like part of a comic sequence.
 
-## 5. Middle-slide grammar
+## 4. Page archetypes
 
-Slides 2 through the penultimate slide form the body.
+Choose one dominant archetype per slide:
 
-Every slide must perform one of these functions:
+- HERO_SCENE
+- TWO_SHOT
+- REACTION_CLOSEUP
+- OBJECT_FOCUS
+- TEXT_LED
+- QUOTE_LED
+- EMPTY_BEAT
+- BEFORE_AFTER
+- SPLIT_COMPARE
+- SEQUENCE_WITHIN_SLIDE (only when 2–3 mini-beats truly belong together)
 
-- `ESTABLISH` — situation / baseline
-- `TRIGGER` — event that changes the state
-- `DEVELOP` — one step of escalation or explanation
-- `EXAMPLE` — concrete instance
-- `COMPARE` — A/B or before/after
-- `CAUSE` — mechanism / why
-- `REACTION` — emotional or human consequence
-- `TURN` — reframe / unexpected interpretation
-- `METAPHOR` — visual analogy
-- `PROOF` — source-derived fact, quote, number, or concrete evidence
-- `BRIDGE` — minimal connection only when essential
+Default is one dominant composition.
+Do not subdivide by habit.
 
-A slide with no distinct function is filler and must be removed.
+## 5. Visual rhythm
 
----
+Consistency does not mean identical camera/blocking.
 
-## 6. Landing grammar
+Across a chronological anecdote, use deliberate variation such as:
+- wide/medium → medium → detail → reaction;
+- two-shot → hand/object focus → close reaction;
+- normal spacing → compressed peak → quiet landing.
 
-The last slide must **land** the idea.
+Avoid six nearly identical medium two-shots.
 
-Possible landing types:
-- punchline;
-- reframe;
-- emotional residue;
-- concise takeaway;
-- memorable quote;
-- unresolved human question.
+Do not vary camera merely for spectacle.
+Variation should clarify the story.
 
-A generic CTA is optional and subordinate.
+## 6. Cast visibility
 
-Do not force:
-- “팔로우 해주세요”
-- “저장해두세요”
-- generic moral lesson
-- AI-written inspirational summary
+Story/context decides who appears.
 
-if it weakens the content.
+Main cast may recur when appropriate.
+Episode-only characters are valid and common.
 
----
+If an episode-only character appears in 2+ cuts, GENERATION_PROTOCOL requires a character anchor before production frames.
 
-## 7. v0.1 active narrative formats
+Do not substitute a familiar main character just to solve continuity cheaply.
 
-v0.1 deliberately supports only two production formats.
+## 7. Art / text separation
 
-Detailed editorial grammar is authoritative in `STORY_GRAMMAR.md`.
+Final page has three logical layers:
 
-### A. STORY_ARC — anecdote / experience / incident
+### A. ART
+- character;
+- background;
+- prop;
+- non-text visual effect;
+- intentional space for typography.
 
-Use when temporal progression matters and the reader's main question is “what happened next?”
+Normally NO final readable narration/dialogue inside the raster art.
 
-Every body slide must change the state.
+### B. VECTOR NARRATIVE
+- hook/title;
+- narration;
+- speech bubble;
+- bubble tail;
+- reaction/inner thought;
+- SFX;
+- source note.
 
-### B. RELATABLE_SCENARIO — dramatized everyday recognition
+### C. LAYOUT METADATA
+- safe margins;
+- reading order;
+- text boxes;
+- focal point;
+- crop anchor;
+- source refs;
+- continuity refs.
 
-Use when the payoff is “I do this too / I know this situation.”
+## 8. Text roles
 
-The default is a mini-scenario, not a traits list or card-news collection.
+Do not treat all copy as one centered sentence at the top.
 
-### Future / dormant
-- OBSERVATION_SET
-- EXPLAINER_CAUSAL
-- CONTRAST_REFRAME
+Use three main storytelling roles:
 
-Do not route v0.1 production into dormant formats merely because the source can be explained that way.
+### NARRATION / CAPTION
+Use for:
+- setup;
+- time jump;
+- brief context;
+- storyteller voice.
 
----
+Typical position:
+- upper region or a deliberately reserved side region;
+- not necessarily centered;
+- one or two short lines.
 
-## 8. Source is orthogonal to format
-
-Source type is metadata, not a narrative format.
-
-Possible sources:
-- personal observation
-- community post / comments
-- news / public data
-- trend
-- user-submitted story
-- interview
-- original idea
-
-A community thread may route to any of the four narrative formats.
-
-Therefore `COMMUNITY_REMIX` is an **ingestion/adaptation mode**, not a visual format.
-
----
-
-## 9. Page archetypes
-
-The Visual Director selects one primary page archetype per slide.
-
-- `HERO_SCENE` — one large illustrative scene
-- `REACTION_CLOSEUP` — expression / reaction dominates
-- `TWO_SHOT` — simple interaction
-- `OBJECT_FOCUS` — prop or detail carries the beat
-- `SPLIT_COMPARE` — A/B comparison
-- `BEFORE_AFTER` — temporal/state comparison
-- `SEQUENCE_WITHIN_SLIDE` — 2–3 mini-beats only when needed
-- `DIAGRAM` — simple causal/process relation
-- `METAPHOR` — visual analogy
-- `TEXT_LED` — typography is primary, art is secondary
-- `QUOTE_LED` — one human/source line is primary
-- `EMPTY_BEAT` — restrained pause / silence / minimal image
-
-Default is one dominant composition per slide.
-
-Do not subdivide a slide into many small panels by habit. Research on Instatoon visual direction found that excessive subdivision and too many characters reduce readability; simplicity and clarity are core platform strengths.
-
----
-
-## 10. Render-mode grammar
-
-The slide planner chooses the cheapest mode that serves the beat:
-
-### `RASTER_FULL`
-Full illustration generated as one flattened art scene.
-Use for story scenes, interactions, locations, metaphor scenes.
-
-### `RASTER_PLUS_VECTOR`
-Generated illustration plus vector narration/dialogue/labels.
-This is the default illustrated mode.
-
-### `VECTOR_PLUS_SPOT_ART`
-Mostly deterministic vector layout with one or two small illustrations/icons.
-Use for explanatory or comparison pages.
-
-### `VECTOR_ONLY`
-No paid image generation.
-Use for simple diagram, quote, list, number, or typographic impact when illustration adds little.
-
-The system should not pay for a full illustration merely because every slide “should have a picture.”
-
----
-
-## 11. Layer lock
-
-Final page composition is separated into three logical layers.
-
-### A. ART LAYER — raster
-- generated scene
-- character(s), if needed
-- background
-- props
-- non-text visual effect
-- NO readable dialogue
-- NO baked-in speech bubbles
-- NO baked-in captions
-- NO critical labels
-
-The art generator should intentionally leave required negative space.
-
-### B. VECTOR NARRATIVE LAYER
-- title
-- narration
-- dialogue
-- speech bubbles and tails
-- labels
-- arrows
-- dividers
-- emphasis marks
-- SFX
-- source note / small attribution where required
-
-All important text is deterministic and editable.
-
-### C. LAYOUT / METADATA LAYER
-- safe zones
-- reading order
-- bounding boxes
-- focal point
-- crop anchors
-- source provenance
-- semantic element IDs
-- QC measurements
-
----
-
-## 12. Text grammar
-
-Text must be written for phone reading.
+### SPOKEN DIALOGUE
+Use speech bubbles attached to the speaker.
+The bubble belongs spatially to the character and beat.
 
 Rules:
-- one dominant statement per slide;
+- short;
+- low bubble count;
+- tail clearly targets speaker;
+- do not cover the main face/hand/prop;
+- avoid giant balloons when narration would be cleaner.
+
+### REACTION / INNER TEXT
+Examples:
+- “…?”
+- “설마”
+- “아 집 가고 싶다”
+- small SFX/reaction marks.
+
+Place near the expression/action it belongs to.
+Do not turn every reaction into a full top caption.
+
+## 9. Mobile typography baseline
+
+These are operational starting points for 1080×1350, not immutable font laws.
+Always check on an actual phone-size preview.
+
+Starting range:
+- cover/hook: 72–96 px;
+- strong narration: 48–64 px;
+- normal narration: 42–56 px;
+- speech-bubble dialogue: 44–60 px;
+- reaction/inner text: 34–46 px;
+- source/credit note: 24–30 px.
+
+Default horizontal safe margin:
+- roughly 64–80 px minimum for important text;
+- more when a swipe edge or composition is visually busy.
+
+Rules:
+- do not shrink critical text just to fit;
+- shorten/split the copy instead;
+- use short line lengths;
+- preserve high contrast;
+- phone readability outranks desktop elegance.
+
+## 10. No-poster rule
+
+A comic page must not accidentally become a generic poster/card because text was requested.
+
+Hard warning signs:
+- top 30–40% becomes blank by default;
+- all copy is centered above a static scene;
+- every slide uses the same title-above-illustration template;
+- character action is pushed too low merely to make room for text.
+
+Instead:
+1. decide text role first;
+2. reserve only the space that role needs;
+3. compose the art around that actual region;
+4. let bubbles/reactions live near the acting when appropriate.
+
+## 11. Text density
+
+Prefer:
+- one dominant statement;
 - short lines;
-- avoid long paragraph blocks;
-- vector text must have a deliberate hierarchy: hook/title > spoken/narrative text > note/source;
-- dialogue bubble count should stay low;
-- narration may replace dialogue when that is clearer;
-- do not manufacture dialogue merely to justify illustrated characters.
+- one or two text objects;
+- strong hierarchy.
 
-Text is a storytelling layer, not decoration.
+If the copy requires tiny type:
+- cut;
+- rephrase;
+- or split the beat.
 
----
+Do not use long paragraph blocks in the comic.
 
-## 13. Character policy
+## 12. Background / composition
 
-No recurring-character requirement.
+Background supports place and action.
+It should not become a lifestyle illustration.
 
-For each episode, people may be:
-- absent;
-- one-off;
-- generic;
-- symbolic;
-- repeated only within the current story;
-- reused across episodes if editorially useful.
+Use:
+- story-essential anchors;
+- open visual breathing room;
+- lower detail than characters.
 
-When one person must persist across multiple slides, create an **episode-local continuity anchor**:
-- age/presentation;
-- hair silhouette;
-- clothing;
-- one or two recognizable traits.
+Avoid:
+- decorative filler;
+- complex café equipment unless story-critical;
+- atmospheric lighting;
+- realistic material rendering.
 
-This anchor exists only to keep the current story readable. It is not a brand identity lock.
+## 13. Continuity modes
 
----
+### NONE
+Independent illustrative examples.
 
-## 14. Background and continuity policy
+### LIGHT
+Loose identity/prop continuity.
 
-Continuity level is selected at episode level:
+### STRICT_EPISODE
+Chronological sequence with the same people/clothes/key props/location logic.
 
-- `NONE` — independent illustrative pages
-- `LIGHT` — same broad person/object vocabulary, loose environment consistency
-- `STRICT_EPISODE` — chronological story requiring same people, clothes, key props, and location logic
+For STRICT_EPISODE:
+- recurring main character uses main identity anchor;
+- episode-only important character uses episode-local anchor;
+- accepted prior frame may support pose/location continuity but does not replace the canonical style reference.
 
-Do not enforce strict continuity on observation/explainer posts that benefit from varied examples.
+## 14. Whole-episode preflight
 
----
+Before production art:
+1. story premise exists;
+2. beat order is locked;
+3. each slide has one job;
+4. final landing comes after the reveal/peak, not before;
+5. cast routing is explicit;
+6. new 2+ cut episode character anchor requirement is identified;
+7. each slide has text role(s);
+8. text safe area is planned;
+9. camera rhythm is intentional;
+10. output ratio is fixed.
 
-## 15. Variety rule
+## 15. Visual hard fails
 
-Consistency does not mean identical composition.
+Repair/reject when:
+- main beat is ambiguous;
+- wrong character is used;
+- episode-only character changes face between cuts;
+- slide order breaks causality;
+- text is too small on phone;
+- all text is treated as detached top narration;
+- giant blank title area posterizes the page;
+- text covers the main action;
+- composition changes dramatically during a local repair;
+- background detail/polish competes with characters;
+- STYLE_LOCK is violated.
 
-Across an episode, avoid:
-- 6 identical medium shots;
-- repeated centered person + bubble;
-- same camera distance on every slide;
-- same left/right blocking on every slide.
-
-Prefer deliberate rhythm:
-- wide → medium → detail
-- scene → graphic → scene
-- calm → dense → calm
-- literal → metaphor → landing
-
-Variation serves comprehension, not spectacle.
-
----
-
-## 16. Simplicity / clarity lock
-
-External research on Instatoon visual direction repeatedly identifies simplicity and clarity as core strengths:
-- simplified figures/backgrounds;
-- restrained visual elements;
-- regular readable layout;
-- low clutter;
-- clear typography;
-- simple popular subjects.
-
-This aligns with `STYLE_LOCK.md`.
-
-Therefore:
-- every decorative element must justify its existence;
-- background is quieter than story action;
-- typography must remain legible;
-- avoid over-partitioning;
-- reduce rather than add when uncertain.
-
----
-
-## 17. Whole-episode preflight
-
-Before the first paid image render, the full plan must pass:
-
-1. one-sentence topic exists;
-2. one-sentence angle exists;
-3. format classification is justified;
-4. every slide has exactly one primary job;
-5. hook promises something the body actually delivers;
-6. the landing resolves/reframes the same topic;
-7. no filler slides;
-8. visual archetypes vary intentionally;
-9. render mode is cost-appropriate;
-10. vector-text plan is complete;
-11. episode continuity mode is explicit;
-12. all factual/source claims have provenance when required.
-
-Only after this gate may rendering begin.
-
----
-
-## 18. Cost-aware render preflight
-
-Even after a full plan is approved, do not immediately spend on every raster slide.
-
-Default:
-1. render the cover;
-2. render one representative body slide with the highest style/scene risk;
-3. check global style compatibility;
-4. if both pass, render remaining raster slides.
-
-This is a **render preflight**, not slide-by-slide planning.
-
-The episode remains the planning unit.
-
----
-
-## 19. Visual QC hard fails
-
-Reject or repair if:
-- `STYLE_LOCK.md` is violated;
-- generated text appears in the raster art where vector text should go;
-- a slide’s main beat is not instantly legible;
-- art leaves no viable space for planned text;
-- visual hierarchy has two competing focal points;
-- background clutter competes with the subject;
-- a multi-panel subdivision is harder to read than a single scene;
-- continuity breaks in a `STRICT_EPISODE` sequence;
-- the rendered page changes the planned narrative function.
-
----
-
-## 20. Change control
+## 16. Change control
 
 This grammar is versioned.
-
-Changes require:
-1. explicit proposed rule;
-2. prototype evidence;
-3. comparison against existing grammar;
-4. explicit approval;
-5. version bump.
-
-Performance data may inform experiments but may not silently mutate the grammar.
+Material change requires prototype evidence + user approval.
