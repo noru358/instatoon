@@ -114,3 +114,24 @@ Instead:
 4. Then finalize machine-readable JSON schemas and implement the deterministic vector renderer.
 
 P002 is no longer the preferred first prototype because it is mainly a social/market phenomenon rather than the v0.1 target of anecdote/experience/incident/relatable storytelling. Keep it as a future-format candidate.
+
+
+---
+
+## Prototype execution update — 2026-09-04
+
+First real source-gate run completed:
+- research pool saved at `research/SOURCE_CANDIDATE_RUN_001.md`;
+- E001 selected: convenience-store “poet” anecdote;
+- `episodes/E001/STORY_SOURCE_PACK.md` created;
+- `CONTENT_MASTER.json` created;
+- `STORY_PLAN.json` created;
+- `EPISODE_PLAN.json` created.
+
+E001 is now at **Human Gate B**: whole-story / whole-visual-plan review before raster spend.
+
+If approved, the production preflight is:
+1. render Slide 1;
+2. render Slide 5 (highest interaction/object-count risk);
+3. QC style + visual grammar + text-safe space;
+4. only then render remaining planned raster slides.
