@@ -1,0 +1,104 @@
+{
+  "episode_id": "E001",
+  "format": "STORY_ARC",
+  "story_shape": "EXPECTATION_REVERSAL",
+  "premise": "늘 피곤하게 하던 취객 단골에게 그날도 친절하게 응대했더니, 갑자기 철학적인 말을 남기고 아이스바 두 개를 양손에 쥐여준 이상하고 따뜻한 밤",
+  "point_of_view": "convenience_store_worker",
+  "emotion_engine": "confused_warmth",
+  "specific_details": [
+    "late-night convenience-store counter",
+    "two opened ice bars",
+    "one ice bar in each hand",
+    "customer waits until worker takes one bite"
+  ],
+  "landing_type": "DEADPAN",
+  "landing_beat": "취객이 떠난 뒤 알바만 양손에 아이스바 두 개를 든 채 남고, 한쪽에는 한입 베어 문 자국이 있다.",
+  "slide_count": 7,
+  "beats": [
+    {
+      "index": 1,
+      "role": "HOOK",
+      "state_before": "reader knows nothing",
+      "state_after": "reader sees an inexplicable aftermath",
+      "beat": "알바가 계산대 안에서 양손에 뜯긴 아이스바를 하나씩 들고 멍하니 서 있다. 한쪽은 한입 베어 물었다.",
+      "reader_question_after": "왜 아이스바를 두 개나 들고 있지?",
+      "source_refs": [
+        "S1"
+      ],
+      "must_use_detail": "two ice bars, one bitten"
+    },
+    {
+      "index": 2,
+      "role": "BASELINE",
+      "state_before": "only strange aftermath is known",
+      "state_after": "reader learns who caused it and why worker is wary",
+      "beat": "술 마시고 올 때마다 사람을 지치게 하던 단골 아저씨가 편의점에 들어온다.",
+      "reader_question_after": "또 무슨 일을 벌이나?",
+      "source_refs": [
+        "S1"
+      ],
+      "must_use_detail": "troublesome drunk regular"
+    },
+    {
+      "index": 3,
+      "role": "SETUP_RESPONSE",
+      "state_before": "worker expects trouble",
+      "state_after": "worker chooses to remain unusually patient and kind",
+      "beat": "그날 알바는 짜증을 내지 않고 끝까지 차분하게 응대한다.",
+      "reader_question_after": "아저씨 반응이 달라지나?",
+      "source_refs": [
+        "S1"
+      ],
+      "must_use_detail": "kind response"
+    },
+    {
+      "index": 4,
+      "role": "TURN",
+      "state_before": "usual nuisance dynamic",
+      "state_after": "customer suddenly becomes serious and emotionally unexpected",
+      "beat": "아저씨가 갑자기 표정을 가라앉히고 한마디를 한다.",
+      "reader_question_after": "그리고 왜 아이스바 두 개가 남은 거지?",
+      "source_refs": [
+        "S1",
+        "G1"
+      ],
+      "must_use_detail": "source quote"
+    },
+    {
+      "index": 5,
+      "role": "ESCALATION",
+      "state_before": "moment briefly feels sincere",
+      "state_after": "sincerity turns into bizarre physical action",
+      "beat": "아저씨가 냉동고에서 아이스바 두 개를 꺼내 둘 다 뜯고 알바의 양손에 하나씩 쥐여준다.",
+      "reader_question_after": "왜 두 개를 다 뜯어서 주는 거야?",
+      "source_refs": [
+        "S1"
+      ],
+      "must_use_detail": "two opened ice bars, both hands"
+    },
+    {
+      "index": 6,
+      "role": "PEAK",
+      "state_before": "worker is holding both bars",
+      "state_after": "customer refuses to leave until worker actually eats one",
+      "beat": "아저씨가 한입 먹는 걸 보고 가겠다며 버틴다. 알바가 결국 한쪽을 한입 베어 문다.",
+      "reader_question_after": "이제 진짜 가나?",
+      "source_refs": [
+        "S1"
+      ],
+      "must_use_detail": "one bite required"
+    },
+    {
+      "index": 7,
+      "role": "LANDING",
+      "state_before": "customer has got what he wanted",
+      "state_after": "the absurd warm residue remains",
+      "beat": "문이 닫히고 알바 혼자 계산대에 남는다. 양손에는 아이스바 두 개, 한쪽에는 이빨 자국.",
+      "reader_question_after": "",
+      "source_refs": [
+        "S1"
+      ],
+      "must_use_detail": "quiet empty aftermath"
+    }
+  ]
+}
