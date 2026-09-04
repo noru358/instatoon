@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <title>E001 slide 1 vector narrative layer</title>
+  <style>text { font-family: "Noto Sans KR", sans-serif; fill: #433c38; }</style>
+  <rect x="72" y="66" width="56" height="9" rx="4.5" fill="#d98973"/>
+  <text id="T1" x="72" y="142" font-size="57" font-weight="700" letter-spacing="-1.2">
+    <tspan x="72" dy="0">이 아저씨가 갑자기</tspan>
+    <tspan x="72" dy="76">아이스바 두 개를 까더니…</tspan>
+  </text>
+</svg>

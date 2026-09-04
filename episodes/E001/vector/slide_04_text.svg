@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <title>E001 slide 4 vector narrative layer</title>
+  <style>text { font-family: "Noto Sans KR", sans-serif; fill: #433c38; }</style>
+  <path id="T4_bubble" d="M497 66 C492 53 515 47 540 48 L986 48 C1015 48 1029 63 1028 89 L1025 294 C1025 319 1008 331 982 331 L675 331 L622 394 L638 327 L540 327 C513 327 499 313 499 287 Z" fill="#fffaf3" fill-opacity="0.94" stroke="#6d625c" stroke-width="3"/>
+  <text id="T4" x="554" y="131" font-size="42" font-weight="600" letter-spacing="-0.7">
+    <tspan x="554" dy="0">너는…</tspan>
+    <tspan x="554" dy="61">니가 살고 싶은 세상에서</tspan>
+    <tspan x="554" dy="61">살아.</tspan>
+  </text>
+</svg>

@@ -16,17 +16,17 @@ This project is independent from the Talkshow repository and video workflow.
 
 ### Big flow
 
-**Foundation complete → style / story / visual grammar locked → prototype extraction in progress → implementation later**
+**Foundation complete → style / story / visual grammar locked → Prototype 1 complete at Gate C → two more prototypes → implementation**
 
 ### Current detailed step
 
-Prototype E001 has a complete source pack, content master, whole-story plan, and whole-episode visual plan.
+Prototype E001 now has a complete source pack, content master, whole-story plan, whole-episode visual plan, seven generated art layers, seven editable SVG narrative layers, seven canonical exports, a contact sheet, and a render manifest.
 
-Its first Slide 1 / Slide 5 raster preflight was rejected for systemic style drift. The root blocker is now resolved: `INSTATOON_STYLE_v1.2` and the five approved binary style references are present in the repository.
+The clean Slide 1 retry passed; Slide 5 then passed the high-risk interaction/object-count check; the remaining five slides received one first pass each. The complete carousel passed technical and story-sequence QC with two style/continuity watch items documented in the manifest.
 
-**Exact current position: E001 two-slide raster preflight, ready to retry Slide 1.**
+**Exact current position: E001 first complete carousel, awaiting Gate C human taste decision (`PUBLISH / REPAIR / KILL`).**
 
-Do not start bulk rendering, Prototype 2, or software implementation before the E001 retry gate is resolved.
+Do not silently promote the texture variation into a new style rule, start Prototype 2, or implement the renderer before the Gate C decision is recorded.
 
 ---
 
@@ -59,7 +59,7 @@ The complete authority order is maintained once in `README.md`; do not duplicate
 
 ## Implementation reality
 
-The repository currently contains the design baseline, canonical references, one research run, and one partially executed prototype.
+The repository currently contains the design baseline, canonical references, one research run, and one fully executed first prototype awaiting human taste approval.
 
 ### Proven at process level
 
@@ -69,7 +69,10 @@ The repository currently contains the design baseline, canonical references, one
 - whole-episode beat planning;
 - whole-episode visual direction;
 - two-slide cost-protection preflight;
-- manual visual failure diagnosis and stop-on-systemic-failure behavior.
+- manual visual failure diagnosis and stop-on-systemic-failure behavior;
+- one full seven-slide raster-plus-vector carousel;
+- episode-local SVG lettering and deterministic 1080×1350 export;
+- manual `RENDER_MANIFEST.json` logging and deterministic file/dimension/vector-bound checks.
 
 ### Not yet implemented as software
 
@@ -77,8 +80,8 @@ The repository currently contains the design baseline, canonical references, one
 - finalized machine-readable JSON Schemas;
 - deterministic plan validator;
 - prompt-assembler code;
-- vector letterer/composer;
-- `RENDER_MANIFEST.json` production logging;
+- reusable vector letterer/composer (only the episode-local SVG proof exists);
+- automated `RENDER_MANIFEST.json` production logging (the E001 manifest was written manually);
 - automated deterministic QC;
 - publishing and performance-feedback ingestion.
 
@@ -90,7 +93,7 @@ Therefore the current system is a **structured, manually operated production pro
 
 The v0.1 extraction program uses three prototypes:
 
-1. a sourced anecdote/incident using `STORY_ARC` — **E001, active**;
+1. a sourced anecdote/incident using `STORY_ARC` — **E001, first pass complete / Gate C pending**;
 2. an error/misunderstanding/embarrassment story using `STORY_ARC` — pending;
 3. an everyday `RELATABLE_SCENARIO` — pending.
 
@@ -112,14 +115,19 @@ Completed artifacts:
 - `episodes/E001/STORY_SOURCE_PACK.md`;
 - `episodes/E001/CONTENT_MASTER.json`;
 - `episodes/E001/STORY_PLAN.json`;
-- `episodes/E001/EPISODE_PLAN.json`.
+- `episodes/E001/EPISODE_PLAN.json`;
+- `episodes/E001/RENDER_MANIFEST.json`;
+- seven art layers under `episodes/E001/renders/`;
+- seven editable SVG layers under `episodes/E001/vector/`;
+- seven canonical exports plus a contact sheet under `episodes/E001/final/`.
 
 Gate state:
 
 - Gate A: E001 selected as `GO` in the research run.
 - Gate B: the complete plan proceeded into an authorized two-slide render preflight; the exact approval wording was not preserved, so do not claim a verbatim approval record.
-- Render preflight: first attempt rejected; retry ready.
-- Gate C: not reached.
+- Render preflight: first attempt rejected; clean Slide 1 and Slide 5 retries passed.
+- First production pass: seven slides complete with vector lettering and QC.
+- Gate C: reached; human decision pending.
 
 ### Historical failed preflight
 
@@ -140,7 +148,7 @@ The failed output IDs, hashes, and detailed evidence remain in `episodes/E001/RE
 
 ### Resolution
 
-The blocker is resolved through:
+The original style blocker was resolved through:
 
 - `INSTATOON_STYLE_v1.2`;
 - five approved assets under `assets/style_refs/`;
@@ -149,27 +157,19 @@ The blocker is resolved through:
 - production-wide `ANTI_GPT_DEFAULT_BLOCK`;
 - prohibition on using a failed frame as the sole style anchor.
 
-The two earlier recovered PNG candidates recorded in previous history were never promoted to repository-canonical assets. They are superseded by the five approved WebP references in `REFERENCE_SET.md`; their old local-only status is not a current blocker.
+The two earlier recovered PNG candidates recorded in previous history were never promoted to repository-canonical assets. The current five-file set is defined by exact paths and hashes in `REFERENCE_SET.md`. REF_03 and REF_05 are now high-resolution PNGs; their faint texture/detail difference is a Gate C watch item, not a hidden blocker.
 
 ---
 
 ## Exact next execution
 
-1. Keep bulk generation stopped.
-2. Before any external paid render, obtain explicit user approval for the spend.
-3. Retry **Slide 1 only** under `INSTATOON_STYLE_v1.2`:
-   - primary scene anchor: `INSTATOON_REF_04_INDOOR.webp`;
-   - face support: `INSTATOON_REF_01_CHARACTER.webp`;
-   - append reference-obedience, face-lock, background-density, master-style, negative-style, and anti-GPT-default blocks;
-   - preserve the planned top negative space and generate no semantic text.
-4. Run style/visual-grammar QC before defect QC.
-5. If Slide 1 fails, diagnose and repair the shared prompt/reference system; do not generate Slide 5.
-6. If Slide 1 passes, retry **Slide 5 only**:
-   - primary scene anchor: `INSTATOON_REF_03_INTERACTION.webp`;
-   - face support: `INSTATOON_REF_01_CHARACTER.webp`;
-   - accepted Slide 1 may be used only as episode-local identity/location continuity support;
-   - show the customer placing exactly two opened, unbitten ice bars into the worker's hands, one bar per hand.
-7. Only after Slide 1 and Slide 5 both pass may the remaining raster slides receive a first pass.
-8. Then add vector lettering, run QC, and request Gate C: `PUBLISH / REPAIR / KILL`.
+1. Review `episodes/E001/final/E001_contact_sheet.png` and the two watch items in `episodes/E001/RENDER_MANIFEST.json`.
+2. Record one Gate C decision:
+   - `PUBLISH` — accept E001 as the first prototype baseline;
+   - `REPAIR` — name the exact slide/text/style defect and make a targeted change;
+   - `KILL` — archive the execution evidence without using it as a baseline.
+3. In the same decision, confirm whether faint surface texture is acceptable for v1.2 or whether the five canonical references must be normalized before Prototype 2.
+4. If `PUBLISH`, select Prototype 2 and repeat the same typed sequence, capturing exact prompt/reference hashes before each image call.
+5. Do not start the reusable vector renderer or executable orchestrator until all three prototypes have exposed stable patterns.
 
-Current blocker: **none inside the repository**. The next gate is execution approval and Slide 1 visual QC.
+Current blocker: **none technical**. The next gate is the user's human taste/publish decision.

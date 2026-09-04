@@ -361,9 +361,9 @@ Use the approved assets from `REFERENCE_SET.md`.
 
 - `INSTATOON_REF_01_CHARACTER.webp`: primary face / hair / close-to-medium character grammar.
 - `INSTATOON_REF_02_FULLBODY.webp`: primary full-body proportion / outfit-scale grammar.
-- `INSTATOON_REF_03_INTERACTION.webp`: primary two-person interaction + outdoor balance.
+- `INSTATOON_REF_03_INTERACTION.png`: primary two-person interaction + outdoor balance.
 - `INSTATOON_REF_04_INDOOR.webp`: primary indoor density / seated scene.
-- `INSTATOON_REF_05_OUTDOOR_APPROVED.webp`: primary outdoor full-body + side-gaze / environment-heavy anchor.
+- `INSTATOON_REF_05_OUTDOOR_APPROVED.png`: primary outdoor full-body + side-gaze / environment-heavy anchor.
 
 Use the most relevant scene anchor **plus REF_01 as a face anchor when faces are at risk of drift**.
 These references control style; they do not require recurring-character identity across unrelated episodes.

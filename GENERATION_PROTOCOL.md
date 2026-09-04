@@ -139,6 +139,8 @@ If the canonical style image is unavailable: **STOP — do not generate producti
 
 A failed preflight frame must never be promoted to the sole reference for the next frame.
 
+Before each call, write the exact assembled prompt, selected reference paths, reference hashes, target canvas, and planned output path into the episode execution record. Immediately after each call, record the returned generation/file identifier, raw dimensions, output hash, and QC verdict. A prompt reconstructed after generation is not valid provenance.
+
 ---
 
 ### Canonical five-reference selection
@@ -192,6 +194,8 @@ Default regeneration budget:
 
 Prefer targeted edit over full regeneration.
 
+Validate raw width, height, format, and readability immediately after every generated file is received. If the generator ignores the requested aspect ratio, normalize with an aspect-preserving crop or pad chosen from the planned negative-space region; never stretch a character. Record the original dimensions and normalization rule in `RENDER_MANIFEST.json`.
+
 ---
 
 ## 9. First-pass QC — style and grammar
@@ -242,6 +246,7 @@ Do not enforce strict continuity when the format intentionally uses independent 
 ## 11. Vector-layer QC
 
 Check deterministically where possible:
+- repository-pinned font family and hash;
 - text overflow;
 - clipping;
 - safe margins;

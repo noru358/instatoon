@@ -1,0 +1,162 @@
+{
+  "episode_id": "E001",
+  "run_date": "2026-09-04",
+  "execution_mode": "manual_orchestrator_with_typed_artifacts",
+  "generation_tool": "ChatGPT image_gen",
+  "style_version": "INSTATOON_STYLE_v1.2",
+  "visual_grammar_version": "INSTATOON_VISUAL_GRAMMAR_v0.1",
+  "story_grammar_version": "INSTATOON_STORY_GRAMMAR_v0.1",
+  "external_credit_spend": false,
+  "generation_count": 7,
+  "regeneration_count": 0,
+  "canonical_export": {
+    "width": 1080,
+    "height": 1350,
+    "format": "PNG",
+    "color_space": "sRGB"
+  },
+  "reference_set": [
+    {
+      "path": "assets/style_refs/INSTATOON_REF_01_CHARACTER.webp",
+      "sha256": "6243d1d58d64f0752f64177b0228c5c0b5b32569c26bd30d5620d9d0a6c478e2"
+    },
+    {
+      "path": "assets/style_refs/INSTATOON_REF_02_FULLBODY.webp",
+      "sha256": "be289521db188e009541b8a36cb4dccd41b5ead7f8b8a296d5beed11819d720d"
+    },
+    {
+      "path": "assets/style_refs/INSTATOON_REF_03_INTERACTION.png",
+      "sha256": "41ff0316f62b8ae238acf9e1f9941a96d188a46e02054a6cedb4a069582cf3f7"
+    },
+    {
+      "path": "assets/style_refs/INSTATOON_REF_04_INDOOR.webp",
+      "sha256": "fae356fcd276b28b39b9ad75a72b2f221be2dd215ccbe04bfcdb82cd0dda6412"
+    },
+    {
+      "path": "assets/style_refs/INSTATOON_REF_05_OUTDOOR_APPROVED.png",
+      "sha256": "de836129fc2fe816df12b7a35dbe11fe1c754e7512028be0e79174e9fbe49128"
+    }
+  ],
+  "prompt_trace": {
+    "exact_text_preserved": false,
+    "prompt_hashes_available": false,
+    "reason": "The exact assembled prompts were not written to a file before the image_gen calls.",
+    "reconstruction_authority": [
+      "episodes/E001/EPISODE_PLAN.json",
+      "MASTER_PROMPTS.md",
+      "STYLE_LOCK.md",
+      "REFERENCE_SET.md"
+    ],
+    "qc_impact": "Images and outputs are auditable, but the exact generation inputs are not bit-for-bit reproducible. This is a recorded process defect, not silently reconstructed evidence."
+  },
+  "slides": [
+    {
+      "index": 1,
+      "generation_file_id": "exec-c8f7b247-6f50-4c77-a865-3f9fe971ab31",
+      "raw_dimensions": "1122x1402",
+      "art_path": "episodes/E001/renders/slide_01_art.png",
+      "art_sha256": "6839cb495ddb34a1c90d1bfb49b827990670af8d671d9ed2a1e2de0f1d5e09c1",
+      "vector_path": "episodes/E001/vector/slide_01_text.svg",
+      "final_path": "episodes/E001/final/slide_01.png",
+      "final_sha256": "ab5c40ea297592e797fb6b238e08b6c594fdfe45f9a25a3ab073f45ff0c74d19",
+      "qc": "PASS"
+    },
+    {
+      "index": 2,
+      "generation_file_id": "exec-9501c445-8779-4fa4-b9b9-1b378fb6c0f4",
+      "raw_dimensions": "1024x1536",
+      "normalization": "aspect-preserving scale-to-width and top crop, anchored south, to 1122x1402",
+      "art_path": "episodes/E001/renders/slide_02_art.png",
+      "art_sha256": "fa23fd4de10fad2d8afd209de5cebb95b3ae90380fe5b05fc5db658905585895",
+      "vector_path": "episodes/E001/vector/slide_02_text.svg",
+      "final_path": "episodes/E001/final/slide_02.png",
+      "final_sha256": "949fe3eece935f7a237000879fd1775812331d30b3b1bafaeea068b3f73fbe16",
+      "qc": "PASS"
+    },
+    {
+      "index": 3,
+      "generation_file_id": "exec-5226bcc2-67dd-48e6-bf0e-5fba34699064",
+      "raw_dimensions": "1122x1402",
+      "art_path": "episodes/E001/renders/slide_03_art.png",
+      "art_sha256": "65f26c9b42a29cbb466978bb16e0a57a7b1abac7bf8ed991be8ca495647e4a6c",
+      "vector_path": "episodes/E001/vector/slide_03_text.svg",
+      "final_path": "episodes/E001/final/slide_03.png",
+      "final_sha256": "1921f85841e5eba64ad9c70988303decee7bbfb55e75ca2d201773ddbc34c0b7",
+      "qc": "PASS_WITH_WATCH",
+      "qc_note": "Customer discomfort/tipsiness reads slightly stronger than planned but does not become threatening or grotesque."
+    },
+    {
+      "index": 4,
+      "generation_file_id": "exec-a4080108-6bc0-411d-91d0-f7ee2192c086",
+      "raw_dimensions": "1122x1402",
+      "art_path": "episodes/E001/renders/slide_04_art.png",
+      "art_sha256": "e17ee1dd89d91fa4dfdfe9a825f67e61f5b0f632f2c5be954012c2a47d1d8ec1",
+      "vector_path": "episodes/E001/vector/slide_04_text.svg",
+      "final_path": "episodes/E001/final/slide_04.png",
+      "final_sha256": "7bc071676dc2d0fd3adb805108e635d940822ea4c95f0304dd11abc9dcaddbdb",
+      "qc": "PASS_WITH_WATCH",
+      "qc_note": "The close-up customer has slightly more facial age detail than the medium shots; identity and style family remain readable."
+    },
+    {
+      "index": 5,
+      "generation_file_id": "exec-e0e512da-9ff9-4255-8637-095deb51521c",
+      "raw_dimensions": "1122x1402",
+      "art_path": "episodes/E001/renders/slide_05_art.png",
+      "art_sha256": "9ee244d79e100f89aa9b6583b10bd92943df4391738cdfd5477e976c629ab4b5",
+      "vector_path": "episodes/E001/vector/slide_05_text.svg",
+      "final_path": "episodes/E001/final/slide_05.png",
+      "final_sha256": "13f2ba34f359f997698184326a636ac6723436e58db642b6a458fc05444bf7f1",
+      "qc": "PASS",
+      "qc_note": "Exactly two opened, unbitten bars; one transferred toward each worker hand."
+    },
+    {
+      "index": 6,
+      "generation_file_id": "exec-2a1bd41c-533d-4367-b330-256ba1c0a622",
+      "raw_dimensions": "1122x1402",
+      "art_path": "episodes/E001/renders/slide_06_art.png",
+      "art_sha256": "74f932df3b6ea678c0627fa44db4fabd9351c1dde9c8333f7e6770f9c1ba1ff9",
+      "vector_path": "episodes/E001/vector/slide_06_text.svg",
+      "final_path": "episodes/E001/final/slide_06.png",
+      "final_sha256": "5ad55f151e32ac3255ce097844480d6d07eda9a23466036123c56707ee67abf6",
+      "qc": "PASS",
+      "qc_note": "Worker bites the green-wrapped bar while still holding the intact purple-wrapped bar; customer watches."
+    },
+    {
+      "index": 7,
+      "generation_file_id": "exec-316f9125-43bb-4122-9d3d-09c071bcec9c",
+      "raw_dimensions": "1086x1448",
+      "normalization": "aspect-preserving scale-to-width and top crop, anchored south, to 1122x1402",
+      "art_path": "episodes/E001/renders/slide_07_art.png",
+      "art_sha256": "c5ced3ae1061eef8faef08e7c523958e8f6e25cd652b25152af6ad29d1248dcc",
+      "vector_path": "episodes/E001/vector/slide_07_text.svg",
+      "final_path": "episodes/E001/final/slide_07.png",
+      "final_sha256": "7ddae2fb12705571ed86e09a6b2b69580b8f5c4b9d9be5f3b5c95afc00ee93e4",
+      "qc": "PASS",
+      "qc_note": "Quiet aftermath, exactly two bars, one bitten; source treatment included as a separate vector note."
+    }
+  ],
+  "vector_layer_qc": {
+    "font": "Noto Sans KR Regular",
+    "font_sha256": "d1bf8649914a4fe9477a8735bf056383e44e466141fb3d61897252e06d900c1a",
+    "editable_semantic_text": true,
+    "overflow": "PASS",
+    "clipping": "PASS",
+    "reading_order": "PASS",
+    "safe_margins": "PASS",
+    "bubble_tail_targets": "PASS",
+    "source_note": "PASS"
+  },
+  "episode_qc": {
+    "story_beat_sequence": "PASS",
+    "character_continuity": "PASS_WITH_WATCH",
+    "location_continuity": "PASS",
+    "critical_object_count": "PASS",
+    "style_lock": "PROVISIONAL_PASS",
+    "style_watch": "High-resolution REF_03 and REF_05 carry more visible surface texture/detail than the three 360x450 WebP anchors. The E001 art inherits faint texture; human Gate C should decide whether it remains acceptable for v1.2 or requires a normalized reference refresh."
+  },
+  "overall_verdict": "GATE_C_REVIEW_REQUIRED",
+  "contact_sheet": {
+    "path": "episodes/E001/final/E001_contact_sheet.png",
+    "sha256": "0ac15c4f07d2b276c5cd9b37b6037be67501ec3df7ef91ef8a1ac254000f1189"
+  }
+}

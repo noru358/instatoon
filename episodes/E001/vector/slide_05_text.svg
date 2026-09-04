@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <title>E001 slide 5 vector narrative layer</title>
+  <style>text { font-family: "Noto Sans KR", sans-serif; fill: #433c38; }</style>
+  <rect x="72" y="66" width="8" height="112" rx="4" fill="#d98973"/>
+  <text id="T5" x="104" y="112" font-size="44" font-weight="600" letter-spacing="-0.8">
+    <tspan x="104" dy="0">그리고 갑자기</tspan>
+    <tspan x="104" dy="59">아이스바 두 개를 다 뜯더니</tspan>
+  </text>
+</svg>

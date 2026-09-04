@@ -1,6 +1,6 @@
 # E001 — 편의점 음유시인
 
-Status: **PREFLIGHT RETRY READY — CANONICAL STYLE BLOCKER RESOLVED**
+Status: **FIRST COMPLETE CAROUSEL READY — GATE C HUMAN REVIEW**
 
 This is the first real TOON SYSTEM v0.1 prototype.
 
@@ -18,21 +18,59 @@ It is therefore useful for testing whether the system preserves **source texture
 
 ## Current gate
 
-The entire 7-slide story and visual plan exists and proceeded into a two-slide render preflight. This functionally moved the episode through Gate B, although the exact approval wording was not preserved in the repository.
+The complete 7-slide plan passed through the prescribed production sequence. Slide 1 passed the retry preflight, Slide 5 then passed the high-risk object/handoff preflight, and Slides 2–4 and 6–7 received one first-pass generation each. Editable SVG lettering was composed separately and all seven canonical 1080×1350 exports passed file, layout, object-count, and story-sequence checks.
 
-The first preflight was rejected. The shared style blocker has since been resolved through `INSTATOON_STYLE_v1.2` and the five approved binary references in `REFERENCE_SET.md`.
+The exact approval wording for the earlier Gate B transition was not preserved; do not invent it. The user's 2026-09-04 instruction to make one comic authorized this production run. The next decision is Gate C: `PUBLISH / REPAIR / KILL`.
 
 Current action:
-1. keep bulk generation stopped;
-2. retry Slide 1 only;
-3. run style/visual-grammar QC;
-4. retry Slide 5 only if Slide 1 passes;
-5. render the remaining slides only if both preflight slides pass.
+1. review `final/E001_contact_sheet.png` at human taste Gate C;
+2. explicitly decide whether the faint texture inherited from the mixed-resolution reference set is acceptable;
+3. choose `PUBLISH`, a targeted `REPAIR`, or `KILL`;
+4. only after that decision, carry the confirmed lessons into Prototype 2.
+
+## Complete production pass — 2026-09-04
+
+Outputs:
+- seven generated art layers in `renders/`;
+- seven editable Korean vector narrative layers in `vector/`;
+- seven 1080×1350 sRGB PNG exports plus `final/E001_contact_sheet.png` in `final/`;
+- exact hashes, raw dimensions, normalization, per-slide QC, and open watch items in `RENDER_MANIFEST.json`.
+
+Execution order:
+1. reused the existing sourced anecdote and locked whole-episode plan;
+2. rendered and passed Slide 1 cover preflight;
+3. rendered and passed Slide 5 interaction/object-count preflight;
+4. generated the five remaining art layers once each;
+5. normalized only Slides 2 and 7 because the generator returned non-canonical raw dimensions;
+6. added all semantic Korean text as editable SVG, using the repository-pinned Noto Sans KR font;
+7. exported the final carousel and ran deterministic dimension/file/vector-bound checks plus visual story/style/continuity review.
+
+Overall verdict: **GATE C REVIEW REQUIRED**.
+
+Strengths:
+- the seven beats read in order without new story invention;
+- the worker, customer, store, and two ice-bar gag remain continuous;
+- Slide 5 has exactly two opened, unbitten bars;
+- Slide 6 shows the worker biting one while still holding the other;
+- Slide 7 lands quietly and identifies the material as a reconstructed online anecdote;
+- all important wording remains editable outside the raster art.
+
+Watch items:
+- REF_03 and REF_05 are higher-resolution PNGs and show slightly more surface texture/detail than REF_01, REF_02, and REF_04; the final art therefore carries faint texture despite the flatness lock;
+- the customer gains somewhat more facial age detail in the Slide 4 close-up;
+- the exact assembled generation prompts were not saved before the calls, so bit-for-bit prompt provenance is incomplete; the manifest records this instead of inventing hashes after the fact.
+
+Process corrections adopted:
+- capture exact prompt/reference hashes before every future generation call;
+- validate raw canvas immediately after every returned image;
+- normalize mismatched aspect ratios without stretching people and record the rule;
+- keep the font binary and license in the repository so vector lettering is reproducible;
+- require a Gate C choice on reference-set texture before Prototype 2.
 
 
 ---
 
-## Preflight execution result — 2026-09-04
+## Historical failed preflight — 2026-09-04
 
 Generated:
 - Slide 1 cover preflight
@@ -78,13 +116,13 @@ The second render then used the first failed frame as the principal reference, c
 
 ### Blocker resolution
 
-The previous missing-binary blocker is **resolved**. The failed render remains rejected, but the episode is ready for a clean preflight retry with the approved references.
+The previous missing-binary blocker was **resolved**. These failed renders remain rejected historical evidence; the clean retry and full first pass are documented above and in `RENDER_MANIFEST.json`.
 
-### Next retry sequence
+### Retry sequence that was subsequently executed
 1. Before spending external tool credits, obtain explicit user approval.
 2. Run Slide 1 only under `INSTATOON_STYLE_v1.2` using `INSTATOON_REF_04_INDOOR.webp` plus `INSTATOON_REF_01_CHARACTER.webp`.
 3. Attach the production reference-obedience, face-lock, background-density, master-style, negative-style, and anti-GPT-default blocks. Preserve top title space and generate no semantic text.
 4. QC the style fingerprint and visual grammar before anatomy/defect QC.
-5. Only if Slide 1 passes, run Slide 5 using `INSTATOON_REF_03_INTERACTION.webp` plus `INSTATOON_REF_01_CHARACTER.webp`; accepted Slide 1 may support episode-local identity/location continuity only.
+5. Only if Slide 1 passes, run Slide 5 using `INSTATOON_REF_03_INTERACTION.png` plus `INSTATOON_REF_01_CHARACTER.webp`; accepted Slide 1 may support episode-local identity/location continuity only.
 6. Slide 5 must show the customer placing exactly two opened, unbitten ice bars into the worker's hands, one bar per hand. Neither bar has a bite yet.
 7. Do not bulk-render the remaining slides until both preflight slides pass.

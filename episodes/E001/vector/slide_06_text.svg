@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <title>E001 slide 6 vector narrative layer</title>
+  <style>text { font-family: "Noto Sans KR", sans-serif; fill: #433c38; }</style>
+  <path id="T6_bubble" d="M64 54 C59 42 78 36 99 36 L385 36 C410 36 421 49 421 71 L419 183 C419 205 406 216 382 216 L322 216 L291 269 L296 215 L100 215 C76 215 64 203 64 181 Z" fill="#fffaf3" fill-opacity="0.94" stroke="#6d625c" stroke-width="3"/>
+  <text id="T6" x="112" y="142" font-size="47" font-weight="600" letter-spacing="-0.5">한 입 먹어.</text>
+  <rect x="543" y="62" width="8" height="112" rx="4" fill="#d98973"/>
+  <text id="T7" x="575" y="107" font-size="38" font-weight="600" letter-spacing="-0.6">
+    <tspan x="575" dy="0">먹는 거 보고 가겠다고</tspan>
+    <tspan x="575" dy="54">버텼다.</tspan>
+  </text>
+</svg>

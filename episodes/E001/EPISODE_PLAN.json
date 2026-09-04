@@ -9,9 +9,9 @@
   "slide_count": 7,
   "episode_rhythm": "aftermath close scene → ordinary wide → calm two-shot → serious close-up → object/action focus → awkward two-shot → quiet aftermath",
   "episode_local_continuity": {
-    "worker": "20s convenience-store worker; simple everyday workwear/vest; same hair/clothes across episode",
-    "customer": "middle-aged male regular; visibly but not grotesquely tipsy; simple everyday clothing; same outfit across episode",
-    "location": "ordinary low-detail Korean convenience store; counter + freezer/refrigerated area as only major anchors"
+    "worker": "Korean woman in her early-to-mid 20s; short straight near-black bob ending at the jaw with light wispy bangs; muted sage long-sleeve shirt under a warm-cream convenience-store vest with no readable logo or name; charcoal straight pants; same hair, face grammar, and clothes across the episode",
+    "customer": "Korean man in his late 50s; short slightly tousled near-black hair with a little gray at the sides; muted navy zip jacket over a beige crew-neck sweater and charcoal pants; tired slightly flushed cheeks; visibly but not grotesquely tipsy; same hair, face grammar, and clothes across the episode",
+    "location": "ordinary low-detail Korean convenience store; warm off-white counter, one pale muted-blue freezer/refrigerator block, and one simplified shelf with color blocks as the only major anchors; no readable branding or signage; consistent spatial logic across the episode"
   },
   "slides": [
     {
@@ -268,6 +268,12 @@
           "kind": "narration",
           "content": "그렇게 양손에 아이스바만 남았다.",
           "priority": 1
+        },
+        {
+          "id": "T9",
+          "kind": "source_note",
+          "content": "온라인에 올라왔던 편의점 알바 경험담을 바탕으로 재구성",
+          "priority": 2
         }
       ],
       "continuity_refs": [

@@ -20,7 +20,7 @@ These images are style authorities, not a requirement that unrelated episodes re
    - Role: full-body proportion / silhouette / outfit-scale anchor.
    - Use for standing full-body and medium-full scenes.
 
-3. `assets/style_refs/INSTATOON_REF_03_INTERACTION.webp`
+3. `assets/style_refs/INSTATOON_REF_03_INTERACTION.png`
    - Role: two-person interaction + outdoor environment balance.
    - Use for social interaction, handoff gestures, and small-group staging.
 
@@ -28,23 +28,27 @@ These images are style authorities, not a requirement that unrelated episodes re
    - Role: indoor environment density / seated scene anchor.
    - Use for sofa, home, cafe, desk, and other interior scenes.
 
-5. `assets/style_refs/INSTATOON_REF_05_OUTDOOR_APPROVED.webp`
+5. `assets/style_refs/INSTATOON_REF_05_OUTDOOR_APPROVED.png`
    - Role: corrected outdoor full-body + side-gaze / environment-heavy anchor.
    - Use for residential streets, outdoor full-body framing, or scenes where the face is small in frame.
 
 ## Asset integrity
 
-All five canonical files are 360×450 WebP images.
+The set currently contains three 360×450 WebP anchors and two 1122×1402 PNG anchors. REF_03 and REF_05 were replaced by higher-resolution equivalents and visually checked against the same v1.2 style family during the E001 production pass. Their exact identities are locked below.
 
-| Asset | SHA-256 |
-|---|---|
-| `INSTATOON_REF_01_CHARACTER.webp` | `6243d1d58d64f0752f64177b0228c5c0b5b32569c26bd30d5620d9d0a6c478e2` |
-| `INSTATOON_REF_02_FULLBODY.webp` | `be289521db188e009541b8a36cb4dccd41b5ead7f8b8a296d5beed11819d720d` |
-| `INSTATOON_REF_03_INTERACTION.webp` | `61bda2bb583d78013e12cc0e4521dd44379d9e0681a827ad457bc886b0b232fd` |
-| `INSTATOON_REF_04_INDOOR.webp` | `fae356fcd276b28b39b9ad75a72b2f221be2dd215ccbe04bfcdb82cd0dda6412` |
-| `INSTATOON_REF_05_OUTDOOR_APPROVED.webp` | `77fcc4ff830ea0d8efcbe34206ae2a19105c7d873b820e8f0b9ec4a5c9987b96` |
+| Asset | Format / dimensions | SHA-256 |
+|---|---|---|
+| `INSTATOON_REF_01_CHARACTER.webp` | WebP / 360×450 | `6243d1d58d64f0752f64177b0228c5c0b5b32569c26bd30d5620d9d0a6c478e2` |
+| `INSTATOON_REF_02_FULLBODY.webp` | WebP / 360×450 | `be289521db188e009541b8a36cb4dccd41b5ead7f8b8a296d5beed11819d720d` |
+| `INSTATOON_REF_03_INTERACTION.png` | PNG / 1122×1402 | `41ff0316f62b8ae238acf9e1f9941a96d188a46e02054a6cedb4a069582cf3f7` |
+| `INSTATOON_REF_04_INDOOR.webp` | WebP / 360×450 | `fae356fcd276b28b39b9ad75a72b2f221be2dd215ccbe04bfcdb82cd0dda6412` |
+| `INSTATOON_REF_05_OUTDOOR_APPROVED.png` | PNG / 1122×1402 | `de836129fc2fe816df12b7a35dbe11fe1c754e7512028be0e79174e9fbe49128` |
 
 If a file's hash differs, do not treat it as the approved canonical binary until the change is explicitly reviewed and versioned.
+
+### Current watch item
+
+The two high-resolution PNG anchors expose slightly more surface texture and detail than the three smaller WebP anchors. E001 remains inside the intended family, but Gate C must explicitly decide whether that faint texture is acceptable or whether all five anchors should be normalized before Prototype 2. Do not silently mix or replace these binaries again.
 
 ## Reference selection rule
 
