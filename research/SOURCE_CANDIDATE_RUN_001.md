@@ -1,3 +1,7 @@
+# HISTORICAL RESEARCH NOTE
+
+This candidate run belongs to the pre-v2/E001 prototype period. It is preserved as research evidence, not as the current production queue. Current active work is E002; see root CURRENT_STATE.md.
+
 # SOURCE CANDIDATE RUN 001 — 2026-09-04
 
 Purpose: first real Human-interest Gate run for TOON SYSTEM v0.1.
