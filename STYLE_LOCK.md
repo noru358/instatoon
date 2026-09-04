@@ -1,10 +1,11 @@
 # STYLE_LOCK.md
 
-# INSTATOON_STYLE_v1.0 — AUTHORITATIVE VISUAL LOCK
+# INSTATOON_STYLE_v1.1 — AUTHORITATIVE VISUAL LOCK
 
 **Status:** LOCKED  
 **Effective:** 2026-09-04  
-**Authority:** Highest visual authority in this repository.
+**Authority:** Highest visual authority in this repository.  
+**v1.1 purpose:** harden the same target style against generic GPT/anime/editorial-illustration drift observed in E001 preflight.
 
 This file defines the visual language for the project. Scene prompts, character prompts, tool defaults, model preferences, and future automation may not silently weaken these rules.
 
@@ -70,7 +71,9 @@ If any of these five drift, the generation is considered a style failure even if
 - Adult but gently simplified.
 
 ### Eyes
-- Tiny simple dark ovals, dots, or short curved forms.
+- Tiny simple **solid dark marks**: small ovals, dots, or short curved forms.
+- In ordinary expressions, do **not** construct the eye from white sclera + separate black pupil.
+- Visible white sclera should be exceptional and minimal, not the default eye grammar.
 - No complex iris.
 - No pupil/iris separation unless absolutely necessary.
 - No glossy highlight.
@@ -112,7 +115,9 @@ Do not add facial rendering detail to increase emotion.
 
 - Near-black charcoal, not blue-black anime gloss.
 - Large clean silhouette masses.
+- Most of the hair area should read as one or a few **flat graphic masses**, not textured hair.
 - Minimal internal lines.
+- No pencil hatching, scratch texture, grain, or tonal scribbling inside the hair mass.
 - Long hair falls in broad simple clumps.
 - Softly tapered ends, not dozens of sharp strands.
 - No luminous highlight band.
@@ -211,6 +216,7 @@ Rendering should be:
 - matte
 - restrained
 - low-contrast
+- **clean flat digital fill rather than textured illustration**
 
 Per major form:
 - zero or one faint soft shadow region is enough.
@@ -224,6 +230,11 @@ Objects:
 - faint contact shadow is allowed.
 
 Forbidden:
+- paper/canvas grain overlay
+- watercolor wash or paper texture
+- pencil shading / crosshatching / stippling
+- scratchy tonal texture on hair, clothing, skin, or walls
+- ambient cozy-night glow as a rendering effect
 - cinematic lighting
 - rim light
 - volumetric light
@@ -271,6 +282,11 @@ Background object vocabulary is simplified:
 - simple kitchen or household items
 
 Every prop should read quickly with minimal internal information.
+
+For shops/convenience stores/cafes:
+- shelves may be implied with a few large blocks;
+- products should read as simplified colored shapes;
+- do not individually render rows of bottle labels, package graphics, or merchandise micro-detail.
 
 Do not render:
 - material micro-texture
@@ -372,7 +388,10 @@ Reject generations containing meaningful drift toward:
 - semi-realistic rendering
 - 3D / CGI
 - painterly rendering
-- strong watercolor texture
+- watercolor texture, even subtle
+- paper grain / canvas grain
+- pencil shading / crosshatching / stippling
+- textured editorial illustration
 - thick black outlines
 - brush-ink lines
 - dramatic cel shading
@@ -449,6 +468,11 @@ A frame fails style QC if any major hard-fail is present:
 8. Image reads as 3D, semi-realistic, romance-webtoon, or anime.
 9. Saturation/contrast rises substantially.
 10. Scene generation redesigns a locked character.
+11. Eyes default to white sclera + pupil construction rather than tiny solid marks.
+12. Hair contains visible hatch/strand texture instead of flat masses.
+13. A global paper/grain/watercolor/pencil texture is visible.
+14. Night/interior lighting creates cinematic glow or modeled ambience.
+15. Background merchandise/architecture is individually rendered beyond story need.
 
 A "prettier" fail remains a fail.
 
@@ -466,3 +490,40 @@ A style change requires:
 5. version bump.
 
 No silent mutation.
+
+
+---
+
+## 21. Anti-GPT-default hardening — E001 lesson
+
+E001 Slide 1 / Slide 5 preflight revealed a recurring failure mode: the model can satisfy the semantic scene while silently replacing this style with a generic polished AI illustration prior.
+
+Typical symptoms:
+- white eyeballs with separate pupils;
+- soft anime/editorial face construction;
+- fluffy, strand-textured hair;
+- paper/grain texture across the image;
+- shaded clothing and skin;
+- cozy/cinematic night ambience;
+- detailed refrigerators, products, windows, lamps, and architecture;
+- poster-like polish instead of plain anecdote-comic staging.
+
+All of these are style failures.
+
+### Production rule
+A text-only description of this style is **not sufficient authority** for production renders.
+
+For style-critical generation:
+1. attach at least one user-approved canonical visual style reference;
+2. treat that image as the primary rendering authority;
+3. use MASTER_PROMPTS only as reinforcement;
+4. keep scene instructions semantically narrow;
+5. never use a failed generated frame as the only style anchor for another frame.
+
+### Prompt-language caution
+Avoid scene adjectives that invite generic model aesthetics unless genuinely required: cozy, softly lit, cinematic, atmospheric, painterly, textured, beautiful, detailed, polished.
+
+Describe facts and actions, then let the canonical reference control the look.
+
+### Flatness test
+At thumbnail size, the image should primarily read as line + flat shape + simple color block + sparse background. If texture, lighting, surface rendering, or environmental realism is one of the first things noticed, the frame fails.
