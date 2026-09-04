@@ -30,7 +30,7 @@ A lower layer may add content but may not weaken or reinterpret a higher layer.
 
 > Keep semantic text in editable vector layers rather than baking it into generated art.
 
-The target illustration language is a warm, restrained, low-detail Korean everyday anecdote-comic style with thin charcoal-brown linework, muted warm colors, minimal shading, quiet low-detail backgrounds, and controlled visual density.
+The target illustration language is a warm, restrained, low-detail Korean everyday anecdote-comic style with thin charcoal-brown linework, muted warm colors, minimal shading, quiet low-detail backgrounds, and controlled visual density. Production rendering uses the approved five-image canonical reference set in `assets/style_refs/` together with an explicit face-distance/gaze lock.
 
 The active v0.1 narrative formats are deliberately narrow:
 - **STORY_ARC** — anecdotes, experiences, incidents
@@ -50,7 +50,7 @@ Locked art-style and visual-grammar rules are versioned.
 Do not mutate them because a model/tool appears to produce a “prettier” result or because one post performs differently.
 
 Current versions:
-- **INSTATOON_STYLE_v1.1 — 2026-09-04**
+- **INSTATOON_STYLE_v1.2 — 2026-09-04**
 - **INSTATOON_VISUAL_GRAMMAR_v0.1 — 2026-09-04**
 
 ## Files
@@ -63,5 +63,6 @@ Current versions:
 - [MASTER_PROMPTS.md](MASTER_PROMPTS.md)
 - [GENERATION_PROTOCOL.md](GENERATION_PROTOCOL.md)
 - [REFERENCE_ANALYSIS.md](REFERENCE_ANALYSIS.md)
+- [REFERENCE_SET.md](REFERENCE_SET.md) — approved canonical visual anchors and role map
 - [CURRENT_STATE.md](CURRENT_STATE.md)
 - [WORKFLOW_PROTOCOL.md](WORKFLOW_PROTOCOL.md)
