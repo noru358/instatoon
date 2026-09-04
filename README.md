@@ -17,7 +17,8 @@ When documents conflict, use this precedence:
 7. **GENERATION_PROTOCOL.md** — generation, preflight, repair, and QC procedure.
 8. **REFERENCE_ANALYSIS.md** — detailed visual deconstruction and rationale.
 9. **CURRENT_STATE.md** — live handoff/state.
-10. Episode-specific content and tool prompts.
+10. **WORKFLOW_PROTOCOL.md** — cross-environment continuity and `갱신` procedure.
+11. Episode-specific content and tool prompts.
 
 A lower layer may add content but may not weaken or reinterpret a higher layer.
 
@@ -49,7 +50,7 @@ Locked art-style and visual-grammar rules are versioned.
 Do not mutate them because a model/tool appears to produce a “prettier” result or because one post performs differently.
 
 Current versions:
-- **INSTATOON_STYLE_v1.0 — 2026-09-04**
+- **INSTATOON_STYLE_v1.1 — 2026-09-04**
 - **INSTATOON_VISUAL_GRAMMAR_v0.1 — 2026-09-04**
 
 ## Files
@@ -63,3 +64,4 @@ Current versions:
 - [GENERATION_PROTOCOL.md](GENERATION_PROTOCOL.md)
 - [REFERENCE_ANALYSIS.md](REFERENCE_ANALYSIS.md)
 - [CURRENT_STATE.md](CURRENT_STATE.md)
+- [WORKFLOW_PROTOCOL.md](WORKFLOW_PROTOCOL.md)
