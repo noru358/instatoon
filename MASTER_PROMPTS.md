@@ -1,6 +1,6 @@
 # MASTER_PROMPTS.md
 
-# Canonical prompt blocks — INSTATOON_STYLE_v1.0
+# Canonical prompt blocks — INSTATOON_STYLE_v1.1
 
 These blocks implement [STYLE_LOCK.md](STYLE_LOCK.md).  
 Do not rewrite them casually per scene. Prefer composition by appending scene content around stable blocks.
@@ -10,7 +10,8 @@ Do not rewrite them casually per scene. Prefer composition by appending scene co
 ## 1. MASTER_STYLE_PROMPT
 
 ```text
-A simple warm Korean slice-of-life story comic illustration.
+Match the attached canonical INSTATOON style reference as the primary rendering authority.
+Do not infer the style from generic category labels such as Korean webtoon, anime, slice-of-life illustration, editorial illustration, or cozy comic.
 
 STYLE LOCK:
 Use thin, softly imperfect hand-drawn digital linework, not bold ink.
@@ -22,7 +23,8 @@ Do not exaggerate the chest, hips, muscles, or fashion-model proportions.
 
 Faces are extremely simple and understated:
 soft oval faces, rounded jawlines, small rounded chins,
-tiny simple dark oval eyes,
+tiny simple solid-dark oval/dot eyes,
+ordinary eyes are NOT constructed as white sclera with separate black pupils,
 no detailed irises,
 no eye highlights,
 almost no eyelashes,
@@ -32,8 +34,9 @@ and a very small curved mouth or small oval mouth.
 Use subtle soft peach-pink blush on both cheeks.
 Facial emotion should be communicated mainly through eyebrow angle, mouth shape, head tilt, and simple eye shape rather than facial detail.
 
-Hair is rendered as a few large, clean, near-black charcoal shapes.
+Hair is rendered as a few large, clean, flat near-black charcoal shapes.
 Minimal internal hair lines.
+No hatch texture, pencil texture, scratch texture, or tonal scribbling in the hair.
 No individual strand rendering.
 No shiny anime highlights.
 Long hair should fall in broad simple clumps with softly tapered ends.
@@ -50,6 +53,9 @@ Avoid highly saturated colors.
 White objects should usually be warm creamy off-white rather than pure white.
 
 RENDERING:
+Clean flat digital color fills.
+No global paper/canvas texture.
+No watercolor wash, pencil shading, crosshatching, stippling, or grain.
 Mostly flat colors.
 Extremely restrained shading.
 At most one faint soft shadow region on each major form.
@@ -63,6 +69,7 @@ BACKGROUND:
 Quiet everyday Korean residential or ordinary urban environments.
 Background objects are reduced to simple readable shapes: windows, tables, shelves, sofas, potted plants, books, doors and ordinary household objects.
 Keep the environment low-detail and uncluttered.
+In a shop/convenience-store scene, simplify merchandise into a few colored blocks; do not render rows of individual labels/packages.
 Background lines and colors must be softer and lighter than the characters.
 Use simplified hand-drawn perspective rather than mathematically perfect architectural perspective.
 
@@ -111,11 +118,19 @@ NO 3D,
 NO CGI,
 NO painterly rendering,
 NO oil painting,
-NO strong watercolor texture,
+NO watercolor texture of any strength,
+NO paper grain,
+NO canvas grain,
+NO pencil shading,
+NO crosshatching,
+NO stippling,
+NO scratch texture,
+NO textured editorial-illustration finish,
 NO thick black outlines,
 NO brush-ink lines,
 NO dramatic cel shading,
 NO hard shadows,
+NO cozy atmospheric lighting treatment,
 NO cinematic lighting,
 NO rim lighting,
 NO volumetric light,
@@ -160,12 +175,13 @@ Use when one or more canonical visual references are attached to the generation 
 
 ```text
 REFERENCE PRIORITY:
-Treat the attached canonical style reference as the visual authority.
+Treat the attached canonical style reference as the **primary and non-optional visual authority for production**.
 Match its line weight, facial simplification, eye size, hair massing, color restraint, shading restraint, background density and overall level of finish.
 
-Do not improve, beautify, modernize, glamorize, render, or reinterpret the reference style.
+Do not improve, beautify, modernize, glamorize, render, texture, or reinterpret the reference style.
 Do not substitute a generic Korean webtoon, anime, or GPT illustration aesthetic.
 Preserve the intentionally modest low-detail drawing language.
+If a scene/continuity reference conflicts with the canonical style reference, preserve scene facts/identity but follow the canonical style reference for line, face grammar, hair rendering, palette, shading, texture, background density, and finish.
 ```
 
 ---
@@ -237,3 +253,41 @@ Prefer this order:
 6. negative style
 
 Do not endlessly restate the same style rule in scene text. Repetition can cause tool-specific overcorrection. The stable master block is the authority.
+
+
+---
+
+## 8. ANTI_GPT_DEFAULT_BLOCK
+
+Append for production renders, especially when the model tends to beautify or add texture.
+
+```text
+ANTI-GPT DEFAULT:
+Do not substitute a generic AI illustration aesthetic.
+
+The image must look flatter, simpler, quieter, and less rendered than a typical AI-generated webtoon/editorial illustration.
+
+Eyes: tiny solid dark marks; no default white-eye + pupil construction.
+Hair: broad flat near-black masses; no strand texture, hatching, scratch detail, or highlight bands.
+Surface: clean flat digital fills; no paper grain, canvas grain, watercolor wash, pencil shading, stippling, or crosshatching.
+Lighting: no cozy atmospheric glow, cinematic night lighting, rim light, or modeled ambient illumination.
+Skin/clothes: no tonal rendering or texture beyond one extremely faint simple shadow if absolutely needed.
+Background: only story-essential geometry; shop merchandise becomes simplified blocks with no label/detail rendering.
+
+Do not make the picture prettier, richer, more atmospheric, or more finished than the canonical reference.
+```
+
+---
+
+## 9. Production reference requirement
+
+For production-grade raster generation:
+
+```text
+CANONICAL STYLE REFERENCE REQUIRED.
+The actual approved reference image must be attached.
+Text prompts reinforce the reference; they do not replace it.
+A failed generated frame must never become the only style anchor for the next frame.
+```
+
+If the canonical reference image is unavailable, stop before paid/production generation.
