@@ -1,6 +1,6 @@
 # MASTER_PROMPTS.md
 
-# Canonical prompt blocks — INSTATOON_STYLE_v1.1
+# Canonical prompt blocks — INSTATOON_STYLE_v1.2
 
 These blocks implement [STYLE_LOCK.md](STYLE_LOCK.md).  
 Do not rewrite them casually per scene. Prefer composition by appending scene content around stable blocks.
@@ -207,7 +207,11 @@ Do not add decorative clutter.
 
 [REFERENCE_OBEDIENCE_BLOCK if applicable]
 
+[FACE_LOCK_BLOCK for production faces]
+
 [IDENTITY_PRESERVATION_BLOCK if applicable]
+
+[BACKGROUND_DENSITY_LOCK if environment-heavy]
 
 [MASTER_STYLE_PROMPT]
 
@@ -248,9 +252,12 @@ Prefer this order:
 1. scene facts
 2. story-clarity constraint
 3. reference-obedience block
-4. identity-preservation block
-5. master style
-6. negative style
+4. face-lock block for production faces
+5. identity-preservation block only when identity continuity is required
+6. background-density lock for environment-heavy scenes
+7. master style
+8. negative style
+9. anti-GPT-default block for production
 
 Do not endlessly restate the same style rule in scene text. Repetition can cause tool-specific overcorrection. The stable master block is the authority.
 
@@ -291,3 +298,69 @@ A failed generated frame must never become the only style anchor for the next fr
 ```
 
 If the canonical reference image is unavailable, stop before paid/production generation.
+
+
+---
+
+## 10. FACE_LOCK_BLOCK
+
+Append for production whenever a human face is visible. It is especially mandatory for medium-full/full-body framing, side gaze, multi-person scenes, and environment-heavy scenes.
+
+```text
+FACE LOCK — MANDATORY:
+Preserve the canonical INSTATOON face grammar at every camera distance.
+
+- soft rounded oval face;
+- rounded jaw and small rounded chin;
+- tiny simple solid-dark oval/dot eyes;
+- thin short eyebrows;
+- tiny minimal nose mark;
+- very small simple mouth;
+- subtle peach cheek blush;
+- broad simple near-black hair masses around the face.
+
+Camera distance must never cause a more detailed or generic face.
+If the face is smaller in frame, simplify it further.
+
+SIDE-GAZE RULE:
+Do not lengthen or redesign the eyes to indicate gaze.
+Do not add visible sclera, detailed irises, eyelid anatomy, glossy highlights, or a generic attractive webtoon/anime eye shape.
+Prefer a slight head turn and minimal positional change of the tiny eye marks.
+
+Farther character = simpler face, never more generic/detail-rich face.
+Never substitute a generic GPT/editorial/webtoon face.
+```
+
+---
+
+## 11. BACKGROUND_DENSITY_LOCK
+
+Append for outdoor, shop, residential exterior, cafe, office, or any environment-heavy scene.
+
+```text
+BACKGROUND DENSITY LOCK:
+Keep the environment narratively readable but intentionally simpler than a generic AI illustration.
+
+Preserve only story-relevant anchors.
+Reduce incidental architectural and decorative detail.
+Windows, railings, bicycles, utility fixtures, furniture, plants, and merchandise should be simplified, icon-like shapes.
+Background lines and micro-detail remain lighter and quieter than the character.
+
+Do not make the environment more polished because the character is smaller in frame.
+If necessary, remove roughly 30–40% of incidental detail.
+```
+
+---
+
+## 12. Canonical reference-role map
+
+Use the approved assets from `REFERENCE_SET.md`.
+
+- `INSTATOON_REF_01_CHARACTER.webp`: primary face / hair / close-to-medium character grammar.
+- `INSTATOON_REF_02_FULLBODY.webp`: primary full-body proportion / outfit-scale grammar.
+- `INSTATOON_REF_03_INTERACTION.webp`: primary two-person interaction + outdoor balance.
+- `INSTATOON_REF_04_INDOOR.webp`: primary indoor density / seated scene.
+- `INSTATOON_REF_05_OUTDOOR_APPROVED.webp`: primary outdoor full-body + side-gaze / environment-heavy anchor.
+
+Use the most relevant scene anchor **plus REF_01 as a face anchor when faces are at risk of drift**.
+These references control style; they do not require recurring-character identity across unrelated episodes.
