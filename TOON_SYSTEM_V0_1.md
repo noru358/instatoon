@@ -172,33 +172,28 @@ A broad topic without an angle does not proceed.
 
 ## 5. FORMAT ROUTER
 
-Allowed v0.1 values:
+Active v0.1 values:
 - `STORY_ARC`
+- `RELATABLE_SCENARIO`
+
+Routing is based on the human story structure, not the source.
+
+### STORY_ARC
+Question:
+“Does the reader mainly want to know what happened next?”
+
+### RELATABLE_SCENARIO
+Question:
+“Is the main payoff recognition of a familiar behavior/situation that can be dramatized as a mini-scene?”
+
+Dormant / future:
 - `OBSERVATION_SET`
 - `EXPLAINER_CAUSAL`
 - `CONTRAST_REFRAME`
 
-Routing is based on the structure of the idea, not the source.
+If a candidate is mainly analytical/informational, hold it for future expansion rather than forcing it into v0.1.
 
-Heuristics:
-
-### STORY_ARC
-Question:
-“Does the meaning depend on what happened next?”
-
-### OBSERVATION_SET
-Question:
-“Is the payoff recognition across several parallel examples?”
-
-### EXPLAINER_CAUSAL
-Question:
-“Is the reader primarily trying to understand how/why something happens?”
-
-### CONTRAST_REFRAME
-Question:
-“Is the strongest payoff a difference, contradiction, reversal, or new framing?”
-
-If two formats are plausible, choose the one with the cleaner landing and fewer explanatory slides.
+Detailed shape routing and story rules: `STORY_GRAMMAR.md`.
 
 ---
 
@@ -258,7 +253,7 @@ Illustrative shape:
   "episode_id": "E0001",
   "style_version": "INSTATOON_STYLE_v1.0",
   "visual_grammar_version": "INSTATOON_VISUAL_GRAMMAR_v0.1",
-  "format": "CONTRAST_REFRAME",
+  "format": "STORY_ARC",
   "continuity_mode": "LIGHT",
   "slide_count": 7,
   "episode_rhythm": "...",
