@@ -205,7 +205,7 @@ Keep the action immediately readable.
 Use only the props and background details needed to understand the beat.
 Do not add decorative clutter.
 
-[REFERENCE_OBEDIENCE_BLOCK if applicable]
+[REFERENCE_OBEDIENCE_BLOCK — mandatory for production raster; optional only for non-production exploration]
 
 [FACE_LOCK_BLOCK for production faces]
 
@@ -216,6 +216,8 @@ Do not add decorative clutter.
 [MASTER_STYLE_PROMPT]
 
 [NEGATIVE_STYLE_PROMPT]
+
+[ANTI_GPT_DEFAULT_BLOCK — mandatory for production raster]
 ```
 
 ---
@@ -259,14 +261,14 @@ Prefer this order:
 8. negative style
 9. anti-GPT-default block for production
 
-Do not endlessly restate the same style rule in scene text. Repetition can cause tool-specific overcorrection. The stable master block is the authority.
+Do not endlessly restate the same style rule in scene text. Repetition can cause tool-specific overcorrection. The selected approved binary reference is the primary visual input; the stable blocks are the canonical textual implementation beneath it.
 
 
 ---
 
 ## 8. ANTI_GPT_DEFAULT_BLOCK
 
-Append for production renders, especially when the model tends to beautify or add texture.
+Append for every production raster render. It is especially important when the model tends to beautify or add texture.
 
 ```text
 ANTI-GPT DEFAULT:
@@ -324,7 +326,8 @@ If the face is smaller in frame, simplify it further.
 
 SIDE-GAZE RULE:
 Do not lengthen or redesign the eyes to indicate gaze.
-Do not add visible sclera, detailed irises, eyelid anatomy, glossy highlights, or a generic attractive webtoon/anime eye shape.
+Do not add visible sclera merely to indicate gaze, and do not add detailed irises, eyelid anatomy, glossy highlights, or a generic attractive webtoon/anime eye shape.
+Minimal visible sclera is allowed only for an explicitly required strong-surprise expression that is supported by the canonical style reference; it remains a special-expression exception, never the ordinary or side-gaze construction.
 Prefer a slight head turn and minimal positional change of the tiny eye marks.
 
 Farther character = simpler face, never more generic/detail-rich face.

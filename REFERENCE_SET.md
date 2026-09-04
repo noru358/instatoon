@@ -32,6 +32,20 @@ These images are style authorities, not a requirement that unrelated episodes re
    - Role: corrected outdoor full-body + side-gaze / environment-heavy anchor.
    - Use for residential streets, outdoor full-body framing, or scenes where the face is small in frame.
 
+## Asset integrity
+
+All five canonical files are 360×450 WebP images.
+
+| Asset | SHA-256 |
+|---|---|
+| `INSTATOON_REF_01_CHARACTER.webp` | `6243d1d58d64f0752f64177b0228c5c0b5b32569c26bd30d5620d9d0a6c478e2` |
+| `INSTATOON_REF_02_FULLBODY.webp` | `be289521db188e009541b8a36cb4dccd41b5ead7f8b8a296d5beed11819d720d` |
+| `INSTATOON_REF_03_INTERACTION.webp` | `61bda2bb583d78013e12cc0e4521dd44379d9e0681a827ad457bc886b0b232fd` |
+| `INSTATOON_REF_04_INDOOR.webp` | `fae356fcd276b28b39b9ad75a72b2f221be2dd215ccbe04bfcdb82cd0dda6412` |
+| `INSTATOON_REF_05_OUTDOOR_APPROVED.webp` | `77fcc4ff830ea0d8efcbe34206ae2a19105c7d873b820e8f0b9ec4a5c9987b96` |
+
+If a file's hash differs, do not treat it as the approved canonical binary until the change is explicitly reviewed and versioned.
+
 ## Reference selection rule
 
 Use the most relevant scene anchor plus REF_01 when facial drift is plausible.

@@ -95,6 +95,7 @@ Contains:
 - source list;
 - topic;
 - angle;
+- premise when a chronological story needs a compact causal formulation;
 - audience;
 - factual claims;
 - human-origin quotes/comments if used;
@@ -102,8 +103,18 @@ Contains:
 - intended reader payoff;
 - safety/public-treatment notes.
 
-### 3.2 EPISODE_PLAN.json
-Whole-episode narrative and visual plan.
+### 3.2 STORY_PLAN.json
+Whole-episode narrative truth before page styling.
+
+Contains:
+- format and story shape;
+- premise and point of view;
+- emotional engine and landing;
+- ordered beats with state change and swipe question;
+- must-use details and source refs.
+
+### 3.3 EPISODE_PLAN.json
+Whole-episode visual and page plan built from the accepted story plan.
 
 Contains:
 - narrative format;
@@ -118,7 +129,7 @@ Contains:
 - visual rhythm;
 - provenance refs.
 
-### 3.3 RENDER_MANIFEST.json
+### 3.4 RENDER_MANIFEST.json
 Execution state only.
 
 Contains:
@@ -155,6 +166,7 @@ Illustrative shape:
   ],
   "topic": "one sentence",
   "angle": "one sentence",
+  "premise": "compact story formulation when applicable",
   "audience": "who should immediately care",
   "reader_payoff": "what changes in the reader after finishing",
   "tone": ["dry", "warm", "awkward"],
@@ -164,7 +176,7 @@ Illustrative shape:
 }
 ```
 
-The angle is mandatory.
+The angle is mandatory. `premise` may refine the angle into a chronological story promise but may not replace it silently.
 
 A broad topic without an angle does not proceed.
 
@@ -251,8 +263,9 @@ Illustrative shape:
 ```json
 {
   "episode_id": "E0001",
-  "style_version": "INSTATOON_STYLE_v1.1",
+  "style_version": "INSTATOON_STYLE_v1.2",
   "visual_grammar_version": "INSTATOON_VISUAL_GRAMMAR_v0.1",
+  "story_grammar_version": "INSTATOON_STORY_GRAMMAR_v0.1",
   "format": "STORY_ARC",
   "continuity_mode": "LIGHT",
   "slide_count": 7,
@@ -306,12 +319,17 @@ SCENE FACTS
 + STORY CLARITY
 + NEGATIVE-SPACE / NO-TEXT requirement
 + episode-local continuity block if required
-+ REFERENCE_OBEDIENCE_BLOCK when visual reference exists
++ selected canonical reference(s) from REFERENCE_SET.md — mandatory for production raster
++ REFERENCE_OBEDIENCE_BLOCK — mandatory for production raster
++ FACE_LOCK_BLOCK when a face is visible
++ IDENTITY_PRESERVATION_BLOCK only when episode-local identity continuity is required
++ BACKGROUND_DENSITY_LOCK for environment-heavy scenes
 + MASTER_STYLE_PROMPT
 + NEGATIVE_STYLE_PROMPT
++ ANTI_GPT_DEFAULT_BLOCK — mandatory for production raster
 ```
 
-`STYLE_LOCK.md` / `MASTER_PROMPTS.md` remain canonical.
+`STYLE_LOCK.md` defines the normative style boundary. `REFERENCE_SET.md` defines the approved binary inputs. `MASTER_PROMPTS.md` implements those authorities as stable text blocks.
 
 Scene copy must not redefine the style.
 
@@ -591,7 +609,7 @@ It may not automatically mutate `STYLE_LOCK.md` or `VISUAL_GRAMMAR.md`.
 Do not build the full application yet.
 
 1. Lock visual grammar.
-2. Create three prototype episodes across different narrative formats.
+2. Create three prototype episodes across the active formats and distinct story shapes.
 3. Manually inspect which page archetypes and render modes recur.
 4. Finalize JSON schemas.
 5. Implement deterministic vector renderer.

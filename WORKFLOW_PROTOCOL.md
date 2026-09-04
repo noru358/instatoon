@@ -51,6 +51,12 @@ Create a new file only if it is:
 
 Git history is the archive. Canonical files represent the present.
 
+Do not delete a rule or explanation merely because it came from an older version. During reconciliation:
+- preserve any still-valid constraint, rationale, failure lesson, prompt fragment, or evidence;
+- merge it into the current authoritative section when it still applies;
+- label superseded execution evidence as historical rather than leaving it phrased as a current blocker;
+- remove text from the present-state view only when it is duplicated, contradicted by an approved newer rule, or no longer needed to continue correctly.
+
 ## 3. Start-of-session restore
 
 Before substantive work:

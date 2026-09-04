@@ -3,207 +3,173 @@
 # Current state — 2026-09-04
 
 ## Project
+
 Repository: `noru358/instatoon`
 
-Purpose:
-Build a semi-automated Instagram-toon production system whose durable identity comes from **the overall illustration style + visual grammar**, not from recurring-character identity.
+Purpose: build a semi-automated Instagram-toon production system whose durable identity comes from **the overall illustration style + visual grammar**, not from recurring-character identity.
 
-This project is independent from the Talkshow video pipeline.
+This project is independent from the Talkshow repository and video workflow.
 
 ---
 
 ## Current phase
 
 ### Big flow
-**Foundation → visual-language + sequential-grammar lock → prototype extraction**
+
+**Foundation complete → style / story / visual grammar locked → prototype extraction in progress → implementation later**
 
 ### Current detailed step
-The canonical art style is now hardened as `INSTATOON_STYLE_v1.2`, and the episode/page grammar is now locked as `INSTATOON_VISUAL_GRAMMAR_v0.1`.
 
-The production architecture is defined in `TOON_SYSTEM_V0_1.md`.
+Prototype E001 has a complete source pack, content master, whole-story plan, and whole-episode visual plan.
+
+Its first Slide 1 / Slide 5 raster preflight was rejected for systemic style drift. The root blocker is now resolved: `INSTATOON_STYLE_v1.2` and the five approved binary style references are present in the repository.
+
+**Exact current position: E001 two-slide raster preflight, ready to retry Slide 1.**
+
+Do not start bulk rendering, Prototype 2, or software implementation before the E001 retry gate is resolved.
 
 ---
 
 ## Canonical decisions
 
-1. This project is separate from the Talkshow repository and video workflow.
-2. **Recurring character identity is not the primary lock.**
-3. The project identity is primarily:
+1. `STYLE_LOCK.md` defines the normative illustration language and pass/fail boundary.
+2. `REFERENCE_SET.md` identifies the approved binary render anchors. A production render must attach the relevant approved reference; prose is reinforcement, not a substitute.
+3. `VISUAL_GRAMMAR.md` controls how a complete episode reads across slides and how pages are structured.
+4. The planning unit is the **entire episode**; the rendering unit is the **slide**.
+5. The project identity is primarily:
    - overall illustration style;
    - sequential/page visual grammar;
    - editorial voice;
    - vector lettering/layout system.
-4. `STYLE_LOCK.md` controls how illustrations look.
-5. `VISUAL_GRAMMAR.md` controls how an episode reads across slides and how pages are structured.
-6. The planning unit is the **entire episode**.
-7. Individual slides are rendered only after the whole episode plan is coherent.
-8. All important text, speech bubbles, labels, arrows, emphasis and SFX are separate editable vector layers.
-9. Community/news/personal material is a **source mode**, not an output format.
-10. v0.1 active narrative formats are deliberately narrow:
-    - `STORY_ARC` — anecdotes / experiences / incidents
-    - `RELATABLE_SCENARIO` — dramatized everyday relatability
-    - `OBSERVATION_SET`, `EXPLAINER_CAUSAL`, and `CONTRAST_REFRAME` are dormant/future expansion.
-11. Paid image generation is used only when illustration materially improves the slide.
-12. Multi-agent debate/swarm architecture is not the default. One orchestrator + typed stages + deterministic validation is preferred to reduce token cost and drift.
-13. Human taste approval stays explicit during v0.1.
-14. Performance feedback may suggest experiments but cannot silently mutate style or visual grammar.
+6. Recurring characters are optional content assets, not the primary brand lock or the next mandatory build step.
+7. All important text, speech bubbles, labels, arrows, emphasis, and SFX remain separate editable vector layers.
+8. Community/news/personal material is a source mode, not an output format.
+9. Active v0.1 formats are:
+   - `STORY_ARC` — anecdotes / experiences / incidents;
+   - `RELATABLE_SCENARIO` — dramatized everyday relatability.
+10. `OBSERVATION_SET`, `EXPLAINER_CAUSAL`, and `CONTRAST_REFRAME` remain dormant/future formats.
+11. Use paid image generation only when illustration materially improves the slide. Explicit user approval is required immediately before spending external tool credits.
+12. v0.1 uses one orchestrator, typed stage outputs, and deterministic validation where possible. It is not a multi-agent debate/swarm system.
+13. Human approval remains explicit for the topic/angle, whole-episode plan, final taste/publish decision, and any style/grammar version change.
+14. Performance feedback may suggest experiments but may not silently mutate style or visual grammar.
+
+The complete authority order is maintained once in `README.md`; do not duplicate or fork it here.
 
 ---
 
-## Research-driven grammar notes
+## Implementation reality
 
-A 2024 Chosun University study of Instatoon visual direction identifies **simplicity** and **clarity** as the dominant visual characteristics: simplified character/background treatment, restrained visual elements, regular readable layouts, clear typography, and reduced clutter.
+The repository currently contains the design baseline, canonical references, one research run, and one partially executed prototype.
 
-Observed Instagram carousel-comic practice also reinforces:
-- slide 1 as a swipe hook rather than a summary;
-- one meaningful beat per slide;
-- sequential reveal across swipes;
-- deliberate payoff/landing;
-- high phone readability;
-- avoiding over-dense multi-panel subdivision.
+### Proven at process level
 
-These findings align with the existing warm, low-density style lock.
+- source candidate filtering and Human-interest Gate;
+- source normalization;
+- angle / format / story-shape routing;
+- whole-episode beat planning;
+- whole-episode visual direction;
+- two-slide cost-protection preflight;
+- manual visual failure diagnosis and stop-on-systemic-failure behavior.
 
----
+### Not yet implemented as software
 
-## Current authoritative hierarchy
+- executable orchestrator;
+- finalized machine-readable JSON Schemas;
+- deterministic plan validator;
+- prompt-assembler code;
+- vector letterer/composer;
+- `RENDER_MANIFEST.json` production logging;
+- automated deterministic QC;
+- publishing and performance-feedback ingestion.
 
-1. `STYLE_LOCK.md` — illustration style authority
-2. `VISUAL_GRAMMAR.md` — episode/page/sequential grammar authority
-3. `STORY_GRAMMAR.md` — active v0.1 anecdote/relatable editorial grammar
-4. `SOURCE_STORY_PIPELINE.md` — source selection → whole-story planning flow
-5. `TOON_SYSTEM_V0_1.md` — production-system architecture and data flow
-6. `MASTER_PROMPTS.md` — canonical style prompt blocks
-7. `GENERATION_PROTOCOL.md` — execution/QC procedure
-8. `REFERENCE_ANALYSIS.md` — style-analysis rationale
-9. `CURRENT_STATE.md` — current handoff / next action
-10. episode-specific content and prompts
+Therefore the current system is a **structured, manually operated production protocol under prototype validation**, not an end-to-end automation application.
 
 ---
 
-## Immediate next work
+## Prototype program
 
-Do **not** build recurring character masters as the next mandatory step.
+The v0.1 extraction program uses three prototypes:
 
-Instead:
+1. a sourced anecdote/incident using `STORY_ARC` — **E001, active**;
+2. an error/misunderstanding/embarrassment story using `STORY_ARC` — pending;
+3. an everyday `RELATABLE_SCENARIO` — pending.
 
-1. Build three prototype episodes focused only on the active v0.1 editorial scope:
-   - one sourced anecdote/incident using `STORY_ARC`;
-   - one error/misunderstanding/embarrassment story using `STORY_ARC`;
-   - one everyday `RELATABLE_SCENARIO`.
-2. For each prototype:
-   - create CONTENT_MASTER;
-   - select angle;
-   - route format;
-   - write the entire swipe script;
-   - create the entire visual plan;
-   - assign page archetype + render mode per slide;
-   - pass whole-episode preflight;
-   - render cover + one representative body slide first;
-   - if style/grammar passes, render remaining required art;
-   - add vector lettering;
-   - QC;
-   - human taste review.
-3. Use those prototypes to verify:
-   - recurring page archetypes;
-   - useful text-density ranges;
-   - vector components;
-   - actual image-generation count;
-   - regeneration rate;
-   - where automation saves time vs hurts taste.
-4. Then finalize machine-readable JSON schemas and implement the deterministic vector renderer.
+Use the three prototypes to discover stable page archetypes, useful text-density ranges, reusable vector components, real image-generation counts, regeneration rates, and the points where automation saves time or damages taste.
 
-P002 is no longer the preferred first prototype because it is mainly a social/market phenomenon rather than the v0.1 target of anecdote/experience/incident/relatable storytelling. Keep it as a future-format candidate.
+P002 is not the preferred first prototype because it is primarily a social/market phenomenon rather than a v0.1 anecdote/experience/incident/relatable story. Keep it as a future-format candidate.
 
+After all three prototypes, finalize schemas and implement the deterministic vector renderer, prompt assembler, render manifest, and deterministic QC in the order defined by `TOON_SYSTEM_V0_1.md`.
 
 ---
 
-## Prototype execution update — 2026-09-04
+## E001 — current production state
 
-First real source-gate run completed:
-- research pool saved at `research/SOURCE_CANDIDATE_RUN_001.md`;
-- E001 selected: convenience-store “poet” anecdote;
-- `episodes/E001/STORY_SOURCE_PACK.md` created;
-- `CONTENT_MASTER.json` created;
-- `STORY_PLAN.json` created;
-- `EPISODE_PLAN.json` created.
+Episode: convenience-store “poet” anecdote
 
-E001 whole-story / whole-visual plan passed into raster preflight, but Slide 1 and Slide 5 were **rejected for systemic visual-style drift**.
+Completed artifacts:
 
-Current production state:
-1. **STOP bulk generation.**
-2. Preserve/verify the actual canonical style-reference image(s) as repository assets.
-3. Retry Slide 1 with the canonical image as primary style authority + STYLE v1.1 hardening.
-4. Only after Slide 1 passes, retry Slide 5 with canonical style reference + accepted Slide 1 as continuity aid.
-5. Only then render remaining slides.
+- `research/SOURCE_CANDIDATE_RUN_001.md`;
+- `episodes/E001/STORY_SOURCE_PACK.md`;
+- `episodes/E001/CONTENT_MASTER.json`;
+- `episodes/E001/STORY_PLAN.json`;
+- `episodes/E001/EPISODE_PLAN.json`.
 
+Gate state:
 
-### E001 style-preflight diagnosis
-The first two generated frames matched scene semantics but failed the visual identity:
+- Gate A: E001 selected as `GO` in the research run.
+- Gate B: the complete plan proceeded into an authorized two-slide render preflight; the exact approval wording was not preserved, so do not claim a verbatim approval record.
+- Render preflight: first attempt rejected; retry ready.
+- Gate C: not reached.
+
+### Historical failed preflight
+
+Slide 1 and Slide 5 matched most scene semantics but failed the project visual identity:
+
 - generic white-eye/pupil construction;
 - textured/strand-heavy hair;
-- paper/grain/pencil-like texture;
-- excessive shading;
-- atmospheric convenience-store lighting;
-- over-detailed retail background;
-- overall generic GPT/editorial/anime-adjacent finish.
+- paper/grain/pencil-like surface;
+- excessive shading and atmospheric lighting;
+- over-detailed convenience-store background;
+- generic GPT/editorial/anime-adjacent finish;
+- failed Slide 1 then contaminated Slide 5 as a style anchor;
+- Slide 5 also showed two prematurely bitten/notched ice bars and a weak handoff.
 
-Root cause: the production render used summarized text instead of the true canonical style reference; Slide 5 then inherited Slide 1's already-wrong style.
+Root cause: the renders used summarized style prose instead of an approved canonical binary style reference, then propagated the failed frame.
 
-**Canonical-style blocker: RESOLVED.** A five-image user-approved reproduction-test reference set has been locked and is being stored under `assets/style_refs/`. Text remains reinforcement; the binary references are the production rendering authority.
+The failed output IDs, hashes, and detailed evidence remain in `episodes/E001/README.md`.
 
+### Resolution
 
-## Canonical style-reference recovery status — 2026-09-04
+The blocker is resolved through:
 
-Two prior user-supplied reference images used for the style analysis were recovered from the user's persistent file library and visually inspected in the current environment.
+- `INSTATOON_STYLE_v1.2`;
+- five approved assets under `assets/style_refs/`;
+- `FACE_LOCK_BLOCK`;
+- `BACKGROUND_DENSITY_LOCK`;
+- production-wide `ANTI_GPT_DEFAULT_BLOCK`;
+- prohibition on using a failed frame as the sole style anchor.
 
-They match the intended style family materially better than the rejected E001 preflight frames.
-
-### Candidate canonical reference A
-- local recovery label: `style_ref_01.png`
-- content: multi-panel everyday anecdote comic reference
-- SHA-256: `9378e010ca13121d1cb38ed0489b93f1c62d9b2fc35793c527e9e10511b999e4`
-- intended repository path after upload: `assets/style_refs/INSTATOON_STYLE_REF_01.png`
-- status: **NOT YET PRESENT ON GITHUB**
-
-### Candidate canonical reference B
-- local recovery label: `style_ref_02.png`
-- content: clean two-person delivery-worker/water-bottle interaction panel
-- SHA-256: `7bb2647003a4ed9f9eea17a3721504b52211dccf8e28c0ae19f87250130a6ee2`
-- intended repository path after upload: `assets/style_refs/INSTATOON_STYLE_REF_02.png`
-- status: **NOT YET PRESENT ON GITHUB**
-
-### Important face-grammar nuance confirmed by actual reference
-Normal/neutral faces primarily use tiny dark eye marks. Some strong surprise expressions may temporarily use visible white sclera + dark pupils. Therefore white sclera is not an absolute ban; it is a **special-expression exception**, not the default face construction.
-
-Do not declare these files repository-canonical until the binary paths above exist remotely and their hashes are verified.
-
+The two earlier recovered PNG candidates recorded in previous history were never promoted to repository-canonical assets. They are superseded by the five approved WebP references in `REFERENCE_SET.md`; their old local-only status is not a current blocker.
 
 ---
 
-## Approved five-image style reproduction set — 2026-09-04
+## Exact next execution
 
-A supplied character was tested across portrait, full-body, two-person interaction, indoor, and outdoor conditions.
+1. Keep bulk generation stopped.
+2. Before any external paid render, obtain explicit user approval for the spend.
+3. Retry **Slide 1 only** under `INSTATOON_STYLE_v1.2`:
+   - primary scene anchor: `INSTATOON_REF_04_INDOOR.webp`;
+   - face support: `INSTATOON_REF_01_CHARACTER.webp`;
+   - append reference-obedience, face-lock, background-density, master-style, negative-style, and anti-GPT-default blocks;
+   - preserve the planned top negative space and generate no semantic text.
+4. Run style/visual-grammar QC before defect QC.
+5. If Slide 1 fails, diagnose and repair the shared prompt/reference system; do not generate Slide 5.
+6. If Slide 1 passes, retry **Slide 5 only**:
+   - primary scene anchor: `INSTATOON_REF_03_INTERACTION.webp`;
+   - face support: `INSTATOON_REF_01_CHARACTER.webp`;
+   - accepted Slide 1 may be used only as episode-local identity/location continuity support;
+   - show the customer placing exactly two opened, unbitten ice bars into the worker's hands, one bar per hand.
+7. Only after Slide 1 and Slide 5 both pass may the remaining raster slides receive a first pass.
+8. Then add vector lettering, run QC, and request Gate C: `PUBLISH / REPAIR / KILL`.
 
-Accepted canonical assets:
-
-- `assets/style_refs/INSTATOON_REF_01_CHARACTER.webp` — character/face anchor;
-- `assets/style_refs/INSTATOON_REF_02_FULLBODY.webp` — full-body anchor;
-- `assets/style_refs/INSTATOON_REF_03_INTERACTION.webp` — two-person/outdoor interaction anchor;
-- `assets/style_refs/INSTATOON_REF_04_INDOOR.webp` — indoor anchor;
-- `assets/style_refs/INSTATOON_REF_05_OUTDOOR_APPROVED.webp` — corrected outdoor full-body anchor.
-
-The first outdoor attempt was rejected because a full-body + environment-heavy + side-gaze combination caused generic GPT/webtoon facial drift.
-
-The corrected outdoor render passed after adding:
-- explicit face-distance/gaze lock;
-- explicit background-density lock;
-- accepted 1–4 images as anchors.
-
-This evidence is now folded into `INSTATOON_STYLE_v1.2`, `MASTER_PROMPTS.md`, and `GENERATION_PROTOCOL.md`.
-
-### Production implication
-
-The E001 style-preflight blocker can now be retried using actual canonical binary references rather than text-only style descriptions.
-
-The five images are **style anchors**, not a mandate to use a recurring character in every episode.
+Current blocker: **none inside the repository**. The next gate is execution approval and Slide 1 visual QC.

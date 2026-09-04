@@ -1,6 +1,6 @@
 # E001 — 편의점 음유시인
 
-Status: **PREFLIGHT REJECTED — GLOBAL STYLE RECOVERY REQUIRED**
+Status: **PREFLIGHT RETRY READY — CANONICAL STYLE BLOCKER RESOLVED**
 
 This is the first real TOON SYSTEM v0.1 prototype.
 
@@ -18,21 +18,16 @@ It is therefore useful for testing whether the system preserves **source texture
 
 ## Current gate
 
-The entire 7-slide story and visual plan exists.
+The entire 7-slide story and visual plan exists and proceeded into a two-slide render preflight. This functionally moved the episode through Gate B, although the exact approval wording was not preserved in the repository.
 
-Before paid/raster generation, review:
-1. story rhythm;
-2. exact slide count;
-3. hook wording;
-4. source quote treatment;
-5. landing;
-6. visual variety.
+The first preflight was rejected. The shared style blocker has since been resolved through `INSTATOON_STYLE_v1.2` and the five approved binary references in `REFERENCE_SET.md`.
 
-If approved, render preflight:
-- Slide 1 cover;
-- Slide 5 representative high-risk body slide.
-
-Only after both pass should the remaining raster slides be generated.
+Current action:
+1. keep bulk generation stopped;
+2. retry Slide 1 only;
+3. run style/visual-grammar QC;
+4. retry Slide 5 only if Slide 1 passes;
+5. render the remaining slides only if both preflight slides pass.
 
 
 ---
@@ -75,20 +70,21 @@ The first render used a summarized textual style description. That allowed the i
 The second render then used the first failed frame as the principal reference, compounding the drift.
 
 ### System correction
-- STYLE_LOCK hardened to `INSTATOON_STYLE_v1.1`.
-- MASTER_PROMPTS adds explicit anti-GPT-default flatness/texture/eye/hair/background rules.
-- GENERATION_PROTOCOL now requires an actual approved canonical style image before production raster generation.
+- STYLE_LOCK was first hardened to v1.1, then superseded by `INSTATOON_STYLE_v1.2` with validated face-distance/off-axis-gaze and background-density controls.
+- MASTER_PROMPTS adds explicit anti-GPT-default flatness/texture/eye/hair/background rules plus mandatory face and environment controls.
+- GENERATION_PROTOCOL requires an approved canonical binary style reference before production raster generation.
+- Five approved WebP references are present under `assets/style_refs/` and registered in `REFERENCE_SET.md`.
 - Failed preflight frames may not become style anchors.
 
-### Current blocker
-The repository currently contains textual style authorities but **no verified canonical style-reference image binary**.
+### Blocker resolution
 
-Do not spend another production generation until the approved reference image is actually preserved and available to the generation environment.
+The previous missing-binary blocker is **resolved**. The failed render remains rejected, but the episode is ready for a clean preflight retry with the approved references.
 
 ### Next retry sequence
-1. preserve/verify 1–3 canonical style-reference images in repository assets;
-2. attach canonical style reference + scene facts for Slide 1;
-3. run Slide 1 only;
-4. QC style fingerprint;
-5. only if Slide 1 passes, run Slide 5 with canonical style reference as style authority and accepted Slide 1 only as episode-continuity aid;
-6. do not bulk-render remaining slides until both pass.
+1. Before spending external tool credits, obtain explicit user approval.
+2. Run Slide 1 only under `INSTATOON_STYLE_v1.2` using `INSTATOON_REF_04_INDOOR.webp` plus `INSTATOON_REF_01_CHARACTER.webp`.
+3. Attach the production reference-obedience, face-lock, background-density, master-style, negative-style, and anti-GPT-default blocks. Preserve top title space and generate no semantic text.
+4. QC the style fingerprint and visual grammar before anatomy/defect QC.
+5. Only if Slide 1 passes, run Slide 5 using `INSTATOON_REF_03_INTERACTION.webp` plus `INSTATOON_REF_01_CHARACTER.webp`; accepted Slide 1 may support episode-local identity/location continuity only.
+6. Slide 5 must show the customer placing exactly two opened, unbitten ice bars into the worker's hands, one bar per hand. Neither bar has a bite yet.
+7. Do not bulk-render the remaining slides until both preflight slides pass.

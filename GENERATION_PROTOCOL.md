@@ -54,8 +54,10 @@ Production raster generation requires an **actual approved canonical style refer
 Text-only generation may be used for exploration, but it may not be accepted as a production style pass.
 
 Append:
-- REFERENCE_OBEDIENCE_BLOCK if applicable;
+- REFERENCE_OBEDIENCE_BLOCK for every production raster render;
+- FACE_LOCK_BLOCK whenever a face is visible;
 - IDENTITY_PRESERVATION_BLOCK only when a specific existing person/character must be preserved;
+- BACKGROUND_DENSITY_LOCK for environment-heavy scenes;
 - MASTER_STYLE_PROMPT;
 - NEGATIVE_STYLE_PROMPT;
 - ANTI_GPT_DEFAULT_BLOCK for production.
@@ -124,8 +126,12 @@ Before the two-slide preflight:
 3. attach it to every production render;
 4. separate its role from any episode continuity/scene reference.
 
-Authority:
-`canonical style reference > STYLE_LOCK/MASTER_PROMPTS > episode continuity reference > scene text`
+Governance authority:
+- `STYLE_LOCK.md` defines what counts as the project style;
+- `REFERENCE_SET.md` defines which binary assets are approved production anchors.
+
+Render-input precedence:
+`selected canonical style reference > stable STYLE_LOCK/MASTER_PROMPTS blocks > episode continuity reference > scene text`
 
 A continuity image controls who/clothing/broad pose/location continuity. It does **not** redefine face grammar, line, hair treatment, texture, rendering density, or lighting style.
 

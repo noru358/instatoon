@@ -8,17 +8,18 @@ The project is built around **style reproducibility + whole-episode visual gramm
 
 When documents conflict, use this precedence:
 
-1. **STYLE_LOCK.md** — highest illustration-style authority.
-2. **VISUAL_GRAMMAR.md** — episode/page/sequential-grammar authority.
-3. **STORY_GRAMMAR.md** — active anecdote/experience/incident/relatable story grammar.
-4. **SOURCE_STORY_PIPELINE.md** — source filtering, human-interest gate, and whole-story planning.
-5. **TOON_SYSTEM_V0_1.md** — system architecture, data flow, automation/cost policy.
-6. **MASTER_PROMPTS.md** — canonical reusable style prompt blocks.
-7. **GENERATION_PROTOCOL.md** — generation, preflight, repair, and QC procedure.
-8. **REFERENCE_ANALYSIS.md** — detailed visual deconstruction and rationale.
-9. **CURRENT_STATE.md** — live handoff/state.
-10. **WORKFLOW_PROTOCOL.md** — cross-environment continuity and `갱신` procedure.
-11. Episode-specific content and tool prompts.
+1. **STYLE_LOCK.md** — normative illustration-style authority: what counts as a pass or fail.
+2. **REFERENCE_SET.md** — approved binary style anchors and their production roles. For an actual render, the selected binary reference is the primary visual input; it is interpreted under `STYLE_LOCK.md`.
+3. **VISUAL_GRAMMAR.md** — episode/page/sequential-grammar authority.
+4. **STORY_GRAMMAR.md** — active anecdote/experience/incident/relatable story grammar.
+5. **SOURCE_STORY_PIPELINE.md** — source filtering, human-interest gate, and whole-story planning.
+6. **TOON_SYSTEM_V0_1.md** — system architecture, data flow, automation/cost policy.
+7. **MASTER_PROMPTS.md** — canonical reusable prompt blocks that implement the style lock.
+8. **GENERATION_PROTOCOL.md** — generation, preflight, repair, and QC procedure.
+9. **REFERENCE_ANALYSIS.md** — detailed visual deconstruction and test rationale.
+10. **CURRENT_STATE.md** — live handoff, implementation status, blocker, and exact next action.
+11. **WORKFLOW_PROTOCOL.md** — cross-environment continuity and `갱신` procedure.
+12. Episode-specific source, plan, execution evidence, and tool prompts.
 
 A lower layer may add content but may not weaken or reinterpret a higher layer.
 
@@ -52,10 +53,19 @@ Do not mutate them because a model/tool appears to produce a “prettier” resu
 Current versions:
 - **INSTATOON_STYLE_v1.2 — 2026-09-04**
 - **INSTATOON_VISUAL_GRAMMAR_v0.1 — 2026-09-04**
+- **INSTATOON_STORY_GRAMMAR_v0.1 — 2026-09-04**
+
+## Resume work
+
+1. Read `CURRENT_STATE.md` for the live stage and exact next action.
+2. Read the active episode's `README.md`, `CONTENT_MASTER.json`, `STORY_PLAN.json`, and `EPISODE_PLAN.json`.
+3. Before production rendering, verify the selected files from `REFERENCE_SET.md` are available and use the current style version.
+4. Do not infer current state from an older failure section when a later section explicitly marks the blocker resolved.
 
 ## Files
 
 - [STYLE_LOCK.md](STYLE_LOCK.md)
+- [REFERENCE_SET.md](REFERENCE_SET.md) — approved canonical visual anchors, roles, and hashes
 - [VISUAL_GRAMMAR.md](VISUAL_GRAMMAR.md)
 - [STORY_GRAMMAR.md](STORY_GRAMMAR.md)
 - [SOURCE_STORY_PIPELINE.md](SOURCE_STORY_PIPELINE.md)
@@ -63,6 +73,5 @@ Current versions:
 - [MASTER_PROMPTS.md](MASTER_PROMPTS.md)
 - [GENERATION_PROTOCOL.md](GENERATION_PROTOCOL.md)
 - [REFERENCE_ANALYSIS.md](REFERENCE_ANALYSIS.md)
-- [REFERENCE_SET.md](REFERENCE_SET.md) — approved canonical visual anchors and role map
 - [CURRENT_STATE.md](CURRENT_STATE.md)
 - [WORKFLOW_PROTOCOL.md](WORKFLOW_PROTOCOL.md)
