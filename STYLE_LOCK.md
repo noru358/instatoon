@@ -1,68 +1,118 @@
 # STYLE_LOCK.md
 
-# INSTATOON_STYLE_v2.0 — LOCKED
+# INSTATOON_STYLE_v2.0 — CURRENT VISUAL PASS/FAIL LOCK
 Approved: 2026-09-04
 
-The previous INSTATOON style is retired.
-This lock reflects the two user-provided character-sheet references plus the approved background and multi-character tests from 2026-09-04.
+The pre-reset tiny-eye / thin brown-line style is retired.
 
-## Hard identity of the style
+## Core fingerprint
 
-- Simple hand-drawn 2D Instagram-webcomic look.
-- Black outlines with slight human irregularity.
-- Flat muted colors.
-- Minimal shading.
-- Sparse texture only where useful.
-- Large round eyes with white sclera, simple black pupil/iris, tiny highlight.
-- Almost no nose.
-- Small graphic mouth.
-- Hair as broad graphic masses, not strand rendering.
-- Simplified adult 4.5–5-head proportions.
-- Contemporary Korean everyday clothing simplified into readable shapes.
-- Backgrounds use the same line/color/detail language as characters.
+- simple hand-drawn 2D Instagram-webcomic look;
+- black outlines with slight natural irregularity;
+- flat local colors;
+- almost no modeled shading;
+- large round eyes with white sclera + simple black pupil/iris + tiny highlight;
+- nearly absent nose;
+- small graphic mouth;
+- hair as broad graphic masses with only a few interior lines;
+- simplified adult proportions around 4.5–5 heads tall;
+- contemporary everyday clothing simplified into readable shapes;
+- backgrounds drawn by the same visual hand as characters.
+
+The target is controlled simplicity, not low technical quality.
+
+## Anti-drift fingerprint
+
+Current observed failure modes are hard fails when they become visually dominant:
+
+1. generic smooth attractive AI face, especially a featureless young-adult face;
+2. warm beige/sepia wash applied across the entire scene;
+3. cozy café/editorial ambience replacing flat comic color;
+4. global paper grain/noise/pencil-like surface texture;
+5. soft ambient shading or ambient-occlusion around objects;
+6. material rendering on wood, glass, metal, fabric, skin, or hair;
+7. glossy or strand-heavy hair;
+8. detailed iris/facial anatomy;
+9. polished romance-webtoon/anime finish;
+10. hyper-detailed background or concept-art environment treatment;
+11. a background that looks more rendered than the characters.
+
+Do not solve “plain” by adding atmosphere, texture, lighting, or decorative detail.
+
+## Color rule
+
+Use local object colors, not one global mood filter.
+
+Examples:
+- wall can be simple warm/off-white;
+- wood can be one or two flat browns;
+- plants can be a flat muted green;
+- clothes retain their own clear local colors.
+
+No blanket beige haze.
+No vignette.
+No cinematic warm lighting.
+No soft realistic shadow system.
+
+A single simple contact shadow is allowed only when needed for spatial readability.
 
 ## Background rule
 
-Backgrounds are not fixed sets by default.
-The story chooses the environment.
-Generate each required café, office, street, subway, home, school, shop, park, etc. in the same locked visual language.
-Only create a continuity anchor if a location intentionally recurs.
+Story chooses location.
+A fixed location-anchor library is not a mandatory stage.
 
-## Main cast
+Backgrounds:
+- use the same outline language as characters;
+- use large simple shapes;
+- include only location-identifying details;
+- stay lower in line/detail density than the characters;
+- avoid realistic material/light rendering.
 
-Recurring main cast exists, but the series is not limited to them.
+Create a persistent background anchor only if a location intentionally repeats and continuity proves useful.
+
+## Cast rule
+
+Main cast:
 - Gaeun
-- Harin — black socks when visible
-- Taemin — approved 2026-09-04 black-haired identity/reference
+- Harin
+- Taemin
 
-Episode-specific one-off characters are normal and may be created whenever the story calls for them.
+They are reusable, not mandatory.
 
-## Hard fail conditions
+Episode context decides whether a main character appears.
+There is NO global Taemin-ban rule.
+Do not default to Taemin merely because an episode needs a male character.
 
-Reject a frame when it materially drifts toward:
-1. generic GPT “pretty illustration” polish;
-2. glossy anime/webtoon rendering;
-3. semi-realism or 3D volume;
-4. detailed irises or facial anatomy;
-5. glossy/strand-heavy hair;
-6. gradients, airbrush, cinematic/rim/bloom lighting;
-7. realistic material rendering;
-8. hyper-detailed environment;
-9. fashion-illustration anatomy;
-10. character redesign;
-11. backgrounds whose finish is more realistic/polished than the characters.
+New episode-only people are expected.
 
-A prettier result can still be a failure.
+## New-character anchor rule
 
-## Composition
+If a newly introduced non-main character will appear in 2+ cuts:
+1. design/generate that character internally first as an episode-local anchor;
+2. check that face, hair, age, clothing, and social role fit the episode;
+3. check that the person does not accidentally duplicate a main character;
+4. use the accepted anchor for all subsequent cuts.
 
-Prioritize story readability.
-Use medium, medium-full, chest-up, simple close-up, and clean two-/three-person staging as needed.
-No default cinematic camera language.
-Reaction and gesture may be expressive, but rendering stays simple.
+One-frame background extras may skip this step.
+
+## Continuity rule
+
+A local correction must not trigger a full visual redesign.
+
+When a frame is already good except for one defect:
+- preserve the accepted composition, scene blocking, background, palette, and identity;
+- edit only the named defect;
+- use the last known good frame/reference as the base;
+- never promote a visibly regressed retry into the new anchor.
 
 ## Change control
 
 No silent mutation.
-A material style change requires explicit user approval and a version bump.
-`MASTER_PROMPTS.md` contains the canonical full prompt implementation.
+
+A material style change requires:
+1. explicit proposed change;
+2. visual comparison;
+3. user approval;
+4. version update.
+
+MASTER_PROMPTS.md is the canonical full prompt implementation.
