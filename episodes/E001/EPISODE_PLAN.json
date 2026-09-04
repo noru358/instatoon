@@ -1,0 +1,287 @@
+{
+  "episode_id": "E001",
+  "style_version": "INSTATOON_STYLE_v1.0",
+  "visual_grammar_version": "INSTATOON_VISUAL_GRAMMAR_v0.1",
+  "story_grammar_version": "INSTATOON_STORY_GRAMMAR_v0.1",
+  "format": "STORY_ARC",
+  "story_shape": "EXPECTATION_REVERSAL",
+  "continuity_mode": "STRICT_EPISODE",
+  "slide_count": 7,
+  "episode_rhythm": "aftermath close scene → ordinary wide → calm two-shot → serious close-up → object/action focus → awkward two-shot → quiet aftermath",
+  "episode_local_continuity": {
+    "worker": "20s convenience-store worker; simple everyday workwear/vest; same hair/clothes across episode",
+    "customer": "middle-aged male regular; visibly but not grotesquely tipsy; simple everyday clothing; same outfit across episode",
+    "location": "ordinary low-detail Korean convenience store; counter + freezer/refrigerated area as only major anchors"
+  },
+  "slides": [
+    {
+      "index": 1,
+      "role": "HOOK",
+      "beat": "worker stands behind counter holding two opened ice bars; one has one bite missing",
+      "page_archetype": "HERO_SCENE",
+      "render_mode": "RASTER_PLUS_VECTOR",
+      "art_direction": {
+        "story_clarity": "The bizarre two-ice-bar aftermath must be readable instantly.",
+        "subjects": [
+          "worker"
+        ],
+        "action": "holding one opened ice bar in each hand, frozen/confused",
+        "location": "convenience-store counter",
+        "composition": "medium shot, eye-level, strong negative space at top",
+        "negative_space": {
+          "preferred_region": "top",
+          "purpose": "title"
+        }
+      },
+      "text_objects": [
+        {
+          "id": "T1",
+          "kind": "title",
+          "content": "이 아저씨가 갑자기 아이스바 두 개를 까더니…",
+          "priority": 1
+        }
+      ],
+      "continuity_refs": [
+        "worker",
+        "location"
+      ],
+      "source_refs": [
+        "S1"
+      ]
+    },
+    {
+      "index": 2,
+      "role": "BASELINE",
+      "beat": "the troublesome drunk regular enters again; worker recognizes him and looks tired",
+      "page_archetype": "TWO_SHOT",
+      "render_mode": "RASTER_PLUS_VECTOR",
+      "art_direction": {
+        "story_clarity": "This is a familiar troublesome regular, not a dangerous confrontation.",
+        "subjects": [
+          "worker",
+          "customer"
+        ],
+        "action": "customer at counter; worker subtly braces himself",
+        "location": "same convenience store",
+        "composition": "medium-wide two-shot, customer foreground side, worker behind counter",
+        "negative_space": {
+          "preferred_region": "top_left",
+          "purpose": "narration"
+        }
+      },
+      "text_objects": [
+        {
+          "id": "T2",
+          "kind": "narration",
+          "content": "술 마시고 올 때마다 사람 진 빠지게 하던 단골이었다.",
+          "priority": 1
+        }
+      ],
+      "continuity_refs": [
+        "worker",
+        "customer",
+        "location"
+      ],
+      "source_refs": [
+        "S1"
+      ]
+    },
+    {
+      "index": 3,
+      "role": "SETUP_RESPONSE",
+      "beat": "worker stays calm and kind instead of snapping",
+      "page_archetype": "TWO_SHOT",
+      "render_mode": "RASTER_PLUS_VECTOR",
+      "art_direction": {
+        "story_clarity": "Worker's patient response is the change; keep acting small and readable.",
+        "subjects": [
+          "worker",
+          "customer"
+        ],
+        "action": "worker calmly responds while customer lingers at counter",
+        "location": "same convenience store",
+        "composition": "closer two-shot with more focus on worker",
+        "negative_space": {
+          "preferred_region": "right",
+          "purpose": "small dialogue bubble"
+        }
+      },
+      "text_objects": [
+        {
+          "id": "T3",
+          "kind": "narration",
+          "content": "근데 그날은 그냥 끝까지 좋게 대해줬다.",
+          "priority": 1
+        }
+      ],
+      "continuity_refs": [
+        "worker",
+        "customer",
+        "location"
+      ],
+      "source_refs": [
+        "S1"
+      ]
+    },
+    {
+      "index": 4,
+      "role": "TURN",
+      "beat": "customer unexpectedly becomes serious and says the memorable line",
+      "page_archetype": "REACTION_CLOSEUP",
+      "render_mode": "RASTER_PLUS_VECTOR",
+      "art_direction": {
+        "story_clarity": "Sudden tonal seriousness after ordinary nuisance behavior.",
+        "subjects": [
+          "customer",
+          "partial worker silhouette"
+        ],
+        "action": "customer pauses and speaks sincerely",
+        "location": "counter background simplified further",
+        "composition": "chest-up customer, worker edge visible, bubble-safe upper side",
+        "negative_space": {
+          "preferred_region": "upper_right",
+          "purpose": "dialogue"
+        }
+      },
+      "text_objects": [
+        {
+          "id": "T4",
+          "kind": "dialogue",
+          "content": "너는… 니가 살고 싶은 세상에서 살아.",
+          "speaker": "customer",
+          "priority": 1
+        }
+      ],
+      "continuity_refs": [
+        "worker",
+        "customer",
+        "location"
+      ],
+      "source_refs": [
+        "S1",
+        "G1"
+      ]
+    },
+    {
+      "index": 5,
+      "role": "ESCALATION",
+      "beat": "customer opens two ice bars and puts one into each of worker's hands",
+      "page_archetype": "OBJECT_FOCUS",
+      "render_mode": "RASTER_PLUS_VECTOR",
+      "art_direction": {
+        "story_clarity": "Two separate opened ice bars and both occupied hands are the entire joke/action.",
+        "subjects": [
+          "worker hands/upper body",
+          "customer hands"
+        ],
+        "action": "customer places two opened ice bars, one in each worker hand",
+        "location": "counter / freezer implied",
+        "composition": "medium detail shot centered on hands and bars",
+        "negative_space": {
+          "preferred_region": "top",
+          "purpose": "narration"
+        }
+      },
+      "text_objects": [
+        {
+          "id": "T5",
+          "kind": "narration",
+          "content": "그리고 갑자기 아이스바 두 개를 다 뜯더니",
+          "priority": 1
+        }
+      ],
+      "continuity_refs": [
+        "worker",
+        "customer",
+        "location"
+      ],
+      "source_refs": [
+        "S1"
+      ]
+    },
+    {
+      "index": 6,
+      "role": "PEAK",
+      "beat": "customer insists he will leave only after worker takes a bite; worker reluctantly bites one",
+      "page_archetype": "TWO_SHOT",
+      "render_mode": "RASTER_PLUS_VECTOR",
+      "art_direction": {
+        "story_clarity": "Customer is stubbornly waiting; worker still holds both bars and bites one.",
+        "subjects": [
+          "worker",
+          "customer"
+        ],
+        "action": "worker bites one bar while holding both; customer watches satisfied",
+        "location": "same counter",
+        "composition": "medium two-shot with clear bite action",
+        "negative_space": {
+          "preferred_region": "upper_left",
+          "purpose": "dialogue"
+        }
+      },
+      "text_objects": [
+        {
+          "id": "T6",
+          "kind": "dialogue",
+          "content": "한 입 먹어.",
+          "speaker": "customer",
+          "priority": 1
+        },
+        {
+          "id": "T7",
+          "kind": "narration",
+          "content": "먹는 거 보고 가겠다고 버텼다.",
+          "priority": 2
+        }
+      ],
+      "continuity_refs": [
+        "worker",
+        "customer",
+        "location"
+      ],
+      "source_refs": [
+        "S1"
+      ]
+    },
+    {
+      "index": 7,
+      "role": "LANDING",
+      "beat": "customer is gone; worker remains alone with two bars and one bite mark",
+      "page_archetype": "EMPTY_BEAT",
+      "render_mode": "RASTER_PLUS_VECTOR",
+      "art_direction": {
+        "story_clarity": "Quiet deadpan aftermath. No extra gag.",
+        "subjects": [
+          "worker"
+        ],
+        "action": "standing alone, one opened bar in each hand, one bitten",
+        "location": "quiet convenience store after customer leaves",
+        "composition": "medium-wide with more empty space than previous slides",
+        "negative_space": {
+          "preferred_region": "bottom",
+          "purpose": "small narration"
+        }
+      },
+      "text_objects": [
+        {
+          "id": "T8",
+          "kind": "narration",
+          "content": "그렇게 양손에 아이스바만 남았다.",
+          "priority": 1
+        }
+      ],
+      "continuity_refs": [
+        "worker",
+        "location"
+      ],
+      "source_refs": [
+        "S1"
+      ]
+    }
+  ],
+  "render_preflight": {
+    "cover_slide": 1,
+    "representative_risk_slide": 5,
+    "reason": "Slide 5 tests continuity, two-person hand interaction, exact two-object count, and negative-space control."
+  }
+}
