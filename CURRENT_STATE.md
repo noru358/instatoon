@@ -151,3 +151,29 @@ The first two generated frames matched scene semantics but failed the visual ide
 Root cause: the production render used summarized text instead of the true canonical style reference; Slide 5 then inherited Slide 1's already-wrong style.
 
 **Current blocker:** there is no verified canonical style-reference image binary in the inspected repository tree. Text-only style documentation is not considered lossless production authority.
+
+
+## Canonical style-reference recovery status — 2026-09-04
+
+Two prior user-supplied reference images used for the style analysis were recovered from the user's persistent file library and visually inspected in the current environment.
+
+They match the intended style family materially better than the rejected E001 preflight frames.
+
+### Candidate canonical reference A
+- local recovery label: `style_ref_01.png`
+- content: multi-panel everyday anecdote comic reference
+- SHA-256: `9378e010ca13121d1cb38ed0489b93f1c62d9b2fc35793c527e9e10511b999e4`
+- intended repository path after upload: `assets/style_refs/INSTATOON_STYLE_REF_01.png`
+- status: **NOT YET PRESENT ON GITHUB**
+
+### Candidate canonical reference B
+- local recovery label: `style_ref_02.png`
+- content: clean two-person delivery-worker/water-bottle interaction panel
+- SHA-256: `7bb2647003a4ed9f9eea17a3721504b52211dccf8e28c0ae19f87250130a6ee2`
+- intended repository path after upload: `assets/style_refs/INSTATOON_STYLE_REF_02.png`
+- status: **NOT YET PRESENT ON GITHUB**
+
+### Important face-grammar nuance confirmed by actual reference
+Normal/neutral faces primarily use tiny dark eye marks. Some strong surprise expressions may temporarily use visible white sclera + dark pupils. Therefore white sclera is not an absolute ban; it is a **special-expression exception**, not the default face construction.
+
+Do not declare these files repository-canonical until the binary paths above exist remotely and their hashes are verified.
