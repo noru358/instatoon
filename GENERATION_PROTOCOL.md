@@ -1,110 +1,309 @@
 # GENERATION_PROTOCOL.md
 
-# Generation & QC protocol — INSTATOON_STYLE_v2.0
+# GENERATION / ANCHOR / REPAIR / QC PROTOCOL — v2.1
 Updated: 2026-09-04
 
-## 1. Plan before rendering
+## 0. Stage order
 
-Required before a production episode:
-- approved source/angle;
-- story beats;
-- humanized dialogue;
-- USER VOICE GATE status during prototype phase;
-- slide/scene count;
-- character roster (recurring vs episode-only);
-- location per scene;
-- key props/actions/reactions;
-- output track(s).
+Production order:
 
-Do not render first and invent the story afterward.
+1. approved source/premise;
+2. story beats;
+3. humanized dialogue;
+4. USER VOICE GATE during learning phase;
+5. whole-episode storyboard + cast router;
+6. build any required episode-local character anchor;
+7. whole-episode visual/text plan;
+8. text-free raster generation;
+9. editable lettering/composition;
+10. QC;
+11. targeted repair from last-known-good asset;
+12. export.
 
-## 2. Output tracks
+Do not skip directly from a premise to production frames.
 
-Primary:
-- Instagram carousel/feed toon: 4:5, target 1080×1350.
-- Reels/Shorts: 9:16, target 1080×1920.
+## 1. Cast routing comes before character rendering
 
-16:9 is not a project default.
-Use it only for explicit landscape/long-form derivative content.
+Story/context decides cast.
 
-Build one semantic scene specification, then adapt composition for each target ratio.
-Do not stretch finished art.
+Main cast:
+- Gaeun
+- Harin
+- Taemin
 
-## 3. Environment policy
+No main character is mandatory.
+No main character is globally banned by default.
 
-There is no mandatory permanent background-anchor library.
-Story determines location.
-Generate environments using the background style lock in MASTER_PROMPTS.md.
+Never choose Taemin solely because a scene needs a man.
+Never choose Harin solely because a scene needs a woman.
 
-Create an episode-local or recurring-location anchor only when:
-- the same place repeats across multiple beats/episodes;
-- spatial continuity matters;
-- re-generation drift becomes a real problem.
+Record per episode:
+- selected main cast;
+- episode-only cast;
+- why each is appropriate.
 
-## 4. Character policy
+## 2. Episode-local character anchor — mandatory rule
 
-Recurring main characters use their identity anchors/notes.
-Episode-only characters may be generated on demand and kept only as temporary continuity references for that episode.
+If a new non-main person appears in 2 or more cuts:
 
-Current main cast:
-Gaeun / Harin / Taemin.
-Harin uses black socks when visible.
-Taemin uses the current approved 2026-09-04 black-haired identity.
+### A. Anchor first
+Before any story frame for that person:
+1. create one internal character anchor or compact sheet;
+2. verify age/presentation/social role;
+3. verify hairstyle/face/clothing are coherent;
+4. verify the design is distinct from main cast;
+5. verify the face does not read as a generic smooth AI default;
+6. select the last-known-good anchor.
 
-## 5. Raster prompt assembly
+### B. Story frames second
+All later cuts preserve:
+- face structure;
+- hair silhouette;
+- age;
+- clothing unless the story explicitly changes it;
+- salient identity details.
 
-Order:
+Only pose/expression/camera/action change by beat.
+
+One-frame incidental extras may skip anchor creation.
+
+## 3. Reference roles
+
+Keep these roles separate:
+
+### STYLE REFERENCE
+Controls:
+- line;
+- face grammar;
+- color/rendering;
+- background density;
+- overall finish.
+
+### MAIN CHARACTER REFERENCE
+Controls identity of Gaeun/Harin/Taemin when selected.
+
+### EPISODE-LOCAL CHARACTER ANCHOR
+Controls identity of a new multi-cut character.
+
+### LAST-KNOWN-GOOD FRAME
+Controls accepted composition/blocking/location during targeted repair.
+
+A scene reference must not redefine style.
+A failed/regressed retry must not become the new authority.
+
+## 4. Prompt assembly
+
+Per raster frame:
+
 1. scene facts;
-2. story beat / clarity;
-3. output ratio/composition;
-4. recurring or episode-local identity continuity;
-5. approved visual reference when available;
-6. MASTER VISUAL STYLE LOCK;
-7. ENVIRONMENT / BACKGROUND STYLE LOCK;
-8. ANTI-GPT / ANTI-POLISH LOCK.
+2. story clarity;
+3. output ratio;
+4. text-free / planned negative-space instruction;
+5. cast identity reference(s);
+6. episode-local character anchor when applicable;
+7. last-known-good preservation block for repair;
+8. MASTER_PROMPTS stable visual blocks.
 
-Do not rewrite the style ad hoc for every scene.
+Do not rewrite the visual style from scratch per slide.
 
-## 6. Text layer
+## 5. Text-free raster policy
 
-For final production, keep important captions/dialogue editable outside the generated raster whenever possible.
-This improves typo correction, voice iteration, layout control, and multi-format adaptation.
+Production raster should normally include:
+- people;
+- props;
+- background;
+- non-text expression/reaction marks.
 
-Quick prototypes may contain generated text, but they are not automatically final masters.
+Do not bake final:
+- hook;
+- narration;
+- dialogue;
+- speech bubbles;
+- labels;
+- source notes
 
-## 7. First-pass QC order
+into the canonical raster master.
 
-1. Does the beat read immediately?
-2. Does dialogue still sound human?
-3. Does the image match STYLE_LOCK v2.0?
-4. Is recurring identity preserved?
-5. Are one-off characters internally consistent where needed?
-6. Are hands/objects/feet/seating/spatial relations plausible?
-7. Is the environment simple enough?
-8. Is there sufficient text safe space?
-9. Is the target ratio correct?
+Reason:
+- better Korean text control;
+- easy dialogue iteration;
+- consistent font/size;
+- less poster-like AI composition;
+- lower repair cost.
 
-## 8. Hard stop / repair
+Baked-in text is acceptable only for a quick prototype/taste check.
 
-Systemic style drift across multiple frames:
-STOP and repair reference/prompt assembly.
+## 6. Output tracks
 
-Single local defect:
-target-edit that frame; preserve accepted areas.
+Feed/carousel:
+- 4:5;
+- 1080×1350.
 
-Weak story/dialogue:
-return to story/dialogue layers rather than trying to save it with prettier art.
+Reels/Shorts:
+- 9:16;
+- 1080×1920.
 
-## 9. Minimal-change edit
+16:9 only when explicitly required.
 
-When a frame is accepted except for a named defect:
-change only the named defect.
-Preserve unmentioned identity, composition, style, palette, geometry, and narrative function.
+Do not stretch.
+Recompose/crop using planned safe space.
 
-## 10. Automation boundary
+## 7. First-pass visual QC
 
-Automation may:
-collect/normalize sources, route formats, draft story beats, draft dialogue, humanize dialogue, assemble prompts, generate storyboards, run deterministic QC, and prepare exports.
+Check in this order:
 
-During the current learning phase, USER VOICE GATE remains explicit before dialogue lock.
-Style or voice rules do not silently mutate from performance feedback.
+1. correct story beat;
+2. correct cast choice;
+3. correct character identity/anchor;
+4. style lock;
+5. scene blocking;
+6. hands/object interaction;
+7. spatial logic;
+8. background simplicity;
+9. planned text space;
+10. ratio.
+
+A pretty but incorrect character = fail.
+A stylish frame in the wrong story order = fail.
+
+## 8. Last-known-good rule
+
+Every accepted:
+- style test;
+- character anchor;
+- episode frame;
+- layout
+
+may be marked LAST_KNOWN_GOOD.
+
+When a subsequent retry is worse:
+- reject the retry;
+- revert to the last-known-good input;
+- do not continue chaining from the regression.
+
+This prevents repair drift.
+
+## 9. Minimal-change repair rule
+
+Before editing, classify the issue:
+
+### LOCAL
+Examples:
+- wrong supporting character;
+- typo/text placement;
+- one hand;
+- one prop;
+- one expression;
+- one accessory.
+
+Action:
+edit only the named defect.
+Preserve:
+- camera;
+- composition;
+- scene blocking;
+- background;
+- accepted character(s);
+- palette;
+- line style;
+- all unmentioned objects.
+
+### SYSTEMIC
+Examples:
+- entire batch uses wrong visual style;
+- all new-character faces drift;
+- all backgrounds get beige cinematic treatment;
+- text layout system is fundamentally wrong.
+
+Action:
+repair the shared prompt/reference/layout system, then rerun only what depends on it.
+
+Do not full-regenerate a good frame for a local defect.
+
+## 10. Sequence-order QC
+
+Before final carousel export, validate beat order explicitly.
+
+For each adjacent pair:
+- does slide N cause/enable/precede slide N+1?
+- does REVEAL/PEAK occur before AFTERMATH/LANDING?
+- was any generation/upload order accidentally mistaken for story order?
+
+Final file naming must use explicit numeric prefixes:
+- slide_01
+- slide_02
+- …
+- slide_07
+
+File creation time or tool-return order never defines narrative order.
+
+## 11. Lettering QC
+
+Final vector text check:
+- phone-size readability;
+- role-appropriate size;
+- safe margins;
+- bubble tail target;
+- no text-face/hand/prop collisions;
+- line breaks;
+- reading order;
+- contrast;
+- no accidental duplicate narration;
+- no tiny type used to save an overlong line.
+
+See VISUAL_GRAMMAR.md for type scale.
+
+## 12. Style QC current critical checks
+
+Reject if:
+- generic smooth AI face appears;
+- a one-off male accidentally becomes Taemin;
+- warm beige/sepia wash dominates;
+- global texture/grain appears;
+- background becomes polished lifestyle illustration;
+- glossy/strand-heavy hair;
+- modeled soft lighting/shading;
+- environment looks more rendered than characters.
+
+## 13. Cost / retry policy
+
+Plan globally before paid generation.
+
+Prefer:
+- one first pass;
+- targeted edit;
+- bounded retries.
+
+Do not “try again until good.”
+If repeated failure is systemic, stop and repair the shared input.
+
+## 14. Recordkeeping
+
+For durable/paid production record:
+- episode ID;
+- slide index;
+- exact story beat;
+- selected identity references;
+- selected style references;
+- prompt/version;
+- output ID/path;
+- dimensions;
+- QC verdict;
+- whether LAST_KNOWN_GOOD;
+- repair scope.
+
+## 15. Automation boundary
+
+Future automation can:
+- route cast;
+- detect anchor requirement;
+- generate internal one-off anchors;
+- assemble prompts;
+- check sequence order;
+- run deterministic text/layout QC;
+- route targeted repair.
+
+During the learning phase:
+- USER VOICE GATE stays human;
+- material visual-style changes stay human;
+- final taste/publish remains human.
