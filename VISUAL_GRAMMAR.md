@@ -140,100 +140,30 @@ if it weakens the content.
 
 ---
 
-## 7. Four canonical narrative formats
+## 7. v0.1 active narrative formats
 
-The router classifies by **narrative topology**, not source origin.
+v0.1 deliberately supports only two production formats.
 
-### A. STORY_ARC — anecdote / event / situation
+Detailed editorial grammar is authoritative in `STORY_GRAMMAR.md`.
 
-Use when the idea has a temporal sequence.
+### A. STORY_ARC — anecdote / experience / incident
 
-Typical grammar:
-1. HOOK
-2. ESTABLISH
-3. TRIGGER
-4. DEVELOP / ESCALATE
-5. TURN
-6. PAYOFF
-7. optional AFTERMATH
+Use when temporal progression matters and the reader's main question is “what happened next?”
 
-Best for:
-- daily-life anecdote;
-- workplace / relationship incident;
-- community story;
-- embarrassing / absurd situation;
-- “something happened” topics.
+Every body slide must change the state.
 
-Hard rule:
-Every body slide changes the state. Repeated reactions without progression are filler.
+### B. RELATABLE_SCENARIO — dramatized everyday recognition
 
-### B. OBSERVATION_SET — relatable observation / pattern collection
+Use when the payoff is “I do this too / I know this situation.”
 
-Use when the value comes from recognition across parallel examples rather than chronology.
+The default is a mini-scenario, not a traits list or card-news collection.
 
-Typical grammar:
-1. HOOK / THESIS
-2. EXAMPLE A
-3. EXAMPLE B
-4. EXAMPLE C
-5. ESCALATED / MOST RECOGNIZABLE EXAMPLE
-6. LANDING / “exactly this” recognition
+### Future / dormant
+- OBSERVATION_SET
+- EXPLAINER_CAUSAL
+- CONTRAST_REFRAME
 
-Best for:
-- “~할 때 특징”
-- generational / workplace / relationship observations
-- recurring social behaviors
-- everyday Korean-life pattern recognition
-
-Hard rule:
-Examples must be meaningfully different manifestations of the same thesis. Synonymous examples are padding.
-
-### C. EXPLAINER_CAUSAL — information / mechanism / why
-
-Use when the reader payoff is understanding.
-
-Typical grammar:
-1. HOOK / QUESTION
-2. BASELINE
-3. CAUSE 1
-4. CAUSE 2 / MECHANISM
-5. CONCRETE EXAMPLE
-6. IMPLICATION
-7. TAKEAWAY / REFRAME
-
-Best for:
-- “왜 이런 일이 생기나”
-- simple economics / social phenomenon
-- practical knowledge
-- myth clarification
-- culture explanation
-
-Hard rule:
-Do not turn the carousel into a textbook. Each slide should be understandable in a few seconds and visualized wherever possible.
-
-### D. CONTRAST_REFRAME — comparison / expectation-vs-reality / inversion
-
-Use when the strongest idea is a difference, contradiction, or changed frame.
-
-Typical grammar:
-1. HOOK: apparent/common frame
-2. SIDE A / BEFORE / EXPECTATION
-3. SIDE B / NOW / REALITY
-4. CONSEQUENCE
-5. CONTRADICTION
-6. REFRAME / VISUAL METAPHOR
-7. LANDING
-
-Best for:
-- A vs B
-- new hire vs experienced worker
-- expectation vs reality
-- old norm vs new norm
-- “problem is not X; it is Y”
-- debate/comment-chain material
-
-Hard rule:
-The two sides must sharpen the central insight; do not use split comparison merely as decoration.
+Do not route v0.1 production into dormant formats merely because the source can be explained that way.
 
 ---
 
