@@ -41,7 +41,15 @@ Only after both pass should the remaining raster slides be generated.
 
 Generated:
 - Slide 1 cover preflight
+  - image_gen gen_id: `8b27651d-2cd4-4762-bcf3-bd41c538c303`
+  - size: 1122×1402
+  - SHA-256: `85457dbe9b47206e9dbfe900a2c1de8a5d54ca6612d6b6c1968f47ca4b11fe9c`
 - Slide 5 high-risk interaction preflight
+  - image_gen gen_id: `b392eb14-d6b0-4a98-83f0-6a29bb9b68ed`
+  - size: 1122×1402
+  - SHA-256: `b68b5bf5fafd80a9d8fe1b6705b8f845612ca2efbeab9b9cc2f73982f471bc79`
+
+The failed PNG binaries are not claimed as GitHub-preserved; the identifiers/hashes are retained as execution evidence.
 
 ### Verdict
 **REJECT BOTH — systemic style failure.**
