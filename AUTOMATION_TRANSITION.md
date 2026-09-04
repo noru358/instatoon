@@ -1,692 +1,362 @@
 # AUTOMATION_TRANSITION.md
 
-# INSTATOON — MANUAL/CHAT → EXECUTABLE AUTOPIPELINE TRANSITION CONTRACT
-
-**Status:** FUTURE IMPLEMENTATION AUTHORITY  
-**Effective:** 2026-09-04
+# MANUAL/CHAT → EXECUTABLE AUTOPIPELINE CONTRACT
+Updated: 2026-09-04
+Status: FUTURE IMPLEMENTATION AUTHORITY
 
 ## 0. Purpose
 
-This document preserves the decisions required to convert the current structured-but-manually-operated Instagram-toon workflow into a reproducible Python/CLI/server pipeline later.
+Convert the validated manual Instatoon workflow into a reproducible Python/CLI/server pipeline later.
 
-It is intentionally written now, while the production protocol, prompts, locks, failure lessons, and human gates are still being discovered manually.
+Do not automate the chat itself.
+Automate the production state machine that the chat is currently operating.
 
-This document **does not authorize skipping the current three-prototype extraction program** and does not replace the current human Gate A / Gate B / Gate C rules during v0.1.
+## 1. Ownership split
 
-When implementation begins, a clean coding agent/person should be able to read this file plus the authorities linked from `README.md` and know what must become code, what must remain configuration/locks, and what must never be left to chat memory.
+### Repository documents/config define WHAT is correct
+Current project authorities:
+- MASTER_PROMPTS.md
+- STYLE_LOCK.md
+- REFERENCE_SET.md
+- SOURCE_STORY_PIPELINE.md
+- VISUAL_GRAMMAR.md
+- GENERATION_PROTOCOL.md
 
----
-
-## 1. Core migration thesis
-
-Do **not** automate the ChatGPT conversation itself.
-
-Automate the production system that the conversation is currently operating manually.
-
-Target transformation:
-
-```text
-CURRENT
-
-human/chat
-  → read repo
-  → remember rules
-  → choose next stage
-  → assemble prompts
-  → call tools
-  → inspect result
-  → decide retry/repair
-  → update state
-
-TARGET
-
-deterministic orchestrator
-  → load canonical project authorities
-  → execute typed stage
-  → call model/tool adapter
-  → validate structured output
-  → run QC
-  → bounded retry / targeted repair
-  → persist state/evidence/cost
-  → advance state machine
-```
-
-The orchestrator owns the flow.  
-The model reasons **inside a stage**.
-
-Do not give one supervisor model every tool and ask it to “make an episode end-to-end” without deterministic control.
-
----
-
-## 2. What stays in documents/config vs what becomes Python
-
-### Documents / YAML / JSON define **WHAT is correct**
-
-Keep durable creative/product truth outside application code:
-
-- project purpose;
-- style/version locks;
-- canonical reference identity and hashes;
-- visual grammar;
-- story grammar;
-- source-selection rules;
-- canonical prompt blocks;
-- human gate policy;
-- QC rubrics and hard-fail conditions;
-- budget policy;
-- project-specific workflow configuration.
-
-Current authorities already provide most of this:
-
-- `STYLE_LOCK.md`
-- `REFERENCE_SET.md`
-- `VISUAL_GRAMMAR.md`
-- `STORY_GRAMMAR.md`
-- `SOURCE_STORY_PIPELINE.md`
-- `MASTER_PROMPTS.md`
-- `GENERATION_PROTOCOL.md`
-- `TOON_SYSTEM_V0_1.md`
-
-Do not bury these rules as opaque Python strings unless a machine-readable mirror is explicitly introduced and version-linked to the human-readable authority.
-
-### Python defines **WHEN / HOW execution proceeds**
-
-The executable layer should own:
-
+### Python defines WHEN/HOW execution proceeds
+Code owns:
 - stage order;
-- input loading;
-- prompt assembly;
-- schema validation;
-- tool/API invocation;
+- input/output schemas;
+- retries;
 - timeouts;
-- retry counts;
-- retry routing;
-- budget ceilings;
 - approval waits;
-- state transitions;
-- manifest/event logging;
-- deterministic QC;
+- budgets;
+- tool adapters;
+- prompt assembly;
+- persistence;
+- QC routing;
 - artifact paths;
-- publishing calls;
+- publishing;
 - analytics ingestion.
 
-Short rule:
+Docs/config = policy.
+Python = orchestration/enforcement.
 
-> Docs/config = policy and truth.  
-> Python = orchestration and enforcement.
+## 2. Target stage machine
 
----
+Current conceptual flow:
 
-## 3. Deterministic orchestration first
-
-Target design is approximately:
-
-- deterministic/state-machine control for stage order, retries, budgets, approvals, persistence;
-- model reasoning only where semantic judgment or generation is actually needed.
-
-This is **not** a multi-agent swarm or debate system.
-
-A stage may use an LLM, vision model, image generator, or tool, but the stage must have a typed contract and a bounded outcome.
-
-Bad:
-
-```text
-"Read everything and autonomously make the best Instagram toon."
-```
-
-Good:
-
-```text
-SOURCE_NORMALIZE
-  input: raw source
-  output: STORY_SOURCE_PACK schema
-  validator: required fields + provenance
-
-STORY_PLAN
-  input: source pack + grammar versions
-  output: STORY_PLAN schema
-  validator: structural checks + Gate B routing
-
-RASTER_RENDER
-  input: one slide spec + exact canonical refs + assembled prompt
-  output: artifact + generation metadata
-  validator: dimensions/hash/provenance
-
-QC_IMAGE
-  input: slide spec + render + relevant locks
-  output: typed pass/fail + defect codes + repair scope
-```
-
-The model must not choose an unbounded new workflow because one stage failed.
-
----
-
-## 4. State machine
-
-The executable system should represent a run explicitly.
-
-Illustrative state flow:
-
-```text
 SOURCE_CANDIDATES
 → SOURCE_SELECTED
 → SOURCE_NORMALIZED
 → STORY_PLANNED
-→ GATE_B_WAIT
-→ EPISODE_PLANNED
-→ PREFLIGHT_READY
-→ PREFLIGHT_RENDERED
-→ PREFLIGHT_QC
-→ PRODUCTION_RENDER
-→ VECTOR_COMPOSE
+→ DIALOGUE_DRAFTED
+→ DIALOGUE_HUMANIZED
+→ USER_VOICE_GATE
+→ STORYBOARD_PLANNED
+→ CAST_ROUTED
+→ CHARACTER_ANCHOR_REQUIRED?
+→ CHARACTER_ANCHOR_READY
+→ VISUAL_PLAN_READY
+→ RASTER_RENDER
+→ VECTOR_LETTER
 → FINAL_QC
-→ GATE_C_WAIT
+→ HUMAN_TASTE_GATE
 → EXPORT_READY
 → PUBLISHED
 → PERFORMANCE_RECORDED
-```
 
-Failure transitions are explicit:
+The character-anchor branch is required only for a new non-main person appearing in 2+ cuts.
 
-```text
-PREFLIGHT_QC_FAIL_STYLE
-  → repair shared prompt/reference assembly
-  → rerun bounded preflight
+## 3. New mandatory runtime concepts
 
-SLIDE_QC_FAIL_LOCAL
-  → targeted repair only
-  → rerun affected slide QC
+### A. CharacterAnchor
+Fields should eventually include:
+- anchor_id;
+- episode_id;
+- character_role;
+- main_cast_or_episode_only;
+- identity traits;
+- artifact path/hash;
+- style version;
+- status;
+- last_known_good flag.
 
-BUDGET_EXCEEDED
-  → human approval / stop
+### B. LastKnownGood
+Every repairable stage may point to an accepted prior artifact/state.
 
-SYSTEMIC_UNKNOWN_FAILURE
-  → stop, preserve evidence, do not free-form loop
-```
+If a retry regresses:
+- reject retry;
+- restore last_known_good;
+- do not chain future generation from the failed retry.
 
-Never use an infinite “keep trying until it looks good” loop.
+### C. VoiceGate
+Dialogue cannot silently pass from draft into production while the project is still learning user voice.
 
----
+Store:
+- draft;
+- humanized draft;
+- user feedback;
+- accepted dialogue;
+- reusable voice rule when appropriate.
 
-## 5. Typed stage contracts
+### D. OrderedBeat
+Story order is data, never inferred from file creation time.
 
-Every generative stage should return machine-readable data first.
+Each slide has:
+- index;
+- beat role;
+- state_before;
+- state_after;
+- reader_question_after;
+- landing/reveal relation.
 
-Example QC shape:
+## 4. Typed-stage philosophy
 
-```json
-{
-  "episode_id": "E0002",
-  "stage": "image_qc",
-  "slide_index": 5,
-  "status": "fail",
-  "scores": {
-    "style": 94,
-    "story_clarity": 88,
-    "anatomy": 61
-  },
-  "fail_codes": [
-    "HAND_OBJECT_CONTACT"
-  ],
-  "repair_scope": [
-    "right_hand",
-    "held_object"
-  ],
-  "next_action": "TARGETED_IMAGE_REPAIR"
-}
-```
+A model reasons inside a bounded stage.
+It does not invent a new workflow after failure.
 
-A free-form explanation may be stored as evidence, but routing must depend on stable typed fields/enums.
+Examples:
 
-Finalize real JSON Schemas only after the three-prototype extraction program exposes the recurring fields and failure classes.
+SOURCE_NORMALIZE
+input: raw source
+output: source facts + source voice + provenance
 
----
+STORY_PLAN
+input: source pack + content grammar
+output: ordered beats
 
-## 6. Prompt assembly must be code, not model improvisation
+DIALOGUE_HUMANIZE
+input: beats + source voice + draft
+output: humanized dialogue + flagged AI-like lines
 
-Do not ask an LLM to rediscover or rewrite the project style for every render.
+CAST_ROUTE
+input: story/context
+output: selected main cast + episode-only roles + rationale
 
-The prompt assembler loads exact versioned blocks and exact selected references.
+CHARACTER_ANCHOR
+input: episode-only role + style refs
+output: anchor artifact + identity digest
 
-Production raster assembly remains conceptually:
+RASTER_RENDER
+input: slide spec + exact references + prompt
+output: art artifact + metadata
 
-```text
-slide scene facts
-+ story clarity
-+ negative-space / no-text requirement
-+ episode-local continuity when required
-+ selected canonical reference paths + hashes
-+ REFERENCE_OBEDIENCE_BLOCK
-+ FACE_LOCK_BLOCK when applicable
-+ IDENTITY_PRESERVATION_BLOCK only when applicable
-+ BACKGROUND_DENSITY_LOCK when applicable
-+ MASTER_STYLE_PROMPT
-+ NEGATIVE_STYLE_PROMPT
-+ ANTI_GPT_DEFAULT_BLOCK
-```
+QC
+input: planned beat + refs + artifact
+output: pass/fail + defect codes + repair scope + last-known-good action
 
-The assembler records the exact prompt text/hash and selected reference hashes **before** the external generation call.
+## 5. Prompt assembly
 
-Chat history must never be the only source of a prompt fragment.
+Prompt assembly must be deterministic code.
 
----
+Load exact current blocks from MASTER_PROMPTS.md or a version-linked machine-readable mirror.
 
-## 7. Source-of-truth split
+Inputs:
+- scene facts;
+- story clarity;
+- output ratio;
+- text-safe region;
+- selected main-character reference;
+- episode-local character anchor;
+- current style reference;
+- last-known-good repair reference when needed;
+- stable visual blocks.
 
-### GitHub repository
+The model must not rewrite the project style each time.
 
-Use Git for durable, reviewable, versioned project truth:
+## 6. Reference-role separation
 
-- locks;
-- prompt blocks;
-- schemas;
-- workflow/config definitions;
+Runtime must distinguish:
+- STYLE_REFERENCE;
+- MAIN_CHARACTER_REFERENCE;
+- EPISODE_CHARACTER_ANCHOR;
+- LAST_KNOWN_GOOD_FRAME;
+- LOCATION_CONTINUITY_REFERENCE when needed.
+
+One role must not silently replace another.
+
+Legacy v1 style assets must be excluded by version/status.
+
+## 7. Repair routing
+
+### Local defect
+Examples:
+- wrong one-off character identity;
+- one hand;
+- one prop;
+- one expression;
+- text placement.
+
+Route:
+TARGETED_REPAIR from last-known-good.
+
+### Systemic defect
+Examples:
+- every background becomes over-rendered;
+- every new-person face becomes generic;
+- entire batch uses wrong style;
+- typography system is unreadable.
+
+Route:
+repair shared prompt/reference/layout configuration, then rerun only dependent outputs.
+
+No unbounded “try again”.
+
+## 8. Deterministic validations
+
+Prefer code for:
+- required fields;
+- slide indices;
+- no duplicate/missing order;
+- REVEAL before AFTERMATH;
+- output dimensions;
+- file hashes;
+- text safe margins;
+- text overflow;
+- minimum font sizes;
+- bubble ownership/tail metadata;
+- reference status/version;
+- anchor presence when required;
+- retry/budget limits.
+
+Use model/vision judgment only where semantics or visual taste require it.
+
+## 9. Runtime storage
+
+GitHub:
+- durable project authorities;
+- versioned prompts;
 - canonical references;
-- source/story/episode plans that are part of the durable record;
-- implementation code;
-- migrations;
-- tests.
+- schemas/config;
+- approved episode artifacts when useful.
 
-### Runtime database
-
-When automation is implemented, use a runtime DB such as PostgreSQL for mutable execution state:
-
-- current run/stage;
+Runtime DB:
+- run/stage state;
 - attempts;
-- queued jobs;
-- tool job IDs;
+- approvals;
+- tool IDs;
 - costs;
 - timestamps;
-- approvals;
-- publish IDs;
-- analytics snapshots.
+- QC results.
 
-Git should not be abused as the live job queue.
+Object storage:
+- large/transient generated assets when server automation arrives.
 
-### Object storage
+Git is not the live job queue.
 
-Large generated/transient assets should move to an object store such as S3/R2 when server automation requires it.
+## 10. Integration hierarchy
 
-Keep canonical visual references in the repository when practical.  
-For large runtime outputs, store stable IDs/paths/hashes in manifests.
-
----
-
-## 8. Tool integration hierarchy
-
-Prefer integrations in this order:
-
+Prefer:
 1. official provider API;
-2. stable MCP server when the capability should be shared across models/clients;
-3. ordinary internal API wrapper/function when only AutoPipeline needs it;
-4. browser automation (for example Playwright) only when no reliable API/MCP exists.
+2. MCP when cross-client interoperability matters;
+3. internal adapter;
+4. browser automation fallback.
 
-Do not turn every internal function into MCP by default.
+Browser/UI automation must be isolated behind adapters.
 
-Use MCP when interoperability is valuable.  
-Use a normal adapter when it is simply an implementation detail of the pipeline.
+## 11. First executable product
 
-Browser automation must be isolated behind an adapter because UI changes, login expiry, CAPTCHA, upload failures, and DOM drift are expected failure modes.
+CLI first, not dashboard.
 
----
+Capability target:
 
-## 9. Target AutoPipeline ownership
-
-Generic automation code belongs in the parent project, not duplicated independently in every content repository.
-
-Target conceptual layout:
-
-```text
-AutoPipeline/
-├── engine/
-│   ├── orchestrator/
-│   ├── stages/
-│   ├── state/
-│   ├── qc/
-│   └── adapters/
-├── cli/
-├── server/
-├── dashboard/          # later
-├── instatoon/          # child repository / project authority
-└── talkshow/           # child repository / project authority
-```
-
-The `instatoon` repository remains the project-specific authority for its style, story grammar, prompts, references, plans, and project configuration.
-
-The parent engine reads the child project; it must not silently fork a second conflicting copy of its locks.
-
----
-
-## 10. CLI is the first executable product
-
-Do not start by building a polished web dashboard.
-
-First implementation milestone:
-
-```bash
 autopipeline run instatoon --source <input>
 autopipeline status <run-id>
-autopipeline approve <run-id> gate-b
-autopipeline retry <run-id> --stage raster-render --slide 5
+autopipeline approve <run-id> voice-gate
+autopipeline approve <run-id> taste-gate
+autopipeline retry <run-id> --slide 5 --scope character
 autopipeline export <run-id>
-```
 
-The exact command syntax may change, but the capability target is fixed:
+Exact syntax may change.
 
-> A clean environment can run one full currently-approved production cycle from a command, with explicit human gates, persisted state, bounded retries, provenance, and reproducible prompt/reference loading.
+Success means one run can proceed without hidden chat memory.
 
-Only after the CLI path is stable should the same engine be exposed through FastAPI/web UI/scheduler.
+## 12. Cost controls
 
----
-
-## 11. Web/server end state
-
-Later target:
-
-```text
-Web dashboard
-  → start / stop / approve / repair / inspect
-
-API server
-  → run management
-
-Durable workflow / workers
-  → long-running image/tool jobs
-  → retries/timeouts/recovery
-
-DB + object storage
-  → execution state + artifacts
-
-Project repository
-  → locks/prompts/config/versioned truth
-```
-
-A dashboard should display at minimum:
-
-- project;
-- episode/run ID;
-- current stage;
-- gate waits;
-- QC result and failure codes;
+Every paid stage records:
+- estimated cost if available;
+- actual cost;
+- provider/tool job ID;
 - attempts;
-- cost;
-- artifact previews/paths;
-- prompt/reference versions;
-- publish state;
-- analytics when available.
+- budget ceiling.
 
-The dashboard is a control surface, not the source of truth for locked creative rules.
-
----
-
-## 12. Durable execution and recovery
-
-External image/video jobs can outlive one process.
-
-The system must eventually support:
-
-- job polling;
-- timeout policy;
-- idempotent retry;
-- process restart;
-- recovery without restarting the entire episode;
-- no duplicate paid calls after an ambiguous timeout unless job state is checked first.
-
-Start simple if necessary:
-
-```text
-Python + Pydantic + CLI + PostgreSQL
-```
-
-Then add a durable workflow engine such as Temporal only when long-running/recovery complexity justifies it.
-
-Do not adopt infrastructure merely because it is fashionable.
-
----
-
-## 13. QC and repair policy in code
-
-Automation must preserve the existing hierarchy:
-
-1. deterministic structural/file checks;
-2. style / visual-grammar QC;
-3. defect / continuity QC;
-4. lettering/layout QC;
-5. human editorial/taste gate.
-
-Important invariant:
-
-> QC diagnoses and routes. It does not get permission to reinvent the episode.
-
-If one defect is local, the repair scope must stay local.
-
-If a systemic style failure appears, stop the batch and repair the shared reference/prompt system before paying for more slides.
-
-The minimal-change edit rule in `GENERATION_PROTOCOL.md` remains binding.
-
----
-
-## 14. Cost controls
-
-Every paid/external stage should have:
-
-- estimated cost before call when possible;
-- actual cost/credits after call;
-- per-stage attempt limit;
-- per-episode budget;
-- stop/approval threshold;
-- tool job ID;
-- artifact hash.
-
-Current prototype cost gates remain the baseline:
-
-- plan whole episode first;
-- two-slide preflight;
-- one first pass per planned raster page;
+Use:
+- whole-story planning;
+- internal character anchor once per relevant one-off;
+- one first pass;
 - targeted repair;
-- bounded additional generations.
+- bounded retries.
 
-Automation is not permission to spend unattended.
+Automation is not permission for unattended spend.
 
----
+## 13. Human gates
 
-## 15. Human gates during migration
+Current learning-phase human ownership:
+- source/premise approval when requested;
+- USER VOICE GATE;
+- final taste/publish decision;
+- material style/visual-grammar changes.
 
-During the current v0.1 period, preserve:
+Some operational gates may later become configurable after repeated evidence.
 
-- Gate A — candidate/premise;
-- Gate B — whole story plan before substantial paid rendering;
-- Gate C — final taste/publish;
-- explicit approval for material style/grammar version changes;
-- explicit approval immediately before external paid generation where the current protocol requires it.
+Performance data may NOT silently mutate:
+- style;
+- reference promotion;
+- visual grammar;
+- voice rules;
+- mandatory main-cast policy.
 
-Later automation may make some operational gates configurable **only after repeated prototype evidence shows they are safe to relax**.
+## 14. AutoPipeline ownership
 
-The following must never be silently changed by performance automation:
+Generic orchestration belongs in noru358/AutoPipeline.
 
-- `STYLE_LOCK.md`;
-- `REFERENCE_SET.md` canonical promotion;
-- `VISUAL_GRAMMAR.md`;
-- story-grammar version;
-- core brand positioning.
+Instatoon child repository owns:
+- creative rules;
+- prompts;
+- refs;
+- content grammar;
+- project config.
 
----
+Do not duplicate Instatoon-specific truths into the generic engine.
 
-## 16. Suggested implementation stack
+## 15. Suggested implementation sequence
 
-This is a recommendation, not a creative authority:
+Phase 0 — continue manual evidence extraction.
+Phase 1 — finalize schemas.
+Phase 2 — local CLI + state machine.
+Phase 3 — generation/research/publish adapters.
+Phase 4 — persistent DB/workers/object storage.
+Phase 5 — web control plane.
+Phase 6 — controlled autonomy.
 
-- Python;
-- Pydantic / JSON Schema;
-- CLI first;
-- FastAPI when remote/web control is needed;
-- PostgreSQL for mutable run state;
-- Redis only if queue/cache needs justify it;
-- S3/R2-class object storage for large runtime artifacts;
-- provider SDKs / HTTP adapters;
-- MCP where cross-client interoperability matters;
-- Playwright only as a fallback adapter;
-- Docker for reproducible deployment;
-- durable workflow engine later if required;
-- Next.js or equivalent dashboard only after the engine is proven.
+Do not build a polished dashboard before the engine works.
 
-Model/provider selection must stay replaceable behind adapters.
+## 16. Anti-patterns
 
-Do not make the pipeline dependent on one chat product, one model vendor, or one local machine.
+Do not:
+- give one supervisor every tool and say “make a post”;
+- depend on chat memory;
+- duplicate prompts in many code locations;
+- use failed render as next anchor;
+- skip one-off character anchor and improvise identity panel by panel;
+- let file creation order define slide order;
+- let QC rewrite the whole episode;
+- loop paid generation indefinitely;
+- use Git as a runtime queue;
+- start browser-first when API/MCP exists.
 
----
+## 17. Automation-complete definition
 
-## 17. Migration sequence from the current manual system
-
-### Phase 0 — now: extract the real protocol
-
-Complete the three prototypes.
-
-Record:
-
-- repeated page archetypes;
-- real render-mode distribution;
-- stable prompt blocks;
-- stable QC fail codes;
-- common repair routes;
-- real generation counts;
-- human decisions that could/could not be automated.
-
-### Phase 1 — consolidate machine-readable contracts
-
-- finalize CONTENT_MASTER schema;
-- finalize STORY_PLAN schema;
-- finalize EPISODE_PLAN schema;
-- finalize RENDER_MANIFEST schema;
-- add stage-result/QC schema;
-- define project config and version identifiers.
-
-### Phase 2 — executable local CLI
-
-Implement:
-
-- repository/context loader;
-- deterministic state machine;
-- source/story planning calls;
-- prompt assembler;
-- adapter interface;
-- vector renderer/composer;
-- manifest logging;
-- deterministic QC;
-- approval checkpoints.
-
-Milestone:
-
-`autopipeline run instatoon` can execute one episode through the current approved workflow without relying on hidden chat context.
-
-### Phase 3 — external tool integration
-
-Attach:
-
-- research/source collectors;
-- image-generation adapters;
-- publishing adapters;
-- analytics adapters.
-
-Use API > MCP > browser fallback hierarchy.
-
-### Phase 4 — durable server execution
-
-Add:
-
-- PostgreSQL run state;
-- workers;
-- job recovery;
-- scheduler if needed;
-- object storage;
-- cost ledger;
-- tracing/logging.
-
-### Phase 5 — web control plane
-
-Add:
-
-- run dashboard;
-- gate approval UI;
-- artifact/QC inspection;
-- manual repair controls;
-- cost/analytics views.
-
-### Phase 6 — controlled autonomy
-
-Only after sufficient evidence:
-
-- configurable automatic Gate A for low-risk source selection;
-- automatic retries within explicit bounds;
-- automatic publishing only for approved channels/policies;
-- performance-driven experiment suggestions.
-
-Do not permit automatic mutation of the core style/grammar locks.
-
----
-
-## 18. Anti-patterns
-
-Do not implement:
-
-### A. One omnipotent supervisor prompt
-“Here are 30 tools; make a post.”
-
-### B. Chat-memory dependency
-A new session should not be necessary to know the current production state.
-
-### C. Prompt duplication
-Do not keep slightly different copies of the master style prompt inside Python, an MCP server, a dashboard, and Markdown.
-
-### D. Free-form retries
-No “try again until good.”
-
-### E. QC-as-writer
-QC must not rewrite everything into a safe/bland average.
-
-### F. Git-as-job-queue
-Execution state belongs in runtime state storage.
-
-### G. Browser-first integration
-Do not scrape/click a provider UI when a stable API exists.
-
-### H. Full web app before engine proof
-The first success criterion is an executable reproducible pipeline, not a pretty dashboard.
-
----
-
-## 19. Definition of automation-complete for Instatoon
-
-The first genuinely automated Instatoon pipeline is complete when:
-
-1. a clean environment can load the repository and discover every required authority without chat history;
-2. one command/API request creates a persisted run;
-3. each stage consumes/produces typed data;
-4. exact prompt/reference/version provenance is recorded;
-5. external calls are adapterized;
-6. failures route through bounded explicit transitions;
-7. process restart does not lose the run state once server persistence is introduced;
-8. paid retries cannot loop indefinitely;
-9. human gates are represented explicitly rather than handled through memory;
-10. final artifacts and manifests can be reproduced/audited;
-11. style/grammar locks cannot be silently changed by the execution engine;
-12. the same generic engine can later load another project without copying Instatoon-specific logic into the engine.
-
----
-
-## 20. Restore instructions for the future automation implementation session
-
-When the user later asks to “automate Instatoon”, “code the pipeline”, “make the CLI”, or equivalent:
-
-1. read `README.md`;
-2. read `CURRENT_STATE.md`;
-3. read this file;
-4. read `TOON_SYSTEM_V0_1.md`;
-5. read `WORKFLOW_PROTOCOL.md`;
-6. follow the authority hierarchy for style/story/generation;
-7. inspect the completed prototype evidence;
-8. do **not** invent a new architecture from scratch unless verified prototype evidence requires a change;
-9. implement the smallest end-to-end CLI slice first;
-10. keep generic engine code in `AutoPipeline` and project truth in `instatoon`.
-
-This file exists specifically so the automation work can resume later without reconstructing these decisions from this conversation.
+First automation milestone is complete when:
+1. clean environment discovers all project authorities;
+2. one command creates a persisted run;
+3. stages use typed inputs/outputs;
+4. character-anchor requirements are enforced;
+5. exact refs/prompts/versions are recorded;
+6. last-known-good repair works;
+7. retries are bounded;
+8. voice/taste gates are explicit;
+9. story order is deterministic;
+10. final assets are auditable;
+11. core style/voice cannot silently mutate;
+12. the generic engine can load another child project without copying Instatoon logic.
