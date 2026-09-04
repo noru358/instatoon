@@ -1,40 +1,58 @@
 # instatoon
 
-Semi-automated Instagram-toon / shorts-toon production system.
+Semi-automated Instagram-toon production system.
 
-This repository is intentionally built around **style reproducibility first**. The project may later automate ideation, scripting, panel planning, generation, QC, packaging, and distribution, but visual identity must not drift as automation increases.
+The project is built around **style reproducibility + whole-episode visual grammar**. The durable identity is the overall drawing language and page/sequential grammar, not a requirement for recurring characters.
 
 ## Authoritative hierarchy
 
-When any prompt, agent, script, tool setting, handoff, or future document conflicts with another, use this precedence:
+When documents conflict, use this precedence:
 
-1. **STYLE_LOCK.md** — highest visual authority. Never override implicitly.
-2. **MASTER_PROMPTS.md** — canonical reusable prompt blocks implementing the style lock.
-3. **GENERATION_PROTOCOL.md** — required assembly order, generation procedure, and QC.
-4. **REFERENCE_ANALYSIS.md** — detailed visual deconstruction and rationale.
-5. **CURRENT_STATE.md** — current project state, decisions, next work.
-6. Episode / scene / tool-specific prompts.
-7. Ad-hoc generation wording.
+1. **STYLE_LOCK.md** — highest illustration-style authority.
+2. **VISUAL_GRAMMAR.md** — episode/page/sequential-grammar authority.
+3. **TOON_SYSTEM_V0_1.md** — system architecture, data flow, automation/cost policy.
+4. **MASTER_PROMPTS.md** — canonical reusable style prompt blocks.
+5. **GENERATION_PROTOCOL.md** — generation, preflight, repair, and QC procedure.
+6. **REFERENCE_ANALYSIS.md** — detailed visual deconstruction and rationale.
+7. **CURRENT_STATE.md** — live handoff/state.
+8. Episode-specific content and tool prompts.
 
-A lower layer may add scene-specific content but may not weaken or reinterpret a higher layer.
+A lower layer may add content but may not weaken or reinterpret a higher layer.
 
-## Core rule
+## Core rules
+
+> Plan the whole episode before rendering any individual slide.
 
 > Preserve the visual language before optimizing beauty, detail, novelty, speed, or tool-specific aesthetics.
 
-The target is **not** a polished romance-webtoon or anime look. It is a warm, restrained, low-detail Korean everyday anecdote-comic language with simple adult characters, thin charcoal-brown linework, muted warm colors, minimal shading, quiet low-detail backgrounds, and highly controlled visual density.
+> Keep semantic text in editable vector layers rather than baking it into generated art.
+
+The target illustration language is a warm, restrained, low-detail Korean everyday anecdote-comic style with thin charcoal-brown linework, muted warm colors, minimal shading, quiet low-detail backgrounds, and controlled visual density.
+
+The default v0.1 narrative formats are:
+- STORY_ARC
+- OBSERVATION_SET
+- EXPLAINER_CAUSAL
+- CONTRAST_REFRAME
+
+Community/news/personal material is a source type, not a visual format.
 
 ## Change control
 
-Locked visual rules are versioned. Do not change them because a model or tool appears to produce a "prettier" result. A lock changes only after explicit review of generated comparisons and an explicit project decision.
+Locked art-style and visual-grammar rules are versioned.
 
-Current canonical style version: **INSTATOON_STYLE_v1.0 — 2026-09-04**
+Do not mutate them because a model/tool appears to produce a “prettier” result or because one post performs differently.
+
+Current versions:
+- **INSTATOON_STYLE_v1.0 — 2026-09-04**
+- **INSTATOON_VISUAL_GRAMMAR_v0.1 — 2026-09-04**
 
 ## Files
 
-- [STYLE_LOCK.md](STYLE_LOCK.md) — non-negotiable visual bible
-- [MASTER_PROMPTS.md](MASTER_PROMPTS.md) — copy/paste master, negative, identity, and scene prompt blocks
-- [GENERATION_PROTOCOL.md](GENERATION_PROTOCOL.md) — prompt assembly order + QC + drift handling
-- [REFERENCE_ANALYSIS.md](REFERENCE_ANALYSIS.md) — detailed style anatomy
-- [CURRENT_STATE.md](CURRENT_STATE.md) — live handoff/state
-
+- [STYLE_LOCK.md](STYLE_LOCK.md)
+- [VISUAL_GRAMMAR.md](VISUAL_GRAMMAR.md)
+- [TOON_SYSTEM_V0_1.md](TOON_SYSTEM_V0_1.md)
+- [MASTER_PROMPTS.md](MASTER_PROMPTS.md)
+- [GENERATION_PROTOCOL.md](GENERATION_PROTOCOL.md)
+- [REFERENCE_ANALYSIS.md](REFERENCE_ANALYSIS.md)
+- [CURRENT_STATE.md](CURRENT_STATE.md)
