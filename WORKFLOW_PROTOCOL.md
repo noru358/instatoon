@@ -1,228 +1,224 @@
 # WORKFLOW_PROTOCOL.md
 
-# CROSS-ENVIRONMENT WORKFLOW / "갱신" PROTOCOL v1.0
-
-**Effective:** 2026-09-04
+# CROSS-ENVIRONMENT / “갱신” PROTOCOL v1.1
+Updated: 2026-09-04
 
 Purpose:
-Preserve project state, exact decisions, prompts, assets, execution evidence, and next actions so work can move between ChatGPT, Claude, local/manual work, and future environments without silently restarting or losing critical detail.
+Preserve current decisions, prompts, assets, execution evidence, failure lessons, and exact next actions across ChatGPT, Claude, local work, and future automation.
 
-## 0. Trigger
+## 0. Meaning of “갱신”
 
-When the user says **"갱신"**, run the full repository reconciliation process in this document.
+When the user says “갱신”, do NOT merely append a handoff.
 
-"갱신" does not mean append another handoff note. It means:
-1. reconcile what changed;
-2. modify authoritative existing files;
-3. create a new file only for a genuinely new durable artifact/authority;
-4. remove or explicitly supersede contradictions;
-5. update exact current state and next action;
-6. commit/push;
-7. verify the remote result;
-8. when the AutoPipeline parent exists, update its child-repository pointer too.
+Run repository reconciliation:
 
-## 1. Single-source-of-truth principle
+1. fetch current remote state;
+2. read every current root Markdown authority and relevant active-episode Markdown;
+3. build an internal conflict/duplication map;
+4. merge still-valid old rules into current authorities;
+5. remove or explicitly retire contradictions/duplication;
+6. prefer editing existing canonical files over creating new session files;
+7. update active episode evidence;
+8. update CURRENT_STATE last;
+9. commit/push;
+10. refetch/verify remote state before saying completion;
+11. update AutoPipeline child pointer when applicable.
 
-Never rely on chat memory as the only copy of a durable decision.
+Git history is the archive.
+Root Markdown should describe the present.
 
-If a clean environment would need something to continue correctly, preserve it in GitHub:
-- project purpose / big flow;
-- current phase;
-- locked design/style/architecture;
-- exact reusable prompts;
-- exact asset/reference identities and paths;
-- source/provenance;
-- episode/experiment state;
+## 1. No chat-memory dependency
+
+If a clean environment would need a decision to continue correctly, GitHub must contain it.
+
+Preserve:
+- project purpose;
+- current stage;
+- current style;
+- exact canonical prompt;
+- content/story/dialogue workflow;
+- cast-routing rule;
+- character/reference identities;
 - known failure modes;
-- QC results;
-- execution parameters;
-- real blockers;
+- active episode state;
+- last-known-good logic;
 - exact next action.
 
-## 2. Prefer modification over file proliferation
+## 2. File-proliferation rule
 
-Do not create NEW_SESSION_HANDOFF, LATEST, FINAL_FINAL, or session-specific state files when an existing canonical file can be updated coherently.
+Do not create:
+- NEW_SESSION_HANDOFF;
+- LATEST;
+- FINAL_FINAL;
+- per-session duplicate prompt documents
 
-Create a new file only if it is:
-1. a new authority layer with a distinct lifecycle;
-2. a reusable specification/schema/protocol;
-3. an independently auditable episode/experiment/source artifact;
-4. a binary/reference asset that cannot be represented losslessly in existing text.
+when an existing authority can be coherently updated.
 
-Git history is the archive. Canonical files represent the present.
+A new file is justified for:
+- an independently auditable episode;
+- a genuinely new authority/spec;
+- binary/reference asset;
+- schema with its own lifecycle.
 
-Do not delete a rule or explanation merely because it came from an older version. During reconciliation:
-- preserve any still-valid constraint, rationale, failure lesson, prompt fragment, or evidence;
-- merge it into the current authoritative section when it still applies;
-- label superseded execution evidence as historical rather than leaving it phrased as a current blocker;
-- remove text from the present-state view only when it is duplicated, contradicted by an approved newer rule, or no longer needed to continue correctly.
+When an old root document is fully superseded:
+1. merge still-useful content;
+2. remove the current duplicate;
+3. rely on Git history for historical recovery.
 
-## 3. Start-of-session restore
+## 3. Mandatory restore pack
 
-Before substantive work:
-1. identify the active repository/project;
-2. read its README entrypoint;
-3. read CURRENT_STATE;
-4. follow the authority hierarchy from those files;
-5. read the active episode/experiment package;
-6. inspect recent relevant commits when needed;
-7. do not re-plan from scratch if the repository already defines the state;
-8. if the requested work is executable automation / CLI / server migration, read `AUTOMATION_TRANSITION.md` before changing architecture or writing generic engine code.
+Before production in a clean session, read:
 
-If another model/session changed the repo, fetch remote state again before acting.
+1. README.md
+2. CURRENT_STATE.md
+3. SOURCE_STORY_PIPELINE.md
+4. MASTER_PROMPTS.md
+5. VISUAL_GRAMMAR.md
+6. GENERATION_PROTOCOL.md
+7. REFERENCE_SET.md
+8. active episode README/package
 
-## 4. During-work recording rule
+Do not produce a new story frame after reading only MASTER_PROMPTS or only CURRENT_STATE.
 
-Record durable evidence in the proper existing artifact:
-- architecture decision -> architecture/lock document;
-- style failure -> style/generation protocol + active episode evidence;
-- exact production outcome -> episode/experiment package;
-- changed next action -> CURRENT_STATE;
-- changed entrypoint/authority hierarchy -> README.
+For automation implementation, also read AUTOMATION_TRANSITION.md.
 
-Keep ephemeral reasoning out unless it changes a durable decision.
+## 4. During-work recording
 
-## 5. "갱신" reconciliation order
+Record durable changes in the proper authority:
 
-A. Decision reconciliation
-- what changed;
-- what remains unchanged;
-- what old text is now wrong/superseded;
-- new blockers;
-- new verified evidence.
+- style/prompt change → MASTER_PROMPTS + STYLE_LOCK
+- reference promotion/retirement → REFERENCE_SET
+- story/dialogue/cast workflow → SOURCE_STORY_PIPELINE
+- text/composition/layout → VISUAL_GRAMMAR
+- generation/repair/QC → GENERATION_PROTOCOL
+- active episode result → episode package
+- current stage/next action → CURRENT_STATE
+- cross-session procedure → WORKFLOW_PROTOCOL
+- future code contract → AUTOMATION_TRANSITION
 
-B. Update durable authorities first if their rules changed.
+Do not leave a cross-session rule only in chat.
 
-C. Update the active episode/experiment/source package with exact result, pass/fail, defects, relevant prompt/settings, and next retry condition.
+## 5. Cast / episode-character portability rule
 
-D. Update CURRENT_STATE last with:
-- big flow;
-- exact detailed current stage;
-- completed work;
-- current blocker/failure;
-- immediate next actions in executable order.
+Story/context decides whether an episode uses:
+- Gaeun;
+- Harin;
+- Taemin;
+- one-off cast;
+- a mixture.
 
-E. Update README only if entrypoint, authority order, project purpose, or canonical-file discovery changed.
+There is no default main-character insertion merely by gender.
+There is no global Taemin ban.
 
-F. Commit/push with clear semantic messages.
+If a new non-main character appears in 2+ cuts:
+1. create the episode-local character anchor internally first;
+2. accept one last-known-good identity;
+3. render story frames from that anchor.
 
-G. Verify by refetching changed files and/or latest commit. Do not say "updated" until remote state is verified.
+This rule survives session changes.
 
-H. When `noru358/AutoPipeline` exists:
-- update child first;
-- advance parent submodule pointer to the verified child commit;
-- update parent cross-project state only when needed;
-- push and verify parent.
+## 6. Last-known-good portability rule
 
-## 6. Asset integrity
+A repair must start from the best accepted prior state, not automatically from the latest generated state.
 
-Text is not a lossless substitute for important visual/audio assets.
+Record when useful:
+- which frame/reference is LAST_KNOWN_GOOD;
+- what is accepted;
+- what exact defect remains.
 
-If an asset is a real authority, preserve the actual file in the repository when practical.
+If a retry regresses:
+- reject it;
+- do not chain from it;
+- return to the prior accepted base.
 
-Examples:
-- canonical style reference images;
-- approved master images;
-- exact production audio master;
-- final render/export.
+## 7. “갱신” reconciliation order
 
-Do not claim an asset is preserved unless the remote path has been verified.
+A. Fetch remote.
+B. Sweep current root Markdown + active episode Markdown.
+C. Reconcile decisions and contradictions.
+D. Update durable authorities.
+E. Update episode evidence.
+F. Update CURRENT_STATE last.
+G. Commit/push.
+H. Refetch changed files/tree.
+I. Verify exact remote HEAD.
+J. Update parent AutoPipeline pointer if present.
 
-For large/transient outputs, preserve at minimum exact filename/ID/hash, generation settings, verdict, reason it matters, and authoritative-original location.
+Never say “갱신 완료” before H/I.
 
-## 7. Generative reference rule
+## 8. Asset integrity
 
-If visual identity depends on a reference image:
-- the actual approved reference image outranks prose;
-- prompts reinforce it; they do not replace it;
-- a failed generated image must never become the sole style reference for the next generation;
-- style reference and scene/continuity reference are separate roles;
-- style reference wins on rendering language.
+Text is not a lossless substitute for important image/audio authority.
 
-If the canonical visual reference is unavailable in the current environment, stop production generation rather than inventing the style from text.
+If a binary reference controls visual identity:
+- preserve the actual asset in GitHub when the environment/tool permits;
+- record exact path/hash after upload;
+- never claim it is preserved when it is not.
 
-## 8. Environment portability
+If the current connector cannot upload the binary:
+- document the gap explicitly;
+- never fall back to an obsolete asset silently.
 
-Use repository-relative paths in canonical docs.
+## 9. Minimal-change preservation
 
+When the user approves most of a frame and requests one fix:
+
+LOCAL ISSUE:
+- edit the target only;
+- preserve all unmentioned composition/style/identity/geometry.
+
+SYSTEMIC ISSUE:
+- repair the shared prompt/reference/layout system;
+- rerun only affected dependencies.
+
+Do not regenerate the entire visual package to fix a local defect unless targeted editing is impossible.
+
+## 10. Environment portability
+
+Canonical docs use repository-relative paths.
 Do not depend on:
-- one computer's Desktop path;
-- one chat's hidden context;
+- a desktop path;
+- hidden chat context;
 - one model's memory;
-- an unrecorded UI selection.
+- an unrecorded UI choice.
 
-When environment setup matters, record tool/runtime, required version if relevant, environment variable names only, and restoration commands.
+Never commit secrets.
 
-Never commit secrets or API keys.
-
-## 9. AutoPipeline parent architecture
+## 11. AutoPipeline relationship
 
 Target parent:
-`noru358/AutoPipeline`
+noru358/AutoPipeline
 
-Use a **Git superproject + submodules**, not copied nested repositories.
+Child repository remains creative/project authority.
+Parent records the exact child commit combination.
 
-Target tree:
+Update child first.
+Then advance parent pointer to the verified child commit.
 
-```text
-AutoPipeline/
-├── README.md
-├── WORKFLOW_PROTOCOL.md
-├── .gitmodules
-├── instatoon/   -> noru358/instatoon @ exact commit
-└── talkshow/    -> noru358/talkshow @ exact commit
-```
+## 12. Automation-transition preservation
 
-Why submodules:
-- preserves each child repository's independent history;
-- parent records the exact child commit combination;
-- avoids duplicate/copy drift;
-- supports reproducible environment restoration.
-
-Clone:
-```bash
-git clone --recurse-submodules <AutoPipeline repo URL>
-```
-
-Restore:
-```bash
-git submodule update --init --recursive
-```
-
-Child-specific authorities remain inside each child repository.
-
-## 10. Automation-transition preservation
-
-If current manual work discovers a rule that will matter to future executable automation, do not leave it only in chat.
-
-Update the appropriate current authority and, when it changes the future code/architecture contract, reconcile `AUTOMATION_TRANSITION.md`.
+If manual production discovers a durable rule that future code must enforce, update both:
+- the current production authority;
+- AUTOMATION_TRANSITION.md when it changes orchestration/state/schema behavior.
 
 Examples:
-- a newly stable QC failure class;
-- a retry route that repeatedly works;
-- a gate proven safe/unsafe to automate;
-- a required prompt-assembly input;
-- provider/API constraints;
-- execution metadata required for reproducibility;
-- a distinction between project policy and generic engine logic.
+- new character-anchor stage;
+- last-known-good state;
+- USER VOICE GATE;
+- sequence-order validation;
+- new deterministic text-layout rule.
 
-The automation document must describe the future implementation contract without pretending unvalidated prototype behavior is already stable software.
+## 13. Definition of lossless
 
----
-
-## 11. Definition of "lossless"
-
-"Lossless" means a competent model/person in a clean environment can determine:
-- what the project is;
+A competent person/model in a clean environment can determine:
+- what this project makes;
 - what is locked;
-- what has been tried;
+- what was tried;
 - what failed and why;
-- exact current state;
-- which assets/prompts are authoritative;
+- what assets/prompts are current;
+- what the active episode is;
 - what to do next;
 
 without the previous chat transcript.
 
-It does not mean dumping every conversation sentence into GitHub.
-
-Preserve decision/state fidelity, not conversational noise.
+Lossless means decision/state fidelity, not copying conversational noise.
