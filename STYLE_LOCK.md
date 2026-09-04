@@ -1,11 +1,11 @@
 # STYLE_LOCK.md
 
-# INSTATOON_STYLE_v1.1 — AUTHORITATIVE VISUAL LOCK
+# INSTATOON_STYLE_v1.2 — AUTHORITATIVE VISUAL LOCK
 
 **Status:** LOCKED  
 **Effective:** 2026-09-04  
 **Authority:** Highest visual authority in this repository.  
-**v1.1 purpose:** harden the same target style against generic GPT/anime/editorial-illustration drift observed in E001 preflight.
+**v1.2 purpose:** preserve the v1.1 anti-GPT hardening and add empirically validated face-distance / off-axis-gaze control plus a five-image approved canonical reference set.
 
 This file defines the visual language for the project. Scene prompts, character prompts, tool defaults, model preferences, and future automation may not silently weaken these rules.
 
@@ -108,6 +108,25 @@ Emotion is conveyed primarily by:
 - pose
 
 Do not add facial rendering detail to increase emotion.
+
+---
+
+## 3A. Face-distance / gaze lock — HARD RULE
+
+The approved reproduction test exposed a specific drift mode: **full-body distance + environment-heavy outdoor scene + off-axis gaze** can cause the generator to replace the tiny-face grammar with a generic attractive GPT/webtoon face.
+
+Therefore:
+
+- Camera distance never authorizes a more detailed face.
+- **Farther character = simpler face, never more generic or detail-rich face.**
+- At medium-full and full-body distance, preserve the same tiny solid-dark eye grammar used in closer accepted frames.
+- A side glance does **not** justify lengthening the eye, adding sclera/pupil construction, iris detail, eyelid anatomy, or a glamour eye shape.
+- Prefer expressing gaze through a slight head turn, eyebrow angle, mouth, and body orientation.
+- If eye direction must be shown, alter placement minimally while retaining the tiny simple mark.
+- Do not let the model "fill in" a small face with its default anime/editorial/webtoon prior.
+- Face shape remains soft, rounded, and non-glamorous at every scale.
+
+This rule outranks scene wording such as "looking to the side" or "glancing away."
 
 ---
 
@@ -297,6 +316,23 @@ Do not render:
 
 ---
 
+## 11A. Background-density lock for environment-heavy scenes
+
+As scene complexity rises, **background rendering density must fall rather than rise**.
+
+For outdoor streets, shops, residential exteriors, or other prop-heavy scenes:
+
+- preserve only story-relevant architectural anchors;
+- simplify windows, railings, bicycles, utility fixtures, furniture, merchandise and plant detail;
+- use icon-like construction instead of precise object rendering;
+- keep background line contrast and micro-detail clearly below the character;
+- do not compensate for a distant/small character by making the environment more polished;
+- if a scene begins to read as an AI "beautiful lifestyle illustration," remove detail.
+
+A useful operational target is to reduce incidental architectural/decorative detail by roughly 30–40% relative to what a generic generator would naturally add.
+
+---
+
 ## 12. Perspective lock
 
 - Eye-level by default.
@@ -473,6 +509,8 @@ A frame fails style QC if any major hard-fail is present:
 13. A global paper/grain/watercolor/pencil texture is visible.
 14. Night/interior lighting creates cinematic glow or modeled ambience.
 15. Background merchandise/architecture is individually rendered beyond story need.
+16. A distant/small character is rendered with a generic AI/editorial/webtoon face instead of the same simplified face grammar.
+17. Off-axis gaze causes longer eyes, visible sclera/pupil architecture, or a face redesign.
 
 A "prettier" fail remains a fail.
 
@@ -527,3 +565,24 @@ Describe facts and actions, then let the canonical reference control the look.
 
 ### Flatness test
 At thumbnail size, the image should primarily read as line + flat shape + simple color block + sparse background. If texture, lighting, surface rendering, or environmental realism is one of the first things noticed, the frame fails.
+
+
+---
+
+## 22. Canonical production reference set — APPROVED
+
+The approved production anchors are documented in [REFERENCE_SET.md](REFERENCE_SET.md) and stored under `assets/style_refs/`.
+
+The set contains five complementary tests:
+
+1. character / face anchor;
+2. full-body anchor;
+3. two-person interaction + outdoor environment anchor;
+4. indoor environment anchor;
+5. corrected outdoor full-body anchor.
+
+These images are **rendering authorities**, not a requirement that every episode reuse the same recurring character. The durable lock is the illustration language.
+
+Reference-role selection is defined in `REFERENCE_SET.md` and `GENERATION_PROTOCOL.md`.
+
+The earlier failed outdoor variant with the generic GPT-like face is explicitly **not canonical**.
