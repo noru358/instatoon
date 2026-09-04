@@ -1,6 +1,6 @@
 # REFERENCE_ANALYSIS.md
 
-# Detailed visual deconstruction underlying INSTATOON_STYLE_v1.0
+# Detailed visual deconstruction underlying INSTATOON_STYLE_v1.2
 
 This file explains **why** the lock is written the way it is. It is descriptive evidence, not a looser substitute for STYLE_LOCK.md.
 
@@ -285,3 +285,59 @@ Symptoms:
 - elaborate folds
 
 All five are hard style regressions.
+
+
+---
+
+## 15. Empirical reproduction test — 2026-09-04
+
+A single supplied character was translated into the target style across five conditions:
+
+1. character portrait;
+2. full-body;
+3. two-person interaction;
+4. indoor seated scene;
+5. outdoor full-body scene.
+
+### Result
+
+Tests 1–4 were visually accepted as one coherent style family.
+
+The initial outdoor test showed a distinct drift:
+- the face became more conventionally attractive / generic AI-webtoon-like;
+- the eyes were reinterpreted for off-axis gaze;
+- facial construction became more polished;
+- hair/face styling became slightly more model-default;
+- the environment carried more architectural/object detail.
+
+### Root cause
+
+The combination of:
+- full-body camera distance,
+- environment-heavy outdoor scene,
+- and side gaze
+
+reduced the influence of the tiny-face grammar and allowed the generator's generic "cute Korean woman illustration" prior to fill the small face.
+
+This was not primarily a palette failure.
+
+### Corrective hypothesis
+
+Two independent controls were added:
+
+1. **FACE LOCK** — preserve the same tiny solid-dark eye / rounded-face grammar at every distance and express gaze mainly with head orientation.
+2. **BACKGROUND DENSITY LOCK** — simplify environment detail as scene complexity rises so the visual budget does not shift toward generic polished illustration.
+
+### Validation
+
+The outdoor scene was regenerated with those controls and the approved references. The corrected result was explicitly accepted.
+
+Therefore this is now an empirical production rule:
+
+> **Farther character = simpler face, never more generic/detail-rich face.**
+
+and:
+
+> **As environment complexity rises, incidental background density should fall.**
+
+The five accepted outputs are the canonical reproduction-test set defined in `REFERENCE_SET.md`.
