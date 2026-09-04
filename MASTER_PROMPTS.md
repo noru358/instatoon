@@ -1,369 +1,187 @@
 # MASTER_PROMPTS.md
 
-# Canonical prompt blocks — INSTATOON_STYLE_v1.2
+# CANONICAL — INSTATOON MASTER PROMPT v2.0
+Updated: 2026-09-04
 
-These blocks implement [STYLE_LOCK.md](STYLE_LOCK.md).  
-Do not rewrite them casually per scene. Prefer composition by appending scene content around stable blocks.
+This file is the single authoritative prompt source for image generation.
+If another prompt/style document conflicts with this file, this file wins until the conflict is cleaned up.
+The pre-2026-09-04 tiny-eye / thin-brown-line style is retired.
 
----
+## 0. Core production intent
 
-## 1. MASTER_STYLE_PROMPT
+Create a simple hand-drawn 2D Korean Instagram-webcomic illustration.
+The goal is not polished beauty. The goal is readable storytelling, consistent characters, expressive reactions, and a deliberately modest handmade finish.
 
-```text
-Match the attached canonical INSTATOON style reference as the primary rendering authority.
-Do not infer the style from generic category labels such as Korean webtoon, anime, slice-of-life illustration, editorial illustration, or cozy comic.
+## 1. MASTER VISUAL STYLE LOCK
 
-STYLE LOCK:
-Use thin, softly imperfect hand-drawn digital linework, not bold ink.
-Character outlines are dark warm charcoal-brown rather than pure black.
-Background outlines are significantly thinner, lighter, and lower contrast.
+Use clean black hand-drawn outlines with slight natural irregularity and subtle variation in line weight.
+Lines should feel manually drawn rather than mathematically perfect vector paths.
 
-Characters have simplified adult proportions, approximately 6 to 6.5 heads tall, with slightly oversized heads, narrow shoulders, slender limbs, small hands, and understated body shapes.
-Do not exaggerate the chest, hips, muscles, or fashion-model proportions.
+Characters use simplified adult proportions, roughly 4.5–5 heads tall, with slightly oversized heads, narrow shoulders, simple limbs, and minimally simplified hands.
+Do not exaggerate chest, hips, muscles, or fashion-model proportions.
 
-Faces are extremely simple and understated:
-soft oval faces, rounded jawlines, small rounded chins,
-tiny simple solid-dark oval/dot eyes,
-ordinary eyes are NOT constructed as white sclera with separate black pupils,
-no detailed irises,
-no eye highlights,
-almost no eyelashes,
-thin short eyebrows,
-a tiny minimal nose or nearly invisible nose,
-and a very small curved mouth or small oval mouth.
-Use subtle soft peach-pink blush on both cheeks.
-Facial emotion should be communicated mainly through eyebrow angle, mouth shape, head tilt, and simple eye shape rather than facial detail.
+FACE:
+- large round eyes with large white sclera;
+- simple solid black pupils/irises with one tiny white highlight;
+- minimal eyelashes;
+- thin simple eyebrows;
+- almost no nose;
+- small graphic mouths;
+- open mouths are simple black oval/semicircle shapes with a small flat coral-red inner mouth/tongue;
+- no realistic lips, cheek modeling, nose modeling, or facial shading.
 
-Hair is rendered as a few large, clean, flat near-black charcoal shapes.
-Minimal internal hair lines.
-No hatch texture, pencil texture, scratch texture, or tonal scribbling in the hair.
-No individual strand rendering.
-No shiny anime highlights.
-Long hair should fall in broad simple clumps with softly tapered ends.
+HAIR:
+- hair is a simple graphic mass;
+- strong readable outer silhouette;
+- only a few interior strand/wave lines;
+- no realistic individual strands;
+- no glossy highlight bands;
+- no gradient rendering.
 
-Clothing is simplified into clean flat silhouettes.
-Use very few fabric folds.
-No textile texture.
-No glossy material rendering.
-Use only minimal lines necessary to identify collars, sleeves, hems and major folds.
+COLOR / RENDER:
+- mostly flat muted colors;
+- sparse hand-drawn texture is allowed on denim, dark clothes, or large flat areas;
+- very little or no shading;
+- no smooth gradients;
+- no painterly modeling;
+- skin stays flat and simple.
 
-COLOR:
-Use a warm, muted pastel palette dominated by creamy ivory, warm off-white, pale peach beige, dusty salmon, light warm wood, muted sage green, pale desaturated blue and charcoal gray.
-Avoid highly saturated colors.
-White objects should usually be warm creamy off-white rather than pure white.
+CLOTHING:
+- ordinary contemporary Korean 20s–30s casual clothing;
+- simplified into clear graphic shapes;
+- only a few necessary fold lines;
+- no fashion-illustration exaggeration;
+- no realistic fabric rendering.
 
-RENDERING:
-Clean flat digital color fills.
-No global paper/canvas texture.
-No watercolor wash, pencil shading, crosshatching, stippling, or grain.
-Mostly flat colors.
-Extremely restrained shading.
-At most one faint soft shadow region on each major form.
-No dramatic shading.
-No hard cel shadows.
-No glossy highlights.
-No realistic light simulation.
-Skin is a clean flat warm peach tone with almost no texture.
+OVERALL:
+simple, readable, slightly imperfect, expressive, charming, intentionally unpolished.
+When uncertain, simplify rather than add detail.
 
-BACKGROUND:
-Quiet everyday Korean residential or ordinary urban environments.
-Background objects are reduced to simple readable shapes: windows, tables, shelves, sofas, potted plants, books, doors and ordinary household objects.
-Keep the environment low-detail and uncluttered.
-In a shop/convenience-store scene, simplify merchandise into a few colored blocks; do not render rows of individual labels/packages.
-Background lines and colors must be softer and lighter than the characters.
-Use simplified hand-drawn perspective rather than mathematically perfect architectural perspective.
+## 2. ENVIRONMENT / BACKGROUND STYLE LOCK
 
-COMPOSITION:
-Clear narrative storytelling composition.
-Eye-level camera.
-Mostly straight-on or mild three-quarter views.
-Medium shots, medium-full shots, and occasional simple close-ups.
-No dramatic lens distortion.
-Leave comfortable negative space around the characters.
-Use simple readable poses and gestures.
+All environments and props use the same visual grammar as the characters.
 
-OVERALL FEEL:
-gentle, ordinary, warm, understated, slightly naive but clean,
-like a calm Korean everyday anecdote comic,
-intentionally low visual density,
-modest and restrained rather than polished or glamorous,
-consistent simple illustration language across characters, props and backgrounds.
-```
+- same simple black hand-drawn outlines;
+- flat muted color fills;
+- simplified architecture, furniture, plants, streets, windows, signs, and props;
+- only enough detail to identify the place;
+- large readable shapes instead of many small details;
+- simple plausible perspective; slight hand-drawn flatness is acceptable;
+- almost no shading;
+- no realistic wood grain, glass reflections, metal gloss, fabric texture, or cinematic light;
+- low decorative clutter;
+- background line density lower than character line density;
+- leave breathing room.
 
----
+The background must look as if the same illustrator who drew the characters casually drew the room, café, street, office, subway, park, or shop.
 
-## 2. NEGATIVE_STYLE_PROMPT
+IMPORTANT:
+A fixed background anchor is NOT required for the series.
+Story determines location.
+Create episode/scene-specific environments using this background style lock.
+Only create a location anchor when a location intentionally recurs and continuity benefits from it.
 
-```text
-NO anime style,
-NO manga rendering,
-NO polished romance webtoon style,
-NO glamorous character design,
-NO large eyes,
-NO sparkling eyes,
-NO detailed irises,
-NO eye highlights,
-NO long eyelashes,
-NO sharp V-line face,
-NO detailed nose,
-NO realistic lips,
-NO glossy lips,
-NO shiny skin,
-NO detailed hair strands,
-NO glossy anime hair,
-NO elaborate hairstyles,
-NO photorealism,
-NO semi-realistic rendering,
-NO 3D,
-NO CGI,
-NO painterly rendering,
-NO oil painting,
-NO watercolor texture of any strength,
-NO paper grain,
-NO canvas grain,
-NO pencil shading,
-NO crosshatching,
-NO stippling,
-NO scratch texture,
-NO textured editorial-illustration finish,
-NO thick black outlines,
-NO brush-ink lines,
-NO dramatic cel shading,
-NO hard shadows,
-NO cozy atmospheric lighting treatment,
-NO cinematic lighting,
-NO rim lighting,
-NO volumetric light,
-NO depth of field,
-NO bokeh,
-NO high contrast,
-NO saturated colors,
-NO hyper-detailed background,
-NO complex furniture,
-NO detailed fabric texture,
-NO excessive clothing folds,
-NO fashion illustration proportions,
-NO muscular anatomy,
-NO exaggerated curves,
-NO perfect architectural rendering,
-NO over-polishing,
-NO visual clutter.
-```
+## 3. ANTI-GPT / ANTI-POLISH LOCK
 
----
+Do not beautify or over-render.
 
-## 3. IDENTITY_PRESERVATION_BLOCK
+NO:
+- polished romance-webtoon rendering;
+- glossy anime rendering;
+- semi-realistic illustration;
+- 3D or 3D-like volume;
+- cinematic lighting;
+- rim light, bloom, volumetric light, bokeh;
+- smooth gradient shading;
+- airbrush rendering;
+- realistic skin texture;
+- glossy skin or hair;
+- detailed iris rendering;
+- realistic facial anatomy;
+- sharp V-line glamour face;
+- elaborate fabric texture;
+- hyper-detailed background;
+- concept-art environment rendering;
+- decorative clutter;
+- highly polished vector perfection.
 
-Use only when a reference character already exists.
+Do not “improve” the reference.
+A prettier, richer, shinier, more realistic result is usually a failure.
 
-```text
-IDENTITY PRESERVATION:
-Preserve the subject's original hairstyle silhouette, hair length, hair part, clothing design, clothing colors, age, gender presentation and recognizable facial characteristics.
+## 4. REFERENCE OBEDIENCE
 
-Do not redesign the character.
-Only translate the character into the locked illustration language described above.
+When current approved reference images are attached:
+- treat them as the primary visual authority;
+- use them for line, face grammar, eye size, hair massing, palette, shading restraint, body proportions, detail density, and overall finish;
+- scene text controls what happens, not how the style is redesigned.
 
-Simplify the existing facial features according to this style instead of replacing them with a generic anime or webtoon face.
-Preserve the person's characteristic eye shape, hairstyle and overall silhouette while reducing detail.
-```
+Do not use pre-reset assets from `assets/style_refs/` as canonical references unless REFERENCE_SET.md explicitly marks them current.
 
----
+## 5. CHARACTER IDENTITY LOCK
 
-## 4. REFERENCE_OBEDIENCE_BLOCK
+For recurring characters:
+preserve hairstyle silhouette, hair length/part, clothing, clothing colors, age, gender presentation, body silhouette, characteristic eye/eyebrow expression, and salient accessories.
 
-Use when one or more canonical visual references are attached to the generation tool.
+Do not redesign a recurring character because the scene changes.
+Translate the same identity into the locked style.
 
-```text
-REFERENCE PRIORITY:
-Treat the attached canonical style reference as the **primary and non-optional visual authority for production**.
-Match its line weight, facial simplification, eye size, hair massing, color restraint, shading restraint, background density and overall level of finish.
+CURRENT MAIN CAST:
+- Gaeun: recurring main character.
+- Harin: recurring main character; black socks when socks are visible.
+- Taemin: recurring main character; current approved identity is the black-haired male based on the user-approved 2026-09-04 reference, normally black jacket/black inner top/cream trousers/black sneakers unless episode wardrobe explicitly changes.
 
-Do not improve, beautify, modernize, glamorize, render, texture, or reinterpret the reference style.
-Do not substitute a generic Korean webtoon, anime, or GPT illustration aesthetic.
-Preserve the intentionally modest low-detail drawing language.
-If a scene/continuity reference conflicts with the canonical style reference, preserve scene facts/identity but follow the canonical style reference for line, face grammar, hair rendering, palette, shading, texture, background density, and finish.
-```
+EPISODE-ONLY CHARACTERS:
+New one-off people are allowed and expected when the story needs them.
+They must use the same master visual style but do not inherit main-character identity.
 
----
+## 6. SCENE PROMPT TEMPLATE
 
-## 5. SCENE_CONTENT_TEMPLATE
-
-Write scene content first, then attach the stable style blocks.
-
-```text
-SCENE:
+SCENE FACTS:
+[episode / slide number]
 [who is present]
-[where they are]
-[what each person is doing]
-[important props]
-[expression / interaction]
+[location]
+[action]
+[essential props]
+[expression/reaction]
 [camera distance and angle]
-[required negative space or speech-bubble area]
+[negative space required for text]
 
 STORY CLARITY:
-Keep the action immediately readable.
-Use only the props and background details needed to understand the beat.
-Do not add decorative clutter.
+State the single beat the viewer must understand immediately.
 
-[REFERENCE_OBEDIENCE_BLOCK — mandatory for production raster; optional only for non-production exploration]
+CONTINUITY:
+[recurring character identity block if relevant]
+[episode-only temporary character note if chronological continuity is needed]
 
-[FACE_LOCK_BLOCK for production faces]
+Then apply:
+1. MASTER VISUAL STYLE LOCK
+2. ENVIRONMENT / BACKGROUND STYLE LOCK
+3. ANTI-GPT / ANTI-POLISH LOCK
+4. REFERENCE OBEDIENCE when reference is attached
 
-[IDENTITY_PRESERVATION_BLOCK if applicable]
+## 7. OUTPUT FORMAT LOCK
 
-[BACKGROUND_DENSITY_LOCK if environment-heavy]
+Primary outputs:
+- Instagram carousel / feed toon: 4:5, target 1080×1350.
+- Reels / Shorts: 9:16, target 1080×1920.
+- 16:9 is NOT the default for this project; use only for explicit landscape/long-form derivatives.
 
-[MASTER_STYLE_PROMPT]
+Plan the story once, then render/adapt compositions for each output track.
+Do not stretch one finished image into a different ratio.
 
-[NEGATIVE_STYLE_PROMPT]
+## 8. TEXT / LETTERING RULE
 
-[ANTI_GPT_DEFAULT_BLOCK — mandatory for production raster]
-```
+For production automation, important Korean captions/dialogue should preferably remain an editable vector/layout layer rather than being irreversibly baked into raster art.
+Generated text inside an image may be used for quick prototype evaluation, but final export should preserve editability and typo control.
 
----
+## 9. COMPILED PRODUCTION PROMPT
 
-## 6. Example scene
+Draw in a simple hand-drawn 2D Korean Instagram webcomic style based closely on the approved reference sheets. Use black hand-inked outlines with slight natural irregularity, simplified adult 4.5–5-head proportions, slightly oversized heads, large round white eyes with simple black pupils and one tiny highlight, almost no nose, small graphic mouths, hair as broad simple masses with only a few interior lines, flat muted colors, sparse hand-drawn texture, and minimal or no shading.
 
-```text
-SCENE:
-A Korean woman in her late twenties stands outside a small low-rise residential building, handing a bottle of water to an older male delivery worker holding a cardboard parcel.
+All backgrounds and props must follow exactly the same visual grammar: simple black outlines, flat muted fills, simplified shapes, low detail density, simple plausible perspective, almost no shading, no realistic material rendering, and no decorative clutter. The same illustrator must appear to have drawn both characters and environment.
 
-The delivery worker stands on the left, wearing a muted gray work jacket and holding a simple brown cardboard box with both hands.
-The woman stands on the right, wearing a loose warm-white blouse and simple charcoal-black trousers.
-She extends a small pale-blue water bottle toward him with a gentle smile.
+Do not beautify or over-render. No polished romance-webtoon look, glossy anime look, semi-realism, 3D volume, cinematic lighting, gradients, airbrush shading, glossy skin/hair, detailed irises, realistic facial anatomy, elaborate fabric texture, hyper-detailed backgrounds, or concept-art polish. When uncertain, simplify rather than add detail.
 
-Behind them is a quiet Korean residential alley with a cream-colored low-rise house, a simple balcony, several small potted plants and a bicycle.
-Keep all architecture and props highly simplified and low-detail.
-Eye-level medium-full shot.
-Calm everyday storytelling composition.
+Preserve any recurring character identity exactly. New episode-only characters are allowed but must use the same style.
 
-STORY CLARITY:
-The handoff of the water bottle is the single primary action.
-The box, bicycle, plants, and building establish context only.
-Do not add extra people, signage, vehicles, or decorative objects.
-
-[then append the canonical blocks]
-```
-
----
-
-## 7. Prompt-assembly rule
-
-Prefer this order:
-
-1. scene facts
-2. story-clarity constraint
-3. reference-obedience block
-4. face-lock block for production faces
-5. identity-preservation block only when identity continuity is required
-6. background-density lock for environment-heavy scenes
-7. master style
-8. negative style
-9. anti-GPT-default block for production
-
-Do not endlessly restate the same style rule in scene text. Repetition can cause tool-specific overcorrection. The selected approved binary reference is the primary visual input; the stable blocks are the canonical textual implementation beneath it.
-
-
----
-
-## 8. ANTI_GPT_DEFAULT_BLOCK
-
-Append for every production raster render. It is especially important when the model tends to beautify or add texture.
-
-```text
-ANTI-GPT DEFAULT:
-Do not substitute a generic AI illustration aesthetic.
-
-The image must look flatter, simpler, quieter, and less rendered than a typical AI-generated webtoon/editorial illustration.
-
-Eyes: tiny solid dark marks; no default white-eye + pupil construction.
-Hair: broad flat near-black masses; no strand texture, hatching, scratch detail, or highlight bands.
-Surface: clean flat digital fills; no paper grain, canvas grain, watercolor wash, pencil shading, stippling, or crosshatching.
-Lighting: no cozy atmospheric glow, cinematic night lighting, rim light, or modeled ambient illumination.
-Skin/clothes: no tonal rendering or texture beyond one extremely faint simple shadow if absolutely needed.
-Background: only story-essential geometry; shop merchandise becomes simplified blocks with no label/detail rendering.
-
-Do not make the picture prettier, richer, more atmospheric, or more finished than the canonical reference.
-```
-
----
-
-## 9. Production reference requirement
-
-For production-grade raster generation:
-
-```text
-CANONICAL STYLE REFERENCE REQUIRED.
-The actual approved reference image must be attached.
-Text prompts reinforce the reference; they do not replace it.
-A failed generated frame must never become the only style anchor for the next frame.
-```
-
-If the canonical reference image is unavailable, stop before paid/production generation.
-
-
----
-
-## 10. FACE_LOCK_BLOCK
-
-Append for production whenever a human face is visible. It is especially mandatory for medium-full/full-body framing, side gaze, multi-person scenes, and environment-heavy scenes.
-
-```text
-FACE LOCK — MANDATORY:
-Preserve the canonical INSTATOON face grammar at every camera distance.
-
-- soft rounded oval face;
-- rounded jaw and small rounded chin;
-- tiny simple solid-dark oval/dot eyes;
-- thin short eyebrows;
-- tiny minimal nose mark;
-- very small simple mouth;
-- subtle peach cheek blush;
-- broad simple near-black hair masses around the face.
-
-Camera distance must never cause a more detailed or generic face.
-If the face is smaller in frame, simplify it further.
-
-SIDE-GAZE RULE:
-Do not lengthen or redesign the eyes to indicate gaze.
-Do not add visible sclera merely to indicate gaze, and do not add detailed irises, eyelid anatomy, glossy highlights, or a generic attractive webtoon/anime eye shape.
-Minimal visible sclera is allowed only for an explicitly required strong-surprise expression that is supported by the canonical style reference; it remains a special-expression exception, never the ordinary or side-gaze construction.
-Prefer a slight head turn and minimal positional change of the tiny eye marks.
-
-Farther character = simpler face, never more generic/detail-rich face.
-Never substitute a generic GPT/editorial/webtoon face.
-```
-
----
-
-## 11. BACKGROUND_DENSITY_LOCK
-
-Append for outdoor, shop, residential exterior, cafe, office, or any environment-heavy scene.
-
-```text
-BACKGROUND DENSITY LOCK:
-Keep the environment narratively readable but intentionally simpler than a generic AI illustration.
-
-Preserve only story-relevant anchors.
-Reduce incidental architectural and decorative detail.
-Windows, railings, bicycles, utility fixtures, furniture, plants, and merchandise should be simplified, icon-like shapes.
-Background lines and micro-detail remain lighter and quieter than the character.
-
-Do not make the environment more polished because the character is smaller in frame.
-If necessary, remove roughly 30–40% of incidental detail.
-```
-
----
-
-## 12. Canonical reference-role map
-
-Use the approved assets from `REFERENCE_SET.md`.
-
-- `INSTATOON_REF_01_CHARACTER.webp`: primary face / hair / close-to-medium character grammar.
-- `INSTATOON_REF_02_FULLBODY.webp`: primary full-body proportion / outfit-scale grammar.
-- `INSTATOON_REF_03_INTERACTION.png`: primary two-person interaction + outdoor balance.
-- `INSTATOON_REF_04_INDOOR.webp`: primary indoor density / seated scene.
-- `INSTATOON_REF_05_OUTDOOR_APPROVED.png`: primary outdoor full-body + side-gaze / environment-heavy anchor.
-
-Use the most relevant scene anchor **plus REF_01 as a face anchor when faces are at risk of drift**.
-These references control style; they do not require recurring-character identity across unrelated episodes.
+[INSERT SCENE FACTS + STORY BEAT + OUTPUT RATIO HERE]
