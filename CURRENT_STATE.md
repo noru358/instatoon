@@ -135,7 +135,7 @@ Read:
 6. GENERATION_PROTOCOL.md
 7. REFERENCE_SET.md
 
-Legacy overlapping root documents are being retired/merged; Git history preserves them.
+Legacy overlapping root documents have been merged/retired; Git history preserves them.
 
 ## Binary reference note
 
