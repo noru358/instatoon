@@ -81,15 +81,20 @@ PRODUCTION_STAGES = {
 }
 
 
-def validate_production_state(plan: dict, state: dict):
+def validate_production_state_shape(state: dict, expected_episode_id: str | None = None):
     for key in ("state_version", "episode_id", "current_stage", "voice_gate", "frame_qc"):
         _require(key in state, f"PRODUCTION_STATE missing {key}")
     _require(state["state_version"] == "1.0", "unsupported PRODUCTION_STATE version")
-    _require(state["episode_id"] == plan["episode_id"], "production-state/plan episode mismatch")
+    if expected_episode_id is not None:
+        _require(state["episode_id"] == expected_episode_id, "production-state episode mismatch")
     _require(state["current_stage"] in PRODUCTION_STAGES, "invalid production current_stage")
+    _require(isinstance(state["voice_gate"], dict), "voice_gate must be an object")
+    _require(isinstance(state["frame_qc"], dict), "frame_qc must be an object")
 
+
+def validate_production_state(plan: dict, state: dict):
+    validate_production_state_shape(state, plan["episode_id"])
     gate = state["voice_gate"]
-    _require(isinstance(gate, dict), "voice_gate must be an object")
     _require(
         gate.get("status") == "PASS",
         "L8 USER VOICE GATE is not fully approved"
@@ -104,7 +109,12 @@ def validate_production_state(plan: dict, state: dict):
     )
     _require(bool(gate.get("evidence")), "L8 approval evidence is required")
 
-    _require(isinstance(state["frame_qc"], dict), "frame_qc must be an object")
+
+def validate_active_state(repo_root: Path):
+    eid = active_episode_id(repo_root)
+    state = load_json(repo_root / "episodes" / eid / "PRODUCTION_STATE.json")
+    validate_production_state_shape(state, eid)
+    return eid, state
 
 
 def _require_persisted_qc(plan: dict, state: dict, slide_index: int, prompt_binding: str):
@@ -221,7 +231,7 @@ def validate_media_requirements(repo_root: Path, plan: dict, manifest: dict):
             )
 
 
-def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: dict):
+def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: dict, require_active: bool = True):
     for key in (
         "manifest_version","episode_id","episode_plan_git_blob_sha","canonical_prompt_source",
         "output","style_refs","media_requirements","renderer_contract","batch_policy","slides"
@@ -235,11 +245,12 @@ def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: 
         "manifest is stale: EPISODE_PLAN git blob SHA mismatch"
     )
 
-    active = active_episode_id(repo_root)
-    _require(
-        active == plan["episode_id"],
-        f"active episode mismatch: CURRENT_STATE={active}, requested={plan['episode_id']}"
-    )
+    if require_active:
+        active = active_episode_id(repo_root)
+        _require(
+            active == plan["episode_id"],
+            f"active episode mismatch: CURRENT_STATE={active}, requested={plan['episode_id']}"
+        )
 
     out = manifest["output"]
     fmt = plan["format"]
@@ -284,7 +295,7 @@ def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: 
         _require(m.get("scene_contract") == p.get("scene_facts"), f"scene contract drift at {p.get('slide_id')}")
 
 
-def validate_repository(repo_root: Path, episode_id: str | None = None):
+def validate_repository(repo_root: Path, episode_id: str | None = None, require_active: bool = True):
     active = active_episode_id(repo_root)
     eid = episode_id or active
     episode_dir = repo_root / "episodes" / eid
@@ -293,7 +304,7 @@ def validate_repository(repo_root: Path, episode_id: str | None = None):
     state = load_json(episode_dir / "PRODUCTION_STATE.json")
     _require(plan.get("episode_id") == eid, "episode directory/plan id mismatch")
     validate_episode_plan(plan)
-    validate_manifest(repo_root, episode_dir, plan, manifest)
+    validate_manifest(repo_root, episode_dir, plan, manifest, require_active=require_active)
     validate_production_state(plan, state)
     return plan, manifest
 
@@ -368,8 +379,9 @@ def authorize(
     renderer_supports_explicit_media_inputs: bool,
     renderer_supported_media_types: list[str] | None = None,
     supplied_media: list[dict] | None = None,
+    require_active: bool = True,
 ) -> str:
-    plan, manifest = validate_repository(repo_root, episode_id)
+    plan, manifest = validate_repository(repo_root, episode_id, require_active=require_active)
     state = load_json(repo_root / "episodes" / episode_id / "PRODUCTION_STATE.json")
     renderer_supported_media_types = renderer_supported_media_types or []
     supplied_media = supplied_media or []
@@ -456,13 +468,26 @@ def main():
 
     try:
         if args.cmd == "validate":
-            plan, _ = validate_repository(root, args.episode)
-            print(json.dumps({
-                "status":"PASS",
-                "episode_id":plan["episode_id"],
-                "slides":plan["format"]["slide_count"],
-                "manifest_sha1":git_blob_sha(root / "episodes" / plan["episode_id"] / "RENDER_MANIFEST.json")
-            }, ensure_ascii=False))
+            eid = args.episode or active_episode_id(root)
+            state = load_json(root / "episodes" / eid / "PRODUCTION_STATE.json")
+            validate_production_state_shape(state, eid)
+            if PRODUCTION_STAGES[state["current_stage"]] < PRODUCTION_STAGES["RENDER_CONTRACT_READY"]:
+                print(json.dumps({
+                    "status":"PASS",
+                    "episode_id":eid,
+                    "current_stage":state["current_stage"],
+                    "render_ready":False
+                }, ensure_ascii=False))
+            else:
+                plan, _ = validate_repository(root, eid)
+                print(json.dumps({
+                    "status":"PASS",
+                    "episode_id":plan["episode_id"],
+                    "current_stage":state["current_stage"],
+                    "render_ready":True,
+                    "slides":plan["format"]["slide_count"],
+                    "manifest_sha1":git_blob_sha(root / "episodes" / plan["episode_id"] / "RENDER_MANIFEST.json")
+                }, ensure_ascii=False))
         elif args.cmd == "compile":
             print(compile_prompt(root, args.episode, args.slide), end="")
         else:

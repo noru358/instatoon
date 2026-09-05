@@ -12,6 +12,8 @@ from pipeline.render_guard import (
     validate_repository,
     validate_episode_plan,
     validate_production_state,
+    validate_active_state,
+    PRODUCTION_STAGES,
 )
 
 REPO = Path(__file__).resolve().parents[1]
@@ -22,7 +24,19 @@ class RenderGuardTests(unittest.TestCase):
         return active_episode_id(REPO)
 
     def _active_plan_manifest(self):
-        eid = self._active()
+        candidates = []
+        for plan_path in (REPO / "episodes").glob("E*/EPISODE_PLAN.json"):
+            eid = plan_path.parent.name
+            if not (plan_path.parent / "RENDER_MANIFEST.json").is_file():
+                continue
+            if not (plan_path.parent / "PRODUCTION_STATE.json").is_file():
+                continue
+            state = json.loads((plan_path.parent / "PRODUCTION_STATE.json").read_text(encoding="utf-8"))
+            if state.get("voice_gate", {}).get("status") == "PASS":
+                candidates.append(eid)
+        if not candidates:
+            self.fail("no render-ready fixture episode")
+        eid = sorted(candidates)[-1]
         plan = json.loads((REPO / "episodes" / eid / "EPISODE_PLAN.json").read_text(encoding="utf-8"))
         manifest = json.loads((REPO / "episodes" / eid / "RENDER_MANIFEST.json").read_text(encoding="utf-8"))
         return eid, plan, manifest
@@ -41,9 +55,11 @@ class RenderGuardTests(unittest.TestCase):
         ]
 
     def test_active_episode_validates(self):
-        eid = self._active()
-        plan, _ = validate_repository(REPO, eid)
-        self.assertEqual(plan["episode_id"], eid)
+        eid, state = validate_active_state(REPO)
+        self.assertEqual(state["episode_id"], eid)
+        if PRODUCTION_STAGES[state["current_stage"]] >= PRODUCTION_STAGES["RENDER_CONTRACT_READY"]:
+            plan, _ = validate_repository(REPO, eid)
+            self.assertEqual(plan["episode_id"], eid)
 
     def test_non_active_episode_fails(self):
         active = self._active()
@@ -72,24 +88,24 @@ class RenderGuardTests(unittest.TestCase):
     def test_blocks_renderer_without_explicit_media_support(self):
         eid, _, _ = self._active_plan_manifest()
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", False, ["image"], [])
+            authorize(REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", False, ["image"], [], require_active=False)
 
     def test_blocks_missing_required_media(self):
         eid, _, _ = self._active_plan_manifest()
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", True, ["image"], [])
+            authorize(REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", True, ["image"], [], require_active=False)
 
     def test_blocks_wrong_media_type_capability(self):
         eid, _, _ = self._active_plan_manifest()
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", True, ["audio"], self._supply_all_required())
+            authorize(REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", True, ["audio"], self._supply_all_required(), require_active=False)
 
     def test_authorizes_when_generic_media_requirements_are_satisfied(self):
         eid, _, _ = self._active_plan_manifest()
         self.assertEqual(
             authorize(
                 REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN",
-                True, ["image"], self._supply_all_required()
+                True, ["image"], self._supply_all_required(), require_active=False
             ),
             "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
         )
@@ -100,9 +116,9 @@ class RenderGuardTests(unittest.TestCase):
             self.skipTest("active episode has only one slide")
         supply = self._supply_all_required()
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "NOT_RUN", True, ["image"], supply)
+            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "NOT_RUN", True, ["image"], supply, require_active=False)
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply)
+            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply, require_active=False)
 
     def test_partial_cast_decision_is_not_l8_approval(self):
         eid, plan, _ = self._active_plan_manifest()
@@ -138,7 +154,7 @@ class RenderGuardTests(unittest.TestCase):
             }
             state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
             self.assertEqual(
-                authorize(root, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply),
+                authorize(root, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply, require_active=False),
                 "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
             )
 
@@ -176,7 +192,7 @@ class RenderGuardTests(unittest.TestCase):
             shutil.copytree(REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
             (root / manifest["style_refs"][0]).write_bytes(b"not the approved image")
             with self.assertRaisesRegex(GuardError, "local media SHA-256 mismatch"):
-                validate_repository(root, eid)
+                validate_repository(root, eid, require_active=False)
 
     def test_required_local_media_cannot_drop_integrity_hash(self):
         eid, _, manifest = self._active_plan_manifest()
@@ -186,7 +202,7 @@ class RenderGuardTests(unittest.TestCase):
             manifest["media_requirements"][0]["expected_hash"] = None
             (root / "episodes" / eid / "RENDER_MANIFEST.json").write_text(json.dumps(manifest))
             with self.assertRaisesRegex(GuardError, "needs a SHA-256"):
-                validate_repository(root, eid)
+                validate_repository(root, eid, require_active=False)
 
     def test_stale_manifest_fails_closed(self):
         active = self._active()
