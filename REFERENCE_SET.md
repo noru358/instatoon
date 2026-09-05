@@ -1,7 +1,7 @@
 # REFERENCE_SET.md
 
 # CURRENT REFERENCE MAP — INSTATOON_STYLE_v2.0
-Updated: 2026-09-04
+Updated: 2026-09-05
 
 ## Legacy assets
 
@@ -28,6 +28,11 @@ Contains multiple everyday environments and controls:
 ### REF_V2_D — approved main-cast sheet
 Contains Gaeun, Harin and Taemin.
 
+Binary:
+- path: `assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg`
+- dimensions: 1448 × 1086
+- SHA-256: `dbddf458a97c89781075e6be03ab2c393eff75b95e8856f044bd81f29310ec07`
+
 Notes:
 - Harin uses black socks when visible.
 - Taemin uses the approved current male identity.
@@ -35,6 +40,11 @@ Notes:
 
 ### REF_V2_E — approved 3-person interaction / background application reference
 This is a POSITIVE CURRENT REFERENCE, not a contamination example.
+
+Binary:
+- path: `assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg`
+- dimensions: 1536 × 864
+- SHA-256: `b49683276f94ba5621e3602d7e3d714b0f2e637b2c41fc1fd132bdf6f336b049`
 
 It is the approved result of applying REF_V2_A / REF_V2_B drawing language to:
 - a real interior background;
@@ -75,13 +85,11 @@ It does not override the v2 style reference.
 
 Never promote a visibly regressed retry into the new reference.
 
-## Current binary gap
+## Current binary status
 
-The current v2 text authorities are in GitHub, but the approved v2 image binaries from the current chat are not yet materialized into this repository through the available connector.
+REF_V2_D and REF_V2_E are materialized in this repository at the exact paths and hashes above.
 
-Until they are uploaded:
+REF_V2_A, REF_V2_B and REF_V2_C are still not materialized here. Until they are ingested:
 - do not substitute legacy v1 assets;
-- use current approved v2 assets when present in the active environment;
-- in a clean environment without the v2 binaries, stop style-critical production rather than silently reverting.
-
-After binary ingest, record exact paths and hashes here.
+- use their approved binaries only when present in the active environment;
+- if a task specifically requires one of those missing references, stop rather than silently reverting.

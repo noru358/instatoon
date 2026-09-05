@@ -133,8 +133,10 @@ Legacy overlapping root documents have been merged/retired; Git history preserve
 
 ## Binary reference note
 
-The approved v2 image references from this session are not yet committed as binaries through the available GitHub connector.
-Do not fall back to legacy v1 style references in a clean environment.
+The approved main-cast sheet and approved 3-person indoor scene are now committed under `assets/style_refs/v2_current/` as REF_V2_D and REF_V2_E.
+Their exact paths, dimensions and SHA-256 hashes are recorded in `REFERENCE_SET.md`.
+
+REF_V2_A, REF_V2_B and REF_V2_C remain pending binary ingest. Do not fall back to legacy v1 style references for them in a clean environment.
 
 
 ## Reference clarification — 2026-09-05
