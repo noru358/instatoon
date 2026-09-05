@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "E005",
+  "title": "결혼할지도",
+  "status": "STORYBOARD_LOCKED",
+  "source": {
+    "provenance_class": "HUMAN_SEEDED_INSPIRATION",
+    "human_seeded": true,
+    "base_url": "https://www.reddit.com/r/tifu/comments/i4jtsd/",
+    "notes": "Korean-localized recomposition of a human-produced first-date wrong-recipient text anecdote. Four-year update later reported that the pair had married; final card is framed as a later update, not a claim that the wedding occurred exactly four years after the text."
+  },
+  "continuity_mode": "STRICT_EPISODE",
+  "format": {
+    "aspect_ratio": "4:5",
+    "width": 1080,
+    "height": 1350,
+    "slide_count": 7,
+    "text_free_raster": true
+  },
+  "cast": {
+    "main_cast": [],
+    "episode_only": [
+      {
+        "id": "woman_01",
+        "role": "POV woman on first date with a three-year friend",
+        "appears_in": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "identity_digest": "Korean woman in her late twenties; collarbone-length very dark brown hair with a soft inward curve and thin side fringe; softly rounded face with slightly narrow chin; large round v2 eyes; ivory knit top and muted blue straight jeans on slides 1-6; no glasses, jewelry, bag, or shoulder strap; ordinary expressive face, deliberately not generic AI-pretty; slide 7 changes clothing only to a simple white wedding dress while preserving face and hair."
+      },
+      {
+        "id": "man_01",
+        "role": "three-year male friend and first-date partner",
+        "appears_in": [
+          1,
+          2,
+          7
+        ],
+        "identity_digest": "Korean man in his late twenties; dark brown compact short hair with a clear 6:4 side part, visually distinct from Taemin; slightly longer face, soft straight eyebrows, large round v2 eyes; muted olive overshirt/cardigan over plain white T-shirt with charcoal trousers on slides 1-2; no glasses, facial hair, jewelry, bag, or shoulder strap; warm restrained ordinary expression, not generic handsome-AI styling; slide 7 changes clothing only to a simple black wedding suit while preserving face and hair."
+      }
+    ]
+  },
+  "style": {
+    "style_version": "INSTATOON_STYLE_v2.0",
+    "required_refs": [
+      "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+      "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+    ],
+    "forbidden_legacy_refs": [
+      "LEGACY_V1_STYLE"
+    ]
+  },
+  "slides": [
+    {
+      "index": 1,
+      "slide_id": "E005_S01",
+      "role": "HOOK",
+      "beat": "Two friends of three years are on their first real date and the chemistry is unexpectedly good.",
+      "location": "simple low-detail Korean cafe or casual restaurant",
+      "action": "woman_01 and man_01 sit across a small table, relaxed and leaning slightly toward each other; woman_01 looks quietly delighted by how well the date is going",
+      "scene_facts": [
+        "woman_01 and man_01 are both present in their locked date outfits",
+        "the scene clearly reads as a first date between already-familiar friends",
+        "background is simple and lower-detail than the characters",
+        "no readable text or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "Longtime friends are having a surprisingly good first date.",
+      "required_entities": [
+        "woman_01",
+        "man_01",
+        "small cafe table",
+        "simple drinks or food"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "romance-webtoon polish",
+        "cinematic lighting",
+        "unrelated third character"
+      ],
+      "composition": "4:5 medium two-shot at eye level; modest upper negative space for later two-line hook without creating a poster-like blank zone"
+    },
+    {
+      "index": 2,
+      "slide_id": "E005_S02",
+      "role": "GOODBYE",
+      "beat": "man_01 walks woman_01 to her apartment door and they share a slightly shy, easy goodbye.",
+      "location": "ordinary Korean apartment hallway at woman_01's front door",
+      "action": "woman_01 stands half inside her open door while man_01 remains in the hallway; both smile with restrained post-date awkwardness",
+      "scene_facts": [
+        "same identities and date outfits as slide 1",
+        "woman_01 is at her own apartment door",
+        "man_01 is outside in the hallway after walking her home",
+        "no readable text or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "The successful date has just ended at her apartment door.",
+      "required_entities": [
+        "woman_01",
+        "man_01",
+        "apartment front door",
+        "simple apartment hallway"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "extra romantic props",
+        "unrelated third character"
+      ],
+      "composition": "4:5 medium doorway two-shot, closer than slide 1, clear threshold geography and later bubble space near each speaker"
+    },
+    {
+      "index": 3,
+      "slide_id": "E005_S03",
+      "role": "IMPULSE",
+      "beat": "Immediately after closing the door, woman_01 sends the marriage-prediction message while her keys are still in her hand.",
+      "location": "inside the same apartment entryway just behind the closed front door",
+      "action": "woman_01 leans her back against the closed door, still holding keys in one hand and phone in the other, smiling in disbelief as she impulsively sends a message",
+      "scene_facts": [
+        "woman_01 is alone",
+        "same outfit and identity as slides 1-2",
+        "front door is now closed behind her",
+        "keys are visibly still in one hand",
+        "phone is visibly being used with the other hand",
+        "no readable phone text is baked into the raster"
+      ],
+      "story_clarity": "Her excitement is so immediate that she texts before even putting her keys away.",
+      "required_entities": [
+        "woman_01",
+        "closed apartment front door",
+        "keys in hand",
+        "smartphone"
+      ],
+      "forbidden_entities": [
+        "man_01 physically present",
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "extra room clutter"
+      ],
+      "composition": "4:5 entryway medium shot; keys and phone both legible; reserve a compact phone/chat overlay area for L14"
+    },
+    {
+      "index": 4,
+      "slide_id": "E005_S04",
+      "role": "REVEAL",
+      "beat": "woman_01 realizes the message went to man_01 instead of her friend.",
+      "location": "same apartment entryway",
+      "action": "tight reaction on woman_01 staring at her phone with frozen huge eyes and sudden panic",
+      "scene_facts": [
+        "woman_01 preserves exact identity and outfit",
+        "phone is prominent and oriented for later recipient-name/chat overlay",
+        "the emotional state is a sudden mistake realization, not generic sadness",
+        "no readable text is baked into the raster"
+      ],
+      "story_clarity": "She has just discovered that the private message went to the date himself.",
+      "required_entities": [
+        "woman_01",
+        "smartphone",
+        "shocked frozen expression"
+      ],
+      "forbidden_entities": [
+        "man_01 physically present",
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "horror effects",
+        "unrelated props"
+      ],
+      "composition": "4:5 reaction close-up with phone foreground/near-face; enough clean screen and nearby negative space for L14 recipient reveal"
+    },
+    {
+      "index": 5,
+      "slide_id": "E005_S05",
+      "role": "DAMAGE_CONTROL",
+      "beat": "woman_01 drops to the entryway floor and rapidly sends an explanation that the message was intended for her friend.",
+      "location": "same apartment entryway",
+      "action": "woman_01 crouches or sits on the floor, furiously typing on her phone with mortified urgency",
+      "scene_facts": [
+        "same identity, clothing, door and entryway geography as slides 3-4",
+        "woman_01 is low to the floor in embarrassment",
+        "phone is active but contains no readable text",
+        "keys remain consistent, either loose in her hand or placed immediately beside her",
+        "reaction is frantic but not slapstick"
+      ],
+      "story_clarity": "She is urgently trying to undo the social damage.",
+      "required_entities": [
+        "woman_01",
+        "smartphone",
+        "apartment entryway floor",
+        "keys continuity"
+      ],
+      "forbidden_entities": [
+        "man_01 physically present",
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "exaggerated slapstick",
+        "unrelated props"
+      ],
+      "composition": "4:5 low medium shot with strong body-language change from slide 4 and clear empty area for two short chat overlays later"
+    },
+    {
+      "index": 6,
+      "slide_id": "E005_S06",
+      "role": "REPLY",
+      "beat": "man_01 replies that he will act as if he did not read it; woman_01 feels partial relief while remaining deeply embarrassed.",
+      "location": "same apartment entryway",
+      "action": "woman_01 reads her phone; shoulders loosen slightly while her face still shows mortified disbelief",
+      "scene_facts": [
+        "woman_01 remains the same identity and outfit",
+        "man_01 is represented only later through vector chat lettering, not physically present",
+        "phone area is clean for later conversation overlay",
+        "no readable text is baked into the raster"
+      ],
+      "story_clarity": "The response is kind enough to defuse the crisis, but the embarrassment remains.",
+      "required_entities": [
+        "woman_01",
+        "smartphone",
+        "relieved-but-mortified reaction"
+      ],
+      "forbidden_entities": [
+        "man_01 physically present",
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "celebration props",
+        "unrelated third character"
+      ],
+      "composition": "4:5 quiet medium/reaction shot, less compressed than slide 5, with controlled negative space for L14 chat bubbles"
+    },
+    {
+      "index": 7,
+      "slide_id": "E005_S07",
+      "role": "AFTERSHOCK",
+      "beat": "A four-year-later update reveals that woman_01 and man_01 did in fact marry.",
+      "location": "simple low-detail wedding setting",
+      "action": "the same two identities stand together as a married couple; woman_01 wears a simple white wedding dress and man_01 a simple black wedding suit; they hold hands or show rings with restrained happy expressions",
+      "scene_facts": [
+        "woman_01 and man_01 must be clearly recognizable as the same people from earlier slides",
+        "only clothing changes to simple wedding attire",
+        "wedding environment remains low-detail and flat",
+        "this image supports a later-update reveal rather than claiming an exact wedding date",
+        "no readable text is baked into the raster"
+      ],
+      "story_clarity": "The embarrassing prediction eventually became true: the pair got married.",
+      "required_entities": [
+        "woman_01",
+        "man_01",
+        "simple wedding attire",
+        "subtle wedding context"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "luxury photorealistic wedding",
+        "cinematic lighting",
+        "over-rendered flowers",
+        "unrelated third character"
+      ],
+      "composition": "4:5 restrained hero ending; same comic finish as prior slides; modest upper/side area reserved for '4년 뒤 근황 / 진짜 결혼함.' lettering"
+    }
+  ]
+}
