@@ -439,10 +439,12 @@ def run_auto_finish(args) -> int:
     episode_id = renderer.resolve_episode(args.episode)
     state = renderer.load_state(episode_id)
     plan = manifest = None
+    activated = False
 
     try:
         plan, manifest = guard.validate_repository(REPO_ROOT, episode_id)
         activate(state, episode_id, plan, args.max_attempts)
+        activated = True
         state = renderer.load_state(episode_id)
 
         # AUTO_FINISH is allowed to start only when the approved storyboard package
@@ -506,6 +508,9 @@ def run_auto_finish(args) -> int:
         print(detail)
         if not isinstance(exc, AutoFinishError):
             traceback.print_exc()
+        if not activated:
+            print("AUTO_FINISH_NOT_ACTIVATED: precondition failed; production state left unchanged")
+            return 2
         try:
             state = renderer.load_state(episode_id)
             current = state.get("current_stage")
