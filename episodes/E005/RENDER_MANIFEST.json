@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "episode_id": "E005",
-  "episode_plan_git_blob_sha": "b771aa805c51fb6f9f2bd30744b49f58aaf64cdc",
+  "episode_plan_git_blob_sha": "053b3785d2c859c645f88306743577024875acab",
   "canonical_prompt_source": {
     "path": "MASTER_PROMPTS.md",
     "section_heading": "## 12. COMPILED PRODUCTION PROMPT"
@@ -25,7 +25,8 @@
       "BINARY_CONDITIONED",
       "AUTHORITY_INFORMED_NON_BINARY_CONDITIONED"
     ],
-    "unexpected_concept_policy": "FAIL_CLOSED"
+    "unexpected_concept_policy": "FAIL_CLOSED",
+    "required_reference_conditioning": "BINARY_REQUIRED"
   },
   "batch_policy": {
     "explicit_payload": "FIRST_FRAME_GATE_THEN_BATCH",
