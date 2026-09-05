@@ -1,7 +1,7 @@
 # MASTER_PROMPTS.md
 
-# CANONICAL — INSTATOON MASTER PROMPT v2.1
-Updated: 2026-09-04
+# CANONICAL — INSTATOON MASTER PROMPT v2.2
+Updated: 2026-09-05
 
 This is the single authoritative visual-generation prompt source.
 If another prompt file conflicts, this file wins.
@@ -137,29 +137,29 @@ Current notes:
 - Harin: black socks when socks are visible.
 - Taemin: approved 2026-09-04 black-haired identity; do not clone him into unrelated episode-only men.
 
-## 7. EPISODE-LOCAL CHARACTER ANCHOR BLOCK
+## 7. EPISODE-LOCAL CHARACTER DESIGN BLOCK
 
 For any newly introduced important person who appears in 2+ cuts:
 
-FIRST, before production frames:
-- create one episode-local character anchor;
+INTERNALLY, before assembling the episode batch:
 - choose a face/hair/clothing combination that fits the story role and social context;
 - make the person visually distinct from main cast;
 - avoid generic smooth AI-pretty facial design;
 - preserve the same v2 drawing language;
-- accept one anchor as the identity source.
+- record one compact identity digest as the episode-only continuity source.
 
-THEN, for every story frame:
-- preserve the anchor's face structure, hair silhouette, age, clothing, and recognizable details;
+THEN, for every frame in the coordinated batch:
+- preserve the digest's face structure, hair silhouette, age, clothing, and recognizable details;
 - vary only pose/expression/camera as required by the beat.
 
 Do not improvise a new version of the person panel by panel.
+Do not create or present a separate character sheet by default. Use a temporary internal image anchor only as an exception when direct batch continuity fails.
 
 ## 8. SCENE PROMPT TEMPLATE
 
 SCENE:
 [episode / slide]
-[characters and which identity anchor each uses]
+[characters and which recurring reference or episode-only identity digest each uses]
 [location]
 [action]
 [essential props]
@@ -234,6 +234,6 @@ Draw the environment with the exact same comic language: simple black outlines, 
 
 Do not beautify or over-render. No generic smooth AI-pretty faces, glossy anime/webtoon finish, paper grain, gradients, airbrush shading, detailed irises, realistic facial anatomy, glossy hair, textile rendering, ambient lighting, or hyper-detailed backgrounds.
 
-Use the story-selected recurring-character anchor or the accepted episode-local character anchor exactly. If this is a repair, preserve the last known good frame and change only the named defect.
+Use the story-selected recurring-character reference or the internally derived episode-only identity digest consistently. If this is a repair and a last-known-good frame exists, preserve it and change only the named defect.
 
 [INSERT SCENE FACTS + STORY BEAT + OUTPUT RATIO]

@@ -1,6 +1,6 @@
 # E002 — 소개팅 셀프팔로우
 
-Status: ACTIVE REPAIR / CHARACTER-ANCHOR STAGE
+Status: ACTIVE — FRESH COORDINATED VISUAL PASS
 
 ## 1. Purpose
 
@@ -10,8 +10,8 @@ This episode tests:
 - omnibus story production;
 - main + episode-only mixed casting;
 - mobile text hierarchy;
-- episode-local character anchor workflow;
-- last-known-good targeted repair;
+- internal episode-only character continuity workflow;
+- coordinated multi-slide batch generation;
 - 4:5 carousel storytelling.
 
 ## 2. Source status
@@ -44,6 +44,23 @@ Important:
 - he is NOT Taemin in this episode;
 - this does NOT create a global Taemin ban;
 - another episode may use Taemin if its story/context calls for him.
+
+### Internal E002 male identity digest
+
+Derive and carry this internally across the seven-slide batch; do not present it as a separate character-sheet gate.
+
+- Korean man in his late twenties;
+- average-slim build and ordinary blind-date presentation;
+- rounded-rectangular face with slightly full cheeks;
+- short dark-chestnut side-parted hair with one soft curved fringe, ears visible;
+- thick straight eyebrows with one brow subtly higher;
+- same large-round-eye v2 grammar, but a slightly self-satisfied resting expression;
+- muted moss-green cardigan over an off-white crew-neck T-shirt;
+- dark charcoal trousers;
+- no glasses, facial hair, jewelry, bag, or conspicuous accessory;
+- small polite smile in early beats, faintly pleased smile at the reveal.
+
+This identity is episode-local and must not be promoted into the recurring cast by default.
 
 ## 5. Beat order
 
@@ -82,6 +99,24 @@ Harin deadpan:
 Hard sequence rule:
 REVEAL (06) must occur before AFTERMATH (07).
 
+### Coordinated visual plan
+
+All seven images are text-free 4:5 raster masters with planned space for later lettering.
+
+01 HOOK — medium-wide café two-shot; Harin and the man face each other across a small table; Harin's phone is visible near her hand; slightly awkward first-date spacing.
+
+02 REQUEST — closer two-shot; the man leans forward slightly and extends an open hand toward the phone; Harin looks mildly puzzled.
+
+03 HANDOFF — table-level object-focused shot; Harin places the phone into his hand; both hands and the phone geometry must be unambiguous.
+
+04 ODD SIGNAL — over-Harin-shoulder view toward the man and phone; a simplified social-profile/search interface is visible without readable semantic text; he is absorbed in the screen.
+
+05 SUSPICION — Harin reaction close-up; her eyes narrow slightly and mouth flattens while the man remains blurred/simplified in the background using the phone.
+
+06 REVEAL — phone/action-focused close shot including the man's pleased face; the profile avatar resembles him and a simple add/follow icon changes to a check state; no readable UI text.
+
+07 AFTERMATH — quiet medium shot; Harin deadpan with depleted posture, phone returned near her, while the man sits faintly satisfied; leave clean space for the final inner-thought lettering.
+
 ## 6. Dialogue status
 
 Rough story/dialogue direction passed.
@@ -92,7 +127,7 @@ SOURCE VOICE → DRAFT → HUMANIZATION → USER VOICE GATE.
 Do not over-polish.
 Do not manufacture a clever final joke if the situation already lands.
 
-## 7. First visual pass — LAST KNOWN GOOD for composition
+## 7. Historical first visual pass
 
 The first pass had the stronger:
 - café composition;
@@ -107,7 +142,7 @@ Observed defects:
 3. background/color had generic AI-like warm texture/atmosphere;
 4. last two story beats were assembled in the wrong order.
 
-Use the visual strengths of this pass as LAST_KNOWN_GOOD composition/reference behavior.
+Its strengths remain lessons, but the asset is not required for the next run and does not need to be recovered. New episode prototypes may be generated fresh.
 
 ## 8. Later retry — REJECT AS VISUAL ANCHOR
 
@@ -125,30 +160,31 @@ But regressed:
 
 Do NOT continue from that retry as the new base.
 
-## 9. Current required repair
+## 9. Current required production pass
 
-### Step A — internal episode-character anchor
-Before repairing story cuts:
-1. create a new E002-only blind-date-man character anchor;
+### Step A — internal episode-character design
+Before assembling the batch:
+1. infer a new E002-only blind-date man from the story and blind-date context;
 2. make him plausible for the date context;
 3. visually distinct from Taemin;
 4. current v2 style;
 5. non-generic face;
-6. accept one anchor internally.
+6. record one compact identity digest and carry it through every cut.
 
-### Step B — targeted frame repair
-Return to the better first-pass composition(s).
+Do not create or present a separate character sheet by default. A temporary internal image anchor is allowed only if direct batch continuity fails.
 
-Preserve:
-- Harin;
-- good café blocking;
-- camera;
-- scene geometry;
-- story action.
+### Step B — fresh coordinated seven-slide visual pass
+Generate the whole episode as one planned batch rather than requesting a taste decision after each slide.
 
-Change:
-- male identity to E002 anchor;
-- background/render finish only where needed to remove AI-like wash/texture.
+Maintain across the batch:
+- Harin identity;
+- the single internal male identity digest;
+- coherent café geometry and props;
+- v2 line/face/color grammar;
+- correct story action and beat order.
+
+Vary camera, pose, expression, and focal object deliberately by beat.
+Do not add AI-like warm wash, texture, or generic smooth faces.
 
 ### Step C — lettering
 Use text-free raster master.
@@ -166,4 +202,4 @@ Verify reveal before aftermath.
 NOT publish-ready.
 
 Next gate:
-repaired 7-slide sequence → user taste/QC.
+fresh 7-slide sequence → user taste/QC.

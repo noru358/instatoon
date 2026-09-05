@@ -2,6 +2,7 @@
 
 # INSTATOON_STYLE_v2.0 — CURRENT VISUAL PASS/FAIL LOCK
 Approved: 2026-09-04
+Continuity clarification: 2026-09-05
 
 The pre-reset tiny-eye / thin brown-line style is retired.
 
@@ -85,13 +86,16 @@ Do not default to Taemin merely because an episode needs a male character.
 
 New episode-only people are expected.
 
-## New-character anchor rule
+## Episode-only character continuity rule
 
 If a newly introduced non-main character will appear in 2+ cuts:
-1. design/generate that character internally first as an episode-local anchor;
+1. derive that character internally from the story, social role, and scene context;
 2. check that face, hair, age, clothing, and social role fit the episode;
 3. check that the person does not accidentally duplicate a main character;
-4. use the accepted anchor for all subsequent cuts.
+4. record a compact identity digest and reuse it across all cuts in the same production batch.
+
+This is an internal continuity operation, not a separate deliverable or user approval stage.
+A standalone character sheet is optional and should be created only when direct batch continuity fails or the character is intentionally promoted for reuse.
 
 One-frame background extras may skip this step.
 

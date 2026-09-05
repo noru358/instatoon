@@ -1,12 +1,12 @@
 # CURRENT_STATE.md
 
-# LIVE STATE — 2026-09-04
+# LIVE STATE — 2026-09-05
 
 Repository: noru358/instatoon
 
 ## Big flow
 
-Style reset complete → real omnibus pilot E002 → dialogue/layout refinement → character-anchor repair → first publishable episode → repeat prototypes → automation implementation.
+Style reset complete → real omnibus pilot E002 → fresh coordinated 7-slide visual pass → dialogue/layout refinement → first publishable episode → repeat prototypes → automation implementation.
 
 ## Current detailed position
 
@@ -78,34 +78,28 @@ Use:
 LAST_KNOWN_GOOD → local change only.
 
 For a new non-main person appearing in 2+ cuts:
-CHARACTER ANCHOR FIRST → story frames second.
+STORY/CONTEXT → INTERNAL IDENTITY DIGEST → COORDINATED EPISODE BATCH.
+
+This internal continuity operation is not a separate user-facing character-sheet or approval stage.
 
 This applies across future sessions and episodes.
 
 ## Exact next action
 
-1. Do NOT continue from the visually regressed E002 retry.
-2. Internally create an E002-only blind-date-man character anchor.
+1. Do NOT depend on recovering either prior E002 pass; episode visuals may be prototyped fresh each run.
+2. From the approved story/context, internally derive one E002-only blind-date-man identity digest.
    - fits a plausible blind-date context;
    - distinct from Taemin;
    - current v2 visual style;
    - no generic smooth AI face.
-3. QC that anchor internally.
-4. Return to the visually stronger first-pass E002 scene compositions as LAST_KNOWN_GOOD bases.
-5. Replace only the male identity while preserving:
-   - Harin;
-   - composition;
-   - camera;
-   - scene blocking;
-   - good background structure;
-   - story action.
-6. Remove final semantic text from raster production art.
-7. Reapply the improved text system as editable layout:
+3. Use that same internal identity digest across a fresh, coordinated seven-slide visual pass; do not stop for a separate character-sheet approval.
+4. Generate text-free raster production art with deliberate shot variation and coherent café continuity.
+5. Apply the text system as editable layout:
    - larger type;
    - narration / speech bubble / reaction roles separated.
-8. Enforce numeric slide order and correct last two beats.
-9. Run whole-sequence QC.
-10. Present the repaired sequence for user taste gate.
+6. Enforce numeric slide order and correct last two beats.
+7. Run whole-sequence QC.
+8. Present the whole new sequence together for user taste gate.
 
 ## Current visual risk to watch
 

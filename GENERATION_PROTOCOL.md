@@ -1,7 +1,7 @@
 # GENERATION_PROTOCOL.md
 
-# GENERATION / ANCHOR / REPAIR / QC PROTOCOL — v2.1
-Updated: 2026-09-04
+# GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.2
+Updated: 2026-09-05
 
 ## 0. Stage order
 
@@ -12,7 +12,7 @@ Production order:
 3. humanized dialogue;
 4. USER VOICE GATE during learning phase;
 5. whole-episode storyboard + cast router;
-6. build any required episode-local character anchor;
+6. internally derive any required episode-local character identity digest;
 7. whole-episode visual/text plan;
 8. text-free raster generation;
 9. editable lettering/composition;
@@ -42,20 +42,20 @@ Record per episode:
 - episode-only cast;
 - why each is appropriate.
 
-## 2. Episode-local character anchor — mandatory rule
+## 2. Episode-local character design — internal continuity rule
 
 If a new non-main person appears in 2 or more cuts:
 
-### A. Anchor first
-Before any story frame for that person:
-1. create one internal character anchor or compact sheet;
+### A. Derive once
+Before assembling the episode render batch:
+1. infer one character design from the story, social role, and scene context;
 2. verify age/presentation/social role;
 3. verify hairstyle/face/clothing are coherent;
 4. verify the design is distinct from main cast;
 5. verify the face does not read as a generic smooth AI default;
-6. select the last-known-good anchor.
+6. record a compact identity digest.
 
-### B. Story frames second
+### B. Carry through the batch
 All later cuts preserve:
 - face structure;
 - hair silhouette;
@@ -65,7 +65,9 @@ All later cuts preserve:
 
 Only pose/expression/camera/action change by beat.
 
-One-frame incidental extras may skip anchor creation.
+This is not a separate user-facing character-sheet or approval stage.
+A temporary internal image anchor is an exception used only when direct multi-cut continuity fails.
+One-frame incidental extras may skip the identity digest.
 
 ## 3. Reference roles
 
@@ -82,8 +84,8 @@ Controls:
 ### MAIN CHARACTER REFERENCE
 Controls identity of Gaeun/Harin/Taemin when selected.
 
-### EPISODE-LOCAL CHARACTER ANCHOR
-Controls identity of a new multi-cut character.
+### EPISODE-LOCAL IDENTITY DIGEST
+An internal context-derived continuity record for a new multi-cut character. It is not a default deliverable.
 
 ### LAST-KNOWN-GOOD FRAME
 Controls accepted composition/blocking/location during targeted repair.
@@ -100,7 +102,7 @@ Per raster frame:
 3. output ratio;
 4. text-free / planned negative-space instruction;
 5. cast identity reference(s);
-6. episode-local character anchor when applicable;
+6. episode-local identity digest when applicable;
 7. last-known-good preservation block for repair;
 8. MASTER_PROMPTS stable visual blocks.
 
@@ -154,7 +156,7 @@ Check in this order:
 
 1. correct story beat;
 2. correct cast choice;
-3. correct character identity/anchor;
+3. correct recurring identity or episode-only identity digest;
 4. style lock;
 5. scene blocking;
 6. hands/object interaction;
@@ -170,7 +172,7 @@ A stylish frame in the wrong story order = fail.
 
 Every accepted:
 - style test;
-- character anchor;
+- episode-only identity digest or exceptional temporary anchor;
 - episode frame;
 - layout
 
@@ -296,8 +298,8 @@ For durable/paid production record:
 
 Future automation can:
 - route cast;
-- detect anchor requirement;
-- generate internal one-off anchors;
+- detect episode-only continuity requirement;
+- derive and persist internal one-off identity digests;
 - assemble prompts;
 - check sequence order;
 - run deterministic text/layout QC;

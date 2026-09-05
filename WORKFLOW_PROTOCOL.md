@@ -1,7 +1,7 @@
 # WORKFLOW_PROTOCOL.md
 
-# CROSS-ENVIRONMENT / “갱신” PROTOCOL v1.1
-Updated: 2026-09-04
+# CROSS-ENVIRONMENT / “갱신” PROTOCOL v1.2
+Updated: 2026-09-05
 
 Purpose:
 Preserve current decisions, prompts, assets, execution evidence, failure lessons, and exact next actions across ChatGPT, Claude, local work, and future automation.
@@ -111,9 +111,11 @@ There is no default main-character insertion merely by gender.
 There is no global Taemin ban.
 
 If a new non-main character appears in 2+ cuts:
-1. create the episode-local character anchor internally first;
-2. accept one last-known-good identity;
-3. render story frames from that anchor.
+1. derive the person internally from story/context;
+2. record one compact episode-only identity digest;
+3. render the whole episode batch with that same digest.
+
+Do not insert a separate user-facing character-sheet or approval stage by default.
 
 This rule survives session changes.
 
@@ -202,7 +204,7 @@ If manual production discovers a durable rule that future code must enforce, upd
 - AUTOMATION_TRANSITION.md when it changes orchestration/state/schema behavior.
 
 Examples:
-- new character-anchor stage;
+- new episode-only identity-continuity stage;
 - last-known-good state;
 - USER VOICE GATE;
 - sequence-order validation;

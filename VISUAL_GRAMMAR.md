@@ -1,7 +1,7 @@
 # VISUAL_GRAMMAR.md
 
-# INSTATOON_VISUAL_GRAMMAR_v0.2 — SEQUENCE / COMPOSITION / LETTERING
-Updated: 2026-09-04
+# INSTATOON_VISUAL_GRAMMAR_v0.3 — SEQUENCE / COMPOSITION / LETTERING
+Updated: 2026-09-05
 
 STYLE authority: STYLE_LOCK.md / MASTER_PROMPTS.md
 CONTENT authority: SOURCE_STORY_PIPELINE.md
@@ -98,7 +98,7 @@ Story/context decides who appears.
 Main cast may recur when appropriate.
 Episode-only characters are valid and common.
 
-If an episode-only character appears in 2+ cuts, GENERATION_PROTOCOL requires a character anchor before production frames.
+If an episode-only character appears in 2+ cuts, GENERATION_PROTOCOL requires one internally derived identity digest to be carried across the coordinated batch. It does not require a separate visible character sheet.
 
 Do not substitute a familiar main character just to solve continuity cheaply.
 
@@ -267,7 +267,7 @@ Before production art:
 3. each slide has one job;
 4. final landing comes after the reveal/peak, not before;
 5. cast routing is explicit;
-6. new 2+ cut episode character anchor requirement is identified;
+6. new 2+ cut episode character continuity requirement is identified;
 7. each slide has text role(s);
 8. text safe area is planned;
 9. camera rhythm is intentional;

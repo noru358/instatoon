@@ -36,7 +36,7 @@ When current documents conflict:
 3. REFERENCE_SET.md — approved/legacy binary reference status.
 4. SOURCE_STORY_PIPELINE.md — story/dialogue/cast/agent workflow.
 5. VISUAL_GRAMMAR.md — sequential, composition, and text-layout grammar.
-6. GENERATION_PROTOCOL.md — rendering, character-anchor, minimal-edit, and QC execution.
+6. GENERATION_PROTOCOL.md — rendering, episode-only identity continuity, minimal-edit, and QC execution.
 7. CURRENT_STATE.md — exact current episode and next action.
 8. WORKFLOW_PROTOCOL.md — cross-session reconciliation.
 9. AUTOMATION_TRANSITION.md — future executable implementation contract.
@@ -58,7 +58,9 @@ Story/context decides cast per episode.
 - use Gaeun/Harin/Taemin only when editorially appropriate;
 - never insert a main character merely because a scene needs a person of that gender;
 - new episode-only characters are allowed;
-- any newly introduced important person who appears in 2+ cuts gets an episode-local character anchor BEFORE production frames.
+- episode-only people are designed internally from story/context before the batch render;
+- their compact identity digest is reused across the episode for continuity;
+- a separate visible character sheet or user approval gate is NOT required by default.
 
 ### Visual
 - current style: INSTATOON_STYLE_v2.0;
@@ -71,7 +73,7 @@ Story/context decides cast per episode.
 
 ### Production principle
 
-Plan the story first. Lock any new recurring-for-the-episode character next. Render text-free art. Add typography deterministically. Repair locally from the last known good frame.
+Plan the whole story first. Internally derive any episode-only character from context and carry the same identity digest across the batch. Render the episode as one coordinated multi-slide production pass, not as separate taste gates. Add typography deterministically. Repair locally from the last known good frame when one exists.
 
 ## Root files
 

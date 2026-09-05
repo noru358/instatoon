@@ -1,7 +1,7 @@
 # SOURCE_STORY_PIPELINE.md
 
-# CANONICAL CONTENT / DIALOGUE / CAST PIPELINE v2.1
-Updated: 2026-09-04
+# CANONICAL CONTENT / DIALOGUE / CAST PIPELINE v2.2
+Updated: 2026-09-05
 
 This file replaces the overlapping story-system material previously split across multiple root documents.
 
@@ -242,20 +242,20 @@ Examples:
 - A blind-date man is not automatically Taemin.
 - A coworker, parent, stranger, boss, clerk, student, etc. may be episode-only.
 
-### L11 — EPISODE-LOCAL CHARACTER ANCHOR
+### L11 — EPISODE-LOCAL CHARACTER DESIGN
 
 Mandatory when a newly introduced non-main character appears in 2+ cuts.
 
-Before production frames:
-1. create an internal anchor image or compact character sheet;
+Before assembling the production batch:
+1. infer the character internally from the story, social role, and scene context;
 2. make age, face, hair, clothing, and role fit the story;
 3. ensure the design is visually distinct from main cast;
 4. reject generic smooth AI-face design;
-5. accept one last-known-good anchor;
-6. use it consistently across all subsequent frames.
+5. record one compact identity digest;
+6. reuse that digest consistently across every frame in the episode batch.
 
-This step is internal by default.
-The user does not need to manually approve every anchor unless identity itself becomes a taste decision.
+This step is internal by default and does not produce a separate user-facing character sheet or approval gate.
+Create a temporary internal anchor image only when direct batch continuity fails. Ask for user approval only when identity itself becomes a material taste decision.
 
 One-frame background extras may skip it.
 
@@ -313,7 +313,7 @@ QC order:
 1. story causality/order;
 2. dialogue naturalness;
 3. correct cast choice;
-4. new-character-anchor continuity;
+4. episode-only character identity continuity;
 5. visual style;
 6. character identity;
 7. scene/blocking/object logic;

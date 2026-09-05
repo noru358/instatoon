@@ -1,7 +1,7 @@
 # AUTOMATION_TRANSITION.md
 
 # MANUAL/CHAT → EXECUTABLE AUTOPIPELINE CONTRACT
-Updated: 2026-09-04
+Updated: 2026-09-05
 Status: FUTURE IMPLEMENTATION AUTHORITY
 
 ## 0. Purpose
@@ -54,8 +54,8 @@ SOURCE_CANDIDATES
 → USER_VOICE_GATE
 → STORYBOARD_PLANNED
 → CAST_ROUTED
-→ CHARACTER_ANCHOR_REQUIRED?
-→ CHARACTER_ANCHOR_READY
+→ EPISODE_IDENTITY_REQUIRED?
+→ EPISODE_IDENTITY_READY
 → VISUAL_PLAN_READY
 → RASTER_RENDER
 → VECTOR_LETTER
@@ -65,18 +65,19 @@ SOURCE_CANDIDATES
 → PUBLISHED
 → PERFORMANCE_RECORDED
 
-The character-anchor branch is required only for a new non-main person appearing in 2+ cuts.
+The episode-identity branch is required only for a new non-main person appearing in 2+ cuts. It is an internal state transition, not a human approval gate or mandatory standalone character-sheet render.
 
 ## 3. New mandatory runtime concepts
 
-### A. CharacterAnchor
+### A. EpisodeCharacterIdentity
 Fields should eventually include:
-- anchor_id;
+- identity_id;
 - episode_id;
 - character_role;
 - main_cast_or_episode_only;
 - identity traits;
-- artifact path/hash;
+- compact identity digest;
+- optional temporary anchor artifact path/hash only when continuity repair needs one;
 - style version;
 - status;
 - last_known_good flag.
@@ -133,9 +134,9 @@ CAST_ROUTE
 input: story/context
 output: selected main cast + episode-only roles + rationale
 
-CHARACTER_ANCHOR
+EPISODE_CHARACTER_IDENTITY
 input: episode-only role + style refs
-output: anchor artifact + identity digest
+output: identity digest + optional temporary internal anchor only when needed
 
 RASTER_RENDER
 input: slide spec + exact references + prompt
@@ -157,7 +158,7 @@ Inputs:
 - output ratio;
 - text-safe region;
 - selected main-character reference;
-- episode-local character anchor;
+- episode-local identity digest;
 - current style reference;
 - last-known-good repair reference when needed;
 - stable visual blocks.
@@ -169,7 +170,7 @@ The model must not rewrite the project style each time.
 Runtime must distinguish:
 - STYLE_REFERENCE;
 - MAIN_CHARACTER_REFERENCE;
-- EPISODE_CHARACTER_ANCHOR;
+- EPISODE_CHARACTER_IDENTITY;
 - LAST_KNOWN_GOOD_FRAME;
 - LOCATION_CONTINUITY_REFERENCE when needed.
 
@@ -216,7 +217,7 @@ Prefer code for:
 - minimum font sizes;
 - bubble ownership/tail metadata;
 - reference status/version;
-- anchor presence when required;
+- episode-only identity digest presence when required;
 - retry/budget limits.
 
 Use model/vision judgment only where semantics or visual taste require it.
@@ -282,7 +283,7 @@ Every paid stage records:
 
 Use:
 - whole-story planning;
-- internal character anchor once per relevant one-off;
+- one internal context-derived identity digest per relevant one-off;
 - one first pass;
 - targeted repair;
 - bounded retries.
@@ -337,8 +338,8 @@ Do not:
 - give one supervisor every tool and say “make a post”;
 - depend on chat memory;
 - duplicate prompts in many code locations;
-- use failed render as next anchor;
-- skip one-off character anchor and improvise identity panel by panel;
+- use a failed render as the next continuity base;
+- improvise a one-off character independently panel by panel instead of carrying one identity digest;
 - let file creation order define slide order;
 - let QC rewrite the whole episode;
 - loop paid generation indefinitely;
@@ -351,7 +352,7 @@ First automation milestone is complete when:
 1. clean environment discovers all project authorities;
 2. one command creates a persisted run;
 3. stages use typed inputs/outputs;
-4. character-anchor requirements are enforced;
+4. episode-only identity-continuity requirements are enforced without adding a human gate;
 5. exact refs/prompts/versions are recorded;
 6. last-known-good repair works;
 7. retries are bounded;
