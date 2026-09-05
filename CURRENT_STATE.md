@@ -42,9 +42,12 @@ Current stage:
 - L11 EPISODE-LOCAL CHARACTER DESIGN PASS;
 - L12 WHOLE-EPISODE VISUAL PLAN PASS;
 - E005 README + EPISODE_PLAN.json materialized;
-- L12.5 RENDER CONTRACT GATE PASS after fixing active-episode-hardcoded regression tests;
-- native/direct E005_S01 attempt 1 executed and is INVALID due to major style drift (polished anime/cozy cinematic rendering rather than v2 flat comic grammar);
-- S02 is NOT authorized; first-frame gate correctly stopped continuation.
+- L12.5 render contract was hardened after the failed native S01 style pass;
+- root cause: the old guard verified that canonical refs existed but did not verify that the renderer actually received them;
+- current v2 episodes now declare reference_conditioning_requirement = BINARY_REQUIRED;
+- render_guard authorization now requires BINARY_CONDITIONED plus evidence that every required canonical ref was actually supplied as renderer media;
+- native/direct paths without a repository-binary reference bridge are BLOCKED before raster generation rather than allowed to fail after generation;
+- prior E005_S01 remains INVALID; S02 is not authorized.
 
 Cast:
 - no recurring main-cast character is used;
@@ -57,11 +60,11 @@ Visual plan:
 - final lettering will frame the ending as "4년 뒤 근황 / 진짜 결혼함." for source accuracy.
 
 Exact next action:
-1. return to the E005 S01 contract; do not use the failed image as a base;
-2. strengthen the renderer-facing v2 style binding against anime/cozy/cinematic drift;
-3. retry E005_S01 only;
-4. run semantic/style/identity QC;
-5. authorize S02 only after S01 PASS.
+1. select or expose a renderer path that can accept REF_V2_D and REF_V2_E as actual media inputs;
+2. prove both required refs in the authorize supplied-ref evidence;
+3. compile/authorize E005_S01 under BINARY_CONDITIONED;
+4. render E005_S01 only;
+5. run semantic/style/identity QC and authorize S02 only after PASS.
 
 ## E004 — current production package
 
