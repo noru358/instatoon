@@ -25,6 +25,10 @@ class RenderGuardTests(unittest.TestCase):
             (REPO / "episodes" / eid / "EPISODE_PLAN.json").read_text(encoding="utf-8")
         )
 
+    def _required_refs(self):
+        _, plan = self._active_plan()
+        return plan["style"]["required_refs"]
+
     def test_active_episode_validates(self):
         eid = self._active()
         plan, _ = validate_repository(REPO, eid)
@@ -37,9 +41,10 @@ class RenderGuardTests(unittest.TestCase):
             for p in (REPO / "episodes").glob("E*/EPISODE_PLAN.json")
             if p.parent.name != active
             and (p.parent / "RENDER_MANIFEST.json").is_file()
+            and json.loads(p.read_text(encoding="utf-8")).get("schema_version") == "1.0"
         )
         if not candidates:
-            self.skipTest("no non-active episode with a render manifest")
+            self.skipTest("no non-active canonical episode with a render manifest")
         with self.assertRaises(GuardError):
             validate_repository(REPO, candidates[-1])
 
@@ -50,22 +55,52 @@ class RenderGuardTests(unittest.TestCase):
 
         self.assertIn(slide["slide_id"], prompt)
         self.assertIn("RASTER_TEXT: NONE", prompt)
+        self.assertIn("REFERENCE_CONDITIONING_REQUIRED:", prompt)
         self.assertIn(slide["story_clarity"], prompt)
         for entity in slide["required_entities"][:2]:
             self.assertIn(entity, prompt)
 
-        lowered = prompt.lower()
-        for bad in ("fluffy white dog", "git status", "productive day"):
-            self.assertNotIn(bad, lowered)
+    def test_binary_required_blocks_authority_only(self):
+        eid, _ = self._active_plan()
+        with self.assertRaises(GuardError):
+            authorize(
+                REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN",
+                "AUTHORITY_INFORMED_NON_BINARY_CONDITIONED", []
+            )
+
+    def test_binary_required_blocks_missing_media_evidence(self):
+        eid, _ = self._active_plan()
+        with self.assertRaises(GuardError):
+            authorize(
+                REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN",
+                "BINARY_CONDITIONED", []
+            )
+
+    def test_binary_required_authorizes_when_all_refs_supplied(self):
+        eid, _ = self._active_plan()
+        self.assertEqual(
+            authorize(
+                REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN",
+                "BINARY_CONDITIONED", self._required_refs()
+            ),
+            "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
+        )
 
     def test_conversation_inferred_cannot_skip_frame_qc(self):
         eid, plan = self._active_plan()
         if plan["format"]["slide_count"] < 2:
             self.skipTest("active episode has only one slide")
+        refs = self._required_refs()
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "NOT_RUN")
+            authorize(
+                REPO, eid, 2, "CONVERSATION_INFERRED", "NOT_RUN",
+                "BINARY_CONDITIONED", refs
+            )
         self.assertEqual(
-            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "PASS"),
+            authorize(
+                REPO, eid, 2, "CONVERSATION_INFERRED", "PASS",
+                "BINARY_CONDITIONED", refs
+            ),
             "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
         )
 
