@@ -51,6 +51,24 @@ Reference handling:
 
 Never substitute obsolete/legacy refs.
 
+## 0.6 Renderer capability / reference-injection gate
+
+Reference presence in the repository is NOT proof that a renderer received the reference.
+
+Before authorization, the operator/runtime must declare:
+- the renderer/tool;
+- the actual reference-conditioning mode;
+- the exact canonical reference paths actually supplied to the renderer as media inputs.
+
+Machine rule:
+- if EPISODE_PLAN.style.reference_conditioning_requirement = BINARY_REQUIRED, AUTHORITY_INFORMED_NON_BINARY_CONDITIONED is forbidden;
+- every required canonical reference must be evidenced as actually supplied media;
+- merely reading Markdown, inspecting a file, fetching its bytes, or mentioning its path in the prompt does not count as binary conditioning;
+- if the current renderer cannot accept the required media, do not render with that renderer. Select a capable renderer/adapter or remain blocked at preflight;
+- never perform a speculative raster call to “see if prompt-only is close enough” when BINARY_REQUIRED.
+
+This gate exists because style fidelity is a renderer-input capability, not a prose-compliance problem.
+
 ### Mandatory structured render-contract gate
 
 Before L13, the active episode must contain:
