@@ -33,8 +33,24 @@ Notes:
 - Taemin uses the approved current male identity.
 - Story/context decides whether any main character appears.
 
-### REF_V2_E — approved 3-person interaction test
-Confirms multi-person and indoor-environment compatibility.
+### REF_V2_E — approved 3-person interaction / background application reference
+This is a POSITIVE CURRENT REFERENCE, not a contamination example.
+
+It is the approved result of applying REF_V2_A / REF_V2_B drawing language to:
+- a real interior background;
+- three characters together;
+- seated multi-person interaction;
+- props/furniture/environment in the same visual grammar.
+
+Use it as evidence for how the v2 character style should extend into background + multi-person scenes.
+
+It confirms:
+- multi-person compatibility;
+- indoor-environment compatibility;
+- character/background style coherence;
+- correct direction for scene-level application of the canonical style.
+
+Do not classify this image as visual drift merely because it contains a full scene rather than a character sheet.
 
 ## Episode-local character references
 
