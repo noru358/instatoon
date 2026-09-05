@@ -77,6 +77,9 @@ Before production in a clean session, read:
 6. GENERATION_PROTOCOL.md
 7. REFERENCE_SET.md
 8. active episode README/package
+9. active episode EPISODE_PLAN.json
+10. active episode RENDER_MANIFEST.json
+11. run `python pipeline/render_guard.py validate`
 
 Do not produce a new story frame after reading only MASTER_PROMPTS or only CURRENT_STATE.
 
@@ -104,6 +107,9 @@ Record durable changes in the proper authority:
 - story/dialogue/cast workflow → SOURCE_STORY_PIPELINE
 - text/composition/layout → VISUAL_GRAMMAR
 - generation/repair/QC → GENERATION_PROTOCOL
+- structured episode render input → active episode EPISODE_PLAN.json
+- exact render binding → active episode RENDER_MANIFEST.json
+- executable guard/schema change → pipeline/ + schemas/ + AUTOMATION_TRANSITION
 - active episode result → episode package
 - current stage/next action → CURRENT_STATE
 - cross-session procedure → WORKFLOW_PROTOCOL
@@ -153,11 +159,12 @@ B. Sweep current root Markdown + active episode Markdown.
 C. Reconcile decisions and contradictions.
 D. Update durable authorities.
 E. Update episode evidence.
-F. Update CURRENT_STATE last.
-G. Commit/push.
-H. Refetch changed files/tree.
-I. Verify exact remote HEAD.
-J. Update parent AutoPipeline pointer if present.
+F. Run render-guard unit tests + active contract validation when production/render rules changed.
+G. Update CURRENT_STATE last.
+H. Commit/push.
+I. Refetch changed files/tree.
+J. Verify exact remote HEAD and relevant CI result.
+K. Update parent AutoPipeline pointer if present.
 
 Never say “갱신 완료” before H/I.
 
@@ -261,5 +268,6 @@ A competent person/model in a clean environment can determine:
 - which worker role executed each production stage and from what source/input;
 
 without the previous chat transcript.
+A clean environment must also be able to determine exactly which structured episode plan and render manifest authorize the next raster call.
 
 Lossless means decision/state fidelity, not copying conversational noise.
