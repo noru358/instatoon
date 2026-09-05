@@ -26,9 +26,7 @@
       "AUTHORITY_INFORMED_NON_BINARY_CONDITIONED"
     ],
     "unexpected_concept_policy": "FAIL_CLOSED",
-    "required_reference_conditioning": "BINARY_REQUIRED",
-    "style_reference_binding_policy": "ACTUAL_MEDIA_REQUIRED_FOR_PRODUCTION",
-    "episode_style_anchor_policy": "REQUIRED_AFTER_STYLE_PASS"
+    "required_reference_conditioning": "BINARY_REQUIRED"
   },
   "batch_policy": {
     "explicit_payload": "FIRST_FRAME_GATE_THEN_BATCH",
@@ -211,6 +209,26 @@
         "speech bubbles",
         "motivational ending"
       ]
+    }
+  ],
+  "media_requirements": [
+    {
+      "requirement_id": "style_ref_01",
+      "role": "style",
+      "media_type": "image",
+      "source_id": "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+      "conditioning": "MUST_SUPPLY_MEDIA",
+      "required": true,
+      "expected_hash": null
+    },
+    {
+      "requirement_id": "style_ref_02",
+      "role": "style",
+      "media_type": "image",
+      "source_id": "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg",
+      "conditioning": "MUST_SUPPLY_MEDIA",
+      "required": true,
+      "expected_hash": null
     }
   ]
 }
