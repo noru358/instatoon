@@ -75,18 +75,16 @@ CONTRADICTION_LOOP / OFFICE-RELATABLE.
 Dialogue should feel like ordinary office speech, not meme catchphrases.
 The final line may be tightened after user review.
 
-## 4. Cast routing — not yet locked
+## 4. Episode cast decision — not yet locked
 
-No three-person requirement.
+This episode follows the project-wide cast-routing policy in MASTER_PROMPTS.md §5 and GENERATION_PROTOCOL.md §0.5; that policy is not redefined here.
 
-Recommended minimum:
+E006-specific unresolved choice:
 - protagonist: one recurring lead OR one episode-local employee;
-- boss: episode-local supporting character.
+- boss: episode-local supporting character;
+- optional coworker/reaction character only if a beat materially improves with them.
 
-Optional:
-- coworker/reaction character only if a beat materially improves with them.
-
-Do not add remaining recurring leads merely for presence.
+Only the resolved E006 cast belongs in this episode package.
 
 ## 5. Exact next gate
 
