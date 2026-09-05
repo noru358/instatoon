@@ -22,53 +22,26 @@ Approved:
 - omnibus content model;
 - source-voice / dialogue-humanization / USER VOICE GATE workflow.
 
-Active episode: episodes/E002/README.md
+Active episode: episodes/E003/README.md
 
-## E002 — current diagnosis
+## E003 — current diagnosis
 
-Working story:
-blind-date man borrows Harin's phone and uses her account to follow himself.
+New-work request correctly routed to a fresh episode.
 
-Casting:
-- Harin = recurring main character;
-- blind-date man = episode-only character in THIS episode.
+Human-seeded base:
+- Reddit r/tifu "TIFU by being so socially awkward it's unreal"
+- https://www.reddit.com/r/tifu/comments/178qnsy/
+- used as inspiration/base, not literal adaptation.
 
-Important clarification:
-There is no global Taemin ban.
-Future episodes may use Taemin when story/context calls for him.
-E002 specifically uses a different one-off man.
+Current story:
+Gaeun meets a stranger on the way to a restroom, reflexively apologizes when told her shoelace is untied, then compounds the awkwardness by automatically saying "see you later" while both enter the same restroom.
 
-### First visual pass
+L1-L12 are complete and recorded in episodes/E003/README.md.
 
-Strengths:
-- scene composition;
-- café staging;
-- shot variety;
-- Harin expression;
-- overall comic-scene feel
-
-were better than later retries.
-
-Problems:
-- male visually drifted too close to Taemin/main-cast solution;
-- text was too small / too detached as top narration;
-- coloring/background had some generic AI-like warm texture/atmosphere;
-- final two beats were accidentally reversed.
-
-Correct ending order:
-REVEAL / self-follow → AFTERMATH / “아 집가고 싶다”.
-
-### Later retry
-
-Improved:
-- larger mobile-readable text;
-- more explicit speech-bubble treatment.
-
-Regressed:
-- male face became a generic smooth AI-like one-off face;
-- character drawing became awkward;
-- composition, scene design and visual rhythm became substantially worse than first pass;
-- the retry should NOT become the new visual anchor.
+L13 raster render is blocked:
+- REF_V2_D and REF_V2_E were actually supplied as reference URLs to a reference-capable renderer;
+- the connected renderer workspace rejected all six jobs before generation because it is out of credits;
+- no fallback render without canonical binary references is allowed.
 
 ## Current hard lesson
 
@@ -86,20 +59,13 @@ This applies across future sessions and episodes.
 
 ## Exact next action
 
-1. Do NOT depend on recovering either prior E002 pass; episode visuals may be prototyped fresh each run.
-2. From the approved story/context, internally derive one E002-only blind-date-man identity digest.
-   - fits a plausible blind-date context;
-   - distinct from Taemin;
-   - current v2 visual style;
-   - no generic smooth AI face.
-3. Use that same internal identity digest across a fresh, coordinated seven-slide visual pass; do not stop for a separate character-sheet approval.
-4. Generate text-free raster production art with deliberate shot variation and coherent café continuity.
-5. Apply the text system as editable layout:
-   - larger type;
-   - narration / speech bubble / reaction roles separated.
-6. Enforce numeric slide order and correct last two beats.
-7. Run whole-sequence QC.
-8. Present the whole new sequence together for user taste gate.
+1. Keep E003 source/story/dialogue/storyboard as the current production package.
+2. Resume at L13 only through a renderer that actually receives REF_V2_D + REF_V2_E.
+3. Generate six coordinated text-free frames.
+4. Run sequence/style/identity/spatial QC.
+5. Apply editable lettering.
+6. Present the complete sequence for user taste gate.
+7. Do not substitute a no-reference renderer merely to produce output.
 
 ## Current visual risk to watch
 
