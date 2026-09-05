@@ -126,6 +126,25 @@ Fields:
 
 The runtime must not claim that separate agents ran when one orchestrator executed multiple bounded roles.
 
+### F. RendererCapabilityProfile
+
+Every renderer adapter must expose capabilities before selection:
+- supports_explicit_reference_media: bool;
+- supported_reference_count / limits when known;
+- supported input media types;
+- prompt_binding_mode;
+- output constraints.
+
+The runtime compares these capabilities with the episode's reference_conditioning_requirement BEFORE a render job is created.
+
+For BINARY_REQUIRED:
+- supports_explicit_reference_media must be true;
+- all manifest style refs must be attached and recorded as supplied refs;
+- authorize must fail if any required ref is missing;
+- prompt-only / authority-only fallback is prohibited.
+
+A file existing in Git, being fetched, or being summarized by the orchestrator is not equivalent to renderer media injection.
+
 ### E. OrderedBeat
 Story order is data, never inferred from file creation time.
 
