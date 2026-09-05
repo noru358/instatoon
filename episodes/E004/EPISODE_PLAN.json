@@ -1,0 +1,265 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "E004",
+  "title": "먼저 내리세요",
+  "status": "READY_FOR_RASTER",
+  "source": {
+    "provenance_class": "HUMAN_SEEDED_INSPIRATION",
+    "human_seeded": true,
+    "base_url": "https://www.reddit.com/r/tifu/comments/1l8jkeq/",
+    "notes": "Localized/recomposed from a human-produced elevator awkwardness anecdote; not a literal adaptation."
+  },
+  "continuity_mode": "STRICT_EPISODE",
+  "format": {
+    "aspect_ratio": "4:5",
+    "width": 1080,
+    "height": 1350,
+    "slide_count": 6,
+    "text_free_raster": true
+  },
+  "cast": {
+    "main_cast": [
+      "Taemin"
+    ],
+    "episode_only": [
+      {
+        "id": "woman_01",
+        "role": "stranger woman sharing the elevator",
+        "appears_in": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "identity_digest": "Korean woman in her late twenties; chin-to-shoulder blunt dark-auburn bob with one side tucked behind her ear; slightly long oval face; straight soft eyebrows; muted navy zip-up jacket over a light gray T-shirt; dark straight jeans; white sneakers; no glasses, bag, jewelry, or decorative accessories; calm socially ordinary expression; deliberately not generic AI-pretty."
+      }
+    ]
+  },
+  "style": {
+    "style_version": "INSTATOON_STYLE_v2.0",
+    "required_refs": [
+      "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+      "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+    ],
+    "forbidden_legacy_refs": [
+      "LEGACY_V1_STYLE"
+    ]
+  },
+  "slides": [
+    {
+      "index": 1,
+      "slide_id": "E004_S01",
+      "role": "HOOK",
+      "beat": "Taemin and the stranger woman enter the apartment elevator together.",
+      "location": "ordinary Korean apartment elevator lobby",
+      "action": "elevator doors are open; Taemin and woman_01 are entering together as strangers",
+      "scene_facts": [
+        "Taemin and woman_01 are both present",
+        "they are at an ordinary Korean apartment elevator",
+        "the elevator doors are open and they are entering together",
+        "no dialogue or readable text is baked into the raster"
+      ],
+      "story_clarity": "Two strangers have just ended up riding the same apartment elevator.",
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "apartment elevator",
+        "open elevator doors"
+      ],
+      "forbidden_entities": [
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "laptop focus",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles",
+        "unrelated third character"
+      ],
+      "composition": "4:5 medium-wide, eye level, simple lobby, low-detail background, natural empty region for later caption"
+    },
+    {
+      "index": 2,
+      "slide_id": "E004_S02",
+      "role": "COURTESY",
+      "beat": "Taemin presses 21 for the woman and 17 for himself.",
+      "location": "inside the same apartment elevator",
+      "action": "Taemin stands by the button panel and presses the woman's 21st floor and his own 17th floor; woman_01 stands beside him",
+      "scene_facts": [
+        "Taemin and woman_01 remain the same identities and clothing",
+        "both are inside the elevator",
+        "Taemin is operating the floor button panel",
+        "the story logic is that woman_01 is going to 21F and Taemin to 17F",
+        "no dialogue or readable text is baked into the raster"
+      ],
+      "story_clarity": "Taemin knows her destination is higher than his because he just pressed both floors.",
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "elevator button panel",
+        "17F destination logic",
+        "21F destination logic"
+      ],
+      "forbidden_entities": [
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles",
+        "unrelated third character"
+      ],
+      "composition": "4:5 medium two-shot, Taemin near button panel, woman beside him, restrained simple interior"
+    },
+    {
+      "index": 3,
+      "slide_id": "E004_S03",
+      "role": "TRIGGER",
+      "beat": "At Taemin's 17th floor, he reflexively gestures for the woman to get out first.",
+      "location": "inside the same elevator with doors open to the 17th-floor hallway",
+      "action": "Taemin steps slightly aside and gives an open-palm polite 'after you' gesture toward the hallway; woman_01 remains standing inside",
+      "scene_facts": [
+        "the elevator has stopped at Taemin's 17th floor, not the woman's 21st floor",
+        "Taemin gestures toward the hallway as if inviting woman_01 to exit first",
+        "woman_01 does not exit and remains inside the elevator",
+        "Taemin and woman_01 preserve exact identity and clothing continuity",
+        "no dialogue or readable text is baked into the raster"
+      ],
+      "story_clarity": "The social error is visible: Taemin politely tries to send her out at his own floor.",
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "open elevator doors",
+        "17th-floor hallway",
+        "Taemin open-palm courtesy gesture"
+      ],
+      "forbidden_entities": [
+        "woman_01 exiting elevator",
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles",
+        "unrelated third character"
+      ],
+      "composition": "4:5 medium-wide from inside elevator, doorway and hallway clearly readable, woman visibly staying inside"
+    },
+    {
+      "index": 4,
+      "slide_id": "E004_S04",
+      "role": "CORRECTION",
+      "beat": "The woman mildly corrects him; Taemin starts realizing the mistake.",
+      "location": "inside the same elevator at the still-open 17th-floor doorway",
+      "action": "woman_01 looks mildly confused and calmly indicates she is not getting out; Taemin's polite expression breaks into realization",
+      "scene_facts": [
+        "woman_01 remains inside the elevator",
+        "Taemin is beginning to realize his mistake",
+        "the 17F-versus-21F logic remains spatially understandable from context",
+        "identity and clothing remain unchanged",
+        "no dialogue or readable text is baked into the raster"
+      ],
+      "story_clarity": "She is not supposed to get out here, and Taemin finally understands that.",
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "elevator interior",
+        "open doorway",
+        "mild confusion",
+        "Taemin realization"
+      ],
+      "forbidden_entities": [
+        "woman_01 exiting elevator",
+        "exaggerated slapstick",
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles"
+      ],
+      "composition": "4:5 reaction two-shot, slightly closer than slide 3, simple button-panel or doorway cue retained"
+    },
+    {
+      "index": 5,
+      "slide_id": "E004_S05",
+      "role": "IMPACT",
+      "beat": "Taemin gives a tiny broken acknowledgment and exits alone.",
+      "location": "17th-floor elevator doorway",
+      "action": "Taemin awkwardly nods and steps out into the 17th-floor hallway; woman_01 stays inside the elevator",
+      "scene_facts": [
+        "only Taemin exits at 17F",
+        "woman_01 remains inside for 21F",
+        "Taemin's reaction is restrained awkwardness rather than comedic exaggeration",
+        "identity and clothing remain unchanged",
+        "no dialogue or readable text is baked into the raster"
+      ],
+      "story_clarity": "He has realized the error and retreats by getting out at his actual floor.",
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "17th-floor hallway",
+        "elevator doorway",
+        "Taemin exiting alone"
+      ],
+      "forbidden_entities": [
+        "woman_01 exiting elevator",
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles"
+      ],
+      "composition": "4:5 medium shot crossing the doorway, Taemin moving out, woman clearly staying behind"
+    },
+    {
+      "index": 6,
+      "slide_id": "E004_S06",
+      "role": "AFTERSHOCK",
+      "beat": "Taemin is left alone in the hallway while the elevator closes with the woman still inside.",
+      "location": "17th-floor apartment hallway outside the elevator",
+      "action": "Taemin stands alone with slightly collapsed shoulders; elevator doors close behind him while woman_01 is still visible inside",
+      "scene_facts": [
+        "Taemin is alone in the 17th-floor hallway foreground",
+        "woman_01 remains inside the elevator as the doors close",
+        "the scene is quiet deadpan aftermath",
+        "no extra gag, moral, mascot, or unrelated prop is added",
+        "no dialogue or readable text is baked into the raster"
+      ],
+      "story_clarity": "The awkwardness lands after he is safely out and the elevator continues without him.",
+      "required_entities": [
+        "Taemin",
+        "closing elevator doors",
+        "woman_01 inside elevator",
+        "17th-floor hallway",
+        "quiet awkward posture"
+      ],
+      "forbidden_entities": [
+        "woman_01 in hallway",
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles",
+        "motivational ending"
+      ],
+      "composition": "4:5 quiet medium shot from hallway, more negative space than prior frames, doors closing behind Taemin"
+    }
+  ]
+}
