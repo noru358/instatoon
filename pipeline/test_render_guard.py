@@ -104,6 +104,22 @@ class RenderGuardTests(unittest.TestCase):
             "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
         )
 
+    def test_production_blocks_without_actual_style_media(self):
+        with self.assertRaises(GuardError):
+            authorize(REPO, "E004", 1, "CONVERSATION_INFERRED", "NOT_RUN", "NO", "NO")
+        self.assertEqual(
+            authorize(REPO, "E004", 1, "CONVERSATION_INFERRED", "NOT_RUN", "YES", "NO"),
+            "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
+        )
+
+    def test_later_slide_requires_episode_style_anchor_media(self):
+        with self.assertRaises(GuardError):
+            authorize(REPO, "E004", 2, "CONVERSATION_INFERRED", "PASS", "YES", "NO")
+        self.assertEqual(
+            authorize(REPO, "E004", 2, "CONVERSATION_INFERRED", "PASS", "YES", "YES"),
+            "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
+        )
+
     def test_stale_manifest_fails_closed(self):
         active = self._active()
         with tempfile.TemporaryDirectory() as td:
