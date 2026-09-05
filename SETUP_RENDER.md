@@ -55,16 +55,28 @@ ChatGPT 구독과는 **별개 과금**이다. 실제 비용은 출력 크기·�
 | slide | 방금 본 컷 번호 |
 | verdict | PASS 또는 FAIL |
 | note | FAIL이면 이유 한 줄 |
+| finish_mode | S01 PASS 뒤 `auto_finish` 또는 `standard`. 실험 기본값은 `auto_finish` |
 
 ### 순서
 
+실험 기본 경로:
+
 ```
-render --slide 1  →  눈으로 확인  →  qc --slide 1 PASS
-                                          ↓
-                                    render --slide 2  →  qc --slide 2 PASS  →  ...
-                                          ↓
-                                    전 컷 PASS → stage LETTERING
+render S01 → 사람 눈으로 앵커 확인 → qc S01 PASS + auto_finish
+                                      ↓
+                         remaining raster 생성
+                                      ↓
+                       자동 vision QC / 제한 재시도
+                                      ↓
+                    deterministic lettering overlay
+                                      ↓
+                         final layout vision QC
+                                      ↓
+                              EXPORT_READY
 ```
+
+기존 경로는 삭제하지 않는다. S01 QC에서 `finish_mode=standard`를 선택하거나
+AUTO_FINISH가 실패하면 기존의 컷별 render → 사람 QC → LETTERING 경로로 돌아간다.
 
 ---
 
@@ -128,3 +140,68 @@ render --slide 1  →  눈으로 확인  →  qc --slide 1 PASS
 `EPISODE_PLAN`, `RENDER_MANIFEST`, `PRODUCTION_STATE`, canonical prompt/reference가 바뀌면
 해당 결과를 새 계약 위에 rebase해 밀지 않는다. push 직전에 origin을 다시 확인하고 관련 입력이
 달라졌으면 그 render/QC를 **STALE로 폐기(exit 2)** 한다. unrelated commit만 바뀐 경우에만 rebase한다.
+
+
+---
+
+## 실험 모드: anchor-gated AUTO_FINISH
+
+목적은 **앵커 승인 이후의 반복 승인만 제거**하는 것이다. 콘티/대본 승인과 S01 앵커의 사람 승인은 그대로 둔다.
+
+### 활성화 조건
+
+AUTO_FINISH는 아래가 모두 참일 때만 시작한다.
+
+1. S01이 이 렌더 어댑터가 만든 실제 파일이고 사람 QC PASS가 해시/attempt에 묶여 있음;
+2. S01이 `episode_anchor`로 등록됨;
+3. stage가 `REMAINING_RENDER`;
+4. 회차에 `LETTERING_PLAN.json`이 있고 현재 `EPISODE_PLAN.json` Git blob SHA에 묶여 있음.
+
+4번이 중요한 이유는 자동 완주 도중 새 대사나 새 레이아웃을 즉석에서 만들지 않기 위해서다.
+레터링 문구/배치는 whole-episode visual/text plan에서 미리 확정한다.
+
+### LETTERING_PLAN
+
+스키마: `schemas/lettering_plan.schema.json`.
+
+각 텍스트 항목은 최소 다음을 가진다.
+
+- `text_id`
+- `kind`: caption / speech / chat / sfx
+- `text`: 확정 문구
+- `box`: `[x, y, width, height]` 0~1 정규화 좌표
+- 필요할 때 `tail_to`, `align`, 글자 크기/패딩 옵션
+
+### 이미지와 레터링 분리
+
+AUTO_FINISH도 레이어 분리를 유지한다.
+
+- 원본 그림: `renders/slide_NN_art.png`
+- 투명 레터링 레이어: `lettering/slide_NN_overlay.png`
+- 합성 완성본: `exports/slide_NN_final.png`
+
+`pipeline/lettering.py`는 원본 art를 덮어쓰지 않는다. 한글은 GitHub Actions에서 설치한 시스템 Nanum 폰트로
+결정적으로 합성하며, 폰트 바이너리는 저장소에 커밋하지 않는다.
+
+### 자동 이미지 QC
+
+`pipeline/auto_finish.py`는 각 후속 컷마다 현재 후보 + 사람이 승인한 S01 앵커 + canonical style refs +
+해당 slide contract를 vision QC에 함께 보낸다. 명확한 PASS만 정상 frame_qc PASS로 저장한다.
+
+- 기본 confidence gate: 0.88
+- 컷당 기본 최대 시도: 3
+- 회차 전체 후속 render attempt 기본 상한: 10
+- STOCHASTIC 실패만 동일 canonical 입력으로 재시도
+- PLAN_OR_PROMPT / 비재시도형 실패는 즉시 롤백
+
+자동 PASS도 artifact SHA-256과 render attempt_id에 묶인다.
+
+### 롤백
+
+예상 가능한 실패는 워크플로 전체를 막아놓지 않고 `PRODUCTION_STATE.json`에 이유를 남긴 뒤:
+
+- 이미지/자동 시각 QC 실패 → `mode=STANDARD`, stage `REMAINING_RENDER`
+- 레터링/최종 레이아웃 QC 실패 → `mode=STANDARD`, stage `LETTERING`
+
+이미 합격한 컷은 유지하고 실패 컷 이후를 수동 표준 경로로 이어간다.
+AUTO_FINISH용 별도 mutable state 파일은 만들지 않는다.

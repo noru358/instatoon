@@ -47,6 +47,14 @@ copy its composition, pose, camera angle or background; the scene contract above
 controls those.
 """.strip()
 
+IDENTITY_ANCHOR_ROLE_NOTE = """
+EPISODE-LOCAL IDENTITY ANCHOR
+Additional attached approved episode frames may be bound to specific recurring
+episode-local characters. Use those frames only to preserve that character's
+face/hair/clothing identity. The current slide contract still controls pose,
+action, location and composition.
+""".strip()
+
 
 class RenderError(RuntimeError):
     pass
@@ -207,6 +215,67 @@ def collect_episode_anchor(state: dict, slide: int) -> dict | None:
     }
 
 
+def register_episode_identity_anchors(
+    plan: dict,
+    state: dict,
+    slide: int,
+    path: Path,
+    digest: str,
+) -> list[str]:
+    """Promote a recurring episode-local character's first accepted appearance.
+
+    This is generic cast continuity, not a per-episode special case. Only a PASS
+    artifact may call this helper.
+    """
+    registered = []
+    anchors = state.setdefault("identity_anchors", {})
+    for char in plan["cast"].get("episode_only", []):
+        appearances = char.get("appears_in", [])
+        if len(appearances) < 2 or not appearances or min(appearances) != slide:
+            continue
+        cid = char.get("id")
+        if not cid or cid in anchors:
+            continue
+        anchors[cid] = {
+            "character_id": cid,
+            "slide": slide,
+            "slide_id": slide_id_for(plan, slide),
+            "path": str(path.relative_to(REPO_ROOT)),
+            "artifact_sha256": digest,
+            "registered_at": now_iso(),
+        }
+        registered.append(cid)
+    return registered
+
+
+def collect_episode_identity_anchors(state: dict, plan: dict, slide: int) -> list[dict]:
+    active_ids = {
+        char.get("id")
+        for char in plan["cast"].get("episode_only", [])
+        if slide in char.get("appears_in", [])
+    }
+    bound = []
+    for cid in sorted(x for x in active_ids if x):
+        anchor = state.get("identity_anchors", {}).get(cid)
+        if not anchor or anchor.get("slide") == slide:
+            continue
+        path = REPO_ROOT / anchor["path"]
+        if not path.is_file():
+            raise RenderError(f"identity anchor for {cid} is missing: {anchor['path']}")
+        actual = sha256_file(path)
+        if actual != anchor.get("artifact_sha256"):
+            raise RenderError(f"identity anchor for {cid} changed on disk")
+        bound.append({
+            "requirement_id": f"episode_identity_anchor:{cid}",
+            "source_id": anchor["path"],
+            "media_type": "image",
+            "role": "character_identity",
+            "actual_hash": actual,
+            "path": path,
+        })
+    return bound
+
+
 # --------------------------------------------------------------------------
 # provider call
 # --------------------------------------------------------------------------
@@ -294,6 +363,13 @@ def cmd_render(args) -> int:
     if anchor:
         media.append(anchor)
         prompt += "\n" + ANCHOR_ROLE_NOTE + "\n"
+
+    identity_anchors = collect_episode_identity_anchors(state, plan, slide)
+    existing_sources = {m["source_id"] for m in media}
+    identity_anchors = [m for m in identity_anchors if m["source_id"] not in existing_sources]
+    if identity_anchors:
+        media.extend(identity_anchors)
+        prompt += "\n" + IDENTITY_ANCHOR_ROLE_NOTE + "\n"
 
     prev_qc = verify_recorded_qc(plan, state, episode_id, slide - 1) if slide > 1 else "NOT_RUN"
 
@@ -415,6 +491,8 @@ def cmd_qc(args) -> int:
                 "registered_at": now_iso(),
             }
             print(f"registered {sid} as the episode identity anchor")
+        for cid in register_episode_identity_anchors(plan, state, slide, path, digest):
+            print(f"registered {sid} as episode-local identity anchor for {cid}")
         if slide == 1 and state["current_stage"] == "FIRST_FRAME_QC_PENDING":
             state["current_stage"] = "REMAINING_RENDER"
         passed = {
@@ -428,6 +506,9 @@ def cmd_qc(args) -> int:
         anchor = state.get("episode_anchor")
         if anchor and anchor.get("slide") == slide:
             state["episode_anchor"] = None
+        for cid, identity_anchor in list(state.get("identity_anchors", {}).items()):
+            if identity_anchor.get("slide") == slide:
+                del state["identity_anchors"][cid]
         if slide == 1:
             # a failed first frame reopens the first-frame gate, nothing later may run
             state["current_stage"] = "RENDER_CONTRACT_READY"
@@ -463,6 +544,12 @@ def cmd_status(args) -> int:
     print(f"stage          : {state['current_stage']}")
     print(f"slides         : {plan['format']['slide_count']}")
     print(f"episode anchor : {anchor['slide_id'] if anchor else 'not registered'}")
+    identity_anchors = state.get("identity_anchors", {})
+    print(
+        "identity anchors: "
+        + (", ".join(f"{cid}={item['slide_id']}" for cid, item in sorted(identity_anchors.items()))
+           if identity_anchors else "none")
+    )
     print()
     for slide in plan["slides"]:
         index = slide["index"]

@@ -1,15 +1,16 @@
 # AUTOMATION_TRANSITION.md
 
-Updated: 2026-09-05
-Status: VERIFIED BASELINE + FUTURE IMPLEMENTATION CONTRACT
+Updated: 2026-09-06
+Status: EXPERIMENTAL AUTO_FINISH IMPLEMENTED + STANDARD FALLBACK
 
 ## 0. 목표와 판단
 
 목표는 실제 인간 소재 → 대본/콘티 → 승인 그림체로 그린 컷 → 대사 합성 → 완성 만화를 하나의 실행 경로로 연결하는 것이다.
 ChatGPT 대화 자체를 자동 조작하는 것이 아니라, 앱 밖에서도 같은 입력과 승인 상태로 이어지는 생산기를 만든다.
 
-현재는 **제작 매뉴얼과 입력 가드가 있는 수동 공정**이다. 대본·참조·콘티는 상당 부분 준비됐지만,
-그것을 실제 모델 호출·검수·합성·저장과 연결한 생산기는 아직 없다.
+현재는 **실제 렌더 어댑터 + 영속 상태 게이트 + 실험적 AUTO_FINISH 오케스트레이터**까지 연결돼 있다.
+후속 컷 자동 vision QC와 deterministic lettering/export 경로도 코드로 존재하며 STANDARD 수동 경로를 병렬 유지한다.
+다만 이 AUTO_FINISH 경로로 현행 v2 회차를 처음부터 끝까지 실제 유료 provider 호출로 완주한 표본은 아직 없으므로,
 정확한 무오류율을 산출할 자료는 없다. 리포에는 현행 v2 기준으로 전체 순서를 통과한 완성 회차가 보존돼 있지 않다.
 E001 최종 PNG/SVG는 v1 역사 자료이며, E004 스타일 합격 기록은 회차 전체 합격이 아니다.
 이는 과거 대화에서 좋은 이미지가 전혀 없었다는 뜻이 아니라, 새 환경에서 재현·계측할 증거가 부족하다는 뜻이다.
@@ -124,13 +125,17 @@ A/B/C 원본 누락은 보존 공백이지만 D/E가 존재하는 E005의 당장
 - 컴파일 결과에 실제 story beat 포함, 미치환 INSERT 표식 제거;
 - 구현된 검사와 아직 없는 실행기/검수/합성 기능 구분.
 
-아직 구현하지 않음:
-- 외부 서비스 호출 어댑터;
+당시 감사 시점에 미구현이었던 항목 중 §7/§8에서 후속 구현된 것:
+- 이미지 provider 호출 어댑터;
 - L8/이미지 QC/실행 순서의 영속 상태;
-- 자동 소재 수집·대본 단계;
-- 회차 앵커 자동 등록;
-- 한글 합성기·완성본 내보내기;
-- 비용·재시도·중단/재개·중복 호출 방지 런타임.
+- 회차 앵커 등록/후속 참조 전달;
+- 한글 deterministic 합성기·완성본 내보내기;
+- bounded retry와 STANDARD rollback.
+
+여전히 후속 과제:
+- 자동 소재 수집·대본 단계의 외부 독립 실행기;
+- 실제 비용 계측/회차 예산 hard stop;
+- 장기 운영용 DB/큐로의 승격과 중복 호출 방지 강화.
 
 전체 JSON Schema 검증 연결, 상태 enum/캐스팅 참조 정합성 강화 등은 실제 실행기 입력 경계에서 함께 처리한다.
 각 필드를 위한 문서나 승인 단계를 따로 늘리지 않는다.
@@ -234,3 +239,92 @@ Implemented now:
 - explicit-payload continuation requires persisted first-frame QC.
 
 This sidecar is intentionally a short-term bridge. The future AutoPipeline runtime DB should preserve the same invariants and become the sole mutable execution-state authority.
+
+
+## 8. 2026-09-06 구현 델타 — anchor-gated AUTO_FINISH 실험
+
+이 절은 위 감사 시점의 “미구현” 문구보다 최신 구현 상태다. 과거 진단은 원인 기록으로 보존하되,
+현재 실행 가능 여부는 이 절과 실제 코드가 우선한다.
+
+### 승인 토폴로지
+
+두 운영 모드를 공통 구조로 병렬 지원한다.
+
+**STANDARD**
+- 기존 수동 경로를 그대로 유지한다.
+- L8 승인 → S01 사람 QC → 후속 컷 render/QC → LETTERING → final QC/export.
+
+**AUTO_FINISH (experimental default at the S01 QC action)**
+- L8/콘티 패키지 승인 유지;
+- S01 앵커는 반드시 사람이 실제 출력 이미지를 보고 PASS;
+- 그 PASS 이벤트 이후에만 내부 자동 완주를 시작;
+- 후속 raster는 기존 `pipeline/render.py`를 그대로 사용;
+- 자동 vision QC가 후속 컷을 보수적으로 검사하고 artifact/attempt에 묶인 PASS만 기록;
+- 확정 `LETTERING_PLAN.json`을 `pipeline/lettering.py`가 별도 레이어로 합성;
+- 최종 레이아웃 vision QC PASS 후 `EXPORT_READY`.
+
+AUTO_FINISH는 이미지와 레터링을 하나의 생성 호출로 합치지 않는다.
+
+### 상태 계약
+
+두 모드 모두 mutable authority는 `episodes/<ID>/PRODUCTION_STATE.json` 하나다.
+AUTO_FINISH는 선택적 `automation` 객체만 추가한다.
+
+핵심 필드:
+- `mode: AUTO_FINISH | STANDARD`
+- `status: RUNNING | COMPLETED | ROLLED_BACK`
+- S01 human-PASS trigger와 anchor hash
+- max attempts / confidence threshold
+- event log
+- last_error / rollback stage
+- final QC report
+
+QC 상세 증거는 artifact 쪽 JSON으로 남기되 다음 단계 권한을 결정하는 두 번째 상태 저장소로 사용하지 않는다.
+
+### 자동 검수와 재시도
+
+자동 검수는 취향 판단을 대체하는 절대적 진실이 아니라 **앵커 승인 이후의 반복 결함 탐지기**다.
+따라서 fail-open이 아니라 fail-closed다.
+
+- PASS + confidence threshold 충족 + critical failure 없음일 때만 자동 PASS;
+- 일반 생성 노이즈로 분류된 STOCHASTIC 실패만 동일 canonical 입력으로 컷당 최대 3회;
+- 회차 전체 후속 render attempt도 기본 10회로 제한해 연쇄 비용 폭주를 막음;
+- cast/scene/prompt/contract 수정이 필요해 보이는 실패는 반복 생성하지 않고 STANDARD로 복귀;
+- 실패한 이미지는 episode anchor나 새로운 authority로 승격하지 않는다.
+
+### 레터링 입력 계약
+
+자동 완주에는 `LETTERING_PLAN.json`이 필요하다. 이는 앵커 승인 이후 새 창작을 추가하기 위한 파일이 아니라,
+콘티/whole-episode visual-text plan에서 이미 확정된 카피와 배치를 실행 가능한 형태로 저장하는 계약이다.
+
+스키마: `schemas/lettering_plan.schema.json`.
+
+합성 산출물은 항상 분리된다:
+- art raster;
+- transparent lettering overlay;
+- final composite.
+
+### 롤백 계약
+
+AUTO_FINISH 실패 시 표준 모드를 삭제/재설계하지 않는다.
+
+- remaining raster 또는 자동 frame QC 실패 → `STANDARD / REMAINING_RENDER`;
+- lettering 또는 final layout QC 실패 → `STANDARD / LETTERING`;
+- 이미 유효한 PASS + hash-bound artifact는 보존;
+- 오류 원인과 마지막 자동 이벤트를 상태에 기록.
+
+이 구조 때문에 실험을 폐기하더라도 데이터 포맷/렌더러를 다시 갈아엎을 필요 없이
+`.github/workflows/qc.yml`에서 `finish_mode=standard`를 선택하면 기존 공정으로 즉시 복귀한다.
+
+
+### 후발 반복 인물의 보조 identity anchor
+
+S01에 없는 episode-local 인물이 뒤 컷에서 처음 등장하고 이후에도 반복될 수 있다.
+AUTO_FINISH는 그 인물의 `appears_in`을 읽어 **첫 QC PASS 등장 컷**만 character-specific identity anchor로 등록한다.
+후속 해당 인물 컷에는 S01 episode anchor와 함께 이 보조 앵커를 실제 미디어로 전달한다.
+
+- 캐릭터 이름 하드코딩 없음;
+- 2컷 이상 반복되는 episode-local 인물만 대상;
+- 실패 이미지 승격 금지;
+- 원본 anchor slide가 나중에 FAIL 처리되면 매핑도 제거;
+- S01 전체 회차 앵커는 계속 고정 유지.

@@ -560,3 +560,49 @@ Render authorization rules:
 - explicit-payload continuation requires persisted first-frame QC.
 
 This is a fail-closed bridge until the future runtime DB replaces the repository sidecar.
+
+
+## 13. Experimental AUTO_FINISH approval topology — 2026-09-06
+
+This section changes **approval frequency**, not the production-layer order.
+
+Human checkpoints in AUTO_FINISH:
+1. the existing L8/source-dialogue-storyboard package approval;
+2. the first usable episode frame (S01) after the human actually inspects the rendered artifact.
+
+After checkpoint 2, the runtime may finish the episode without further user approvals only when all of the following are true:
+- S01 PASS is persisted against its exact attempt and artifact SHA-256;
+- S01 is the fixed episode anchor;
+- the episode's final copy and lettering placement are already locked in a current `LETTERING_PLAN.json`;
+- remaining frames use EXPLICIT_COMPILED_PAYLOAD and the same binary style authorities;
+- each remaining frame receives conservative automatic visual QC;
+- deterministic separated lettering succeeds;
+- final layout QC succeeds.
+
+The raster/text separation remains mandatory:
+`renders/*_art.png` → `lettering/*_overlay.png` → `exports/*_final.png`.
+AUTO_FINISH must never ask the image renderer to bake final dialogue into raster art.
+
+Automatic QC may authorize continuation only for an unambiguous PASS. Low confidence, semantic/style failure,
+or a condition requiring prompt/plan changes is a hard stop for AUTO_FINISH, not permission to improvise.
+Only stochastic generation failure is retryable automatically, with both per-slide and whole-episode render-attempt caps.
+
+Rollback is a first-class transition, not an exception to the rules:
+- raster/QC failure returns to STANDARD at `REMAINING_RENDER`;
+- lettering/final-layout failure returns to STANDARD at `LETTERING`;
+- accepted artifacts remain hash-bound and reusable;
+- failed candidates never replace the human-approved episode anchor.
+
+STANDARD mode remains supported indefinitely during the experiment. Removing the experiment therefore requires
+no migration of episode assets or state; select STANDARD and continue from the persisted stage.
+
+
+### Episode-local identity promotion during AUTO_FINISH
+
+If a recurring episode-local character first appears after S01, a text digest alone is not sufficient for reliable visual continuity.
+The first frame for that character may become a character-specific identity anchor only after that frame receives a valid human or AUTO_FINISH QC PASS.
+That accepted artifact is then supplied on later slides where the same character appears.
+
+This promotion is derived from `cast.episode_only[].appears_in`, never from hardcoded character names.
+A failed candidate is never promoted. If the anchor slide is later invalidated with FAIL, its character-specific identity anchor is removed.
+The global S01 episode anchor remains fixed and separate from these character-specific anchors.

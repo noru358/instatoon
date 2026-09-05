@@ -46,10 +46,29 @@ Authoritative details:
 - feed/carousel master 4:5, 1080×1350 unless the episode explicitly selects another output.
 - L13 raster text-free; lettering comes later.
 
+## 공통 파이프라인 실험 — AUTO_FINISH
+
+2026-09-06부터 공통 실행 구조에 두 모드를 병렬 지원한다.
+
+- `STANDARD`: 기존 컷별 이미지/검수/레터링 경로.
+- `AUTO_FINISH`: 콘티/L8 승인과 S01 사람 앵커 승인은 유지하고, S01 PASS 뒤 후속 이미지 생성→자동 QC→분리 레터링→최종 QC→export를 내부 완주.
+- 이미지와 레터링은 계속 별도 산출물로 보존.
+- 자동 실패 시 `PRODUCTION_STATE.automation`에 원인을 기록하고 `STANDARD`의 `REMAINING_RENDER` 또는 `LETTERING`으로 롤백.
+- AUTO_FINISH는 현재 EPISODE_PLAN에 바인딩된 `LETTERING_PLAN.json`이 없으면 유료 후속 렌더 전에 fail-closed 롤백.
+
+구현:
+- `pipeline/auto_finish.py`
+- `pipeline/lettering.py`
+- `schemas/lettering_plan.schema.json`
+- `.github/workflows/qc.yml`의 `finish_mode`
+
+이 변경은 **E006의 현재 승인 상태를 건드리지 않는다**. E006는 여전히 L8_AWAITING_APPROVAL이며,
+새 패키지 승인→콘티/plan/manifest/lettering plan→S01 생성/사람 승인 순서를 먼저 밟는다.
+
 ## 정확한 다음 행동
 
 1. user reviews E006 new L1-L7 package;
 2. on PASS, lock the smallest story-sufficient cast;
 3. build whole-episode storyboard and episode-local identity digests;
-4. rebuild EPISODE_PLAN / RENDER_MANIFEST from the approved package;
+4. rebuild EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN from the approved package;
 5. render S01 only and run visual/style QC before remaining frames.
