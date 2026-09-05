@@ -1,6 +1,6 @@
 # E006 — 어떻게 오셨어요?
 
-Status: CAST_RESOLVED — L8 USER VOICE GATE PENDING
+Status: L12.5 RENDER CONTRACT READY — S01 PREFLIGHT NEXT
 Updated: 2026-09-06
 
 ## 1. Provenance
@@ -105,12 +105,50 @@ Why invalid:
 - final Korean text was baked into raster instead of L14 vector lettering;
 - renderer added unapproved wording.
 
-## 5. Exact next action
+## 5. L8 approval
 
-L8 USER VOICE GATE:
-present this L1-L7 package to the user and wait for explicit full-package approval or edits.
+PASS — 2026-09-06.
+User explicitly approved the corrected full L1-L7 package with "통과".
 
-Only after L8 PASS:
-L9 voice ledger -> L10 storyboard/cast -> L11 episode-only identity digest -> L12 whole-episode visual plan -> L12.5 EPISODE_PLAN + RENDER_MANIFEST -> guard validate/compile/authorize -> L13 S01 only -> user visual QC.
+This supersedes the earlier CAST_ONLY partial state.
 
-No raster generation is authorized in the current state.
+## 6. L9 VOICE LEDGER
+
+No new global voice rule promoted from a single episode.
+Episode-local preservation rule:
+- keep the source-specific literal misunderstanding and brief human embarrassment;
+- do not add a neat moral or invented clarification exchange.
+
+## 7. L10-L12 visual/cast plan
+
+- six slides;
+- feed/carousel master = 4:5, 1080×1350;
+- one panel per image, separate files;
+- strict episode continuity;
+- no main cast;
+- woman_01 = episode-only foreign Korean-language beginner;
+- receptionist_01 = episode-only Korean dental receptionist;
+- both receive persistent identity digests because each appears in 2+ slides;
+- final readable Korean text is L14 vector lettering only.
+
+Camera rhythm:
+S01 medium-wide establish → S02 medium two-shot → S03 closer protagonist-favoring medium → S04 tight reaction two-shot → S05 medium/full transition → S06 quiet medium-wide landing.
+
+## 8. L12.5 render contract
+
+Materialized:
+- EPISODE_PLAN.json
+- RENDER_MANIFEST.json
+- PRODUCTION_STATE.json
+
+Required production refs:
+- REF_V2_D
+- REF_V2_E
+
+Both are BINARY_REQUIRED and must be supplied as actual renderer image media.
+
+Exact next action:
+1. validate/compile/authorize E006_S01;
+2. confirm current renderer can bind the actual required binaries;
+3. generate E006_S01 only, text-free 4:5;
+4. user visual QC before any S02 call.

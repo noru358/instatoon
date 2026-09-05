@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "E006",
+  "title": "어떻게 오셨어요?",
+  "status": "VISUAL_PLAN_LOCKED",
+  "source": {
+    "provenance_class": "HUMAN_SEEDED_INSPIRATION",
+    "human_seeded": true,
+    "base_url": "https://www.reddit.com/r/Living_in_Korea/comments/1tk2g5g/something_in_korea_that_embarrassed_you/",
+    "notes": "Source-faithful recomposition of a Korean-language beginner's dentist misunderstanding. Preserve the literal '어떻게 오셨어요?' / '자전거 타고 왔어요 :)' misunderstanding and embarrassed retreat. Wisdom-tooth context is a factual after-note from replies, not an invented clarification exchange."
+  },
+  "continuity_mode": "STRICT_EPISODE",
+  "format": {
+    "aspect_ratio": "4:5",
+    "width": 1080,
+    "height": 1350,
+    "slide_count": 6,
+    "text_free_raster": true,
+    "panels_per_image": 1,
+    "delivery_mode": "SEPARATE_FILES"
+  },
+  "cast": {
+    "main_cast": [],
+    "episode_only": [
+      {
+        "id": "woman_01",
+        "role": "foreign Korean-language beginner visiting a dentist",
+        "appears_in": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "identity_digest": "Non-Korean woman in her mid twenties; shoulder-length light chestnut hair with a soft natural wave and side part; softly rounded face; expressive v2 eyes without glossy anime rendering; small faint freckles across upper cheeks for continuity; beige cardigan over plain off-white T-shirt, muted blue straight jeans, simple low-profile sneakers; small dark-brown shoulder bag only while arriving, then kept beside her in waiting area; no glasses, jewelry, logos, or fashion-model styling; ordinary friendly face, not generic AI-pretty."
+      },
+      {
+        "id": "receptionist_01",
+        "role": "Korean dental receptionist",
+        "appears_in": [
+          2,
+          3,
+          4
+        ],
+        "identity_digest": "Korean woman in her early thirties; compact dark-brown low bun with clean center-to-soft-side part; slightly oval face; calm friendly v2 eyes; navy clinic scrub-style top with a small blank name badge shape but no readable text; no glasses, jewelry, decorative makeup, or glossy hair; polite restrained expression that changes from neutral welcome to a small involuntary giggle."
+      }
+    ]
+  },
+  "style": {
+    "style_version": "INSTATOON_STYLE_v2.0",
+    "required_refs": [
+      "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+      "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+    ],
+    "forbidden_legacy_refs": [
+      "LEGACY_V1_STYLE"
+    ],
+    "reference_conditioning_requirement": "BINARY_REQUIRED"
+  },
+  "slides": [
+    {
+      "index": 1,
+      "slide_id": "E006_S01",
+      "role": "HOOK",
+      "beat": "A foreign Korean-language beginner comes to a Korean dental clinic shortly after starting to study Korean.",
+      "location": "simple low-detail Korean dental clinic entrance/reception area",
+      "action": "woman_01 has just entered the clinic and pauses near reception, slightly tense but trying to handle the visit in Korean; her small shoulder bag is on her shoulder",
+      "scene_facts": [
+        "woman_01 is the only foreground character",
+        "her locked cardigan, T-shirt, jeans, hair, freckles and arrival bag are preserved",
+        "the environment reads clearly as a dental clinic through simple non-text visual cues such as a tooth symbol shape and reception desk",
+        "background remains lower-detail than the character",
+        "no readable text, signage, captions or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "She is new to studying Korean and has come to a dentist, setting up the language misunderstanding.",
+      "required_entities": [
+        "woman_01",
+        "simple dental reception area",
+        "reception desk",
+        "non-text dental cue"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "receptionist_01 foreground interaction",
+        "readable text",
+        "speech bubbles",
+        "multi-panel layout",
+        "glossy webtoon polish",
+        "cinematic lighting",
+        "decorative clinic clutter"
+      ],
+      "composition": "4:5 medium-wide entrance/reception establishing shot; woman_01 is dominant; reserve a compact upper-left narrative safe area for later L14 setup text without creating a poster-like blank zone",
+      "text_role": {
+        "type": "NARRATION",
+        "copy": "한국어 공부 시작한 지 얼마 안 됐을 때 치과 갔는데"
+      }
+    },
+    {
+      "index": 2,
+      "slide_id": "E006_S02",
+      "role": "QUESTION",
+      "beat": "At the reception desk, receptionist_01 asks woman_01 '어떻게 오셨어요?'",
+      "location": "same dental clinic reception desk",
+      "action": "woman_01 stands facing receptionist_01 across the desk; receptionist_01 gives a normal welcoming expression while asking the routine question; woman_01 listens carefully",
+      "scene_facts": [
+        "woman_01 and receptionist_01 both use their locked episode identities",
+        "woman_01 no longer needs the bag strap emphasized; bag may hang naturally or be minimally visible",
+        "the receptionist is seated or standing naturally behind the reception desk",
+        "the beat is an ordinary routine question, not yet comedic exaggeration",
+        "no readable text or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "The receptionist asks an ordinary Korean question that the protagonist is about to misunderstand.",
+      "required_entities": [
+        "woman_01",
+        "receptionist_01",
+        "reception desk"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "readable text",
+        "speech bubbles",
+        "third character",
+        "exaggerated laughter",
+        "cinematic lighting",
+        "realistic clinic rendering"
+      ],
+      "composition": "4:5 medium two-shot across the reception desk; leave bubble-safe space above and slightly toward receptionist_01 for L14 dialogue",
+      "text_role": {
+        "type": "SPOKEN_DIALOGUE",
+        "speaker": "receptionist_01",
+        "copy": "어떻게 오셨어요?"
+      }
+    },
+    {
+      "index": 3,
+      "slide_id": "E006_S03",
+      "role": "CONFIDENT_MISREAD",
+      "beat": "woman_01 confidently answers that she came by bicycle, believing she understood the question.",
+      "location": "same reception desk",
+      "action": "woman_01 brightens and answers with quiet confidence, small proud smile and slightly lifted posture; receptionist_01 is visible listening",
+      "scene_facts": [
+        "both locked identities remain unchanged",
+        "woman_01 looks sincerely pleased that she understood the Korean, not slapstick or smug",
+        "receptionist_01 has not yet broken into laughter",
+        "no bicycle is physically present in the clinic; the answer will be added later as vector dialogue",
+        "no readable text or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "She is completely confident in the wrong interpretation.",
+      "required_entities": [
+        "woman_01",
+        "receptionist_01",
+        "reception desk",
+        "confident pleased expression"
+      ],
+      "forbidden_entities": [
+        "actual bicycle",
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "readable text",
+        "speech bubbles",
+        "third character",
+        "generic anime sparkle effects",
+        "over-rendered clinic"
+      ],
+      "composition": "4:5 closer medium shot favoring woman_01, receptionist_01 still readable at the edge/opposite side; bubble-safe area near woman_01",
+      "text_role": {
+        "type": "SPOKEN_DIALOGUE",
+        "speaker": "woman_01",
+        "copy": "자전거 타고 왔어요 :)"
+      }
+    },
+    {
+      "index": 4,
+      "slide_id": "E006_S04",
+      "role": "REACTION",
+      "beat": "receptionist_01 involuntarily giggles and woman_01 senses that something is wrong.",
+      "location": "same reception desk",
+      "action": "receptionist_01 tries to stay polite but a small giggle escapes; woman_01's confident smile freezes into a puzzled, dawning-embarrassment expression",
+      "scene_facts": [
+        "both identities and clothing remain exactly consistent",
+        "the receptionist reaction is small and human, not mocking laughter",
+        "woman_01 changes from confidence to uncertain realization",
+        "reaction marks may be non-text and minimal",
+        "no readable dialogue, captions or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "The staff reaction makes her realize she may have answered the wrong question.",
+      "required_entities": [
+        "woman_01",
+        "receptionist_01",
+        "reception desk",
+        "small giggle reaction",
+        "woman_01 puzzled embarrassment"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "readable text",
+        "speech bubbles",
+        "pointing/mockery",
+        "large LOL reaction",
+        "third character",
+        "horror effects"
+      ],
+      "composition": "4:5 reaction-oriented two-shot, slightly tighter than slide 3; emphasize the contrast between receptionist_01's restrained giggle and woman_01's frozen realization",
+      "text_role": {
+        "type": "NONE",
+        "copy": ""
+      }
+    },
+    {
+      "index": 5,
+      "slide_id": "E006_S05",
+      "role": "RETREAT",
+      "beat": "Embarrassed, woman_01 breaks eye contact and retreats to the nearby waiting seats without adding another explanation.",
+      "location": "same dental clinic, path from reception to waiting seats",
+      "action": "woman_01 turns away from the desk and walks a few steps toward the waiting seats with shoulders slightly drawn in; her bag is now carried low or held close; receptionist_01 does not need to be prominent",
+      "scene_facts": [
+        "woman_01 preserves exact identity and outfit",
+        "the action clearly changes location from desk interaction toward waiting area",
+        "body language reads as contained embarrassment rather than melodramatic running away",
+        "receptionist_01 may be a small background presence but cannot dominate the frame",
+        "no readable text or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "She is too embarrassed to continue and quietly retreats to the waiting area.",
+      "required_entities": [
+        "woman_01",
+        "waiting seats",
+        "reception area continuity"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "readable text",
+        "speech bubbles",
+        "running pose",
+        "crying",
+        "slapstick fall",
+        "unrelated patient crowd"
+      ],
+      "composition": "4:5 medium-full-body transition shot with clear reception-to-waiting-area geography; use body direction to create visual motion and leave no oversized text zone",
+      "text_role": {
+        "type": "NONE",
+        "copy": ""
+      }
+    },
+    {
+      "index": 6,
+      "slide_id": "E006_S06",
+      "role": "LANDING",
+      "beat": "woman_01 sits in the waiting area, quietly mortified; the factual after-note is that she was there to have a wisdom tooth removed.",
+      "location": "same dental clinic waiting area",
+      "action": "woman_01 sits hunched slightly forward on a waiting chair, one hand partly covering her face while the other rests near her lap; her small shoulder bag sits beside her; she avoids looking toward reception",
+      "scene_facts": [
+        "woman_01 preserves exact identity and outfit",
+        "the embarrassment is quiet and recognizable, not crying or cartoon collapse",
+        "bag continuity is resolved by placing it beside her",
+        "background is simple and reception may be only loosely implied",
+        "no readable text, captions or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "The misunderstanding has landed; she sits in silent embarrassment while the real visit reason was a wisdom tooth.",
+      "required_entities": [
+        "woman_01",
+        "waiting chair",
+        "small shoulder bag beside her",
+        "quiet mortified pose"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "receptionist_01 foreground",
+        "readable text",
+        "speech bubbles",
+        "crying",
+        "large comedy effects",
+        "moralizing imagery"
+      ],
+      "composition": "4:5 quiet medium-wide landing shot with woman_01 slightly off-center and a compact clean area for one small L14 after-note; visually calmer than slides 3-5",
+      "text_role": {
+        "type": "NARRATION",
+        "copy": "사랑니 뽑으러 간 거였음"
+      }
+    }
+  ]
+}
