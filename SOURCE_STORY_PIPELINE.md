@@ -26,6 +26,33 @@ Episode-specific characters are normal.
 Run the following layers in order.
 Expose intermediate outputs for QC when the user is actively reviewing the production process.
 
+### Worker-role map and reporting
+
+Current manual/chat execution may use one ChatGPT orchestrator operating through bounded roles; these role labels do not imply separate live agents unless the runtime actually instantiates them.
+
+Default worker roles:
+- L1 SOURCE DISCOVERY / COLLECTION → Source Researcher
+- L2 HUMAN-INTEREST GATE → Editorial Screener
+- L3 SOURCE NORMALIZATION → Source Editor
+- L4 FORMAT / STORY-SHAPE ROUTER → Story Architect
+- L5 STORY ROOM → Story Writer
+- L6 DIALOGUE DRAFT → Dialogue Writer
+- L7 DIALOGUE HUMANIZATION → Dialogue Editor
+- L8 USER VOICE GATE → User / Human Editor
+- L9 VOICE LEDGER → Voice Editor
+- L10 STORYBOARD + CAST ROUTER → Storyboard & Cast Director
+- L11 EPISODE-LOCAL CHARACTER DESIGN → Character Designer
+- L12 WHOLE-EPISODE VISUAL PLAN → Visual Director
+- L13 TEXT-FREE ART GENERATION → Raster Renderer
+- L14 VECTOR LETTERING / COMPOSITION → Lettering & Layout Designer
+- L15 QC → QC Reviewer
+- L16 PERFORMANCE FEEDBACK → Performance Analyst
+
+After each meaningful stage completes, report:
+STAGE / WORKER ROLE / EXECUTION ACTOR / INPUT / SOURCE-PROVENANCE / OUTPUT / STATUS / QC / NEXT.
+
+For visual generation, SOURCE-PROVENANCE must additionally name the exact style and character reference assets actually supplied to the renderer.
+
 ### L1 — SOURCE DISCOVERY / COLLECTION
 
 Collect candidate:
