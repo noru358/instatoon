@@ -488,3 +488,18 @@ The current guard CLI represents these as:
 Future provider adapters should derive these flags from the actual request payload, not from a model claim.
 
 A text prompt that names or describes a reference is not equivalent to media binding.
+
+
+## AutoPipeline generic media contract adapter
+
+The current child render guard is an adapter, not the future generic engine.
+
+Mapping:
+- child RENDER_MANIFEST.media_requirements -> AutoPipeline media job requirements;
+- renderer adapter capability -> AutoPipeline renderer profile;
+- actual tool/media handles -> AutoPipeline supplied evidence.
+
+The generic parent must not know REF_V2 names or Instatoon style semantics.
+Instatoon may add stricter checks, but cannot weaken MUST_SUPPLY_MEDIA.
+
+When generic AutoPipeline execution is implemented, move capability/supply authorization to the parent engine and keep only Instatoon-specific story/style/QC validation here.
