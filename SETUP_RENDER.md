@@ -190,6 +190,7 @@ AUTO_FINISH도 레이어 분리를 유지한다.
 
 - 기본 confidence gate: 0.88
 - 컷당 기본 최대 시도: 3
+- 회차 전체 후속 render attempt 기본 상한: 10
 - STOCHASTIC 실패만 동일 canonical 입력으로 재시도
 - PLAN_OR_PROMPT / 비재시도형 실패는 즉시 롤백
 
