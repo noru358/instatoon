@@ -1,45 +1,37 @@
 {
   "state_version": "1.0",
   "episode_id": "E006",
-  "current_stage": "RENDER_CONTRACT_READY",
+  "current_stage": "L8_AWAITING_APPROVAL",
   "voice_gate": {
-    "status": "PASS",
-    "approved_scope": "L1_L7_FULL_PACKAGE",
-    "approval_kind": "USER_EXPLICIT",
-    "evidence": "2026-09-06 user replied '통과' to the corrected E006 L1-L7 full-package review."
+    "status": "PENDING",
+    "approved_scope": "NONE",
+    "approval_kind": "NONE",
+    "evidence": "2026-09-06 user replaced the E006 premise with the workplace contradictory-expectations topic; new L1-L7 package requires review."
   },
   "decisions": [
     {
-      "decision_id": "E006_CAST_001",
-      "type": "CAST",
-      "status": "APPROVED",
-      "value": "episode-only foreign protagonist; no main-cast retrofit"
+      "decision_id": "E006_TOPIC_RESET_20260906",
+      "type": "TOPIC",
+      "status": "SELECTED",
+      "value": "workplace contradiction: independent action punished, asking for direction also punished"
     },
     {
-      "decision_id": "E006_L8_001",
-      "type": "USER_VOICE_GATE",
-      "status": "PASS",
-      "value": "corrected source-faithful L1-L7 package approved"
-    },
-    {
-      "decision_id": "E006_L11_001",
-      "type": "EPISODE_IDENTITY",
-      "status": "LOCKED",
-      "value": "woman_01 and receptionist_01 identity digests stored in EPISODE_PLAN"
+      "decision_id": "E006_CAST_POLICY_20260906",
+      "type": "CAST_POLICY",
+      "status": "APPROVED_GLOBAL_RULE",
+      "value": "no three-main-character quota; use 0-3 recurring leads and episode-local/supporting cast strictly by story need"
     }
   ],
   "frame_qc": {},
   "blockers": [
     {
-      "blocker_id": "E006_L13_MEDIA_BINDING_001",
-      "stage": "L13",
-      "status": "BLOCKED_CURRENT_RUNTIME",
-      "requirement": "BINARY_REQUIRED",
-      "required_media": [
-        "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
-        "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
-      ],
-      "reason": "Current native image-generation interface cannot bind repository/local file paths and exact D/E are not current-conversation image attachments. Text-only fallback is prohibited."
+      "blocker_id": "E006_L8_REAPPROVAL_20260906",
+      "stage": "L8",
+      "status": "AWAITING_USER_APPROVAL",
+      "requirement": "L1_L7_FULL_PACKAGE",
+      "required_media": [],
+      "reason": "Old dentist package was superseded; new workplace package must pass the user voice gate before storyboard/render-contract rebuild."
     }
-  ]
+  ],
+  "episode_anchor": null
 }
