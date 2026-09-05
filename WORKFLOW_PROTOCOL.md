@@ -291,3 +291,21 @@ Lossless means decision/state fidelity, not copying conversational noise.
 Before any L13 raster call, restore the active EPISODE_PLAN.json and RENDER_MANIFEST.json and run the repository render guard. A production session is not authorized by chat memory alone.
 
 When render rules change, 갱신 is complete only after guard tests, active-contract validation, remote refetch, CI verification, CURRENT_STATE update last, and the parent AutoPipeline pointer update when applicable.
+
+
+## 15.5 Reference-conditioning capability gate
+
+Before any L13 authorization, distinguish three facts:
+1. canonical ref exists in repository;
+2. operator inspected/refetched it;
+3. renderer actually received it as media input.
+
+Only #3 satisfies BINARY_CONDITIONED.
+
+If the active episode requires BINARY_REQUIRED:
+- record exact supplied reference paths;
+- pass them to render_guard authorize;
+- block any renderer that cannot accept them;
+- do not downgrade to authority-only from convenience or tool habit.
+
+A renderer capability mismatch is a preflight BLOCK, not an invitation to generate and QC afterward.
