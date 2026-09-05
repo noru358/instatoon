@@ -231,6 +231,19 @@ Examples:
 - new deterministic text-layout rule;
 - mandatory stage execution reporting.
 
+## 12.5 Mandatory pre-production user review gate
+
+For every NEW_EPISODE during the current learning phase:
+1. execute L1-L7 in order;
+2. present the source/provenance, story beats, and humanized dialogue to the user before visual production;
+3. stop at L8 USER VOICE GATE;
+4. require explicit user approval before L10-L13 can proceed.
+
+Approval may be terse (“통과”, “ㄱ”, “좋음”, or equivalent).
+Do not infer approval from silence or from the original request to make a new episode.
+
+This is a cross-session production requirement, not an optional status update.
+
 ## 13. Mandatory stage execution report
 
 During active production, do not silently jump across stages.
