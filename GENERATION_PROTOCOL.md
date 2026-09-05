@@ -1,6 +1,6 @@
 # GENERATION_PROTOCOL.md
 
-# GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.2
+# GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.3
 Updated: 2026-09-05
 
 ## 0. Stage order
@@ -21,6 +21,7 @@ Production order:
 12. export.
 
 Do not skip directly from a premise to production frames.
+Do not enter raster generation until the structured render-contract gate below passes.
 
 ### Mandatory visual preflight before L13
 
@@ -49,6 +50,56 @@ Reference handling:
 - such an output may be QC'd and used as a prototype, but must not be promoted to a new canonical reference solely because the prompt said it matched.
 
 Never substitute obsolete/legacy refs.
+
+### Mandatory structured render-contract gate
+
+Before L13, the active episode must contain:
+- `EPISODE_PLAN.json` conforming to `schemas/episode_plan.schema.json`;
+- `RENDER_MANIFEST.json` conforming to `schemas/render_manifest.schema.json`.
+
+The manifest is bound to the exact EPISODE_PLAN Git blob SHA. If the plan changes, the old manifest becomes stale and rendering is blocked.
+
+Run:
+`python pipeline/render_guard.py validate`
+
+The executable guard verifies at minimum:
+- CURRENT_STATE active episode == plan episode == manifest episode;
+- continuous slide indices and exact slide count;
+- text-free raster output;
+- output ratio/dimensions;
+- episode-only identity digest when the person recurs;
+- exact current required visual-reference paths exist;
+- plan ↔ manifest scene contracts and required/forbidden entities are identical;
+- manifest is not stale.
+
+### Prompt-binding modes
+
+Every renderer run records one prompt-binding mode:
+
+`EXPLICIT_COMPILED_PAYLOAD`
+- renderer receives the deterministic prompt compiled from MASTER_PROMPTS + EPISODE_PLAN/RENDER_MANIFEST;
+- render first frame;
+- continue remaining batch only after first-frame semantic QC PASS.
+
+`CONVERSATION_INFERRED`
+- renderer infers instructions from conversation/context rather than receiving an auditable explicit compiled payload;
+- parallel/multi-frame batch is prohibited;
+- render exactly one frame;
+- semantic-QC that frame;
+- only a PASS authorizes the next frame.
+
+This stricter mode applies to native/direct tools when their actual renderer payload is not inspectable.
+
+### Semantic hard-stop
+
+If an output substitutes or introduces a materially different story/cast/concept — for example an unrelated mascot, animal, self-help/productivity scene, coding/Git scene, collage, poster, baked semantic text, or any episode-specific forbidden entity — then:
+1. mark the image INVALID;
+2. do not continue the batch;
+3. do not repair from it;
+4. do not promote it to LAST_KNOWN_GOOD or any reference;
+5. inspect prompt binding / manifest / renderer path before retrying.
+
+Renderer success means semantic contract compliance, not merely “an image was returned.”
 
 ## 1. Cast routing comes before character rendering
 
@@ -123,6 +174,16 @@ A failed/regressed retry must not become the new authority.
 
 ## 4. Prompt assembly
 
+Free-form prompt rewriting at render time is prohibited.
+
+The canonical compiler source is:
+- `MASTER_PROMPTS.md` → `## 12. COMPILED PRODUCTION PROMPT`;
+- active `EPISODE_PLAN.json`;
+- bound `RENDER_MANIFEST.json`.
+
+Use:
+`python pipeline/render_guard.py compile --episode <ID> --slide <N>`
+
 Per raster frame:
 
 1. scene facts;
@@ -195,6 +256,11 @@ Check in this order:
 
 A pretty but incorrect character = fail.
 A stylish frame in the wrong story order = fail.
+An image from a different story/concept = semantic hard fail and immediate stop.
+
+Continuation authorization:
+- explicit compiled payload: first-frame QC PASS before remainder;
+- conversation-inferred: previous-frame QC PASS before every next frame.
 
 ## 8. Last-known-good rule
 
