@@ -1,6 +1,6 @@
 # E003 — 왜 죄송하지
 
-Status: SOURCE/VOICE/STORYBOARD LOCKED — VISUAL PASS IN PROGRESS
+Status: SOURCE/VOICE/STORYBOARD LOCKED — RASTER RENDER BLOCKED (renderer credits)
 
 ## 1. Provenance
 
@@ -126,3 +126,20 @@ Do not claim style compliance unless these binaries are actually supplied to the
 7. no generic AI-pretty smoothing;
 8. no warm beige atmospheric wash;
 9. later lettering remains mobile-readable.
+
+
+## 9. Render attempt — 2026-09-05
+
+Attempted renderer:
+- Higgsfield Nano Banana Pro
+- exact reference URLs supplied for REF_V2_D and REF_V2_E
+- 4:5
+- six coordinated text-free frames
+
+Result:
+BLOCKED before generation.
+The connected Private workspace returned: out of credits.
+No image from this failed submission is accepted as an E003 visual artifact.
+
+Important:
+Do not fall back to a renderer path that cannot receive the canonical reference binaries merely to obtain an image. Style fidelity outranks producing a knowingly wrong render.
