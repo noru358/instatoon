@@ -1,0 +1,18 @@
+name: render-guard
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate-render-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: python -m unittest pipeline.test_render_guard
+      - name: Validate active episode render contract
+        run: python pipeline/render_guard.py validate
