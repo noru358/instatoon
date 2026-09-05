@@ -496,3 +496,30 @@ For conversation-inferred native rendering:
 - one frame only per call;
 - visual QC before every next frame;
 - attach/reuse both canonical style media and the accepted episode anchor after the style anchor exists.
+
+
+## Generic media-requirement mapping
+
+Instatoon is a child adapter of the AutoPipeline MEDIA_INPUT_CONTRACT.
+
+RENDER_MANIFEST.media_requirements is the machine-facing authorization source.
+Each item declares:
+- requirement_id;
+- role;
+- media_type;
+- source_id;
+- conditioning;
+- required;
+- optional expected_hash.
+
+Current style_refs remain a project-level compatibility field, but authorization does NOT hard-code or iterate special asset names from style_refs. Every style ref must map into media_requirements.
+
+Future requirements such as:
+- character_identity anchor;
+- repair_base / LAST_KNOWN_GOOD image;
+- location anchor;
+- other image/audio/video conditioning
+
+are added as new media_requirements entries. The authorization algorithm itself does not change.
+
+AutoPipeline owns the generic declared/capability/supplied model; Instatoon adds story, slide-order, style, and episode-specific validation.
