@@ -1,7 +1,7 @@
 # MASTER_PROMPTS.md
 
 # CANONICAL — INSTATOON MASTER PROMPT v2.2
-Updated: 2026-09-05
+Updated: 2026-09-06
 
 This is the single authoritative visual-generation prompt source.
 This file owns prompt wording. If wording conflicts with an approved visual reference, the approved image wins; reconcile the wording rather than redesigning the reference.
@@ -120,6 +120,13 @@ Do NOT use pre-reset legacy assets from assets/style_refs/ as current style auth
 
 Choose cast from story/context BEFORE rendering.
 
+There is NO quota requiring all three recurring leads to appear.
+Per episode and per scene, use only the people who have an actual story function:
+- zero, one, two, or all three of Gaeun / Harin / Taemin may appear;
+- an episode may use only episode-local/supporting characters;
+- supporting or one-off characters (boss, coworker, clerk, date, family member, customer, etc.) may be introduced whenever the premise requires them;
+- omit any recurring lead who would exist only to fill space or provide a redundant reaction.
+
 Main cast may appear when the episode naturally suits them:
 - Gaeun
 - Harin
@@ -128,6 +135,8 @@ Main cast may appear when the episode naturally suits them:
 Never insert a main character merely because the scene needs “a woman” or “a man.”
 There is no global Taemin ban.
 An episode may explicitly choose an episode-only man instead of Taemin.
+
+Cast routing is story-first, not asset-first: fixed visual style and continuity do not imply fixed cast composition.
 
 ## 6. RECURRING CHARACTER IDENTITY BLOCK
 
