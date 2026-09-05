@@ -230,3 +230,32 @@ L12.5 RENDER CONTRACT GATE:
 5. compile and authorize E005_S01 only;
 6. render exactly one TEXT-FREE first frame;
 7. semantic/style/identity QC before authorizing S02.
+
+
+## 10. L12.5 / L13 first-frame execution — 2026-09-05
+
+L12.5 RENDER CONTRACT GATE:
+- EPISODE_PLAN blob SHA: b771aa805c51fb6f9f2bd30744b49f58aaf64cdc
+- RENDER_MANIFEST created and SHA-bound.
+- Initial CI run failed because regression tests hard-coded E004 as the active episode.
+- Systemic fix: pipeline/test_render_guard.py now resolves CURRENT_STATE active episode dynamically.
+- Follow-up GitHub Actions render-guard run 33962214729: PASS.
+- E005_S01 authorized as CONVERSATION_INFERRED sequential single-frame render.
+
+L13 E005_S01 attempt 1:
+- renderer: native/direct ChatGPT image generation
+- conditioning: AUTHORITY_INFORMED_NON_BINARY_CONDITIONED
+- renderer gen id: d676ff26-1d7e-43b2-ab1a-563872f81a5f
+- local runtime artifact: /mnt/data/a_cozy_pastel_toned_cartoon_comic_style_illustrat.png
+- semantic beat: broadly correct first-date two-shot
+- STYLE QC: FAIL
+- failure codes:
+  - polished anime/romance-webtoon rendering
+  - warm cinematic/cozy lighting
+  - detailed hair/facial rendering
+  - over-rendered food/background
+  - model-pretty faces
+  - violates flat/simple v2 comic grammar
+- status: INVALID; not LAST_KNOWN_GOOD; not a reference.
+- continuation: STOP. E005_S02 is NOT authorized.
+- repair scope: SYSTEMIC renderer/style-binding failure. Recompile/reassert visual style before retrying S01; do not chain from this output.
