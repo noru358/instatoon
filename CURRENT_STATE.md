@@ -7,59 +7,49 @@ Active episode: episodes/E006/README.md
 
 ## 현재 위치
 
-큰 흐름: 수동 제작 검증 → 상태/렌더 가드 강화 → 최소 실행 경로 연결 → 독립 CLI → 웹 도구.
+큰 흐름: 수집/소재 확정 → L1-L7 재구성 → 사용자 보이스 게이트 → 캐스팅/콘티 → 렌더 계약 → 첫 컷 QC → 나머지 컷.
 
-E006 "어떻게 오셨어요?"의 corrected L1-L7 package가 2026-09-06 사용자 명시 승인 PASS.
-현재 PRODUCTION_STATE = RENDER_CONTRACT_READY.
+E006는 사용자가 기존 치과 에피소드 대신 **직장 내 모순된 자율/보고 요구** 주제로 교체했다.
+현재 PRODUCTION_STATE = L8_AWAITING_APPROVAL.
 
-완료:
-- L1-L8 PASS;
-- L9 episode-local voice preservation recorded, no unsupported global rule promotion;
-- L10 storyboard/cast routing complete;
-- L11 woman_01 + receptionist_01 persistent identity digests complete;
-- L12 six-slide whole-episode visual plan complete;
-- L12.5 EPISODE_PLAN / SHA-bound RENDER_MANIFEST materialized.
+새 L1-L7 후보는 episodes/E006/README.md에 기록되어 있다.
+기존 치과 EPISODE_PLAN / RENDER_MANIFEST는 새 패키지 승인 전까지 **SUPERSEDED / DO_NOT_RENDER** 이다.
 
-## E006 production lock
+## 새 E006 핵심
 
-- 6 slides.
-- Feed/carousel master 4:5, 1080×1350.
-- ONE PANEL = ONE IMAGE FILE.
-- L13 raster is text-free.
-- L14 adds final Korean text/bubbles.
-- no main cast in this episode.
-- required canonical style media: REF_V2_D + REF_V2_E, both BINARY_REQUIRED.
-- first accepted E006 frame becomes a secondary episode style/identity anchor for later slides.
+Human-seeded source:
+- Reddit r/living_in_korea_now — "is there a middle ground in korean work culture"
+- 독립적으로 처리하면 "왜 말 안 했어?"
+- 다음엔 물어보면 "이런 것까지 왜 물어봐? 알아서 해."
+- 단일 실제 사건을 거짓으로 재현하지 말고, 반복되는 직장 모순 패턴을 압축 각색한다.
 
-The earlier premature 9:16 six-panel render remains INVALID_RENDER / STORYBOARD_REFERENCE_ONLY and must not be used as a visual reference.
+## 캐스팅 전역 규칙 — 갱신됨
 
-## L13 current-runtime preflight
+- Gaeun / Harin / Taemin 전원 출연 의무 없음.
+- 회차/컷마다 스토리 기능이 있는 인물만 사용.
+- 메인 캐릭터는 0~3명 모두 가능.
+- 상사, 동료, 점원, 소개팅 상대, 가족 등 조연/단역을 자유롭게 사용할 수 있음.
+- 조연이 2컷 이상 반복되면 episode-local identity digest를 만든다.
+- 그림체/렌더 락과 캐스트 구성은 별개다: **스타일은 고정, 캐스팅은 유동**.
 
-BLOCKED_CURRENT_RUNTIME — fail-closed.
+Authoritative details:
+- MASTER_PROMPTS.md §5
+- GENERATION_PROTOCOL.md §0.5
 
-The current native image-generation interface cannot bind GitHub/repository-local D/E files directly, and the exact D/E binaries are not current-conversation image attachments.
-Because E006 requires BINARY_REQUIRED conditioning, text-only generation is prohibited.
-
-## 정확한 다음 행동
-
-1. make exact REF_V2_D/E available as actual image inputs to the selected renderer;
-2. authorize E006_S01 with supplied-media evidence;
-3. generate S01 only as text-free 4:5;
-4. user style/identity QC PASS is required before S02.
-
-Do not substitute the invalid prior E006 image or a prose-only style description.
-
-## 구조 개선
-
-Persisted state gate remains active:
-- CAST_ONLY != L8 full approval;
-- caller string PASS cannot substitute for artifact-bound QC;
-- pre-render active episodes are valid states;
-- render authorization is fail closed.
-
-## 현행 시각 기준
+## 시각 기준
 
 - INSTATOON_STYLE_v2.0.
 - REF_V2_D: assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg
 - REF_V2_E: assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg
 - approved binaries outrank generalized prose.
+- one panel = one image file.
+- feed/carousel master 4:5, 1080×1350 unless the episode explicitly selects another output.
+- L13 raster text-free; lettering comes later.
+
+## 정확한 다음 행동
+
+1. user reviews E006 new L1-L7 package;
+2. on PASS, lock the smallest story-sufficient cast;
+3. build whole-episode storyboard and episode-local identity digests;
+4. rebuild EPISODE_PLAN / RENDER_MANIFEST from the approved package;
+5. render S01 only and run visual/style QC before remaining frames.
