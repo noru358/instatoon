@@ -100,7 +100,25 @@ Store:
 - accepted dialogue;
 - reusable voice rule when appropriate.
 
-### D. OrderedBeat
+### D. StageExecutionReport
+Every completed stage emits an auditable report.
+
+Fields:
+- stage_name;
+- worker_role;
+- execution_actor;
+- input_artifact_ids;
+- source_provenance;
+- output_artifact_ids;
+- status;
+- qc_summary;
+- blocker;
+- next_stage;
+- exact reference assets actually supplied when the stage is visual generation.
+
+The runtime must not claim that separate agents ran when one orchestrator executed multiple bounded roles.
+
+### E. OrderedBeat
 Story order is data, never inferred from file creation time.
 
 Each slide has:
@@ -233,6 +251,7 @@ GitHub:
 
 Runtime DB:
 - run/stage state;
+- stage execution reports with worker role / actual execution actor / provenance / outputs / QC;
 - attempts;
 - approvals;
 - tool IDs;
@@ -360,4 +379,5 @@ First automation milestone is complete when:
 9. story order is deterministic;
 10. final assets are auditable;
 11. core style/voice cannot silently mutate;
-12. the generic engine can load another child project without copying Instatoon logic.
+12. the generic engine can load another child project without copying Instatoon logic;
+13. every completed stage is auditable by worker role, actual execution actor, provenance/input, output, QC verdict, and next stage.
