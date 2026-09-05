@@ -1,6 +1,6 @@
 # E004 — 먼저 내리세요
 
-Status: HUMAN-SEEDED / STORYBOARD LOCKED — TEXT-FREE RASTER PASS NEXT
+Status: RENDER CONTRACT VALIDATED — FIRST-FRAME SEMANTIC GATE NEXT
 
 ## 1. Provenance
 
@@ -156,3 +156,34 @@ L10 STORYBOARD + CAST ROUTER — PASS.
 L11 EPISODE-LOCAL CHARACTER DESIGN — PASS, identity digest above.
 L12 WHOLE-EPISODE VISUAL PLAN — PASS.
 L13 TEXT-FREE ART GENERATION — NEXT.
+
+
+## 10. Structured render contract
+
+Canonical machine-readable inputs:
+- episodes/E004/EPISODE_PLAN.json
+- episodes/E004/RENDER_MANIFEST.json
+
+The manifest is bound to EPISODE_PLAN Git blob SHA bde1834628166fbbe26b858bee7a50ad883374c3.
+
+The render guard and regression tests now verify active-episode equality, slide count/order, text-free raster, current reference presence, episode-only identity continuity, plan/manifest scene equality, stale-manifest failure, and conversation-inferred continuation gating.
+
+GitHub Actions render-guard at commit 0e0571636348f1f39702dc3962b25fe2ea842d47 passed.
+
+## 11. Invalid native-render incident — discarded
+
+The prior native L13 attempt returned unrelated generic comic content rather than E004. Those images are INVALID: they are not E004 artifacts, not LAST_KNOWN_GOOD, not references, and are not stored as production art.
+
+Root cause class: orchestration/prompt-payload binding drift between the locked episode and renderer behavior.
+
+Systemic repair:
+- free-form L13 invocation prohibited;
+- structured episode plan plus SHA-bound render manifest mandatory;
+- deterministic prompt compiler mandatory;
+- unexpected-concept policy FAIL_CLOSED;
+- conversation-inferred rendering is one frame at a time;
+- every next frame requires previous-frame semantic QC PASS.
+
+L12.5 RENDER CONTRACT GATE — PASS.
+L13 TEXT-FREE ART GENERATION — RESET; no valid E004 raster exists yet.
+Next: compile and authorize E004_S01 only, render exactly one frame, run semantic/style/identity QC, then continue only on PASS.
