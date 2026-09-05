@@ -418,3 +418,34 @@ During the learning phase:
 - USER VOICE GATE stays human;
 - material visual-style changes stay human;
 - final taste/publish remains human.
+
+
+## 16. Structured render-contract enforcement — CANONICAL
+
+Before any raster call:
+- active episode must contain `EPISODE_PLAN.json`;
+- active episode must contain `RENDER_MANIFEST.json`;
+- manifest must bind the exact EPISODE_PLAN Git blob SHA;
+- `python pipeline/render_guard.py validate` must PASS.
+
+Free-form prompt rewriting at render time is prohibited. Compile with:
+`python pipeline/render_guard.py compile --episode <ID> --slide <N>`
+
+The compiler loads:
+- `MASTER_PROMPTS.md` → `## 12. COMPILED PRODUCTION PROMPT`;
+- active EPISODE_PLAN;
+- bound RENDER_MANIFEST.
+
+Prompt-binding modes:
+- `EXPLICIT_COMPILED_PAYLOAD`: render first frame, semantic-QC it, then allow remaining batch only after PASS.
+- `CONVERSATION_INFERRED`: renderer payload is not fully auditable; parallel batch is prohibited. Render one frame, QC, then authorize only the next frame after PASS.
+
+Semantic hard stop:
+If a returned image is from a different story or concept, uses the wrong cast, introduces forbidden/unplanned entities, becomes a mascot/self-help/coding/collage substitute, or bakes semantic text into a text-free raster stage:
+1. mark INVALID;
+2. stop further rendering;
+3. do not repair from it;
+4. do not promote it to LAST_KNOWN_GOOD or any reference;
+5. inspect plan/manifest/prompt-binding/renderer before retry.
+
+A renderer returning an image is not success. Success requires scene-contract compliance.

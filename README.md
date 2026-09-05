@@ -114,3 +114,22 @@ Old overlapping root specifications are merged/retired; Git history is the archi
 See episodes/E004/README.md.
 
 episodes/E001/ is preserved as a historical pre-v2 prototype and is not current style authority.
+
+
+## Render contract hard gate — canonical
+
+Raster production is not authorized from free-form conversational memory.
+
+Before L13 every active episode must have:
+- `EPISODE_PLAN.json` matching `schemas/episode_plan.schema.json`;
+- `RENDER_MANIFEST.json` matching `schemas/render_manifest.schema.json`;
+- manifest bound to the exact EPISODE_PLAN Git blob SHA;
+- `python pipeline/render_guard.py validate` PASS.
+
+Prompt assembly is deterministic from the canonical MASTER_PROMPTS compiled-production section plus the structured slide contract.
+
+Renderer prompt binding:
+- `EXPLICIT_COMPILED_PAYLOAD`: first frame must pass semantic QC before the remaining batch.
+- `CONVERSATION_INFERRED`: never parallelize; generate one frame only, QC it, and require PASS before the next frame.
+
+An unrelated story/cast/concept, unplanned mascot/animal, coding/self-help substitution, collage/poster, or baked semantic text is a hard failure. Discard it immediately; it cannot become LAST_KNOWN_GOOD or a reference.
