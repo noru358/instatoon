@@ -10,6 +10,16 @@ This file replaces the overlapping story-system material previously split across
 FORMAT = omnibus.
 SOURCE SUPPLY = internet/community/SNS anecdotes, comments, everyday incidents, user stories, observed situations, plus limited original invention when appropriate.
 
+DEFAULT EDITORIAL PRINCIPLE = HUMAN-SOURCE-FIRST.
+Even when the final episode is substantially recomposed or partly invented, prefer to begin from one or more real human-produced anecdotes, comments, reactions, behavioral details, or observed incidents. The human material is seed material for specificity, cadence, awkwardness, and social texture; it does not need to be copied literally or treated as a verified factual source for the final reconstructed episode.
+
+Pure AI-originated premises are allowed only when:
+- the user explicitly asks for original invention; or
+- human-source discovery produces no usable seed after a reasonable search; or
+- the concept is intentionally experimental.
+
+When a human source is used as inspiration rather than literal adaptation, record it as BASE / INSPIRATION provenance and distinguish it from SOURCE FACTS that the final episode claims to reproduce.
+
 The project does NOT require one fixed cast or one fixed location.
 
 Main characters are reusable assets:
@@ -67,6 +77,15 @@ Collect candidate:
 - user-submitted premises.
 
 Preserve provenance when applicable.
+
+Collection priority:
+1. direct human anecdotes/posts;
+2. comment/reply threads with vivid human wording;
+3. multiple similar human incidents that can be recomposed into one stronger premise;
+4. observed/user-submitted incidents;
+5. pure original invention only as a fallback or explicit creative choice.
+
+Do not confuse "human-seeded" with "literal adaptation." The story room may restructure, merge, fictionalize, or invent connective tissue while retaining the specific human texture that made the source worth collecting.
 
 ### L2 — HUMAN-INTEREST GATE
 
