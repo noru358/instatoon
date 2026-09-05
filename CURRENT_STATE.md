@@ -42,8 +42,9 @@ Current stage:
 - L11 EPISODE-LOCAL CHARACTER DESIGN PASS;
 - L12 WHOLE-EPISODE VISUAL PLAN PASS;
 - E005 README + EPISODE_PLAN.json materialized;
-- no E005 raster generation has occurred;
-- L12.5 RENDER CONTRACT GATE is NEXT.
+- L12.5 RENDER CONTRACT GATE PASS after fixing active-episode-hardcoded regression tests;
+- native/direct E005_S01 attempt 1 executed and is INVALID due to major style drift (polished anime/cozy cinematic rendering rather than v2 flat comic grammar);
+- S02 is NOT authorized; first-frame gate correctly stopped continuation.
 
 Cast:
 - no recurring main-cast character is used;
@@ -56,11 +57,11 @@ Visual plan:
 - final lettering will frame the ending as "4년 뒤 근황 / 진짜 결혼함." for source accuracy.
 
 Exact next action:
-1. create SHA-bound E005 RENDER_MANIFEST.json;
-2. validate active episode / plan / manifest / current refs;
-3. compile and authorize E005_S01 only;
-4. render exactly one text-free first frame;
-5. run semantic/style/identity QC before S02.
+1. return to the E005 S01 contract; do not use the failed image as a base;
+2. strengthen the renderer-facing v2 style binding against anime/cozy/cinematic drift;
+3. retry E005_S01 only;
+4. run semantic/style/identity QC;
+5. authorize S02 only after S01 PASS.
 
 ## E004 — current production package
 
