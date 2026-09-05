@@ -254,7 +254,23 @@ Human texture > verbal smoothness.
 
 ### L8 — USER VOICE GATE
 
-During the current learning phase, this is a deliberate manual gate.
+During the current learning phase, this is a mandatory pre-production human gate.
+
+Before storyboard/cast planning or any raster production, present the user with the accepted L1-L7 package in a compact reviewable form:
+- source/provenance;
+- why the source passed the human-interest gate;
+- normalized premise and important human details;
+- story shape / ordered beats;
+- dialogue and reaction text after humanization;
+- any material adaptation/invention notes.
+
+Then STOP and wait for explicit user approval.
+
+Hard rule:
+- do not continue to L10 STORYBOARD + CAST ROUTER, L11 character design, L12 visual planning, L12.5 render contract, or L13 raster generation until the user explicitly passes the package;
+- terse approval such as “통과”, “ㄱ”, “좋음”, or equivalent is sufficient;
+- terse rejection/edit feedback is sufficient and must route back to the relevant L3-L7 stage;
+- never treat silence, prior general approval, or “make a new episode” as approval of the current episode package.
 
 The user may give terse feedback:
 - “2번 AI 같음”
