@@ -66,6 +66,66 @@ def _require(condition: bool, message: str):
         raise GuardError(message)
 
 
+PRODUCTION_STAGES = {
+    "L8_AWAITING_APPROVAL": 10,
+    "CAST_RESOLVED": 20,
+    "L8_APPROVED": 30,
+    "STORYBOARD_READY": 40,
+    "VISUAL_PLAN_READY": 50,
+    "RENDER_CONTRACT_READY": 60,
+    "FIRST_FRAME_QC_PENDING": 70,
+    "REMAINING_RENDER": 80,
+    "LETTERING": 90,
+    "FINAL_QC": 100,
+    "EXPORT_READY": 110,
+}
+
+
+def validate_production_state(plan: dict, state: dict):
+    for key in ("state_version", "episode_id", "current_stage", "voice_gate", "frame_qc"):
+        _require(key in state, f"PRODUCTION_STATE missing {key}")
+    _require(state["state_version"] == "1.0", "unsupported PRODUCTION_STATE version")
+    _require(state["episode_id"] == plan["episode_id"], "production-state/plan episode mismatch")
+    _require(state["current_stage"] in PRODUCTION_STAGES, "invalid production current_stage")
+
+    gate = state["voice_gate"]
+    _require(isinstance(gate, dict), "voice_gate must be an object")
+    _require(
+        gate.get("status") == "PASS",
+        "L8 USER VOICE GATE is not fully approved"
+    )
+    _require(
+        gate.get("approved_scope") == "L1_L7_FULL_PACKAGE",
+        "partial decision/CAST approval is not L8 full-package approval"
+    )
+    _require(
+        gate.get("approval_kind") == "USER_EXPLICIT",
+        "L8 approval must be explicit user approval"
+    )
+    _require(bool(gate.get("evidence")), "L8 approval evidence is required")
+
+    _require(isinstance(state["frame_qc"], dict), "frame_qc must be an object")
+
+
+def _require_persisted_qc(plan: dict, state: dict, slide_index: int, prompt_binding: str):
+    if slide_index <= 1:
+        return
+
+    qc_index = slide_index - 1 if prompt_binding == "CONVERSATION_INFERRED" else 1
+    slide_id = plan["slides"][qc_index - 1]["slide_id"]
+    record = state.get("frame_qc", {}).get(slide_id)
+    _require(record is not None, f"{slide_id}: persisted QC record missing")
+    _require(record.get("slide_id") == slide_id, f"{slide_id}: QC slide binding mismatch")
+    _require(record.get("status") == "PASS", f"{slide_id}: persisted QC is not PASS")
+    _require(record.get("inspected_output") is True, f"{slide_id}: QC is not bound to an inspected output")
+    _require(bool(record.get("attempt_id")), f"{slide_id}: QC attempt_id missing")
+    digest = record.get("artifact_sha256")
+    _require(
+        isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest),
+        f"{slide_id}: QC artifact_sha256 missing/invalid"
+    )
+
+
 def validate_episode_plan(plan: dict):
     for key in ("schema_version","episode_id","title","status","source","continuity_mode","format","cast","style","slides"):
         _require(key in plan, f"EPISODE_PLAN missing {key}")
@@ -230,9 +290,11 @@ def validate_repository(repo_root: Path, episode_id: str | None = None):
     episode_dir = repo_root / "episodes" / eid
     plan = load_json(episode_dir / "EPISODE_PLAN.json")
     manifest = load_json(episode_dir / "RENDER_MANIFEST.json")
+    state = load_json(episode_dir / "PRODUCTION_STATE.json")
     _require(plan.get("episode_id") == eid, "episode directory/plan id mismatch")
     validate_episode_plan(plan)
     validate_manifest(repo_root, episode_dir, plan, manifest)
+    validate_production_state(plan, state)
     return plan, manifest
 
 
@@ -308,12 +370,25 @@ def authorize(
     supplied_media: list[dict] | None = None,
 ) -> str:
     plan, manifest = validate_repository(repo_root, episode_id)
+    state = load_json(repo_root / "episodes" / episode_id / "PRODUCTION_STATE.json")
     renderer_supported_media_types = renderer_supported_media_types or []
     supplied_media = supplied_media or []
 
     _require(1 <= slide_index <= plan["format"]["slide_count"], "slide out of range")
     contract = manifest["renderer_contract"]
     _require(prompt_binding in contract["allowed_prompt_bindings"], f"prompt binding not allowed: {prompt_binding}")
+
+    stage = state["current_stage"]
+    if slide_index == 1:
+        _require(
+            stage in {"RENDER_CONTRACT_READY", "FIRST_FRAME_QC_PENDING"},
+            f"slide 1 render blocked at production stage {stage}"
+        )
+    else:
+        _require(
+            stage == "REMAINING_RENDER",
+            f"slide {slide_index} render requires production stage REMAINING_RENDER, got {stage}"
+        )
 
     supplied_by_id = {x.get("requirement_id"): x for x in supplied_media}
     supported_types = set(renderer_supported_media_types)
@@ -332,15 +407,13 @@ def authorize(
         if expected_hash:
             _require(evidence.get("actual_hash") == expected_hash, f"{rid}: supplied media hash mismatch")
 
+    # Backward-compatible CLI argument is deliberately non-authoritative.
+    # A literal PASS cannot replace persisted QC bound to a specific artifact.
+    _require_persisted_qc(plan, state, slide_index, prompt_binding)
+
     if prompt_binding == "CONVERSATION_INFERRED":
-        if slide_index > 1:
-            _require(previous_frame_qc == "PASS", "conversation-inferred renderer requires previous frame semantic QC PASS")
         return "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME"
-
-    if slide_index > 1:
-        _require(previous_frame_qc == "PASS", "explicit-payload continuation requires first-frame semantic QC PASS")
     return "AUTHORIZED_FIRST_FRAME" if slide_index == 1 else "AUTHORIZED_POST_FIRST_FRAME"
-
 
 def parse_supplied_media(values: list[str]) -> list[dict]:
     parsed = []

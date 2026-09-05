@@ -530,3 +530,24 @@ AutoPipeline owns the generic declared/capability/supplied model; Instatoon adds
 The standalone guard does not call the renderer or inspect generated pixels. `--previous-frame-qc PASS` and supplied-media arguments are caller declarations, not stored inspection records.
 Manual production must check the actual request and output. Future runtime requirements are specified in AUTOMATION_TRANSITION.md: persist approval/QC bound to exact artifacts, build media evidence from the request and call the renderer through the same entry point.
 Do not claim CI or input authorization proves story/style correctness.
+
+
+## 18. Persisted production-state gate — ACTIVE
+
+Every canonical episode that reaches render-contract stage must contain `episodes/<ID>/PRODUCTION_STATE.json`.
+
+This file is the machine-facing execution authority for:
+- current production stage;
+- L8 full-package approval;
+- durable partial decisions such as CAST_RESOLVED that are explicitly **not** full L8 approval;
+- per-slide QC records bound to slide_id, attempt_id and artifact SHA-256.
+
+Render authorization rules:
+- `voice_gate.status=PASS` is insufficient by itself; `approved_scope` must be `L1_L7_FULL_PACKAGE` and approval_kind must be `USER_EXPLICIT`;
+- a cast-only choice or other partial decision cannot authorize L10+ or L13;
+- slide 1 requires a render-ready stage;
+- slide 2+ in conversation-inferred mode requires a persisted PASS record for the immediately previous slide;
+- a CLI/string `--previous-frame-qc PASS` is compatibility input only and is never evidence;
+- explicit-payload continuation requires persisted first-frame QC.
+
+This is a fail-closed bridge until the future runtime DB replaces the repository sidecar.

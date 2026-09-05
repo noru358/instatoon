@@ -219,3 +219,18 @@ AutoPipeline의 MEDIA_INPUT_CONTRACT가 공통 선언/능력/공급 모델을 �
 - 수집 소재에 맞는 말투·이상한 디테일을 살리고, QC가 재미를 평균적인 교훈으로 바꾸지 않게 한다.
 - 성과는 주제/길이/훅 실험의 입력이며 그림체·목소리·주연 정책을 자동 변경하지 않는다.
 - 규칙은 소유 문서에 갱신하고 새 handoff/락/예외 파일을 계속 붙이지 않는다.
+
+
+## 7. Implemented short-term state gate — 2026-09-06
+
+The repository now has a fail-closed `PRODUCTION_STATE.json` sidecar contract and render_guard enforcement.
+
+Implemented now:
+- full L8 approval is distinct from CAST_ONLY / other partial decisions;
+- compile/validate require persisted full-package L8 approval;
+- render authorization requires an allowed production stage;
+- caller-supplied `PASS` text no longer authorizes continuation;
+- conversation-inferred slide N requires persisted QC PASS for slide N-1 bound to slide_id + attempt_id + artifact SHA-256;
+- explicit-payload continuation requires persisted first-frame QC.
+
+This sidecar is intentionally a short-term bridge. The future AutoPipeline runtime DB should preserve the same invariants and become the sole mutable execution-state authority.

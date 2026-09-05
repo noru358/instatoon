@@ -11,6 +11,7 @@ from pipeline.render_guard import (
     compile_prompt,
     validate_repository,
     validate_episode_plan,
+    validate_production_state,
 )
 
 REPO = Path(__file__).resolve().parents[1]
@@ -93,17 +94,53 @@ class RenderGuardTests(unittest.TestCase):
             "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
         )
 
-    def test_conversation_inferred_cannot_skip_frame_qc(self):
+    def test_literal_pass_cannot_skip_persisted_frame_qc(self):
         eid, plan, _ = self._active_plan_manifest()
         if plan["format"]["slide_count"] < 2:
             self.skipTest("active episode has only one slide")
         supply = self._supply_all_required()
         with self.assertRaises(GuardError):
             authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "NOT_RUN", True, ["image"], supply)
-        self.assertEqual(
-            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply),
-            "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
-        )
+        with self.assertRaises(GuardError):
+            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply)
+
+    def test_partial_cast_decision_is_not_l8_approval(self):
+        eid, plan, _ = self._active_plan_manifest()
+        state = json.loads((REPO / "episodes" / eid / "PRODUCTION_STATE.json").read_text(encoding="utf-8"))
+        state["current_stage"] = "CAST_RESOLVED"
+        state["voice_gate"] = {
+            "status": "PENDING",
+            "approved_scope": "CAST_ONLY",
+            "approval_kind": "USER_EXPLICIT",
+            "evidence": "user selected episode-only protagonist only"
+        }
+        with self.assertRaisesRegex(GuardError, "L8 USER VOICE GATE"):
+            validate_production_state(plan, state)
+
+    def test_persisted_bound_qc_allows_next_conversation_frame(self):
+        eid, plan, _ = self._active_plan_manifest()
+        if plan["format"]["slide_count"] < 2:
+            self.skipTest("active episode has only one slide")
+        supply = self._supply_all_required()
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td) / "repo"
+            shutil.copytree(REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            state_path = root / "episodes" / eid / "PRODUCTION_STATE.json"
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            state["current_stage"] = "REMAINING_RENDER"
+            first_id = plan["slides"][0]["slide_id"]
+            state["frame_qc"][first_id] = {
+                "slide_id": first_id,
+                "status": "PASS",
+                "inspected_output": True,
+                "attempt_id": "test-attempt-001",
+                "artifact_sha256": "a" * 64
+            }
+            state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+            self.assertEqual(
+                authorize(root, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply),
+                "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
+            )
 
     def test_multi_panel_or_combined_delivery_is_rejected(self):
         for field, bad in [("panels_per_image", 4), ("panels_per_image", None),

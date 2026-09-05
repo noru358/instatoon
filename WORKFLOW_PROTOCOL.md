@@ -246,3 +246,15 @@ When render rules change, 갱신 is complete only after guard tests, active-cont
 
 Read the active tool definition each session. Native/direct image generation can have explicit prompt and image-path inputs; never infer inability from an old chat.
 GENERATION_PROTOCOL.md owns media preflight. Record actual inputs, not just declared paths. The current standalone guard cannot prove an external call received media or that a QC claim corresponds to an output.
+
+
+## 16. Persisted execution state — mandatory restore input
+
+For an episode at or beyond L8, restore `episodes/<ID>/PRODUCTION_STATE.json` before deciding what the user's latest message authorizes.
+
+Partial decisions are first-class states. Example:
+- user chooses an episode-only foreign protagonist → `CAST_RESOLVED`;
+- this does **not** imply `L8_APPROVED`;
+- only explicit approval of the full L1-L7 review package may set the L8 gate to PASS.
+
+Before any compile/authorize/render action, the executable guard must validate this persisted state. Chat interpretation cannot bypass it.

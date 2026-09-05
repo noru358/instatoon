@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "production_state.schema.json",
+  "title": "Instatoon Production State",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "state_version",
+    "episode_id",
+    "current_stage",
+    "voice_gate",
+    "frame_qc"
+  ],
+  "properties": {
+    "state_version": {
+      "const": "1.0"
+    },
+    "episode_id": {
+      "type": "string",
+      "pattern": "^E[0-9]+$"
+    },
+    "current_stage": {
+      "enum": [
+        "L8_AWAITING_APPROVAL",
+        "CAST_RESOLVED",
+        "L8_APPROVED",
+        "STORYBOARD_READY",
+        "VISUAL_PLAN_READY",
+        "RENDER_CONTRACT_READY",
+        "FIRST_FRAME_QC_PENDING",
+        "REMAINING_RENDER",
+        "LETTERING",
+        "FINAL_QC",
+        "EXPORT_READY"
+      ]
+    },
+    "voice_gate": {
+      "type": "object",
+      "required": [
+        "status",
+        "approved_scope",
+        "approval_kind",
+        "evidence"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PENDING",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "approved_scope": {
+          "enum": [
+            "NONE",
+            "CAST_ONLY",
+            "L1_L7_FULL_PACKAGE"
+          ]
+        },
+        "approval_kind": {
+          "enum": [
+            "USER_EXPLICIT",
+            "NONE"
+          ]
+        },
+        "evidence": {
+          "type": "string"
+        }
+      }
+    },
+    "decisions": {
+      "type": "array"
+    },
+    "frame_qc": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    }
+  }
+}
