@@ -77,7 +77,7 @@ class RenderGuardTests(unittest.TestCase):
 
     def test_compiled_prompt_contains_generic_media_requirements(self):
         eid, plan, manifest = self._active_plan_manifest()
-        prompt = compile_prompt(REPO, eid, 1)
+        prompt = compile_prompt(REPO, eid, 1, require_active=False)
         self.assertIn(plan["slides"][0]["slide_id"], prompt)
         self.assertIn("REQUIRED MEDIA INPUTS:", prompt)
         for req in manifest["media_requirements"]:
@@ -169,7 +169,7 @@ class RenderGuardTests(unittest.TestCase):
 
     def test_single_panel_compiler_isolates_requested_scene(self):
         eid, plan, _ = self._active_plan_manifest()
-        prompt = compile_prompt(REPO, eid, 1)
+        prompt = compile_prompt(REPO, eid, 1, require_active=False)
         self.assertIn("Exactly ONE panel in ONE image", prompt)
         self.assertIn("Reference sheets are input references only", prompt)
         if len(plan["slides"]) > 1:
@@ -205,14 +205,14 @@ class RenderGuardTests(unittest.TestCase):
                 validate_repository(root, eid, require_active=False)
 
     def test_stale_manifest_fails_closed(self):
-        active = self._active()
+        eid, _, _ = self._active_plan_manifest()
         with tempfile.TemporaryDirectory() as td:
             root = Path(td) / "repo"
             shutil.copytree(REPO, root, dirs_exist_ok=True)
-            plan_path = root / "episodes" / active / "EPISODE_PLAN.json"
+            plan_path = root / "episodes" / eid / "EPISODE_PLAN.json"
             plan_path.write_text(plan_path.read_text(encoding="utf-8") + "\n", encoding="utf-8")
             with self.assertRaises(GuardError):
-                validate_repository(root, active)
+                validate_repository(root, eid, require_active=False)
 
 
 if __name__ == "__main__":

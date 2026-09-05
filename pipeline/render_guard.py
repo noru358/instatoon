@@ -309,8 +309,8 @@ def validate_repository(repo_root: Path, episode_id: str | None = None, require_
     return plan, manifest
 
 
-def compile_prompt(repo_root: Path, episode_id: str, slide_index: int) -> str:
-    plan, manifest = validate_repository(repo_root, episode_id)
+def compile_prompt(repo_root: Path, episode_id: str, slide_index: int, require_active: bool = True) -> str:
+    plan, manifest = validate_repository(repo_root, episode_id, require_active=require_active)
     _require(1 <= slide_index <= len(plan["slides"]), "requested slide index out of range")
 
     slide = plan["slides"][slide_index - 1]
