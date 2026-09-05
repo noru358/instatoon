@@ -85,14 +85,14 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           EPISODE: ${{ steps.ep.outputs.id }}
-        run: python pipeline/auto_finish.py run --episode "$EPISODE"
+        run: python -m pipeline.auto_finish run --episode "$EPISODE"
 
       - name: Show episode status
         env:
           EID: ${{ steps.ep.outputs.id }}
         run: |
           python pipeline/render.py status --episode "$EID"
-          python pipeline/auto_finish.py status --episode "$EID"
+          python -m pipeline.auto_finish status --episode "$EID"
 
       - name: Commit QC / auto-finish result
         env:
