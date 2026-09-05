@@ -45,7 +45,8 @@
     ],
     "forbidden_legacy_refs": [
       "LEGACY_V1_STYLE"
-    ]
+    ],
+    "reference_conditioning_requirement": "BINARY_REQUIRED"
   },
   "slides": [
     {
