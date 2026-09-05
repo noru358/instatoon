@@ -162,8 +162,14 @@ input: episode-only role + style refs
 output: identity digest + optional temporary internal anchor only when needed
 
 RASTER_RENDER
-input: slide spec + exact references + prompt
-output: art artifact + metadata
+input: slide spec + exact references + prompt + renderer capability profile
+output: art artifact + metadata + reference-conditioning mode
+
+Renderer selection rule:
+- native/direct image generation is a valid first-class renderer;
+- do not invoke an external provider merely because it is connected;
+- external provider use requires explicit user request, a missing native capability, or a provider/automation test;
+- one provider's credit failure does not block RASTER_RENDER if another valid renderer path exists.
 
 QC
 input: planned beat + refs + artifact
@@ -176,6 +182,8 @@ Prompt assembly must be deterministic code.
 Load exact current blocks from MASTER_PROMPTS.md or a version-linked machine-readable mirror.
 
 Inputs:
+- current restore-pack/version check;
+- renderer capability profile;
 - scene facts;
 - story clarity;
 - output ratio;
@@ -191,6 +199,8 @@ The model must not rewrite the project style each time.
 ## 6. Reference-role separation
 
 Runtime must distinguish:
+- RENDERER;
+- REFERENCE_CONDITIONING_MODE = BINARY_CONDITIONED | AUTHORITY_INFORMED_NON_BINARY_CONDITIONED;
 - STYLE_REFERENCE;
 - MAIN_CHARACTER_REFERENCE;
 - EPISODE_CHARACTER_IDENTITY;
@@ -271,11 +281,17 @@ Git is not the live job queue.
 
 ## 10. Integration hierarchy
 
-Prefer:
+Manual/chat production:
+1. native/direct ChatGPT generation when it satisfies the required visual task;
+2. connected external renderer only when explicitly requested or materially necessary.
+
+Executable AutoPipeline:
 1. official provider API;
 2. MCP when cross-client interoperability matters;
 3. internal adapter;
 4. browser automation fallback.
+
+Renderer choice is capability-driven, not habit-driven.
 
 Browser/UI automation must be isolated behind adapters.
 
@@ -298,7 +314,14 @@ Success means one run can proceed without hidden chat memory.
 
 ## 12. Cost controls
 
-Every paid stage records:
+Every generation stage records:
+- renderer/tool;
+- reference-conditioning mode;
+- exact visual authorities inspected;
+- exact media inputs supplied when supported;
+- whether generation was paid, unlimited, or native;
+
+Every paid stage additionally records:
 - estimated cost if available;
 - actual cost;
 - provider/tool job ID;
