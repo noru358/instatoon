@@ -6,7 +6,7 @@ Repository: noru358/instatoon
 
 ## Big flow
 
-Style reset complete → real omnibus pilot E002 → fresh coordinated 7-slide visual pass → dialogue/layout refinement → first publishable episode → repeat prototypes → automation implementation.
+Style reset complete → E002 pilot lessons captured → E003 human-seeded production → native/direct coordinated raster pass → lettering/QC → first publishable episode → repeat prototypes → automation implementation.
 
 ## Current detailed position
 
@@ -38,10 +38,19 @@ Gaeun meets a stranger on the way to a restroom, reflexively apologizes when tol
 
 L1-L12 are complete and recorded in episodes/E003/README.md.
 
-L13 raster render is blocked:
-- REF_V2_D and REF_V2_E were actually supplied as reference URLs to a reference-capable renderer;
-- the connected renderer workspace rejected all six jobs before generation because it is out of credits;
-- no fallback render without canonical binary references is allowed.
+L13 raster render is READY through native/direct image generation.
+
+Historical external attempt:
+- REF_V2_D and REF_V2_E were supplied as reference URLs to Higgsfield Nano Banana Pro;
+- that optional provider rejected all six jobs before generation because its connected workspace had no credits;
+- this is a provider-specific failure, not a project-stage blocker.
+
+Current renderer rule:
+- native/direct ChatGPT image generation is first-class and may be used without invoking Higgsfield;
+- before direct generation, restore the full production pack and inspect the actual current visual binaries;
+- use MASTER_PROMPTS + observed reference traits + episode visual plan;
+- if a renderer cannot accept the repository binaries as explicit media inputs, report AUTHORITY-INFORMED / NON-BINARY-CONDITIONED honestly rather than pretending they were injected;
+- never generate from chat memory alone.
 
 ## Current hard lesson
 
@@ -60,12 +69,13 @@ This applies across future sessions and episodes.
 ## Exact next action
 
 1. Keep E003 source/story/dialogue/storyboard as the current production package.
-2. Resume at L13 only through a renderer that actually receives REF_V2_D + REF_V2_E.
-3. Generate six coordinated text-free frames.
-4. Run sequence/style/identity/spatial QC.
-5. Apply editable lettering.
-6. Present the complete sequence for user taste gate.
-7. Do not substitute a no-reference renderer merely to produce output.
+2. Before L13, restore CURRENT_STATE + MASTER_PROMPTS + VISUAL_GRAMMAR + GENERATION_PROTOCOL + REFERENCE_SET + E003 package and inspect REF_V2_D + REF_V2_E.
+3. Use native/direct ChatGPT image generation first unless the user requests another renderer or a required capability is missing.
+4. Generate six coordinated text-free frames while preserving Gaeun and the episode-only stranger identity digest.
+5. Report exact docs/assets inspected, renderer used, and binary-conditioned vs authority-informed/non-binary-conditioned mode.
+6. Run sequence/style/identity/spatial QC.
+7. Apply editable lettering.
+8. Present the complete sequence for user taste gate.
 
 ## Current visual risk to watch
 
@@ -86,7 +96,7 @@ Dialogue is not final until the user taste gate passes.
 
 ## Repository authority after cleanup
 
-Read:
+Read before production:
 1. README.md
 2. this file
 3. SOURCE_STORY_PIPELINE.md
@@ -94,6 +104,9 @@ Read:
 5. VISUAL_GRAMMAR.md
 6. GENERATION_PROTOCOL.md
 7. REFERENCE_SET.md
+8. active episode package
+
+Direct/native image generation does not waive this restore order.
 
 Legacy overlapping root documents have been merged/retired; Git history preserves them.
 
