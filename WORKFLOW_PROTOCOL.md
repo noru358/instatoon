@@ -309,3 +309,13 @@ If the active episode requires BINARY_REQUIRED:
 - do not downgrade to authority-only from convenience or tool habit.
 
 A renderer capability mismatch is a preflight BLOCK, not an invitation to generate and QC afterward.
+
+
+## Generic media preflight portability
+
+Before a generation call, build the active job's media requirements from the child manifest and run capability/supply preflight.
+
+Do not encode individual canonical asset names into orchestration code.
+New required assets are data entries, not new if/else branches.
+
+The same model must support image, audio, video, and future media types.
