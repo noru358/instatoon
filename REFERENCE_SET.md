@@ -93,3 +93,16 @@ REF_V2_A, REF_V2_B and REF_V2_C are still not materialized here. Until they are 
 - do not substitute legacy v1 assets;
 - use their approved binaries only when present in the active environment;
 - if a task specifically requires one of those missing references, stop rather than silently reverting.
+
+
+## Reference-conditioning requirement
+
+Current canonical v2 production requires BINARY_CONDITIONED reference use for L13.
+
+Operational meaning:
+- REF_V2_D and REF_V2_E must be supplied to the chosen renderer as actual media inputs when an episode lists them in required_refs;
+- repository existence, hashes, prompt descriptions, or operator inspection alone are insufficient;
+- a renderer without an explicit reference-media bridge is not eligible for canonical v2 raster production;
+- AUTHORITY_INFORMED / NON-BINARY-CONDITIONED output may be used only when an episode explicitly declares AUTHORITY_ONLY_ALLOWED, never as an implicit fallback for v2 production.
+
+This requirement is enforced machine-readably through EPISODE_PLAN, RENDER_MANIFEST, and pipeline/render_guard.py.
