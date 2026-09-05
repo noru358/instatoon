@@ -1,6 +1,6 @@
 # E003 — 왜 죄송하지
 
-Status: SOURCE/VOICE/STORYBOARD LOCKED — RASTER RENDER BLOCKED (renderer credits)
+Status: SOURCE/VOICE/STORYBOARD LOCKED — READY FOR NATIVE/DIRECT RASTER PASS
 
 ## 1. Provenance
 
@@ -113,7 +113,11 @@ SCENE-LEVEL STYLE:
 PROMPT:
 - MASTER_PROMPTS.md v2.2
 
-Do not claim style compliance unless these binaries are actually supplied to the renderer.
+Reference-use rule:
+- inspect these binaries before any render;
+- when the renderer supports explicit media refs, supply them;
+- for direct/native ChatGPT image generation without a repository-media slot, compile the observed reference traits + MASTER_PROMPTS into the generation instruction and report AUTHORITY-INFORMED / NON-BINARY-CONDITIONED;
+- do not promote a new canonical reference without visual QC.
 
 ## 8. QC priorities
 
@@ -137,9 +141,16 @@ Attempted renderer:
 - six coordinated text-free frames
 
 Result:
-BLOCKED before generation.
-The connected Private workspace returned: out of credits.
-No image from this failed submission is accepted as an E003 visual artifact.
+That external-provider attempt was blocked before generation because the connected Private workspace had no credits.
+No image from that failed submission is accepted as an E003 visual artifact.
 
-Important:
-Do not fall back to a renderer path that cannot receive the canonical reference binaries merely to obtain an image. Style fidelity outranks producing a knowingly wrong render.
+Interpretation:
+This does NOT block L13 as a whole. It only blocks that optional Higgsfield attempt.
+Native/direct ChatGPT image generation is an allowed next renderer after mandatory visual-authority preflight.
+
+Next raster route:
+1. inspect REF_V2_D + REF_V2_E and current prompt/grammar/protocol docs;
+2. use native/direct generation first;
+3. generate the coordinated six-frame text-free pass;
+4. report whether the renderer was binary-conditioned or authority-informed/non-binary-conditioned;
+5. run whole-sequence QC before any reference promotion.
