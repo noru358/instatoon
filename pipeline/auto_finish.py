@@ -291,6 +291,11 @@ def record_auto_pass(
         "qc_report_path": str(report_path.relative_to(REPO_ROOT)),
         "qc_confidence": result.confidence,
     }
+    registered = renderer.register_episode_identity_anchors(
+        plan, state, slide, path, digest
+    )
+    for cid in registered:
+        event(state, "IDENTITY_ANCHOR_REGISTERED", character_id=cid, slide_id=sid)
 
     passed = {
         s["slide_id"] for s in plan["slides"]
