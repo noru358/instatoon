@@ -69,6 +69,7 @@ Cast cardinality / role rule:
 - supporting/episode-only characters are first-class cast when the story role requires them;
 - do not add Gaeun/Harin/Taemin merely to create a reaction shot or fill a three-person composition;
 - if an episode-local character appears in 2+ cuts, give that character a persistent identity digest before raster generation.
+- this routing policy is global pipeline behavior; episode packages store only the resolved cast/roles for that episode and must not redefine the global cardinality rule.
 
 - recurring lead: canonical style media + that selected lead’s actual identity reference;
 - episode-only person: canonical style media for drawing language only + the story-derived age, gender/presentation, body, hair, clothes and identity digest; do not inherit the reference cast’s identity or demographic;
