@@ -46,6 +46,7 @@ Python = orchestration/enforcement.
 Current conceptual flow:
 
 SOURCE_CANDIDATES
+→ HUMAN_SOURCE_SEED_CHECK
 → SOURCE_SELECTED
 → SOURCE_NORMALIZED
 → STORY_PLANNED
@@ -135,6 +136,10 @@ A model reasons inside a bounded stage.
 It does not invent a new workflow after failure.
 
 Examples:
+
+HUMAN_SOURCE_SEED_CHECK
+input: source candidates + user premise
+output: selected human-produced base material, provenance class (literal source / inspiration base / composite seed / pure original fallback), and reason
 
 SOURCE_NORMALIZE
 input: raw source
@@ -308,6 +313,23 @@ Use:
 - bounded retries.
 
 Automation is not permission for unattended spend.
+
+## 12.5 Human-source-first default
+
+Unless the user explicitly requests pure invention, source discovery should attempt to attach real human-produced material before story planning.
+
+The runtime may:
+- use one human anecdote as a base;
+- combine multiple human anecdotes/comments into a composite seed;
+- heavily fictionalize/restructure after collection.
+
+It must distinguish:
+- literal-source adaptation;
+- inspiration/base provenance;
+- composite human-seeded premise;
+- pure original fallback.
+
+The purpose is not factual purity. The purpose is to preserve human specificity, cadence, social awkwardness, and non-generic detail while preventing the model from inventing an entire premise in a vacuum by default.
 
 ## 13. Human gates
 
