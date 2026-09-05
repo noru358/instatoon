@@ -106,3 +106,26 @@ Operational meaning:
 - AUTHORITY_INFORMED / NON-BINARY-CONDITIONED output may be used only when an episode explicitly declares AUTHORITY_ONLY_ALLOWED, never as an implicit fallback for v2 production.
 
 This requirement is enforced machine-readably through EPISODE_PLAN, RENDER_MANIFEST, and pipeline/render_guard.py.
+
+
+## Runtime binding requirement — SHORT-TERM PRODUCTION LOCK
+
+Reference status and reference delivery are separate.
+
+A canonical asset is not considered visually active for a production render merely because:
+- it exists in GitHub;
+- its path/hash was restored;
+- the operator inspected it earlier;
+- its traits were paraphrased into text.
+
+For style-sensitive production, the canonical image must be supplied to the renderer as actual image media.
+
+Primary current style/identity media:
+- `assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg`
+
+Secondary scene/style media when available:
+- `assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg`
+
+After an episode receives a human-approved style pass, that approved image becomes a secondary EPISODE STYLE/IDENTITY ANCHOR for later cuts. It supplements but never replaces the canonical style media.
+
+If a client cannot bridge the GitHub binary into the renderer, production must use an equivalent actually attached copy of the same approved image (for example, the user-uploaded copy present in the active conversation). Text-only authority-informed generation is prototype-only under this short-term lock.
