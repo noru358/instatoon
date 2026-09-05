@@ -47,29 +47,29 @@ MISUNDERSTANDING_REVEAL.
 
 ### L5 STORY BEATS
 
-1. HOOK / SETUP — 한국 온 지 얼마 안 됐을 때 치과에 감.
+1. HOOK / SETUP — 한국어 공부 시작한 지 얼마 안 됐을 때 치과에 감.
 2. QUESTION — 접수 직원: "어떻게 오셨어요?"
 3. CONFIDENT MISREAD — 주인공: "자전거 타고 왔어요 :)"
-4. AWKWARD BEAT — 직원이 웃고 잠깐 정적.
-5. CLARIFICATION / REALIZATION — 방문 이유를 다시 묻고, 주인공이 뒤늦게 뜻을 깨달음.
-6. LANDING — "...사랑니요." 이후 민망해서 대기석으로 감. 이미지가 민망함을 마무리하고 별도 교훈은 넣지 않음.
+4. REACTION — 접수 직원이 웃음/피식. 주인공이 순간 이상함을 느낌.
+5. RETREAT — 별말 더 못 하고 바로 대기석으로 감.
+6. LANDING — 대기석에서 민망해하는 장면. 작은 내레이션으로 "사랑니 뽑으러 간 거였음" 정도만 사실 보충하고 별도 교훈/추가 펀치라인은 넣지 않음.
 
 ### L6-L7 DIALOGUE / HUMANIZATION
 
 Current dialogue candidate:
-- narration/setup: "한국 온 지 얼마 안 됐을 때 치과 갔는데"
+- narration/setup: "한국어 공부 시작한 지 얼마 안 됐을 때 치과 갔는데"
 - receptionist: "어떻게 오셨어요?"
 - protagonist: "자전거 타고 왔어요 :)"
-- receptionist awkward reaction: "…아ㅎㅎ 네…" — adaptation candidate, not source-verbatim
-- receptionist clarification: "오늘 어디가 불편해서 오셨어요?" — neutral staging/adaptation
-- protagonist: "…사랑니요."
-- final landing: no dialogue preferred.
+- receptionist: readable dialogue not required; visual giggle/reaction is preferred because the source only says she giggled
+- protagonist then retreats to the waiting seat without an invented clarification exchange
+- final small narration candidate: "사랑니 뽑으러 간 거였음"
 
 Do NOT add:
 - "아! 무슨 뜻인지 알 것 같아!"
 - a moral;
 - "그날 한국어 공부 끝냄" or another manufactured closing joke;
-- extra explanatory dialogue unless the user approves it.
+- extra explanatory dialogue unless the user approves it;
+- the previously invented receptionist clarification question and protagonist "...사랑니요." exchange.
 
 ## 3. Cast decision — PARTIAL USER APPROVAL ONLY
 
