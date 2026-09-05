@@ -43,7 +43,11 @@ Current stage:
 - L8 USER VOICE GATE intentionally deferred until before final lettering because raster masters are text-free;
 - L9 has no new durable voice rule yet;
 - L10-L12 complete;
-- L13 TEXT-FREE ART GENERATION is next/in progress.
+- L12.5 RENDER CONTRACT GATE complete;
+- E004 EPISODE_PLAN.json + SHA-bound RENDER_MANIFEST.json materialized;
+- executable render guard + regression tests + GitHub Actions are active;
+- prior unrelated native outputs are INVALID/discarded and do not count as L13 artifacts;
+- L13 is reset to FIRST-FRAME SEMANTIC GATE NEXT.
 
 Cast:
 - Taemin = recurring REF_V2_D main-cast identity.
@@ -88,12 +92,13 @@ New-work commands such as "새 만화" always restart from fresh human-source di
 
 ## Exact next action
 
-1. Render the six E004 text-free 4:5 frames as one coordinated episode batch.
-2. Preserve Taemin and the episode-only woman identity digest.
-3. Run sequence/style/identity/spatial QC, especially 17F/21F logic and ensuring the woman remains inside at 17F.
-4. Do not bake final dialogue into raster art.
-5. Present the sequence for user taste/voice gate.
-6. After dialogue approval, apply editable lettering and final mobile QC.
+1. Run `python pipeline/render_guard.py validate`.
+2. Compile and authorize E004_S01 from the structured contract.
+3. Because the native/direct renderer is conversation-inferred, render exactly ONE frame only.
+4. Run semantic/style/identity QC on S01.
+5. Continue to S02 only if S01 PASS; repeat this gate for every frame.
+6. Preserve Taemin and woman_01 continuity and the 17F/21F spatial logic.
+7. Keep raster text-free; lettering remains after the voice gate.
 
 ## Current visual risk to watch
 
@@ -136,3 +141,35 @@ The canonical interpretation remains:
 The third image is NOT a failed/drifted example.
 
 Actual contamination means romance-webtoon / generic AI-pretty rendering, soft beige atmosphere, heavier shading, and altered face grammar.
+
+
+## Render-contract hardening — 2026-09-05
+
+The repeated wrong-story native-render failure is now treated as an orchestration defect, not a reminder problem.
+
+Repository-wide controls now active:
+- schemas/episode_plan.schema.json
+- schemas/render_manifest.schema.json
+- pipeline/render_guard.py
+- pipeline/test_render_guard.py
+- .github/workflows/render-guard.yml
+- per-episode EPISODE_PLAN.json
+- per-episode SHA-bound RENDER_MANIFEST.json
+
+Global policy:
+- no free-form render from chat memory;
+- active episode / plan / manifest must match;
+- plan mutation invalidates old manifest;
+- required current reference paths must exist;
+- unexpected concepts are FAIL_CLOSED;
+- explicit compiled-payload renderers first-frame gate the batch;
+- conversation-inferred renderers are sequential and gate every frame;
+- semantic mismatch stops the run immediately and can never become LAST_KNOWN_GOOD/reference.
+
+Verified regression coverage includes:
+- active-episode mismatch rejection;
+- stale-manifest rejection;
+- deterministic E004 prompt binding;
+- conversation-inferred next-frame rejection without prior QC PASS.
+
+This materially reduces recurrence and, crucially, prevents a wrong output from propagating through the rest of the episode. Model/renderer misbehavior can still occur, so zero-error generation is not guaranteed; the system is designed to detect and contain it before continuation.
