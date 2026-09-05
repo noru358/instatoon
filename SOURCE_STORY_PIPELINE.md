@@ -31,6 +31,18 @@ But every episode decides cast from its own story/context.
 Do not use a main character merely because the script needs a person of the same gender.
 Episode-specific characters are normal.
 
+## 0.5 New-work routing
+
+User commands such as "새 만화 만들어", "새 작품", "하나 만들어", or equivalent default to NEW_EPISODE.
+
+NEW_EPISODE means:
+1. start again at L1 SOURCE DISCOVERY / COLLECTION;
+2. seek fresh human-produced seed material by default;
+3. do not silently reuse the currently active episode premise;
+4. create a new episode ID/package once the source/premise passes the editorial gate.
+
+Continue an existing episode only when the user explicitly refers to that episode, says to continue/repair/retry it, or otherwise clearly anchors the request to existing work.
+
 ## 1. Layered working order
 
 Run the following layers in order.
