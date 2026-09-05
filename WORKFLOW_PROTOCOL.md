@@ -1,10 +1,10 @@
 # WORKFLOW_PROTOCOL.md
 
-# CROSS-ENVIRONMENT / “갱신” PROTOCOL v1.2
+# CROSS-ENVIRONMENT / “갱신” PROTOCOL v1.3
 Updated: 2026-09-05
 
 Purpose:
-Preserve current decisions, prompts, assets, execution evidence, failure lessons, and exact next actions across ChatGPT, Claude, local work, and future automation.
+Preserve current decisions, prompts, assets, execution evidence, failure lessons, exact next actions, and stage-level accountability across ChatGPT, Claude, local work, and future automation.
 
 ## 0. Meaning of “갱신”
 
@@ -208,9 +208,33 @@ Examples:
 - last-known-good state;
 - USER VOICE GATE;
 - sequence-order validation;
-- new deterministic text-layout rule.
+- new deterministic text-layout rule;
+- mandatory stage execution reporting.
 
-## 13. Definition of lossless
+## 13. Mandatory stage execution report
+
+During active production, do not silently jump across stages.
+
+After each meaningful pipeline stage completes, report it to the user even when they did not explicitly ask for a status report.
+
+For every reported stage include:
+- STAGE: canonical stage/layer name;
+- WORKER ROLE: researcher, story editor, dialogue writer, storyboard/cast director, character designer, visual director, renderer, letterer, QC, performance analyst, etc.;
+- EXECUTION ACTOR: the actual actor that performed it (for current manual/chat mode this may be the same ChatGPT orchestrator operating in a bounded role; do not pretend separate agents ran when they did not);
+- INPUT: exact upstream artifact/state used;
+- SOURCE / PROVENANCE: URLs, posts, user-provided material, repository file, or explicitly “original/internal premise — no external source”;
+- OUTPUT: concrete artifact/result produced;
+- STATUS: pass / fail / blocked / awaiting user gate;
+- QC: key checks performed and defects found;
+- NEXT: exact next stage.
+
+Source collection must never imply external provenance when none exists.
+Visual generation must state which exact style and character reference assets were actually supplied to the renderer.
+If required canonical binaries were not supplied, report that as a production defect rather than implying reference compliance.
+
+For long runs, stage reports may be grouped into a compact progress table, but every completed stage must remain auditable.
+
+## 14. Definition of lossless
 
 A competent person/model in a clean environment can determine:
 - what this project makes;
@@ -220,6 +244,7 @@ A competent person/model in a clean environment can determine:
 - what assets/prompts are current;
 - what the active episode is;
 - what to do next;
+- which worker role executed each production stage and from what source/input;
 
 without the previous chat transcript.
 
