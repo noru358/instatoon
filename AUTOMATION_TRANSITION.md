@@ -287,7 +287,8 @@ QC 상세 증거는 artifact 쪽 JSON으로 남기되 다음 단계 권한을 �
 따라서 fail-open이 아니라 fail-closed다.
 
 - PASS + confidence threshold 충족 + critical failure 없음일 때만 자동 PASS;
-- 일반 생성 노이즈로 분류된 STOCHASTIC 실패만 동일 canonical 입력으로 최대 3회;
+- 일반 생성 노이즈로 분류된 STOCHASTIC 실패만 동일 canonical 입력으로 컷당 최대 3회;
+- 회차 전체 후속 render attempt도 기본 10회로 제한해 연쇄 비용 폭주를 막음;
 - cast/scene/prompt/contract 수정이 필요해 보이는 실패는 반복 생성하지 않고 STANDARD로 복귀;
 - 실패한 이미지는 episode anchor나 새로운 authority로 승격하지 않는다.
 
@@ -314,3 +315,16 @@ AUTO_FINISH 실패 시 표준 모드를 삭제/재설계하지 않는다.
 
 이 구조 때문에 실험을 폐기하더라도 데이터 포맷/렌더러를 다시 갈아엎을 필요 없이
 `.github/workflows/qc.yml`에서 `finish_mode=standard`를 선택하면 기존 공정으로 즉시 복귀한다.
+
+
+### 후발 반복 인물의 보조 identity anchor
+
+S01에 없는 episode-local 인물이 뒤 컷에서 처음 등장하고 이후에도 반복될 수 있다.
+AUTO_FINISH는 그 인물의 `appears_in`을 읽어 **첫 QC PASS 등장 컷**만 character-specific identity anchor로 등록한다.
+후속 해당 인물 컷에는 S01 episode anchor와 함께 이 보조 앵커를 실제 미디어로 전달한다.
+
+- 캐릭터 이름 하드코딩 없음;
+- 2컷 이상 반복되는 episode-local 인물만 대상;
+- 실패 이미지 승격 금지;
+- 원본 anchor slide가 나중에 FAIL 처리되면 매핑도 제거;
+- S01 전체 회차 앵커는 계속 고정 유지.
