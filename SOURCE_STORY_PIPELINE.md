@@ -456,12 +456,9 @@ NARRATE when:
 
 Do not use a large caption to explain a scene the image already communicates.
 
-## 6. Current pilot note
+## 6. Current active-episode note
 
-Active current pilot is E002.
-See episodes/E002/README.md.
+The current active production episode is recorded by CURRENT_STATE.md and its episode package.
+As of 2026-09-05 this is E003; E002 remains preserved as a prior pilot/learning episode.
 
-The current blind-date episode uses:
-- Harin as the female lead;
-- an episode-only blind-date man;
-- no global rule banning Taemin from other episodes.
+Do not hard-code an old active episode into future execution. CURRENT_STATE.md wins for the exact live episode.
