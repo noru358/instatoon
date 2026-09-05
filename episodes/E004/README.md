@@ -187,3 +187,23 @@ Systemic repair:
 L12.5 RENDER CONTRACT GATE — PASS.
 L13 TEXT-FREE ART GENERATION — RESET; no valid E004 raster exists yet.
 Next: compile and authorize E004_S01 only, render exactly one frame, run semantic/style/identity QC, then continue only on PASS.
+
+
+## 12. Short-term actual-media style anchor — ACTIVE
+
+User verdict on the latest corrected render: ART STYLE PASS.
+
+Role of that render:
+- EPISODE STYLE/IDENTITY ANCHOR = APPROVED;
+- story-frame promotion = NOT YET; approval was specifically for art style, and scene/composition must still satisfy the slide contract independently.
+
+Short-term binding rule for E004:
+- every production call must include the actual approved canonical character/style sheet image as renderer media;
+- Taemin must be conditioned from that actual sheet, not redesigned from prose;
+- the current approved E004 style render must be reused as a secondary style/identity anchor on subsequent cuts while it remains available as actual media;
+- slide scene facts still come only from EPISODE_PLAN / RENDER_MANIFEST;
+- style anchor never overrides story blocking.
+
+Current conversation has an actually uploaded copy of the approved main-cast/style sheet, so native rendering may proceed under ACTUAL_MEDIA_REQUIRED_FOR_PRODUCTION in this session.
+
+If that actual media is unavailable in a future clean session, production rendering is blocked until the approved binary is actually attached/bridged again. AUTHORITY_INFORMED text-only generation is prototype-only under the current short-term lock.
