@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "episode_id": "E004",
-  "episode_plan_git_blob_sha": "bde1834628166fbbe26b858bee7a50ad883374c3",
+  "episode_plan_git_blob_sha": "538a0d55d23dd3188b53f5e33d3d10f8a778c9ce",
   "canonical_prompt_source": {
     "path": "MASTER_PROMPTS.md",
     "section_heading": "## 12. COMPILED PRODUCTION PROMPT"
@@ -25,7 +25,8 @@
       "BINARY_CONDITIONED",
       "AUTHORITY_INFORMED_NON_BINARY_CONDITIONED"
     ],
-    "unexpected_concept_policy": "FAIL_CLOSED"
+    "unexpected_concept_policy": "FAIL_CLOSED",
+    "required_reference_conditioning": "BINARY_REQUIRED"
   },
   "batch_policy": {
     "explicit_payload": "FIRST_FRAME_GATE_THEN_BATCH",
@@ -41,8 +42,24 @@
         "the elevator doors are open and they are entering together",
         "no dialogue or readable text is baked into the raster"
       ],
-      "required_entities": ["Taemin","woman_01","apartment elevator","open elevator doors"],
-      "forbidden_entities": ["dog","bird","animal mascot","coding screen","laptop focus","self-help theme","2x2 collage","readable text","speech bubbles","unrelated third character"]
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "apartment elevator",
+        "open elevator doors"
+      ],
+      "forbidden_entities": [
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "laptop focus",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles",
+        "unrelated third character"
+      ]
     },
     {
       "index": 2,
@@ -54,8 +71,24 @@
         "the story logic is that woman_01 is going to 21F and Taemin to 17F",
         "no dialogue or readable text is baked into the raster"
       ],
-      "required_entities": ["Taemin","woman_01","elevator button panel","17F destination logic","21F destination logic"],
-      "forbidden_entities": ["dog","bird","animal mascot","coding screen","self-help theme","2x2 collage","readable text","speech bubbles","unrelated third character"]
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "elevator button panel",
+        "17F destination logic",
+        "21F destination logic"
+      ],
+      "forbidden_entities": [
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles",
+        "unrelated third character"
+      ]
     },
     {
       "index": 3,
@@ -67,8 +100,25 @@
         "Taemin and woman_01 preserve exact identity and clothing continuity",
         "no dialogue or readable text is baked into the raster"
       ],
-      "required_entities": ["Taemin","woman_01","open elevator doors","17th-floor hallway","Taemin open-palm courtesy gesture"],
-      "forbidden_entities": ["woman_01 exiting elevator","dog","bird","animal mascot","coding screen","self-help theme","2x2 collage","readable text","speech bubbles","unrelated third character"]
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "open elevator doors",
+        "17th-floor hallway",
+        "Taemin open-palm courtesy gesture"
+      ],
+      "forbidden_entities": [
+        "woman_01 exiting elevator",
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles",
+        "unrelated third character"
+      ]
     },
     {
       "index": 4,
@@ -80,8 +130,26 @@
         "identity and clothing remain unchanged",
         "no dialogue or readable text is baked into the raster"
       ],
-      "required_entities": ["Taemin","woman_01","elevator interior","open doorway","mild confusion","Taemin realization"],
-      "forbidden_entities": ["woman_01 exiting elevator","exaggerated slapstick","dog","bird","animal mascot","coding screen","self-help theme","2x2 collage","readable text","speech bubbles"]
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "elevator interior",
+        "open doorway",
+        "mild confusion",
+        "Taemin realization"
+      ],
+      "forbidden_entities": [
+        "woman_01 exiting elevator",
+        "exaggerated slapstick",
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles"
+      ]
     },
     {
       "index": 5,
@@ -93,8 +161,24 @@
         "identity and clothing remain unchanged",
         "no dialogue or readable text is baked into the raster"
       ],
-      "required_entities": ["Taemin","woman_01","17th-floor hallway","elevator doorway","Taemin exiting alone"],
-      "forbidden_entities": ["woman_01 exiting elevator","dog","bird","animal mascot","coding screen","self-help theme","2x2 collage","readable text","speech bubbles"]
+      "required_entities": [
+        "Taemin",
+        "woman_01",
+        "17th-floor hallway",
+        "elevator doorway",
+        "Taemin exiting alone"
+      ],
+      "forbidden_entities": [
+        "woman_01 exiting elevator",
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles"
+      ]
     },
     {
       "index": 6,
@@ -106,8 +190,25 @@
         "no extra gag, moral, mascot, or unrelated prop is added",
         "no dialogue or readable text is baked into the raster"
       ],
-      "required_entities": ["Taemin","closing elevator doors","woman_01 inside elevator","17th-floor hallway","quiet awkward posture"],
-      "forbidden_entities": ["woman_01 in hallway","dog","bird","animal mascot","coding screen","self-help theme","2x2 collage","readable text","speech bubbles","motivational ending"]
+      "required_entities": [
+        "Taemin",
+        "closing elevator doors",
+        "woman_01 inside elevator",
+        "17th-floor hallway",
+        "quiet awkward posture"
+      ],
+      "forbidden_entities": [
+        "woman_01 in hallway",
+        "dog",
+        "bird",
+        "animal mascot",
+        "coding screen",
+        "self-help theme",
+        "2x2 collage",
+        "readable text",
+        "speech bubbles",
+        "motivational ending"
+      ]
     }
   ]
 }
