@@ -28,13 +28,13 @@ def load_json(path: Path):
 
 def git_blob_sha(path: Path) -> str:
     data = path.read_bytes()
-    header = f"blob {len(data)}\\0".encode()
+    header = f"blob {len(data)}\0".encode()
     return hashlib.sha1(header + data).hexdigest()
 
 
 def active_episode_id(repo_root: Path) -> str:
     state = (repo_root / "CURRENT_STATE.md").read_text(encoding="utf-8")
-    match = re.search(r"^Active episode:\\s+episodes/(E\\d+)/README\\.md\\s*$", state, re.M)
+    match = re.search(r"^Active episode:\s+episodes/(E\d+)/README\.md\s*$", state, re.M)
     if not match:
         raise GuardError("CURRENT_STATE.md has no single parseable Active episode line")
     return match.group(1)
@@ -45,11 +45,11 @@ def extract_markdown_section(path: Path, heading: str) -> str:
     start = text.find(heading)
     if start < 0:
         raise GuardError(f"canonical prompt section missing: {heading}")
-    body_start = text.find("\\n", start)
+    body_start = text.find("\n", start)
     if body_start < 0:
         raise GuardError(f"empty canonical prompt section: {heading}")
     tail = text[body_start + 1:]
-    next_heading = re.search(r"^##\\s+", tail, re.M)
+    next_heading = re.search(r"^##\s+", tail, re.M)
     if next_heading:
         tail = tail[:next_heading.start()]
     section = tail.strip()
@@ -192,19 +192,19 @@ def compile_prompt(repo_root: Path, episode_id: str, slide_index: int) -> str:
     source = manifest["canonical_prompt_source"]
     base = extract_markdown_section(repo_root / source["path"], source["section_heading"])
 
-    episode_only = "\\n".join(
+    episode_only = "\n".join(
         f'- {c["id"]}: {c["identity_digest"]}'
         for c in plan["cast"].get("episode_only", [])
         if slide_index in c.get("appears_in", [])
     ) or "- none"
 
     main_cast = ", ".join(plan["cast"].get("main_cast", [])) or "none"
-    facts = "\\n".join(f"- {x}" for x in slide["scene_facts"])
+    facts = "\n".join(f"- {x}" for x in slide["scene_facts"])
     required = ", ".join(slide["required_entities"])
     forbidden = ", ".join(slide["forbidden_entities"]) or "none"
-    refs = "\\n".join(f"- {x}" for x in manifest["style_refs"])
+    refs = "\n".join(f"- {x}" for x in manifest["style_refs"])
 
-    return f"""${base}
+    return f"""{base}
 
 RENDER CONTRACT — DO NOT DEVIATE
 EPISODE_ID: {plan['episode_id']}
@@ -233,7 +233,7 @@ STYLE REFERENCES REQUIRED BY CONTRACT:
 FAIL-CLOSED:
 Do not substitute a different story, mascot, animal, productivity/self-help theme, coding/Git scene, collage, poster, or unrelated character.
 If the renderer cannot follow this exact scene contract, return no production frame rather than inventing a replacement.
-""".strip() + "\\n"
+""".strip() + "\n"
 
 
 def authorize(repo_root: Path, episode_id: str, slide_index: int, prompt_binding: str, previous_frame_qc: str) -> str:
