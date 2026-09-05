@@ -65,6 +65,7 @@ Default worker roles:
 - L10 STORYBOARD + CAST ROUTER → Storyboard & Cast Director
 - L11 EPISODE-LOCAL CHARACTER DESIGN → Character Designer
 - L12 WHOLE-EPISODE VISUAL PLAN → Visual Director
+- L12.5 RENDER CONTRACT GATE → Render Contract Compiler / Validator
 - L13 TEXT-FREE ART GENERATION → Raster Renderer
 - L14 VECTOR LETTERING / COMPOSITION → Lettering & Layout Designer
 - L15 QC → QC Reviewer
@@ -334,7 +335,40 @@ Plan:
 No fixed 4-cut ideology.
 A 5, 6, 7, or 8-slide story is acceptable if every slide earns its place.
 
+### L12.5 — RENDER CONTRACT GATE
+
+This is mandatory for every episode, renderer, client, and future automation path.
+
+Materialize:
+- `episodes/<ID>/EPISODE_PLAN.json` from the accepted L1-L12 state;
+- `episodes/<ID>/RENDER_MANIFEST.json` bound to the exact EPISODE_PLAN Git blob SHA.
+
+The manifest must carry:
+- episode ID;
+- slide count/order;
+- output ratio and text-free-raster flag;
+- selected cast and episode-only continuity through the plan;
+- required canonical style/reference paths;
+- per-slide scene contract;
+- required entities;
+- forbidden/unplanned entities;
+- renderer prompt-binding policy;
+- FAIL_CLOSED unexpected-concept policy.
+
+Then run:
+`python pipeline/render_guard.py validate`
+
+Hard rules:
+- free-form render calls assembled from chat memory are prohibited;
+- plan/manifest/active-episode mismatch blocks L13;
+- a stale manifest after any EPISODE_PLAN change blocks L13;
+- missing current reference binaries block L13;
+- conversation-inferred renderer paths must render one frame at a time and require semantic QC PASS before the next call;
+- explicit compiled-payload renderers may continue as a batch only after the first frame passes semantic QC.
+
 ### L13 — TEXT-FREE ART GENERATION
+
+L13 may start only after L12.5 PASS.
 
 Production art should normally contain:
 - characters;
