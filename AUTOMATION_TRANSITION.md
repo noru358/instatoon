@@ -1,7 +1,7 @@
 # AUTOMATION_TRANSITION.md
 
-Updated: 2026-09-05
-Status: VERIFIED BASELINE + FUTURE IMPLEMENTATION CONTRACT
+Updated: 2026-09-06
+Status: EXPERIMENTAL AUTO_FINISH IMPLEMENTED + STANDARD FALLBACK
 
 ## 0. 목표와 판단
 
@@ -234,3 +234,78 @@ Implemented now:
 - explicit-payload continuation requires persisted first-frame QC.
 
 This sidecar is intentionally a short-term bridge. The future AutoPipeline runtime DB should preserve the same invariants and become the sole mutable execution-state authority.
+
+
+## 8. 2026-09-06 구현 델타 — anchor-gated AUTO_FINISH 실험
+
+이 절은 위 감사 시점의 “미구현” 문구보다 최신 구현 상태다. 과거 진단은 원인 기록으로 보존하되,
+현재 실행 가능 여부는 이 절과 실제 코드가 우선한다.
+
+### 승인 토폴로지
+
+두 운영 모드를 공통 구조로 병렬 지원한다.
+
+**STANDARD**
+- 기존 수동 경로를 그대로 유지한다.
+- L8 승인 → S01 사람 QC → 후속 컷 render/QC → LETTERING → final QC/export.
+
+**AUTO_FINISH (experimental default at the S01 QC action)**
+- L8/콘티 패키지 승인 유지;
+- S01 앵커는 반드시 사람이 실제 출력 이미지를 보고 PASS;
+- 그 PASS 이벤트 이후에만 내부 자동 완주를 시작;
+- 후속 raster는 기존 `pipeline/render.py`를 그대로 사용;
+- 자동 vision QC가 후속 컷을 보수적으로 검사하고 artifact/attempt에 묶인 PASS만 기록;
+- 확정 `LETTERING_PLAN.json`을 `pipeline/lettering.py`가 별도 레이어로 합성;
+- 최종 레이아웃 vision QC PASS 후 `EXPORT_READY`.
+
+AUTO_FINISH는 이미지와 레터링을 하나의 생성 호출로 합치지 않는다.
+
+### 상태 계약
+
+두 모드 모두 mutable authority는 `episodes/<ID>/PRODUCTION_STATE.json` 하나다.
+AUTO_FINISH는 선택적 `automation` 객체만 추가한다.
+
+핵심 필드:
+- `mode: AUTO_FINISH | STANDARD`
+- `status: RUNNING | COMPLETED | ROLLED_BACK`
+- S01 human-PASS trigger와 anchor hash
+- max attempts / confidence threshold
+- event log
+- last_error / rollback stage
+- final QC report
+
+QC 상세 증거는 artifact 쪽 JSON으로 남기되 다음 단계 권한을 결정하는 두 번째 상태 저장소로 사용하지 않는다.
+
+### 자동 검수와 재시도
+
+자동 검수는 취향 판단을 대체하는 절대적 진실이 아니라 **앵커 승인 이후의 반복 결함 탐지기**다.
+따라서 fail-open이 아니라 fail-closed다.
+
+- PASS + confidence threshold 충족 + critical failure 없음일 때만 자동 PASS;
+- 일반 생성 노이즈로 분류된 STOCHASTIC 실패만 동일 canonical 입력으로 최대 3회;
+- cast/scene/prompt/contract 수정이 필요해 보이는 실패는 반복 생성하지 않고 STANDARD로 복귀;
+- 실패한 이미지는 episode anchor나 새로운 authority로 승격하지 않는다.
+
+### 레터링 입력 계약
+
+자동 완주에는 `LETTERING_PLAN.json`이 필요하다. 이는 앵커 승인 이후 새 창작을 추가하기 위한 파일이 아니라,
+콘티/whole-episode visual-text plan에서 이미 확정된 카피와 배치를 실행 가능한 형태로 저장하는 계약이다.
+
+스키마: `schemas/lettering_plan.schema.json`.
+
+합성 산출물은 항상 분리된다:
+- art raster;
+- transparent lettering overlay;
+- final composite.
+
+### 롤백 계약
+
+AUTO_FINISH 실패 시 표준 모드를 삭제/재설계하지 않는다.
+
+- remaining raster 또는 자동 frame QC 실패 → `STANDARD / REMAINING_RENDER`;
+- lettering 또는 final layout QC 실패 → `STANDARD / LETTERING`;
+- 이미 유효한 PASS + hash-bound artifact는 보존;
+- 오류 원인과 마지막 자동 이벤트를 상태에 기록.
+
+이 구조 때문에 실험을 폐기하더라도 데이터 포맷/렌더러를 다시 갈아엎을 필요 없이
+`.github/workflows/qc.yml`에서 `finish_mode=standard`를 선택하면 기존 공정으로 즉시 복귀한다.
