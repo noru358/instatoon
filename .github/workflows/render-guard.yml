@@ -16,3 +16,16 @@ jobs:
         run: python -m unittest pipeline.test_render_guard
       - name: Validate active episode render contract
         run: python pipeline/render_guard.py validate
+      - name: Adapter status
+        run: python pipeline/render.py status
+      - name: Adapter S01 dry-run
+        run: python pipeline/render.py render --slide 1 --dry-run
+      - name: Adapter S02 must fail closed
+        run: |
+          set +e
+          OUTPUT=$(python pipeline/render.py render --slide 2 --dry-run 2>&1)
+          RC=$?
+          set -e
+          echo "$OUTPUT"
+          test "$RC" -eq 2
+          echo "$OUTPUT" | grep -F "slide 2 render requires production stage REMAINING_RENDER, got RENDER_CONTRACT_READY"
