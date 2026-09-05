@@ -26,7 +26,9 @@
       "AUTHORITY_INFORMED_NON_BINARY_CONDITIONED"
     ],
     "unexpected_concept_policy": "FAIL_CLOSED",
-    "required_reference_conditioning": "BINARY_REQUIRED"
+    "required_reference_conditioning": "BINARY_REQUIRED",
+    "style_reference_binding_policy": "ACTUAL_MEDIA_REQUIRED_FOR_PRODUCTION",
+    "episode_style_anchor_policy": "REQUIRED_AFTER_STYLE_PASS"
   },
   "batch_policy": {
     "explicit_payload": "FIRST_FRAME_GATE_THEN_BATCH",
