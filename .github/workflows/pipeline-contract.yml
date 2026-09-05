@@ -44,7 +44,7 @@ jobs:
       - name: Wrong-stage auto-finish must not mutate E006
         run: |
           set +e
-          python pipeline/auto_finish.py run --episode E006
+          python -m pipeline.auto_finish run --episode E006
           CODE=$?
           set -e
           test "$CODE" -eq 2
