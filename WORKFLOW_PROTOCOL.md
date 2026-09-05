@@ -271,3 +271,10 @@ without the previous chat transcript.
 A clean environment must also be able to determine exactly which structured episode plan and render manifest authorize the next raster call.
 
 Lossless means decision/state fidelity, not copying conversational noise.
+
+
+## 15. Executable render guard
+
+Before any L13 raster call, restore the active EPISODE_PLAN.json and RENDER_MANIFEST.json and run the repository render guard. A production session is not authorized by chat memory alone.
+
+When render rules change, 갱신 is complete only after guard tests, active-contract validation, remote refetch, CI verification, CURRENT_STATE update last, and the parent AutoPipeline pointer update when applicable.
