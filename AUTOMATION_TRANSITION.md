@@ -468,3 +468,23 @@ Prompt-binding modes:
 Any plan mutation invalidates the prior manifest. No raster call may occur before preflight PASS. A semantic mismatch stops the run and cannot become LAST_KNOWN_GOOD.
 
 Executable baseline is pipeline/render_guard.py with validate, compile, and authorize commands. CI must run its regression tests and validate the active episode.
+
+
+## 17. Actual style-media binding — SHORT-TERM IMPLEMENTATION CONTRACT
+
+Production renderer adapters must expose auditable runtime evidence for:
+- canonical_style_media_bound: YES | NO;
+- episode_style_anchor_bound: YES | NO;
+- exact media identity/path/hash where the adapter can expose it.
+
+Authorization is fail-closed:
+- canonical_style_media_bound must be YES for every production raster;
+- episode_style_anchor_bound must be YES for slide 2+ once the episode has an accepted style anchor.
+
+The current guard CLI represents these as:
+- `--style-media-bound YES|NO`
+- `--episode-anchor-bound YES|NO`
+
+Future provider adapters should derive these flags from the actual request payload, not from a model claim.
+
+A text prompt that names or describes a reference is not equivalent to media binding.
