@@ -45,7 +45,7 @@ Current stage:
 - L12.5 render contract was hardened after the failed native S01 style pass;
 - root cause: the old guard verified that canonical refs existed but did not verify that the renderer actually received them;
 - current v2 episodes now declare reference_conditioning_requirement = BINARY_REQUIRED;
-- render_guard authorization now requires BINARY_CONDITIONED plus evidence that every required canonical ref was actually supplied as renderer media;
+- render authorization now uses generic RENDER_MANIFEST.media_requirements plus renderer capability and supplied-media evidence; current required v2 image refs map to MUST_SUPPLY_MEDIA;
 - native/direct paths without a repository-binary reference bridge are BLOCKED before raster generation rather than allowed to fail after generation;
 - prior E005_S01 remains INVALID; S02 is not authorized.
 
@@ -213,3 +213,16 @@ Verified regression coverage includes:
 - conversation-inferred next-frame rejection without prior QC PASS.
 
 This materially reduces recurrence and, crucially, prevents a wrong output from propagating through the rest of the episode. Model/renderer misbehavior can still occur, so zero-error generation is not guaranteed; the system is designed to detect and contain it before continuation.
+
+
+## Generic media-contract hardening — 2026-09-05
+
+The reference fix is no longer an Instatoon-only style-ref rule.
+AutoPipeline now owns a project-agnostic MEDIA_INPUT_CONTRACT and generic media_gate.
+Instatoon RENDER_MANIFEST now emits media_requirements[] and its render_guard consumes that generic model.
+
+Result:
+- new image/audio/video requirements are data, not code branches;
+- renderer capability mismatch blocks before generation;
+- actual supplied evidence is distinct from repository availability;
+- project-specific asset names are not encoded in the generic authorization algorithm.
