@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-"""Fail-closed Instatoon render-contract validator and deterministic prompt compiler.
+"""Fail-closed Instatoon episode/render validator.
 
-Stdlib-only so ChatGPT/Claude/local/CI can run the same guard.
+Project-specific story/scene checks live here.
+Media-conditioning authorization uses the same generic requirement model as
+AutoPipeline MEDIA_INPUT_CONTRACT: declared requirements + renderer capability
++ actual supplied evidence.
 """
 from __future__ import annotations
 
@@ -103,10 +106,55 @@ def validate_episode_plan(plan: dict):
     )
 
 
+def validate_media_requirements(repo_root: Path, plan: dict, manifest: dict):
+    reqs = manifest.get("media_requirements")
+    _require(isinstance(reqs, list) and reqs, "manifest media_requirements must be non-empty")
+
+    seen = set()
+    for req in reqs:
+        rid = req.get("requirement_id")
+        _require(rid and rid not in seen, f"duplicate/invalid media requirement_id: {rid}")
+        seen.add(rid)
+        _require(req.get("role"), f"{rid}: media role missing")
+        _require(req.get("media_type") in {"image","audio","video","other"}, f"{rid}: invalid media_type")
+        _require(req.get("source_id"), f"{rid}: source_id missing")
+        _require(
+            req.get("conditioning") in {"MUST_SUPPLY_MEDIA","AUTHORITY_ONLY_ALLOWED"},
+            f"{rid}: invalid conditioning"
+        )
+        _require(isinstance(req.get("required"), bool), f"{rid}: required must be boolean")
+
+        source_id = req["source_id"]
+        if not re.match(r"^[a-zA-Z]+://", source_id) and not source_id.startswith("connector:"):
+            _require((repo_root / source_id).is_file(), f"{rid}: required media source missing: {source_id}")
+
+    # Compatibility/migration invariant: every current style_ref must be represented
+    # through the generic requirement model. Authorization never reads style_refs directly.
+    style_sources = {
+        req["source_id"]
+        for req in reqs
+        if req.get("role") == "style" and req.get("required") is True
+    }
+    _require(
+        set(manifest.get("style_refs", [])) <= style_sources,
+        "every style_ref must map to a required generic media requirement"
+    )
+
+    desired = plan["style"]["reference_conditioning_requirement"]
+    if desired == "BINARY_REQUIRED":
+        for ref in manifest.get("style_refs", []):
+            matching = [r for r in reqs if r.get("source_id") == ref and r.get("role") == "style"]
+            _require(matching, f"style ref missing media requirement: {ref}")
+            _require(
+                all(r.get("conditioning") == "MUST_SUPPLY_MEDIA" for r in matching),
+                f"binary-required style ref cannot allow authority-only conditioning: {ref}"
+            )
+
+
 def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: dict):
     for key in (
         "manifest_version","episode_id","episode_plan_git_blob_sha","canonical_prompt_source",
-        "output","style_refs","renderer_contract","batch_policy","slides"
+        "output","style_refs","media_requirements","renderer_contract","batch_policy","slides"
     ):
         _require(key in manifest, f"RENDER_MANIFEST missing {key}")
 
@@ -141,10 +189,7 @@ def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: 
     )
 
     contract = manifest["renderer_contract"]
-    _require(
-        contract.get("unexpected_concept_policy") == "FAIL_CLOSED",
-        "unexpected concept policy must be FAIL_CLOSED"
-    )
+    _require(contract.get("unexpected_concept_policy") == "FAIL_CLOSED", "unexpected concept policy must be FAIL_CLOSED")
     _require(
         contract.get("required_reference_conditioning") == plan["style"]["reference_conditioning_requirement"],
         "manifest reference-conditioning requirement must match EPISODE_PLAN"
@@ -158,36 +203,23 @@ def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: 
         "explicit-payload rendering must first-frame gate"
     )
 
-    _require(len(manifest["slides"]) == len(plan["slides"]), "manifest/plan slide count mismatch")
+    validate_media_requirements(repo_root, plan, manifest)
 
+    _require(len(manifest["slides"]) == len(plan["slides"]), "manifest/plan slide count mismatch")
     for p, m in zip(plan["slides"], manifest["slides"]):
         _require(m.get("index") == p.get("index"), f"slide index mismatch at {p.get('slide_id')}")
         _require(m.get("slide_id") == p.get("slide_id"), f"slide id mismatch at {p.get('slide_id')}")
-        _require(
-            m.get("required_entities") == p.get("required_entities"),
-            f"required_entities drift at {p.get('slide_id')}"
-        )
-        _require(
-            m.get("forbidden_entities") == p.get("forbidden_entities"),
-            f"forbidden_entities drift at {p.get('slide_id')}"
-        )
-        _require(
-            m.get("scene_contract") == p.get("scene_facts"),
-            f"scene contract drift at {p.get('slide_id')}"
-        )
-
-    for ref in manifest["style_refs"]:
-        _require((repo_root / ref).is_file(), f"required visual ref missing: {ref}")
+        _require(m.get("required_entities") == p.get("required_entities"), f"required_entities drift at {p.get('slide_id')}")
+        _require(m.get("forbidden_entities") == p.get("forbidden_entities"), f"forbidden_entities drift at {p.get('slide_id')}")
+        _require(m.get("scene_contract") == p.get("scene_facts"), f"scene contract drift at {p.get('slide_id')}")
 
 
 def validate_repository(repo_root: Path, episode_id: str | None = None):
     active = active_episode_id(repo_root)
     eid = episode_id or active
     episode_dir = repo_root / "episodes" / eid
-
     plan = load_json(episode_dir / "EPISODE_PLAN.json")
     manifest = load_json(episode_dir / "RENDER_MANIFEST.json")
-
     _require(plan.get("episode_id") == eid, "episode directory/plan id mismatch")
     validate_episode_plan(plan)
     validate_manifest(repo_root, episode_dir, plan, manifest)
@@ -212,8 +244,11 @@ def compile_prompt(repo_root: Path, episode_id: str, slide_index: int) -> str:
     facts = "\n".join(f"- {x}" for x in slide["scene_facts"])
     required = ", ".join(slide["required_entities"])
     forbidden = ", ".join(slide["forbidden_entities"]) or "none"
-    refs = "\n".join(f"- {x}" for x in manifest["style_refs"])
-    conditioning = manifest["renderer_contract"]["required_reference_conditioning"]
+    media = "\n".join(
+        f'- {r["requirement_id"]} | role={r["role"]} | type={r["media_type"]} | '
+        f'source={r["source_id"]} | conditioning={r["conditioning"]}'
+        for r in manifest["media_requirements"] if r.get("required") is True
+    )
 
     return f"""{base}
 
@@ -222,7 +257,6 @@ EPISODE_ID: {plan['episode_id']}
 SLIDE_ID: {slide['slide_id']}
 OUTPUT: {plan['format']['aspect_ratio']} {plan['format']['width']}x{plan['format']['height']}
 RASTER_TEXT: NONE. No readable captions, dialogue, labels, logos, watermarks, or speech bubbles.
-REFERENCE_CONDITIONING_REQUIRED: {conditioning}
 
 MAIN CAST: {main_cast}
 EPISODE-LOCAL IDENTITIES:
@@ -239,14 +273,13 @@ SCENE FACTS — ALL MUST BE TRUE:
 REQUIRED ENTITIES: {required}
 FORBIDDEN / UNPLANNED ENTITIES: {forbidden}
 
-STYLE REFERENCES REQUIRED BY CONTRACT:
-{refs}
+REQUIRED MEDIA INPUTS:
+{media}
 
 FAIL-CLOSED:
-The paths above are not evidence of media injection by themselves.
-If REFERENCE_CONDITIONING_REQUIRED is BINARY_REQUIRED, every required style reference must be supplied to the renderer as actual reference media before generation.
-Do not substitute a different story, mascot, animal, productivity/self-help theme, coding/Git scene, collage, poster, or unrelated character.
-If the renderer cannot satisfy the scene or reference-conditioning contract, return no production frame rather than inventing a replacement.
+A source path being present here is not evidence of renderer media injection.
+Every MUST_SUPPLY_MEDIA item must be supplied as actual renderer media before generation.
+If the renderer cannot satisfy the scene or media-input contract, return no production frame rather than inventing a replacement.
 """.strip() + "\n"
 
 
@@ -256,51 +289,58 @@ def authorize(
     slide_index: int,
     prompt_binding: str,
     previous_frame_qc: str,
-    reference_conditioning_mode: str,
-    supplied_refs: list[str] | None = None,
+    renderer_supports_explicit_media_inputs: bool,
+    renderer_supported_media_types: list[str] | None = None,
+    supplied_media: list[dict] | None = None,
 ) -> str:
     plan, manifest = validate_repository(repo_root, episode_id)
-    supplied_refs = supplied_refs or []
+    renderer_supported_media_types = renderer_supported_media_types or []
+    supplied_media = supplied_media or []
 
     _require(1 <= slide_index <= plan["format"]["slide_count"], "slide out of range")
     contract = manifest["renderer_contract"]
+    _require(prompt_binding in contract["allowed_prompt_bindings"], f"prompt binding not allowed: {prompt_binding}")
 
-    _require(
-        prompt_binding in contract["allowed_prompt_bindings"],
-        f"prompt binding not allowed: {prompt_binding}"
-    )
-    _require(
-        reference_conditioning_mode in contract["reference_conditioning_modes"],
-        f"reference conditioning mode not allowed: {reference_conditioning_mode}"
-    )
+    supplied_by_id = {x.get("requirement_id"): x for x in supplied_media}
+    supported_types = set(renderer_supported_media_types)
 
-    required_conditioning = contract["required_reference_conditioning"]
-    if required_conditioning == "BINARY_REQUIRED":
-        _require(
-            reference_conditioning_mode == "BINARY_CONDITIONED",
-            "binary reference conditioning is required; authority-only rendering is blocked"
-        )
-        missing = [ref for ref in manifest["style_refs"] if ref not in set(supplied_refs)]
-        _require(
-            not missing,
-            "binary conditioning evidence missing required supplied refs: " + ", ".join(missing)
-        )
+    for req in manifest["media_requirements"]:
+        if req.get("required") is not True or req.get("conditioning") != "MUST_SUPPLY_MEDIA":
+            continue
+        rid = req["requirement_id"]
+        _require(renderer_supports_explicit_media_inputs, f"{rid}: renderer cannot accept explicit media inputs")
+        _require(req["media_type"] in supported_types, f"{rid}: renderer does not support media type {req['media_type']}")
+        evidence = supplied_by_id.get(rid)
+        _require(evidence is not None, f"{rid}: required media was not supplied")
+        _require(evidence.get("source_id") == req["source_id"], f"{rid}: supplied source_id mismatch")
+        _require(evidence.get("media_type") == req["media_type"], f"{rid}: supplied media_type mismatch")
+        expected_hash = req.get("expected_hash")
+        if expected_hash:
+            _require(evidence.get("actual_hash") == expected_hash, f"{rid}: supplied media hash mismatch")
 
     if prompt_binding == "CONVERSATION_INFERRED":
         if slide_index > 1:
-            _require(
-                previous_frame_qc == "PASS",
-                "conversation-inferred renderer is fail-closed: previous frame semantic QC must PASS"
-            )
+            _require(previous_frame_qc == "PASS", "conversation-inferred renderer requires previous frame semantic QC PASS")
         return "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME"
 
     if slide_index > 1:
-        _require(
-            previous_frame_qc == "PASS",
-            "explicit-payload batch may continue only after first-frame semantic QC PASS"
-        )
-
+        _require(previous_frame_qc == "PASS", "explicit-payload continuation requires first-frame semantic QC PASS")
     return "AUTHORIZED_FIRST_FRAME" if slide_index == 1 else "AUTHORIZED_POST_FIRST_FRAME"
+
+
+def parse_supplied_media(values: list[str]) -> list[dict]:
+    parsed = []
+    for value in values:
+        parts = value.split("|", 3)
+        if len(parts) not in (3, 4):
+            raise GuardError("--supplied-media must be requirement_id|source_id|media_type[|actual_hash]")
+        parsed.append({
+            "requirement_id": parts[0],
+            "source_id": parts[1],
+            "media_type": parts[2],
+            "actual_hash": parts[3] if len(parts) == 4 and parts[3] else None,
+        })
+    return parsed
 
 
 def main():
@@ -318,27 +358,11 @@ def main():
     auth = sub.add_parser("authorize")
     auth.add_argument("--episode", required=True)
     auth.add_argument("--slide", type=int, required=True)
-    auth.add_argument(
-        "--prompt-binding",
-        required=True,
-        choices=["EXPLICIT_COMPILED_PAYLOAD","CONVERSATION_INFERRED"]
-    )
-    auth.add_argument(
-        "--previous-frame-qc",
-        default="NOT_RUN",
-        choices=["NOT_RUN","PASS","FAIL"]
-    )
-    auth.add_argument(
-        "--reference-conditioning-mode",
-        required=True,
-        choices=["BINARY_CONDITIONED","AUTHORITY_INFORMED_NON_BINARY_CONDITIONED"]
-    )
-    auth.add_argument(
-        "--supplied-ref",
-        action="append",
-        default=[],
-        help="Repository-relative canonical ref actually supplied to renderer as media; repeat for each ref."
-    )
+    auth.add_argument("--prompt-binding", required=True, choices=["EXPLICIT_COMPILED_PAYLOAD","CONVERSATION_INFERRED"])
+    auth.add_argument("--previous-frame-qc", default="NOT_RUN", choices=["NOT_RUN","PASS","FAIL"])
+    auth.add_argument("--renderer-explicit-media", action="store_true")
+    auth.add_argument("--supported-media-type", action="append", default=[])
+    auth.add_argument("--supplied-media", action="append", default=[])
 
     args = parser.parse_args()
     root = Path(args.repo_root).resolve()
@@ -361,8 +385,9 @@ def main():
                 args.slide,
                 args.prompt_binding,
                 args.previous_frame_qc,
-                args.reference_conditioning_mode,
-                args.supplied_ref,
+                args.renderer_explicit_media,
+                args.supported_media_type,
+                parse_supplied_media(args.supplied_media),
             ))
     except GuardError as exc:
         print(f"RENDER_GUARD_FAIL: {exc}", file=sys.stderr)
