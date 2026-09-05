@@ -24,7 +24,43 @@ Approved:
 - source-voice / dialogue-humanization / USER VOICE GATE workflow;
 - native/direct ChatGPT image generation as a first-class raster path after authority preflight.
 
-Active episode: episodes/E004/README.md
+Active episode: episodes/E005/README.md
+
+## E005 — current production package
+
+Fresh NEW_EPISODE routing completed from L1.
+
+Human-seeded base:
+- Reddit r/tifu "TIFU by texting my date that I might end up marrying him seconds after we ended our date"
+- https://www.reddit.com/r/tifu/comments/i4jtsd/
+- later four-year update reports that the pair eventually married.
+
+Current stage:
+- L1-L7 complete;
+- L8 USER VOICE GATE explicitly PASS by user;
+- L10 STORYBOARD + CAST ROUTER PASS;
+- L11 EPISODE-LOCAL CHARACTER DESIGN PASS;
+- L12 WHOLE-EPISODE VISUAL PLAN PASS;
+- E005 README + EPISODE_PLAN.json materialized;
+- no E005 raster generation has occurred;
+- L12.5 RENDER CONTRACT GATE is NEXT.
+
+Cast:
+- no recurring main-cast character is used;
+- woman_01 and man_01 are both episode-only to avoid turning the sourced marriage outcome into recurring main-cast canon;
+- both have STRICT_EPISODE identity digests in the E005 package.
+
+Visual plan:
+- seven 4:5 text-free raster slides;
+- first-date medium two-shot → apartment-door goodbye → keys-in-hand impulsive text → wrong-recipient reaction → damage control → reply reaction → restrained wedding/update aftershock;
+- final lettering will frame the ending as "4년 뒤 근황 / 진짜 결혼함." for source accuracy.
+
+Exact next action:
+1. create SHA-bound E005 RENDER_MANIFEST.json;
+2. validate active episode / plan / manifest / current refs;
+3. compile and authorize E005_S01 only;
+4. render exactly one text-free first frame;
+5. run semantic/style/identity QC before S02.
 
 ## E004 — current production package
 
