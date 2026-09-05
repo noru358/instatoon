@@ -13,10 +13,10 @@ Style reset complete → real omnibus pilot E002 → dialogue/layout refinement 
 Visual-style exploration itself is no longer the main task.
 
 Approved:
-- v2 character style;
+- v2 character style from the two canonical character-sheet references;
 - v2 background direction;
 - Gaeun / Harin / Taemin main-cast sheet after corrections;
-- 3-person interaction test;
+- the approved 3-person indoor interaction image is a POSITIVE reference showing the canonical style correctly extended to background + multi-person composition; it is NOT a contamination example;
 - 4:5 feed/carousel as primary format;
 - 9:16 Reels/Shorts derivative;
 - omnibus content model;
@@ -141,3 +141,18 @@ Legacy overlapping root documents have been merged/retired; Git history preserve
 
 The approved v2 image references from this session are not yet committed as binaries through the available GitHub connector.
 Do not fall back to legacy v1 style references in a clean environment.
+
+
+## Reference clarification — 2026-09-05
+
+The three images re-shown by the user at session handoff must be interpreted as follows:
+
+1. long-wavy-black-hair female character sheet = canonical character-style reference;
+2. brown-bob female character sheet = canonical character-style reference;
+3. living-room three-person scene = approved positive scene reference demonstrating how references 1/2 should extend to background + multi-person interaction.
+
+The third image is NOT a failed/drifted example.
+
+The actual contaminated examples are the later generations that drifted toward romance-webtoon / generic AI-pretty rendering, soft beige atmosphere, heavier shading, and altered face grammar.
+
+Next-session restore must preserve this distinction before any new generation.
