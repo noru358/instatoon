@@ -138,6 +138,8 @@ An episode may explicitly choose an episode-only man instead of Taemin.
 
 Cast routing is story-first, not asset-first: fixed visual style and continuity do not imply fixed cast composition.
 
+This is a PROJECT-WIDE routing invariant. Episode files record only the cast selected for that episode; they must not redefine this policy or encode a per-episode three-person/main-cast quota.
+
 ## 6. RECURRING CHARACTER IDENTITY BLOCK
 
 When a main character is selected:
