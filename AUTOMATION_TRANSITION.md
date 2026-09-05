@@ -426,3 +426,19 @@ First automation milestone is complete when:
 11. core style/voice cannot silently mutate;
 12. the generic engine can load another child project without copying Instatoon logic;
 13. every completed stage is auditable by worker role, actual execution actor, provenance/input, output, QC verdict, and next stage.
+
+
+## 16. RenderContract / PromptBinding runtime contract
+
+Mandatory states now include:
+VISUAL_PLAN_READY → EPISODE_PLAN_MATERIALIZED → RENDER_MANIFEST_BOUND → RENDER_PREFLIGHT_VALIDATED → FIRST_FRAME_RENDER → FIRST_FRAME_SEMANTIC_QC → RASTER_RENDER.
+
+Runtime must persist the episode-plan Git blob SHA, render-manifest path, prompt-binding mode, per-slide required/forbidden entities, and semantic-QC continuation state.
+
+Prompt-binding modes:
+- EXPLICIT_COMPILED_PAYLOAD: first-frame semantic gate, then remaining batch may continue.
+- CONVERSATION_INFERRED: one frame at a time; every next frame requires previous-frame semantic QC PASS.
+
+Any plan mutation invalidates the prior manifest. No raster call may occur before preflight PASS. A semantic mismatch stops the run and cannot become LAST_KNOWN_GOOD.
+
+Executable baseline is pipeline/render_guard.py with validate, compile, and authorize commands. CI must run its regression tests and validate the active episode.
