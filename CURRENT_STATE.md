@@ -70,5 +70,5 @@ Authoritative details:
 1. user reviews E006 new L1-L7 package;
 2. on PASS, lock the smallest story-sufficient cast;
 3. build whole-episode storyboard and episode-local identity digests;
-4. rebuild EPISODE_PLAN / RENDER_MANIFEST from the approved package;
+4. rebuild EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN from the approved package;
 5. render S01 only and run visual/style QC before remaining frames.
