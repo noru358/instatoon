@@ -22,6 +22,34 @@ Production order:
 
 Do not skip directly from a premise to production frames.
 
+### Mandatory visual preflight before L13
+
+Before ANY raster generation — including ChatGPT/native image generation — restore and inspect the current visual authorities:
+1. CURRENT_STATE.md;
+2. MASTER_PROMPTS.md;
+3. VISUAL_GRAMMAR.md;
+4. GENERATION_PROTOCOL.md;
+5. REFERENCE_SET.md;
+6. active episode package;
+7. the actual current style/main-cast/scene reference binaries required by that episode.
+
+Do not generate from chat memory alone.
+
+Native/direct image generation is a valid production renderer and is the default when it can satisfy the episode requirements. Do not invoke an external renderer merely because one exists.
+
+Use an external renderer only when:
+- the user explicitly requests it;
+- native generation lacks a material capability required by the episode;
+- a reproducibility/automation/provider test specifically requires it.
+
+Reference handling:
+- if the renderer supports explicit reference-media inputs, supply the canonical binaries;
+- if a native/direct renderer has no explicit repository-media slot, the operator must first inspect the canonical binaries and compile their observed identity/style constraints together with MASTER_PROMPTS into the generation instruction;
+- in that second mode, report honestly that the output is authority-informed but not binary-conditioned;
+- such an output may be QC'd and used as a prototype, but must not be promoted to a new canonical reference solely because the prompt said it matched.
+
+Never substitute obsolete/legacy refs.
+
 ## 1. Cast routing comes before character rendering
 
 Story/context decides cast.
@@ -278,6 +306,21 @@ Prefer:
 
 Do not “try again until good.”
 If repeated failure is systemic, stop and repair the shared input.
+
+## 13.5 Renderer selection / reporting
+
+For each raster run record:
+- execution actor;
+- renderer/tool actually used;
+- why that renderer was selected;
+- exact Markdown authorities read;
+- exact visual assets inspected;
+- which assets were actually passed as renderer media inputs, if supported;
+- whether the output is BINARY-CONDITIONED or AUTHORITY-INFORMED / NON-BINARY-CONDITIONED;
+- generation attempt/result/cost when applicable.
+
+A renderer failure is a local provider/tool failure unless all valid render paths are unavailable.
+Do not mark the entire L13 stage blocked merely because one optional external provider has no credits.
 
 ## 14. Recordkeeping
 
