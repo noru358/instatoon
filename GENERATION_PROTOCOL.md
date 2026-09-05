@@ -1,7 +1,7 @@
 # GENERATION_PROTOCOL.md
 
 # GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.3
-Updated: 2026-09-05
+Updated: 2026-09-06
 
 ## 0. Stage order
 
@@ -62,6 +62,14 @@ User checkpoints:
 Between checkpoints the operator proceeds autonomously, reports progress, inspects every returned image and repairs material defects. Do not ask the user to approve every panel by default. Return to the user for unresolved taste/identity decisions or changes to approved content.
 
 Reference routing:
+
+Cast cardinality / role rule:
+- determine cast from the approved premise and beat requirements, never from a recurring-character quota;
+- a scene or episode may use 0–3 recurring leads;
+- supporting/episode-only characters are first-class cast when the story role requires them;
+- do not add Gaeun/Harin/Taemin merely to create a reaction shot or fill a three-person composition;
+- if an episode-local character appears in 2+ cuts, give that character a persistent identity digest before raster generation.
+
 - recurring lead: canonical style media + that selected lead’s actual identity reference;
 - episode-only person: canonical style media for drawing language only + the story-derived age, gender/presentation, body, hair, clothes and identity digest; do not inherit the reference cast’s identity or demographic;
 - mixed cast: assign the role per person; never apply a whole cast sheet indiscriminately;
