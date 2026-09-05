@@ -1,0 +1,31 @@
+{
+  "state_version": "1.0",
+  "episode_id": "E006",
+  "current_stage": "CAST_RESOLVED",
+  "voice_gate": {
+    "status": "PENDING",
+    "approved_scope": "CAST_ONLY",
+    "approval_kind": "USER_EXPLICIT",
+    "evidence": "2026-09-06 user explicitly chose an episode-only foreign protagonist; full L1-L7 package has not yet been re-approved."
+  },
+  "decisions": [
+    {
+      "decision_id": "E006_CAST_001",
+      "type": "CAST",
+      "status": "APPROVED_PARTIAL",
+      "value": "episode-only foreign protagonist",
+      "does_not_imply": [
+        "L8_APPROVED",
+        "STORYBOARD_READY",
+        "RENDER_AUTHORIZED"
+      ]
+    },
+    {
+      "decision_id": "E006_RENDER_ROLLBACK_001",
+      "type": "INVALIDATION",
+      "status": "ACTIVE",
+      "value": "premature six-panel 9:16 raster is INVALID_RENDER / STORYBOARD_REFERENCE_ONLY and must not be used as a visual anchor"
+    }
+  ],
+  "frame_qc": {}
+}

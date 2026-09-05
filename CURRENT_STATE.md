@@ -1,79 +1,71 @@
 # CURRENT_STATE.md
 
-Updated: 2026-09-05
+Updated: 2026-09-06
 Repository: noru358/instatoon
 
-Active episode: episodes/E005/README.md
+Active episode: episodes/E006/README.md
 
 ## 현재 위치
 
-큰 흐름: 수동 제작 검증 → 최소 실행 경로 연결 → 독립 CLI → 웹 도구.
-현재는 수동 제작 규칙과 입력 가드가 있고, 실제 생성·합성·승인 상태를 잇는 실행기는 미구현이다.
-이번 리포 점검에서 새 그림은 생성하지 않았다.
+큰 흐름: 수동 제작 검증 → 상태/렌더 가드 강화 → 최소 실행 경로 연결 → 독립 CLI → 웹 도구.
 
-## E005 — 결혼할지도
+현재 활성 회차는 E006 "어떻게 오셨어요?"다.
+E006은 L1-L7 검토 후보가 준비되어 있고, 사용자가 "단회성 외국인 주인공"이라는 CAST 결정만 승인했다.
+현재 PRODUCTION_STATE = CAST_RESOLVED, L8 USER VOICE GATE = PENDING.
 
-- L1–L7 완료, L8 사용자 명시 승인 PASS (2026-09-05).
-- L10 캐스팅, L11 회차 인물 설계, L12 전체 7컷 콘티 완료.
-- EPISODE_PLAN.json과 SHA로 결합된 RENDER_MANIFEST.json 존재.
-- 두 주인공 모두 회차 전용 woman_01 / man_01. 결혼 결말을 주연의 영구 설정으로 만들지 않는다.
-- 이전 S01은 장면 대체로 일치, 그림체 FAIL. INVALID이며 참조·수정 원본으로 쓰지 않는다.
-- 유효한 S01과 후속 컷 없음. S02로 넘어갈 수 없다.
-- 원소재, 대사, 콘티와 실패 기록은 episodes/E005/README.md에 보존한다.
+따라서 L10 이후 제작이나 raster generation은 현재 권한 없음.
 
-## 정확한 다음 제작 행동
+## E006 롤백 상태
 
-1. 현행 문서와 E005 계획을 복원하고 `python pipeline/render_guard.py validate`를 실행한다.
-2. REF_V2_D/E의 실제 파일을 열어 확인한다.
-3. **현재 도구 정의**에서 프롬프트·실제 참조 이미지 입력 방식을 확인한다.
-   이번 Work 환경의 image_gen은 `prompt`와 `referenced_image_paths`를 제공한다.
-   이 환경에는 로컬 두 JPEG도 존재한다. 과거 세션의 “native는 미디어 입력 불가”를 재사용하지 않는다.
-4. E005_S01의 컴파일 결과와 실제 참조 경로를 같은 생성 호출에 전달한다.
-   지금 도구의 입력 가능 여부만 확인한 상태이며 성공적인 생성은 아직 검증하지 않았다.
-5. S01만 생성해 장면·그림체·두 사람 얼굴을 비교한다. 현재 사용자 검수 합의를 지킨다.
-6. 채택 이미지를 회차 보조 앵커로 저장·실제 전달한 뒤 나머지 컷을 진행한다.
-7. 대사/말풍선 합성, 휴대폰 크기 가독성·컷 순서 확인 후 최종 내보내기.
+직전 채팅에서 생성된 9:16 6컷 합본은 INVALID_RENDER / STORYBOARD_REFERENCE_ONLY로 폐기한다.
+
+하드 실패:
+- L8 전체 패키지 승인 전에 작화 진입;
+- E006 EPISODE_PLAN / RENDER_MANIFEST 없이 free-form 생성;
+- canonical REF_V2_D/E 실제 미디어 미전달;
+- canonical compiler 미사용;
+- 한 컷=한 파일 규칙 위반;
+- feed master 4:5 대신 9:16 합본;
+- raster에 최종 한글/말풍선 직접 생성;
+- 승인되지 않은 대사 추가;
+- 현행 v2 그림체와 다른 generic polished webtoon 스타일.
+
+이 이미지는 스타일 레퍼런스, 회차 앵커, LAST_KNOWN_GOOD로 절대 승격하지 않는다.
+
+## 구조 개선 — 2026-09-06
+
+원격 main에 다음 실행 강제를 반영했다.
+
+- episodes/<ID>/PRODUCTION_STATE.json을 machine-facing 실행 상태 원장으로 도입.
+- CAST_ONLY와 L1_L7_FULL_PACKAGE 승인을 분리.
+- compile/authorize는 L8 전체승인 없이는 fail closed.
+- caller의 단순 previous-frame-qc PASS 문자열은 권한 증거가 아님.
+- 후속 conversation-inferred 컷은 slide/attempt/artifact SHA에 묶인 persisted QC PASS가 필요.
+- active episode가 pre-render 단계여도 CI/상태 검증은 정상 동작하며, render contract가 생기기 전에는 render validation으로 오인하지 않음.
+- 구조 변경 후 GitHub Actions unit tests와 active validation 단계 PASS 확인.
+
+관련 커밋:
+- f444f403697b708c3d5477a70dea32aa9f5d42a8
+- 73f3570a1a992e57d6a78abee7b40e719dc08681
+
+## 정확한 다음 행동
+
+1. episodes/E006/README.md의 L1-L7 전체 패키지를 사용자에게 다시 제시한다.
+2. 명시적 전체 승인 전에는 L10, L11, L12, L12.5, L13으로 넘어가지 않는다.
+3. 승인 후에만 회차 전용 외국인 identity digest와 전체 컷 계획을 만든다.
+4. E006 EPISODE_PLAN.json + RENDER_MANIFEST.json을 materialize하고 render_guard validate/compile/authorize를 거친다.
+5. REF_V2_D/E를 실제 이미지 미디어로 전달하여 S01 한 컷만 text-free 4:5로 생성한다.
+6. 사용자 그림체/인물 검수 PASS 뒤에만 후속 컷으로 진행한다.
 
 ## 현행 시각 기준
 
-- INSTATOON_STYLE_v2.0. 실제 승인 이미지가 일반화된 스타일 문장보다 우선한다.
-- REF_V2_D: 주연/그림체 시트. REF_V2_E: **정상 승인된** 실내 3인 장면.
-- 두 파일은 assets/style_refs/v2_current/에 있다. 정확한 경로·해시는 REFERENCE_SET.md.
-- A/B/C 원본은 아직 이 리포에 없다. 현행 E005의 필수 입력은 D/E이므로 이것만으로 파일 부재 차단 사유는 아니다.
-- E004에서 승인된 회차 스타일 앵커는 기록만 있고 바이너리 경로/해시가 없다. E004 재개 시 복구 또는 새 승인 필요.
-- 태민의 고유 눈매와 자연스러운 감정 표현을 모든 인물에 대한 원형 눈 문장으로 덮어쓰지 않는다.
+- INSTATOON_STYLE_v2.0.
+- REF_V2_D: assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg
+- REF_V2_E: assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg
+- 실제 승인 이미지가 일반화된 스타일 문장보다 우선한다.
+- current v2 production은 BINARY_CONDITIONED reference use가 원칙이다.
 
-## 다른 회차
+## 이전 회차
 
-| 회차 | 상태 |
-|---|---|
-| E001 | v1 역사적 제작 샘플. 그림·SVG 글자·최종 PNG 존재, 현행 스타일 검증에 포함하지 않음 |
-| E002 | 소개팅 셀프팔로우, 이전 학습 파일. 현행 제작 대기열 아님 |
-| E003 | 인간 소재 기반 이전 콘티. 외부 공급자 크레딧 실패는 당시 해당 경로의 실패 |
-| E004 | 이전 콘티 및 스타일 승인 기록. L8을 뒤로 미룬 당시 절차는 폐기; 재개 전 승인 상태 확인 |
-
-## 점검 결과와 남은 결함
-
-기존 가드 테스트 9개와 활성 입력 검증은 통과했지만, 다음을 재현했다.
-- 이미지/QC 결과 파일 없이 호출자가 `PASS`라고 쓰면 마지막 컷도 허가됐다.
-- 참조 파일 내용을 바꿔도 검증됐다. 이번에 로컬 필수 미디어의 SHA-256 검증과 회귀 테스트로 수정했다.
-
-따라서 단계 승인, 실제 생성 요청, 이미지 검수와 결과 저장을 연결하는 실행기는 여전히 필요하다.
-문서 정리는 실행기 구현이나 그림체 성공률 입증을 의미하지 않는다.
-상세 진단·구현 순서·검증 기준은 AUTOMATION_TRANSITION.md를 따른다.
-
-## 이번 정리 검증
-
-- 가드 테스트 14개 PASS, 활성 E005 계약 검증 PASS.
-- 필수 참조 바이트 교체 및 해시 누락 차단을 회귀 테스트로 확인.
-- 컴파일 결과의 장면 비트/보조 앵커 안내와 미치환 표식 제거 확인.
-- 첫 감사에서 root 문서 약 600줄을 줄였다. 새 운영 문서를 추가하지 않고 중복/구버전 안내 정리.
-- 생성 품질 시험은 실행하지 않았으므로 그림체 합격률은 아직 미측정.
-
-## 사용자 확정 운영 요구 — 2026-09-05
-
-- 대본/흐름 검수 → 첫 실제 만화 컷의 그림체·인물 검수 → 후속 컷은 운영자가 검수하며 제작 → 완성본 검수.
-- 한 컷은 반드시 한 이미지 파일. 컷별 독립 호출/납품. 합본·그리드·콜라주로 대체하지 않는다.
-- 주연은 선택된 인물 정체성도 보존; 조연은 그림체만 공통이며 나이·성별·체형·복장은 이야기로 정한다.
-- 승인된 회차 이미지를 후속 컷의 고정 보조 미디어로 실제 전달한다. 자세한 절차는 GENERATION_PROTOCOL §0.5.
-- 이번 변경은 운영 절차와 입력 계약을 반영한다. 새 이미지 생성/그림체 성공률 측정은 아직 수행하지 않았다.
+E005는 render contract가 존재하는 이전 활성 회차이며 L8 승인 상태와 구조화 입력이 보존되어 있다.
+E001-E004는 각 역사/학습 기록으로 유지한다.
