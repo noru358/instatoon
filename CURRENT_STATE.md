@@ -6,7 +6,7 @@ Repository: noru358/instatoon
 
 ## Big flow
 
-Style reset complete → E002 pilot lessons captured → E003 human-seeded production → native/direct coordinated raster pass → lettering/QC → first publishable episode → repeat prototypes → automation implementation.
+Style reset complete → source-first manual production → coordinated text-free raster pass → lettering/QC → publishable episodes → repeat prototypes → automation implementation.
 
 ## Current detailed position
 
@@ -20,39 +20,59 @@ Approved:
 - 4:5 feed/carousel as primary format;
 - 9:16 Reels/Shorts derivative;
 - omnibus content model;
-- source-voice / dialogue-humanization / USER VOICE GATE workflow.
+- HUMAN-SOURCE-FIRST provenance;
+- source-voice / dialogue-humanization / USER VOICE GATE workflow;
+- native/direct ChatGPT image generation as a first-class raster path after authority preflight.
 
-Active episode: episodes/E003/README.md
+Active episode: episodes/E004/README.md
 
-## E003 — current diagnosis
+## E004 — current production package
 
-New-work request correctly routed to a fresh episode.
+Fresh new-work routing restarted from L1 and did NOT reuse E003.
 
 Human-seeded base:
-- Reddit r/tifu "TIFU by being so socially awkward it's unreal"
-- https://www.reddit.com/r/tifu/comments/178qnsy/
+- Reddit r/tifu "TIFU by letting a girl off at the wrong floor like it was her stop"
+- https://www.reddit.com/r/tifu/comments/1l8jkeq/
 - used as inspiration/base, not literal adaptation.
 
 Current story:
-Gaeun meets a stranger on the way to a restroom, reflexively apologizes when told her shoelace is untied, then compounds the awkwardness by automatically saying "see you later" while both enter the same restroom.
+Taemin shares an apartment elevator with a woman he has never met, presses 21 for her and 17 for himself, then reflexively tells her "먼저 내리세요" when the doors open at his own 17th floor. She reminds him she is on 21; he realizes he has effectively tried to eject her at his floor and exits into concentrated awkwardness.
 
-L1-L12 are complete and recorded in episodes/E003/README.md.
+Current stage:
+- L1-L7 complete;
+- L8 USER VOICE GATE intentionally deferred until before final lettering because raster masters are text-free;
+- L9 has no new durable voice rule yet;
+- L10-L12 complete;
+- L13 TEXT-FREE ART GENERATION is next/in progress.
 
-L13 raster render is READY through native/direct image generation.
+Cast:
+- Taemin = recurring REF_V2_D main-cast identity.
+- Episode-only woman = continuity digest recorded in E004; preserve across slides 01-05.
 
-Historical external attempt:
-- REF_V2_D and REF_V2_E were supplied as reference URLs to Higgsfield Nano Banana Pro;
-- that optional provider rejected all six jobs before generation because its connected workspace had no credits;
-- this is a provider-specific failure, not a project-stage blocker.
+## E003 status
 
-Current renderer rule:
-- native/direct ChatGPT image generation is first-class and may be used without invoking Higgsfield;
-- before direct generation, restore the full production pack and inspect the actual current visual binaries;
-- use MASTER_PROMPTS + observed reference traits + episode visual plan;
-- if a renderer cannot accept the repository binaries as explicit media inputs, report AUTHORITY-INFORMED / NON-BINARY-CONDITIONED honestly rather than pretending they were injected;
-- never generate from chat memory alone.
+E003 remains preserved as prior human-seeded production work and is no longer the active new-work target unless the user explicitly returns to it.
 
-## Current hard lesson
+Its source/story/dialogue/storyboard package remains valid in episodes/E003/README.md.
+The historical Higgsfield no-credit failure was provider-specific and never invalidated native/direct generation.
+
+## Current renderer rule
+
+Native/direct ChatGPT image generation is first-class and may be used without invoking Higgsfield.
+
+Before direct generation:
+1. restore the canonical Markdown production pack;
+2. inspect the current visual binaries when the runtime can expose them;
+3. use MASTER_PROMPTS + observed reference traits + episode visual plan;
+4. if the renderer cannot accept the repository binaries as explicit media inputs, report AUTHORITY-INFORMED / NON-BINARY-CONDITIONED honestly rather than pretending they were injected;
+5. never fall back to retired v1 assets.
+
+For E004 in the present chat:
+- repository authorities and the exact REF_V2_D / REF_V2_E binary identities/paths were restored;
+- native image generation does not expose those GitHub JPEG binaries as explicit renderer media inputs;
+- therefore any direct pass must be logged as AUTHORITY-INFORMED / NON-BINARY-CONDITIONED unless the runtime gains a reference-media bridge.
+
+## Current hard lessons
 
 Do not solve one local problem by fully regenerating a good frame.
 
@@ -64,35 +84,26 @@ STORY/CONTEXT → INTERNAL IDENTITY DIGEST → COORDINATED EPISODE BATCH.
 
 This internal continuity operation is not a separate user-facing character-sheet or approval stage.
 
-This applies across future sessions and episodes.
+New-work commands such as "새 만화" always restart from fresh human-source discovery unless the user explicitly requests continuation/repair.
 
 ## Exact next action
 
-1. Keep E003 source/story/dialogue/storyboard as the current production package.
-2. Before L13, restore CURRENT_STATE + MASTER_PROMPTS + VISUAL_GRAMMAR + GENERATION_PROTOCOL + REFERENCE_SET + E003 package and inspect REF_V2_D + REF_V2_E.
-3. Use native/direct ChatGPT image generation first unless the user requests another renderer or a required capability is missing.
-4. Generate six coordinated text-free frames while preserving Gaeun and the episode-only stranger identity digest.
-5. Report exact docs/assets inspected, renderer used, and binary-conditioned vs authority-informed/non-binary-conditioned mode.
-6. Run sequence/style/identity/spatial QC.
-7. Apply editable lettering.
-8. Present the complete sequence for user taste gate.
+1. Render the six E004 text-free 4:5 frames as one coordinated episode batch.
+2. Preserve Taemin and the episode-only woman identity digest.
+3. Run sequence/style/identity/spatial QC, especially 17F/21F logic and ensuring the woman remains inside at 17F.
+4. Do not bake final dialogue into raster art.
+5. Present the sequence for user taste/voice gate.
+6. After dialogue approval, apply editable lettering and final mobile QC.
 
 ## Current visual risk to watch
 
-The main remaining visual drift is not the core face grammar; it is:
+The main remaining visual drift risks are:
 - generic AI-like new-person face design;
 - blanket beige/sepia atmosphere;
 - soft global texture;
 - over-rendered environment;
+- main-cast identity drift;
 - full-scene regeneration during local repair.
-
-## Current content / dialogue state
-
-The rough story and dialogue direction passed.
-The system now structurally separates:
-source facts → source voice → story beats → dialogue draft → humanization → USER VOICE GATE → Voice Ledger.
-
-Dialogue is not final until the user taste gate passes.
 
 ## Repository authority after cleanup
 
@@ -108,26 +119,20 @@ Read before production:
 
 Direct/native image generation does not waive this restore order.
 
-Legacy overlapping root documents have been merged/retired; Git history preserves them.
-
 ## Binary reference note
 
-The approved main-cast sheet and approved 3-person indoor scene are now committed under `assets/style_refs/v2_current/` as REF_V2_D and REF_V2_E.
+The approved main-cast sheet and approved 3-person indoor scene are committed under `assets/style_refs/v2_current/` as REF_V2_D and REF_V2_E.
 Their exact paths, dimensions and SHA-256 hashes are recorded in `REFERENCE_SET.md`.
 
 REF_V2_A, REF_V2_B and REF_V2_C remain pending binary ingest. Do not fall back to legacy v1 style references for them in a clean environment.
 
-
 ## Reference clarification — 2026-09-05
 
-The three images re-shown by the user at session handoff must be interpreted as follows:
-
+The canonical interpretation remains:
 1. long-wavy-black-hair female character sheet = canonical character-style reference;
 2. brown-bob female character sheet = canonical character-style reference;
-3. living-room three-person scene = approved positive scene reference demonstrating how references 1/2 should extend to background + multi-person interaction.
+3. living-room three-person scene = approved positive scene reference demonstrating how the character style extends to background + multi-person interaction.
 
 The third image is NOT a failed/drifted example.
 
-The actual contaminated examples are the later generations that drifted toward romance-webtoon / generic AI-pretty rendering, soft beige atmosphere, heavier shading, and altered face grammar.
-
-Next-session restore must preserve this distinction before any new generation.
+Actual contamination means romance-webtoon / generic AI-pretty rendering, soft beige atmosphere, heavier shading, and altered face grammar.
