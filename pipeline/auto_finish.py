@@ -36,6 +36,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 DEFAULT_QC_MODEL = os.environ.get("INSTATOON_QC_MODEL", "gpt-5.6-luna")
 DEFAULT_MAX_ATTEMPTS = int(os.environ.get("INSTATOON_AUTO_MAX_ATTEMPTS", "3"))
+DEFAULT_MAX_TOTAL_RENDER_ATTEMPTS = int(os.environ.get("INSTATOON_AUTO_MAX_TOTAL_RENDER_ATTEMPTS", "10"))
 VISUAL_QC_MIN_CONFIDENCE = float(os.environ.get("INSTATOON_VISUAL_QC_MIN_CONFIDENCE", "0.88"))
 FINAL_QC_MIN_CONFIDENCE = float(os.environ.get("INSTATOON_FINAL_QC_MIN_CONFIDENCE", "0.86"))
 
@@ -92,7 +93,13 @@ def save_state(episode_id: str, state: dict) -> None:
     renderer.save_state(episode_id, state)
 
 
-def activate(state: dict, episode_id: str, plan: dict, max_attempts: int) -> None:
+def activate(
+    state: dict,
+    episode_id: str,
+    plan: dict,
+    max_attempts: int,
+    max_total_render_attempts: int,
+) -> None:
     first_sid = plan["slides"][0]["slide_id"]
     first_qc = state.get("frame_qc", {}).get(first_sid)
     anchor = state.get("episode_anchor")
@@ -118,6 +125,7 @@ def activate(state: dict, episode_id: str, plan: dict, max_attempts: int) -> Non
         },
         "policy": {
             "max_attempts_per_slide": max_attempts,
+            "max_total_render_attempts": max_total_render_attempts,
             "visual_qc_min_confidence": VISUAL_QC_MIN_CONFIDENCE,
             "final_qc_min_confidence": FINAL_QC_MIN_CONFIDENCE,
         },
@@ -303,7 +311,9 @@ def render_remaining(
     image_model: str,
     qc_model: str,
     max_attempts: int,
+    max_total_render_attempts: int,
 ) -> dict:
+    total_render_attempts = 0
     for slide in range(2, plan["format"]["slide_count"] + 1):
         sid = plan["slides"][slide - 1]["slide_id"]
         existing = state.get("frame_qc", {}).get(sid)
@@ -314,7 +324,15 @@ def render_remaining(
                 continue
 
         for attempt_no in range(1, max_attempts + 1):
-            print(f"\nAUTO_FINISH render {sid}: attempt {attempt_no}/{max_attempts}")
+            if total_render_attempts >= max_total_render_attempts:
+                raise AutoFinishError(
+                    f"episode render-attempt cap reached ({max_total_render_attempts}) before {sid}"
+                )
+            total_render_attempts += 1
+            print(
+                f"\nAUTO_FINISH render {sid}: slide attempt {attempt_no}/{max_attempts}; "
+                f"episode attempt {total_render_attempts}/{max_total_render_attempts}"
+            )
             args = argparse.Namespace(
                 episode=episode_id,
                 slide=slide,
@@ -443,7 +461,19 @@ def run_auto_finish(args) -> int:
 
     try:
         plan, manifest = guard.validate_repository(REPO_ROOT, episode_id)
-        activate(state, episode_id, plan, args.max_attempts)
+        minimum_required = max(0, plan["format"]["slide_count"] - 1)
+        if args.max_total_render_attempts < minimum_required:
+            raise AutoFinishError(
+                f"max total render attempts {args.max_total_render_attempts} is below "
+                f"the {minimum_required} remaining slides"
+            )
+        activate(
+            state,
+            episode_id,
+            plan,
+            args.max_attempts,
+            args.max_total_render_attempts,
+        )
         activated = True
         state = renderer.load_state(episode_id)
 
@@ -459,6 +489,7 @@ def run_auto_finish(args) -> int:
             args.image_model,
             args.qc_model,
             args.max_attempts,
+            args.max_total_render_attempts,
         )
         if state.get("current_stage") != "LETTERING":
             raise AutoFinishError(
@@ -546,6 +577,11 @@ def main() -> int:
     run.add_argument("--image-model", default=renderer.DEFAULT_MODEL)
     run.add_argument("--qc-model", default=DEFAULT_QC_MODEL)
     run.add_argument("--max-attempts", type=int, default=DEFAULT_MAX_ATTEMPTS)
+    run.add_argument(
+        "--max-total-render-attempts",
+        type=int,
+        default=DEFAULT_MAX_TOTAL_RENDER_ATTEMPTS,
+    )
 
     status = sub.add_parser("status", help="show automation state")
     status.add_argument("--episode")
@@ -553,6 +589,11 @@ def main() -> int:
     args = parser.parse_args()
     if getattr(args, "max_attempts", 1) < 1 or getattr(args, "max_attempts", 1) > 5:
         parser.error("--max-attempts must be between 1 and 5")
+    if (
+        getattr(args, "max_total_render_attempts", 1) < 1
+        or getattr(args, "max_total_render_attempts", 1) > 30
+    ):
+        parser.error("--max-total-render-attempts must be between 1 and 30")
     return run_auto_finish(args) if args.cmd == "run" else cmd_status(args)
 
 
