@@ -33,14 +33,21 @@ E006 "어떻게 오셨어요?"의 corrected L1-L7 package가 2026-09-06 사용�
 
 The earlier premature 9:16 six-panel render remains INVALID_RENDER / STORYBOARD_REFERENCE_ONLY and must not be used as a visual reference.
 
+## L13 current-runtime preflight
+
+BLOCKED_CURRENT_RUNTIME — fail-closed.
+
+The current native image-generation interface cannot bind GitHub/repository-local D/E files directly, and the exact D/E binaries are not current-conversation image attachments.
+Because E006 requires BINARY_REQUIRED conditioning, text-only generation is prohibited.
+
 ## 정확한 다음 행동
 
-1. run render_guard validate for E006.
-2. compile E006_S01 from MASTER_PROMPTS + EPISODE_PLAN + RENDER_MANIFEST.
-3. authorize S01 only with actual supplied-media evidence for REF_V2_D/E.
-4. if the current renderer cannot bind those exact images as media, STOP at L13 preflight rather than text-only fallback.
-5. if authorized, generate S01 only as text-free 4:5.
-6. user style/identity QC PASS is required before S02.
+1. make exact REF_V2_D/E available as actual image inputs to the selected renderer;
+2. authorize E006_S01 with supplied-media evidence;
+3. generate S01 only as text-free 4:5;
+4. user style/identity QC PASS is required before S02.
+
+Do not substitute the invalid prior E006 image or a prose-only style description.
 
 ## 구조 개선
 

@@ -28,5 +28,18 @@
       "value": "woman_01 and receptionist_01 identity digests stored in EPISODE_PLAN"
     }
   ],
-  "frame_qc": {}
+  "frame_qc": {},
+  "blockers": [
+    {
+      "blocker_id": "E006_L13_MEDIA_BINDING_001",
+      "stage": "L13",
+      "status": "BLOCKED_CURRENT_RUNTIME",
+      "requirement": "BINARY_REQUIRED",
+      "required_media": [
+        "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+        "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+      ],
+      "reason": "Current native image-generation interface cannot bind repository/local file paths and exact D/E are not current-conversation image attachments. Text-only fallback is prohibited."
+    }
+  ]
 }

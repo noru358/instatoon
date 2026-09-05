@@ -152,3 +152,29 @@ Exact next action:
 2. confirm current renderer can bind the actual required binaries;
 3. generate E006_S01 only, text-free 4:5;
 4. user visual QC before any S02 call.
+
+
+## 9. L13 current-runtime preflight — BLOCKED, FAIL-CLOSED
+
+Input contract/CI:
+- E006 render contract validates;
+- S01 scene contract exists;
+- required style media are REF_V2_D + REF_V2_E, both BINARY_REQUIRED.
+
+Current ChatGPT native image-generation interface inspection:
+- supports generation and current-conversation image references;
+- does not expose a repository path / arbitrary local image path parameter for canonical media binding in this session;
+- the exact REF_V2_D/E binaries are not current-conversation image attachments.
+
+Therefore:
+- do NOT call native image generation with text-only style paraphrase;
+- do NOT use the invalid prior E006 render as a substitute;
+- E006 remains at RENDER_CONTRACT_READY until a renderer can receive the exact D/E images as actual media.
+
+A compatible external reference-image provider exists in the plugin directory (for example OpenArt or Higgsfield), but neither was installed/connected in this execution and no provider was silently selected.
+
+Next valid production action:
+1. make exact REF_V2_D/E available as actual media to the selected renderer (current-conversation attachment or an explicitly connected compatible renderer);
+2. authorize E006_S01 with supplied-media evidence;
+3. generate S01 only;
+4. run user style/identity QC before S02.
