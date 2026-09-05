@@ -23,6 +23,9 @@ Minimum restore pack:
 4. VISUAL_GRAMMAR.md — 4:5 page, lettering, composition, and sequence rules.
 5. GENERATION_PROTOCOL.md — anchor/render/edit/QC procedure.
 6. REFERENCE_SET.md — which visual references are current vs legacy.
+7. active episode EPISODE_PLAN.json — machine-readable story/cast/scene contract.
+8. active episode RENDER_MANIFEST.json — exact render binding to the episode plan.
+9. run `python pipeline/render_guard.py validate` — fail-closed preflight.
 
 Read AUTOMATION_TRANSITION.md only when implementing the CLI/server pipeline.
 Read WORKFLOW_PROTOCOL.md when restoring across environments or when the user says 갱신.
@@ -73,7 +76,24 @@ Story/context decides cast per episode.
 
 ### Production principle
 
-Plan the whole story first. Internally derive any episode-only character from context and carry the same identity digest across the batch. Render the episode as one coordinated multi-slide production pass, not as separate taste gates. Add typography deterministically. Repair locally from the last known good frame when one exists.
+Plan the whole story first. Internally derive any episode-only character from context and carry the same identity digest across the batch. Add typography deterministically. Repair locally from the last known good frame when one exists.
+
+### Render-contract hard gate
+
+Production raster is never launched from free-form conversational memory.
+
+Before L13:
+1. materialize `episodes/<ID>/EPISODE_PLAN.json`;
+2. bind it by Git blob SHA in `episodes/<ID>/RENDER_MANIFEST.json`;
+3. compile each scene prompt from the canonical MASTER_PROMPTS section plus the structured slide contract;
+4. run `python pipeline/render_guard.py validate`;
+5. render one first frame and run semantic QC before allowing continuation.
+
+Prompt-binding policy:
+- `EXPLICIT_COMPILED_PAYLOAD` → first-frame gate, then the remaining batch may proceed.
+- `CONVERSATION_INFERRED` → no parallel batch; render exactly one frame at a time and require semantic QC PASS before the next frame.
+
+Any unrelated story, wrong cast, mascot/animal substitution, coding/self-help scene, collage, baked text, or other unplanned concept is a hard failure. The bad output is discarded and never becomes LAST_KNOWN_GOOD or a reference.
 
 ## Root files
 
@@ -91,6 +111,6 @@ Old overlapping root specifications are merged/retired; Git history is the archi
 
 ## Current episode
 
-See episodes/E002/README.md.
+See episodes/E004/README.md.
 
 episodes/E001/ is preserved as a historical pre-v2 prototype and is not current style authority.
