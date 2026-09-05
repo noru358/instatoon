@@ -80,7 +80,20 @@ Before production in a clean session, read:
 
 Do not produce a new story frame after reading only MASTER_PROMPTS or only CURRENT_STATE.
 
+Before direct/native image generation, the restore requirement still applies. "I can generate the image myself" never means "generate from memory." The operator must inspect the current visual binaries plus the active prompt/grammar/protocol authorities first.
+
 For automation implementation, also read AUTOMATION_TRANSITION.md.
+
+## 3.5 Capability verification in chat
+
+When the user asks to "갱신", edit GitHub, push, or otherwise perform a connected action, do not declare the capability unavailable from assumption or stale session memory.
+
+First:
+1. check the currently available tools/connections/plugins;
+2. if the required capability exists, execute it;
+3. only report unavailable after the current environment check actually fails.
+
+This rule applies especially to GitHub because chat sessions may expose different connected-tool surfaces.
 
 ## 4. During-work recording
 
@@ -229,8 +242,9 @@ For every reported stage include:
 - NEXT: exact next stage.
 
 Source collection must never imply external provenance when none exists.
-Visual generation must state which exact style and character reference assets were actually supplied to the renderer.
-If required canonical binaries were not supplied, report that as a production defect rather than implying reference compliance.
+Visual generation must state which exact style and character reference assets were inspected and which were actually supplied to the renderer as media inputs.
+For renderers without explicit repository-media inputs, report AUTHORITY-INFORMED / NON-BINARY-CONDITIONED rather than pretending the binaries were injected.
+If required canonical assets were neither inspected nor supplied where supported, report that as a production defect rather than implying reference compliance.
 
 For long runs, stage reports may be grouped into a compact progress table, but every completed stage must remain auditable.
 
