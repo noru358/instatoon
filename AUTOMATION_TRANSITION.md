@@ -94,10 +94,17 @@ If a retry regresses:
 ### C. VoiceGate
 Dialogue cannot silently pass from draft into production while the project is still learning user voice.
 
+This is a blocking PRE-PRODUCTION approval state.
+The runtime must present the L1-L7 review package to the user and persist explicit approval before STORYBOARD_PLANNED / CAST_ROUTED / VISUAL_PLAN_READY / RASTER_RENDER may execute.
+Silence or the initial NEW_EPISODE command is never implicit approval.
+
 Store:
+- source/provenance summary presented for review;
+- story beats presented for review;
 - draft;
 - humanized draft;
 - user feedback;
+- explicit approval status;
 - accepted dialogue;
 - reusable voice rule when appropriate.
 
