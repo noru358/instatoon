@@ -467,3 +467,32 @@ If a returned image is from a different story or concept, uses the wrong cast, i
 5. inspect plan/manifest/prompt-binding/renderer before retry.
 
 A renderer returning an image is not success. Success requires scene-contract compliance.
+
+
+## 17. Short-term style-binding lock — CANONICAL
+
+For the current production phase, style-sensitive raster generation is production-authorized only when the canonical style reference is bound to the renderer as ACTUAL IMAGE MEDIA.
+
+A repository path, Markdown description, prompt paraphrase, filename, hash, or operator memory does NOT count as style-media binding.
+
+Required per production render:
+1. actual canonical style-sheet image media;
+2. current slide contract from EPISODE_PLAN / RENDER_MANIFEST;
+3. recurring-character identity media when that identity is present;
+4. after the first accepted style pass, the accepted episode style/identity anchor as secondary actual image media on every later slide.
+
+Current short-term hierarchy:
+CANONICAL STYLE MEDIA → ACCEPTED EPISODE STYLE/IDENTITY ANCHOR → SLIDE SCENE CONTRACT → renderer.
+
+If the runtime cannot actually attach the required image media:
+- do not silently fall back to text-only style description;
+- do not call the result production-ready;
+- either use a renderer/runtime that can bind the media or stop at prototype status.
+
+An accepted image may serve as an episode style/identity anchor even when its composition/story beat is not accepted, but that role must be recorded explicitly. It must not be mislabeled as a story-correct LAST_KNOWN_GOOD frame.
+
+For conversation-inferred native rendering:
+- actual reference images must be present in the current conversation and selected as the intended visual references;
+- one frame only per call;
+- visual QC before every next frame;
+- attach/reuse both canonical style media and the accepted episode anchor after the style anchor exists.
