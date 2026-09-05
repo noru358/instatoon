@@ -4,7 +4,7 @@
 Updated: 2026-09-05
 
 This is the single authoritative visual-generation prompt source.
-If another prompt file conflicts, this file wins.
+This file owns prompt wording. If wording conflicts with an approved visual reference, the approved image wins; reconcile the wording rather than redesigning the reference.
 
 ## 0. Production intent
 
@@ -25,7 +25,8 @@ CHARACTERS:
 - no fashion-model anatomy or exaggerated curves.
 
 FACE:
-- large round eyes;
+- preserve the selected identity’s eye shape and expression from its approved image;
+- large round eyes are a common style trait, not a command to open every eyelid;
 - large white sclera;
 - simple solid black pupil/iris;
 - one tiny white eye highlight at most;
@@ -228,12 +229,20 @@ Prototype baked-in text may be used only for quick taste tests, not as the canon
 
 ## 12. COMPILED PRODUCTION PROMPT
 
+Draw exactly one standalone panel for the requested slide, in one image. No multi-panel page, strip, grid, collage or sheet. Input character sheets and scene references are references only; do not reproduce their layout.
+
 Draw a simple hand-drawn 2D Instagram-webcomic frame matching the approved v2 references. Use slightly irregular black outlines, simplified adult 4.5–5-head proportions, large round white eyes with simple black pupils/irises and at most one tiny highlight, almost no nose, small graphic mouths, broad simple hair masses, flat local muted colors, and almost no shading.
 
 Draw the environment with the exact same comic language: simple black outlines, large flat shapes, low detail density, simple perspective, no realistic materials, no decorative clutter, no global beige/sepia wash, and no cozy/cinematic atmosphere.
 
 Do not beautify or over-render. No generic smooth AI-pretty faces, glossy anime/webtoon finish, paper grain, gradients, airbrush shading, detailed irises, realistic facial anatomy, glossy hair, textile rendering, ambient lighting, or hyper-detailed backgrounds.
 
-Use the story-selected recurring-character reference or the internally derived episode-only identity digest consistently. If this is a repair and a last-known-good frame exists, preserve it and change only the named defect.
+The attached approved images are the visual authority. Common eye/proportion descriptions must not override an approved identity’s eye shape, eyelids or natural expression. Do not exaggerate texture, lighting or detail beyond the references, and do not redesign their accepted line quality to satisfy an absolute prose ban.
 
-[INSERT SCENE FACTS + STORY BEAT + OUTPUT RATIO]
+Use style-only references for drawing language, not their cast, room, pose, framing or palette wholesale. Render only the episode-selected people in the planned scene.
+
+For a recurring character, preserve that selected person’s referenced identity. For an episode-only person, transfer drawing language only: use the story-specified age, gender/presentation, body, hair and clothing rather than copying the reference people. Simplified adult proportions describe the current adult cast, not a rule to turn children, older people or different physiques into those adults. Keep the same drawing language through these variations.
+
+Use the story-selected recurring-character reference or the internally derived episode-only identity digest consistently. Once an episode image is accepted, also use its actual image as the secondary identity/style anchor on later cuts; the current scene contract still controls action and composition. If this is a repair and a last-known-good frame exists, preserve it and change only the named defect.
+
+The compiler appends the exact story beat, scene contract, output format and required media below.

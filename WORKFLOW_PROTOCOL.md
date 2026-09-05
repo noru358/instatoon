@@ -117,40 +117,11 @@ Record durable changes in the proper authority:
 
 Do not leave a cross-session rule only in chat.
 
-## 5. Cast / episode-character portability rule
+## 5. Preserve, do not duplicate, production policy
 
-Story/context decides whether an episode uses:
-- Gaeun;
-- Harin;
-- Taemin;
-- one-off cast;
-- a mixture.
-
-There is no default main-character insertion merely by gender.
-There is no global Taemin ban.
-
-If a new non-main character appears in 2+ cuts:
-1. derive the person internally from story/context;
-2. record one compact episode-only identity digest;
-3. render the whole episode batch with that same digest.
-
-Do not insert a separate user-facing character-sheet or approval stage by default.
-
-This rule survives session changes.
-
-## 6. Last-known-good portability rule
-
-A repair must start from the best accepted prior state, not automatically from the latest generated state.
-
-Record when useful:
-- which frame/reference is LAST_KNOWN_GOOD;
-- what is accepted;
-- what exact defect remains.
-
-If a retry regresses:
-- reject it;
-- do not chain from it;
-- return to the prior accepted base.
+SOURCE_STORY_PIPELINE.md owns cast/episode-only identity and L8 approval.
+GENERATION_PROTOCOL.md owns last-known-good repair and actual-media delivery.
+REFERENCE_SET.md owns binary status. Preserve those documents and point to them instead of adding another policy copy here.
 
 ## 7. “갱신” reconciliation order
 
@@ -180,20 +151,6 @@ If a binary reference controls visual identity:
 If the current connector cannot upload the binary:
 - document the gap explicitly;
 - never fall back to an obsolete asset silently.
-
-## 9. Minimal-change preservation
-
-When the user approves most of a frame and requests one fix:
-
-LOCAL ISSUE:
-- edit the target only;
-- preserve all unmentioned composition/style/identity/geometry.
-
-SYSTEMIC ISSUE:
-- repair the shared prompt/reference/layout system;
-- rerun only affected dependencies.
-
-Do not regenerate the entire visual package to fix a local defect unless targeted editing is impossible.
 
 ## 10. Environment portability
 
@@ -231,18 +188,10 @@ Examples:
 - new deterministic text-layout rule;
 - mandatory stage execution reporting.
 
-## 12.5 Mandatory pre-production user review gate
+## 12.5 Approval portability
 
-For every NEW_EPISODE during the current learning phase:
-1. execute L1-L7 in order;
-2. present the source/provenance, story beats, and humanized dialogue to the user before visual production;
-3. stop at L8 USER VOICE GATE;
-4. require explicit user approval before L10-L13 can proceed.
-
-Approval may be terse (“통과”, “ㄱ”, “좋음”, or equivalent).
-Do not infer approval from silence or from the original request to make a new episode.
-
-This is a cross-session production requirement, not an optional status update.
+Persist the current L8 user approval and exactly what was approved; SOURCE_STORY_PIPELINE.md owns the gate.
+Old episodes that postponed L8 are historical evidence, not exceptions for new execution.
 
 ## 13. Mandatory stage execution report
 
@@ -293,29 +242,7 @@ Before any L13 raster call, restore the active EPISODE_PLAN.json and RENDER_MANI
 When render rules change, 갱신 is complete only after guard tests, active-contract validation, remote refetch, CI verification, CURRENT_STATE update last, and the parent AutoPipeline pointer update when applicable.
 
 
-## 15.5 Reference-conditioning capability gate
+## 15.5 Current capability, not historical capability
 
-Before any L13 authorization, distinguish three facts:
-1. canonical ref exists in repository;
-2. operator inspected/refetched it;
-3. renderer actually received it as media input.
-
-Only #3 satisfies BINARY_CONDITIONED.
-
-If the active episode requires BINARY_REQUIRED:
-- record exact supplied reference paths;
-- pass them to render_guard authorize;
-- block any renderer that cannot accept them;
-- do not downgrade to authority-only from convenience or tool habit.
-
-A renderer capability mismatch is a preflight BLOCK, not an invitation to generate and QC afterward.
-
-
-## Generic media preflight portability
-
-Before a generation call, build the active job's media requirements from the child manifest and run capability/supply preflight.
-
-Do not encode individual canonical asset names into orchestration code.
-New required assets are data entries, not new if/else branches.
-
-The same model must support image, audio, video, and future media types.
+Read the active tool definition each session. Native/direct image generation can have explicit prompt and image-path inputs; never infer inability from an old chat.
+GENERATION_PROTOCOL.md owns media preflight. Record actual inputs, not just declared paths. The current standalone guard cannot prove an external call received media or that a QC claim corresponds to an output.

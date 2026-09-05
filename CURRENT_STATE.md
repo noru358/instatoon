@@ -1,228 +1,79 @@
 # CURRENT_STATE.md
 
-# LIVE STATE — 2026-09-05
-
+Updated: 2026-09-05
 Repository: noru358/instatoon
-
-## Big flow
-
-Style reset complete → source-first manual production → coordinated text-free raster pass → lettering/QC → publishable episodes → repeat prototypes → automation implementation.
-
-## Current detailed position
-
-Visual-style exploration itself is no longer the main task.
-
-Approved:
-- v2 character style from the two canonical character-sheet references;
-- v2 background direction;
-- Gaeun / Harin / Taemin main-cast sheet after corrections;
-- the approved 3-person indoor interaction image is a POSITIVE reference showing the canonical style correctly extended to background + multi-person composition; it is NOT a contamination example;
-- 4:5 feed/carousel as primary format;
-- 9:16 Reels/Shorts derivative;
-- omnibus content model;
-- HUMAN-SOURCE-FIRST provenance;
-- source-voice / dialogue-humanization / USER VOICE GATE workflow;
-- native/direct ChatGPT image generation as a first-class raster path after authority preflight.
 
 Active episode: episodes/E005/README.md
 
-## E005 — current production package
+## 현재 위치
 
-Fresh NEW_EPISODE routing completed from L1.
+큰 흐름: 수동 제작 검증 → 최소 실행 경로 연결 → 독립 CLI → 웹 도구.
+현재는 수동 제작 규칙과 입력 가드가 있고, 실제 생성·합성·승인 상태를 잇는 실행기는 미구현이다.
+이번 리포 점검에서 새 그림은 생성하지 않았다.
 
-Human-seeded base:
-- Reddit r/tifu "TIFU by texting my date that I might end up marrying him seconds after we ended our date"
-- https://www.reddit.com/r/tifu/comments/i4jtsd/
-- later four-year update reports that the pair eventually married.
+## E005 — 결혼할지도
 
-Current stage:
-- L1-L7 complete;
-- L8 USER VOICE GATE explicitly PASS by user;
-- L10 STORYBOARD + CAST ROUTER PASS;
-- L11 EPISODE-LOCAL CHARACTER DESIGN PASS;
-- L12 WHOLE-EPISODE VISUAL PLAN PASS;
-- E005 README + EPISODE_PLAN.json materialized;
-- L12.5 render contract was hardened after the failed native S01 style pass;
-- root cause: the old guard verified that canonical refs existed but did not verify that the renderer actually received them;
-- current v2 episodes now declare reference_conditioning_requirement = BINARY_REQUIRED;
-- render authorization now uses generic RENDER_MANIFEST.media_requirements plus renderer capability and supplied-media evidence; current required v2 image refs map to MUST_SUPPLY_MEDIA;
-- native/direct paths without a repository-binary reference bridge are BLOCKED before raster generation rather than allowed to fail after generation;
-- prior E005_S01 remains INVALID; S02 is not authorized.
+- L1–L7 완료, L8 사용자 명시 승인 PASS (2026-09-05).
+- L10 캐스팅, L11 회차 인물 설계, L12 전체 7컷 콘티 완료.
+- EPISODE_PLAN.json과 SHA로 결합된 RENDER_MANIFEST.json 존재.
+- 두 주인공 모두 회차 전용 woman_01 / man_01. 결혼 결말을 주연의 영구 설정으로 만들지 않는다.
+- 이전 S01은 장면 대체로 일치, 그림체 FAIL. INVALID이며 참조·수정 원본으로 쓰지 않는다.
+- 유효한 S01과 후속 컷 없음. S02로 넘어갈 수 없다.
+- 원소재, 대사, 콘티와 실패 기록은 episodes/E005/README.md에 보존한다.
 
-Cast:
-- no recurring main-cast character is used;
-- woman_01 and man_01 are both episode-only to avoid turning the sourced marriage outcome into recurring main-cast canon;
-- both have STRICT_EPISODE identity digests in the E005 package.
+## 정확한 다음 제작 행동
 
-Visual plan:
-- seven 4:5 text-free raster slides;
-- first-date medium two-shot → apartment-door goodbye → keys-in-hand impulsive text → wrong-recipient reaction → damage control → reply reaction → restrained wedding/update aftershock;
-- final lettering will frame the ending as "4년 뒤 근황 / 진짜 결혼함." for source accuracy.
+1. 현행 문서와 E005 계획을 복원하고 `python pipeline/render_guard.py validate`를 실행한다.
+2. REF_V2_D/E의 실제 파일을 열어 확인한다.
+3. **현재 도구 정의**에서 프롬프트·실제 참조 이미지 입력 방식을 확인한다.
+   이번 Work 환경의 image_gen은 `prompt`와 `referenced_image_paths`를 제공한다.
+   이 환경에는 로컬 두 JPEG도 존재한다. 과거 세션의 “native는 미디어 입력 불가”를 재사용하지 않는다.
+4. E005_S01의 컴파일 결과와 실제 참조 경로를 같은 생성 호출에 전달한다.
+   지금 도구의 입력 가능 여부만 확인한 상태이며 성공적인 생성은 아직 검증하지 않았다.
+5. S01만 생성해 장면·그림체·두 사람 얼굴을 비교한다. 현재 사용자 검수 합의를 지킨다.
+6. 채택 이미지를 회차 보조 앵커로 저장·실제 전달한 뒤 나머지 컷을 진행한다.
+7. 대사/말풍선 합성, 휴대폰 크기 가독성·컷 순서 확인 후 최종 내보내기.
 
-Exact next action:
-1. select or expose a renderer path that can accept REF_V2_D and REF_V2_E as actual media inputs;
-2. prove both required refs in the authorize supplied-ref evidence;
-3. compile/authorize E005_S01 under BINARY_CONDITIONED;
-4. render E005_S01 only;
-5. run semantic/style/identity QC and authorize S02 only after PASS.
+## 현행 시각 기준
 
-## E004 — current production package
+- INSTATOON_STYLE_v2.0. 실제 승인 이미지가 일반화된 스타일 문장보다 우선한다.
+- REF_V2_D: 주연/그림체 시트. REF_V2_E: **정상 승인된** 실내 3인 장면.
+- 두 파일은 assets/style_refs/v2_current/에 있다. 정확한 경로·해시는 REFERENCE_SET.md.
+- A/B/C 원본은 아직 이 리포에 없다. 현행 E005의 필수 입력은 D/E이므로 이것만으로 파일 부재 차단 사유는 아니다.
+- E004에서 승인된 회차 스타일 앵커는 기록만 있고 바이너리 경로/해시가 없다. E004 재개 시 복구 또는 새 승인 필요.
+- 태민의 고유 눈매와 자연스러운 감정 표현을 모든 인물에 대한 원형 눈 문장으로 덮어쓰지 않는다.
 
-Fresh new-work routing restarted from L1 and did NOT reuse E003.
+## 다른 회차
 
-Human-seeded base:
-- Reddit r/tifu "TIFU by letting a girl off at the wrong floor like it was her stop"
-- https://www.reddit.com/r/tifu/comments/1l8jkeq/
-- used as inspiration/base, not literal adaptation.
+| 회차 | 상태 |
+|---|---|
+| E001 | v1 역사적 제작 샘플. 그림·SVG 글자·최종 PNG 존재, 현행 스타일 검증에 포함하지 않음 |
+| E002 | 소개팅 셀프팔로우, 이전 학습 파일. 현행 제작 대기열 아님 |
+| E003 | 인간 소재 기반 이전 콘티. 외부 공급자 크레딧 실패는 당시 해당 경로의 실패 |
+| E004 | 이전 콘티 및 스타일 승인 기록. L8을 뒤로 미룬 당시 절차는 폐기; 재개 전 승인 상태 확인 |
 
-Current story:
-Taemin shares an apartment elevator with a woman he has never met, presses 21 for her and 17 for himself, then reflexively tells her "먼저 내리세요" when the doors open at his own 17th floor. She reminds him she is on 21; he realizes he has effectively tried to eject her at his floor and exits into concentrated awkwardness.
+## 점검 결과와 남은 결함
 
-Current stage:
-- L1-L7 complete;
-- L8 USER VOICE GATE intentionally deferred until before final lettering because raster masters are text-free;
-- L9 has no new durable voice rule yet;
-- L10-L12 complete;
-- L12.5 RENDER CONTRACT GATE complete;
-- E004 EPISODE_PLAN.json + SHA-bound RENDER_MANIFEST.json materialized;
-- executable render guard + regression tests + GitHub Actions are active;
-- prior unrelated native outputs are INVALID/discarded and do not count as L13 artifacts;
-- L13 is reset to FIRST-FRAME SEMANTIC GATE NEXT.
+기존 가드 테스트 9개와 활성 입력 검증은 통과했지만, 다음을 재현했다.
+- 이미지/QC 결과 파일 없이 호출자가 `PASS`라고 쓰면 마지막 컷도 허가됐다.
+- 참조 파일 내용을 바꿔도 검증됐다. 이번에 로컬 필수 미디어의 SHA-256 검증과 회귀 테스트로 수정했다.
 
-Cast:
-- Taemin = recurring REF_V2_D main-cast identity.
-- Episode-only woman = continuity digest recorded in E004; preserve across slides 01-05.
+따라서 단계 승인, 실제 생성 요청, 이미지 검수와 결과 저장을 연결하는 실행기는 여전히 필요하다.
+문서 정리는 실행기 구현이나 그림체 성공률 입증을 의미하지 않는다.
+상세 진단·구현 순서·검증 기준은 AUTOMATION_TRANSITION.md를 따른다.
 
-## E003 status
+## 이번 정리 검증
 
-E003 remains preserved as prior human-seeded production work and is no longer the active new-work target unless the user explicitly returns to it.
+- 가드 테스트 14개 PASS, 활성 E005 계약 검증 PASS.
+- 필수 참조 바이트 교체 및 해시 누락 차단을 회귀 테스트로 확인.
+- 컴파일 결과의 장면 비트/보조 앵커 안내와 미치환 표식 제거 확인.
+- 첫 감사에서 root 문서 약 600줄을 줄였다. 새 운영 문서를 추가하지 않고 중복/구버전 안내 정리.
+- 생성 품질 시험은 실행하지 않았으므로 그림체 합격률은 아직 미측정.
 
-Its source/story/dialogue/storyboard package remains valid in episodes/E003/README.md.
-The historical Higgsfield no-credit failure was provider-specific and never invalidated native/direct generation.
+## 사용자 확정 운영 요구 — 2026-09-05
 
-## Current renderer rule
-
-Native/direct ChatGPT image generation is first-class and may be used without invoking Higgsfield.
-
-Before direct generation:
-1. restore the canonical Markdown production pack;
-2. inspect the current visual binaries when the runtime can expose them;
-3. use MASTER_PROMPTS + observed reference traits + episode visual plan;
-4. if the renderer cannot accept the repository binaries as explicit media inputs, report AUTHORITY-INFORMED / NON-BINARY-CONDITIONED honestly rather than pretending they were injected;
-5. never fall back to retired v1 assets.
-
-For E004 in the present chat:
-- repository authorities and the exact REF_V2_D / REF_V2_E binary identities/paths were restored;
-- native image generation does not expose those GitHub JPEG binaries as explicit renderer media inputs;
-- therefore any direct pass must be logged as AUTHORITY-INFORMED / NON-BINARY-CONDITIONED unless the runtime gains a reference-media bridge.
-
-## Current hard lessons
-
-Do not solve one local problem by fully regenerating a good frame.
-
-Use:
-LAST_KNOWN_GOOD → local change only.
-
-For a new non-main person appearing in 2+ cuts:
-STORY/CONTEXT → INTERNAL IDENTITY DIGEST → COORDINATED EPISODE BATCH.
-
-This internal continuity operation is not a separate user-facing character-sheet or approval stage.
-
-New-work commands such as "새 만화" always restart from fresh human-source discovery unless the user explicitly requests continuation/repair.
-
-## Exact next action
-
-1. Run `python pipeline/render_guard.py validate`.
-2. Compile and authorize E004_S01 from the structured contract.
-3. Because the native/direct renderer is conversation-inferred, render exactly ONE frame only.
-4. Run semantic/style/identity QC on S01.
-5. Continue to S02 only if S01 PASS; repeat this gate for every frame.
-6. Preserve Taemin and woman_01 continuity and the 17F/21F spatial logic.
-7. Keep raster text-free; lettering remains after the voice gate.
-
-## Current visual risk to watch
-
-The main remaining visual drift risks are:
-- generic AI-like new-person face design;
-- blanket beige/sepia atmosphere;
-- soft global texture;
-- over-rendered environment;
-- main-cast identity drift;
-- full-scene regeneration during local repair.
-
-## Repository authority after cleanup
-
-Read before production:
-1. README.md
-2. this file
-3. SOURCE_STORY_PIPELINE.md
-4. MASTER_PROMPTS.md
-5. VISUAL_GRAMMAR.md
-6. GENERATION_PROTOCOL.md
-7. REFERENCE_SET.md
-8. active episode package
-
-Direct/native image generation does not waive this restore order.
-
-## Binary reference note
-
-The approved main-cast sheet and approved 3-person indoor scene are committed under `assets/style_refs/v2_current/` as REF_V2_D and REF_V2_E.
-Their exact paths, dimensions and SHA-256 hashes are recorded in `REFERENCE_SET.md`.
-
-REF_V2_A, REF_V2_B and REF_V2_C remain pending binary ingest. Do not fall back to legacy v1 style references for them in a clean environment.
-
-## Reference clarification — 2026-09-05
-
-The canonical interpretation remains:
-1. long-wavy-black-hair female character sheet = canonical character-style reference;
-2. brown-bob female character sheet = canonical character-style reference;
-3. living-room three-person scene = approved positive scene reference demonstrating how the character style extends to background + multi-person interaction.
-
-The third image is NOT a failed/drifted example.
-
-Actual contamination means romance-webtoon / generic AI-pretty rendering, soft beige atmosphere, heavier shading, and altered face grammar.
-
-
-## Render-contract hardening — 2026-09-05
-
-The repeated wrong-story native-render failure is now treated as an orchestration defect, not a reminder problem.
-
-Repository-wide controls now active:
-- schemas/episode_plan.schema.json
-- schemas/render_manifest.schema.json
-- pipeline/render_guard.py
-- pipeline/test_render_guard.py
-- .github/workflows/render-guard.yml
-- per-episode EPISODE_PLAN.json
-- per-episode SHA-bound RENDER_MANIFEST.json
-
-Global policy:
-- no free-form render from chat memory;
-- active episode / plan / manifest must match;
-- plan mutation invalidates old manifest;
-- required current reference paths must exist;
-- unexpected concepts are FAIL_CLOSED;
-- explicit compiled-payload renderers first-frame gate the batch;
-- conversation-inferred renderers are sequential and gate every frame;
-- semantic mismatch stops the run immediately and can never become LAST_KNOWN_GOOD/reference.
-
-Verified regression coverage includes:
-- active-episode mismatch rejection;
-- stale-manifest rejection;
-- deterministic E004 prompt binding;
-- conversation-inferred next-frame rejection without prior QC PASS.
-
-This materially reduces recurrence and, crucially, prevents a wrong output from propagating through the rest of the episode. Model/renderer misbehavior can still occur, so zero-error generation is not guaranteed; the system is designed to detect and contain it before continuation.
-
-
-## Generic media-contract hardening — 2026-09-05
-
-The reference fix is no longer an Instatoon-only style-ref rule.
-AutoPipeline now owns a project-agnostic MEDIA_INPUT_CONTRACT and generic media_gate.
-Instatoon RENDER_MANIFEST now emits media_requirements[] and its render_guard consumes that generic model.
-
-Result:
-- new image/audio/video requirements are data, not code branches;
-- renderer capability mismatch blocks before generation;
-- actual supplied evidence is distinct from repository availability;
-- project-specific asset names are not encoded in the generic authorization algorithm.
+- 대본/흐름 검수 → 첫 실제 만화 컷의 그림체·인물 검수 → 후속 컷은 운영자가 검수하며 제작 → 완성본 검수.
+- 한 컷은 반드시 한 이미지 파일. 컷별 독립 호출/납품. 합본·그리드·콜라주로 대체하지 않는다.
+- 주연은 선택된 인물 정체성도 보존; 조연은 그림체만 공통이며 나이·성별·체형·복장은 이야기로 정한다.
+- 승인된 회차 이미지를 후속 컷의 고정 보조 미디어로 실제 전달한다. 자세한 절차는 GENERATION_PROTOCOL §0.5.
+- 이번 변경은 운영 절차와 입력 계약을 반영한다. 새 이미지 생성/그림체 성공률 측정은 아직 수행하지 않았다.

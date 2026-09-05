@@ -5,7 +5,7 @@ Updated: 2026-09-05
 
 ## Legacy assets
 
-The files currently stored under assets/style_refs/ belong to the retired pre-reset v1.x style.
+The five INSTATOON_REF_* files directly under assets/style_refs/ belong to the retired pre-reset v1.x style. Files under v2_current/ are current, not legacy.
 
 They are NON-CANONICAL for current production.
 Do not use them as fallback references.
@@ -64,13 +64,9 @@ Do not classify this image as visual drift merely because it contains a full sce
 
 ## Episode-local character references
 
-A new important non-main character appearing in 2+ cuts must get an episode-local character anchor before story frames.
-
-That anchor:
-- fits the role/context;
-- stays visually distinct from main cast;
-- uses v2 style;
-- becomes the identity source for that episode only.
+A new important non-main character appearing in 2+ cuts gets one internal identity digest before rendering, not a mandatory standalone character sheet.
+After the first accepted episode image, reuse that actual image as a secondary style/identity anchor in later cuts. The canonical style image remains primary; the slide contract controls the new action and composition.
+A separate character-sheet image is optional when continuity fails or the character is promoted for reuse.
 
 ## Last-known-good references
 
@@ -105,7 +101,7 @@ Operational meaning:
 - a renderer without an explicit reference-media bridge is not eligible for canonical v2 raster production;
 - AUTHORITY_INFORMED / NON-BINARY-CONDITIONED output may be used only when an episode explicitly declares AUTHORITY_ONLY_ALLOWED, never as an implicit fallback for v2 production.
 
-This requirement is enforced machine-readably through EPISODE_PLAN, RENDER_MANIFEST, and pipeline/render_guard.py.
+EPISODE_PLAN / RENDER_MANIFEST declare this requirement. The guard checks local media integrity and caller-supplied evidence; actual delivery still requires a renderer adapter or an inspected manual tool call.
 
 
 ## Runtime binding requirement — SHORT-TERM PRODUCTION LOCK

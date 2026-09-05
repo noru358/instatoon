@@ -6,13 +6,15 @@ Continuity clarification: 2026-09-05
 
 The pre-reset tiny-eye / thin brown-line style is retired.
 
+Approved visual references are the target. The fingerprint below describes them; it must not override character-specific eyelids, natural expressions, accepted line quality or restrained surface detail. Anti-drift checks reject added/exaggerated polish, not the approved references themselves.
+
 ## Core fingerprint
 
 - simple hand-drawn 2D Instagram-webcomic look;
 - black outlines with slight natural irregularity;
 - flat local colors;
 - almost no modeled shading;
-- large round eyes with white sclera + simple black pupil/iris + tiny highlight;
+- reference-specific eyes with simple white sclera / black pupils; large round eyes are common, while selected character eyelids and natural expressions remain intact;
 - nearly absent nose;
 - small graphic mouth;
 - hair as broad graphic masses with only a few interior lines;

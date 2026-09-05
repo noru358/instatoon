@@ -37,10 +37,10 @@ def git_blob_sha(path: Path) -> str:
 
 def active_episode_id(repo_root: Path) -> str:
     state = (repo_root / "CURRENT_STATE.md").read_text(encoding="utf-8")
-    match = re.search(r"^Active episode:\s+episodes/(E\d+)/README\.md\s*$", state, re.M)
-    if not match:
+    matches = re.findall(r"^Active episode:\s+episodes/(E\d+)/README\.md\s*$", state, re.M)
+    if len(matches) != 1:
         raise GuardError("CURRENT_STATE.md has no single parseable Active episode line")
-    return match.group(1)
+    return matches[0]
 
 
 def extract_markdown_section(path: Path, heading: str) -> str:
@@ -74,6 +74,9 @@ def validate_episode_plan(plan: dict):
 
     fmt = plan["format"]
     _require(fmt.get("text_free_raster") is True, "canonical raster must be text-free")
+    _require(type(fmt.get("panels_per_image")) is int and fmt["panels_per_image"] == 1,
+             "production requires exactly one panel per image")
+    _require(fmt.get("delivery_mode") == "SEPARATE_FILES", "production requires separate image files")
     slides = plan["slides"]
     _require(fmt.get("slide_count") == len(slides), "slide_count does not match slides")
 
@@ -126,7 +129,14 @@ def validate_media_requirements(repo_root: Path, plan: dict, manifest: dict):
 
         source_id = req["source_id"]
         if not re.match(r"^[a-zA-Z]+://", source_id) and not source_id.startswith("connector:"):
-            _require((repo_root / source_id).is_file(), f"{rid}: required media source missing: {source_id}")
+            source_path = repo_root / source_id
+            _require(source_path.is_file(), f"{rid}: required media source missing: {source_id}")
+            if req.get("required") and req.get("conditioning") == "MUST_SUPPLY_MEDIA":
+                expected_hash = req.get("expected_hash")
+                _require(isinstance(expected_hash, str) and re.fullmatch(r"[0-9a-f]{64}", expected_hash),
+                         f"{rid}: required local media needs a SHA-256 expected_hash")
+                _require(hashlib.sha256(source_path.read_bytes()).hexdigest() == expected_hash,
+                         f"{rid}: local media SHA-256 mismatch")
 
     # Compatibility/migration invariant: every current style_ref must be represented
     # through the generic requirement model. Authorization never reads style_refs directly.
@@ -173,7 +183,7 @@ def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: 
 
     out = manifest["output"]
     fmt = plan["format"]
-    for key in ("aspect_ratio","width","height","text_free_raster"):
+    for key in ("aspect_ratio","width","height","text_free_raster","panels_per_image","delivery_mode"):
         _require(out.get(key) == fmt.get(key), f"output {key} differs from EPISODE_PLAN")
 
     _require(
@@ -255,7 +265,11 @@ def compile_prompt(repo_root: Path, episode_id: str, slide_index: int) -> str:
 RENDER CONTRACT — DO NOT DEVIATE
 EPISODE_ID: {plan['episode_id']}
 SLIDE_ID: {slide['slide_id']}
+STORY BEAT: {slide['beat']}
 OUTPUT: {plan['format']['aspect_ratio']} {plan['format']['width']}x{plan['format']['height']}
+DELIVERY: SEPARATE_FILES. Exactly ONE panel in ONE image for {slide['slide_id']} only.
+No multi-panel page, comic strip, grid, collage, storyboard sheet or contact sheet.
+Reference sheets are input references only; never copy their multi-view layout into the output.
 RASTER_TEXT: NONE. No readable captions, dialogue, labels, logos, watermarks, or speech bubbles.
 
 MAIN CAST: {main_cast}

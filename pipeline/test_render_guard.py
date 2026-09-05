@@ -10,6 +10,7 @@ from pipeline.render_guard import (
     authorize,
     compile_prompt,
     validate_repository,
+    validate_episode_plan,
 )
 
 REPO = Path(__file__).resolve().parents[1]
@@ -103,6 +104,52 @@ class RenderGuardTests(unittest.TestCase):
             authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply),
             "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
         )
+
+    def test_multi_panel_or_combined_delivery_is_rejected(self):
+        for field, bad in [("panels_per_image", 4), ("panels_per_image", None),
+                           ("delivery_mode", "CONTACT_SHEET")]:
+            with self.subTest(field=field, value=bad):
+                _, plan, _ = self._active_plan_manifest()
+                plan["format"][field] = bad
+                with self.assertRaises(GuardError):
+                    validate_episode_plan(plan)
+
+    def test_single_panel_compiler_isolates_requested_scene(self):
+        eid, plan, _ = self._active_plan_manifest()
+        prompt = compile_prompt(REPO, eid, 1)
+        self.assertIn("Exactly ONE panel in ONE image", prompt)
+        self.assertIn("Reference sheets are input references only", prompt)
+        if len(plan["slides"]) > 1:
+            self.assertNotIn(plan["slides"][1]["slide_id"], prompt)
+            self.assertNotIn(plan["slides"][1]["action"], prompt)
+
+    def test_duplicate_active_episode_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            eid = self._active()
+            line = f"Active episode: episodes/{eid}/README.md\n"
+            (root / "CURRENT_STATE.md").write_text(line + line)
+            with self.assertRaises(GuardError):
+                active_episode_id(root)
+
+    def test_changed_reference_bytes_are_rejected(self):
+        eid, _, manifest = self._active_plan_manifest()
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td) / "repo"
+            shutil.copytree(REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            (root / manifest["style_refs"][0]).write_bytes(b"not the approved image")
+            with self.assertRaisesRegex(GuardError, "local media SHA-256 mismatch"):
+                validate_repository(root, eid)
+
+    def test_required_local_media_cannot_drop_integrity_hash(self):
+        eid, _, manifest = self._active_plan_manifest()
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td) / "repo"
+            shutil.copytree(REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            manifest["media_requirements"][0]["expected_hash"] = None
+            (root / "episodes" / eid / "RENDER_MANIFEST.json").write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(GuardError, "needs a SHA-256"):
+                validate_repository(root, eid)
 
     def test_stale_manifest_fails_closed(self):
         active = self._active()

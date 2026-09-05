@@ -506,29 +506,8 @@ NARRATE when:
 
 Do not use a large caption to explain a scene the image already communicates.
 
-## 6. Current active-episode note
+## 6. Current execution pointers
 
-The current active production episode is recorded by CURRENT_STATE.md and its episode package.
-As of 2026-09-05 this is E003; E002 remains preserved as a prior pilot/learning episode.
-
-Do not hard-code an old active episode into future execution. CURRENT_STATE.md wins for the exact live episode.
-
-
-## L12.5 — RENDER CONTRACT GATE — CANONICAL
-
-This gate applies to every episode, client, renderer, and future automation path.
-
-After L12 and before L13:
-1. materialize `episodes/<ID>/EPISODE_PLAN.json`;
-2. materialize `episodes/<ID>/RENDER_MANIFEST.json` bound to the exact EPISODE_PLAN Git blob SHA;
-3. require exact active-episode / plan / manifest ID equality;
-4. require exact slide count/order, text-free raster flag, output ratio, cast continuity, required refs, per-slide scene facts, required entities, and forbidden entities;
-5. run `python pipeline/render_guard.py validate`.
-
-Free-form render calls assembled from chat memory are prohibited.
-
-Continuation policy:
-- explicit compiled payload → first-frame semantic QC PASS before remainder;
-- conversation-inferred payload → one frame at a time, semantic QC PASS before every next frame.
-
-A stale manifest, missing required ref, wrong episode, wrong cast, unrelated story/concept, or unplanned entity is FAIL_CLOSED and blocks L13.
+CURRENT_STATE.md alone identifies the active episode. Episode numbers in historical records do not route production.
+GENERATION_PROTOCOL.md owns render-contract, actual-media, continuation and repair mechanics; L12.5 above places that gate in the story workflow.
+A `validate` PASS checks input consistency only. The current guard does not persist or verify L8 approval, actual renderer delivery or image QC.

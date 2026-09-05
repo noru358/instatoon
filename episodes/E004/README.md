@@ -1,5 +1,8 @@
 # E004 — 먼저 내리세요
 
+> HISTORICAL / INACTIVE. This file preserves that episode’s decisions and attempts. It does not authorize current production. Follow root CURRENT_STATE.md and current GENERATION_PROTOCOL.md on resumption; prior L8 deferral, text-only fallback and batch directions are superseded.
+
+
 Status: RENDER CONTRACT VALIDATED — FIRST-FRAME SEMANTIC GATE NEXT
 
 ## 1. Provenance
@@ -189,7 +192,7 @@ L13 TEXT-FREE ART GENERATION — RESET; no valid E004 raster exists yet.
 Next: compile and authorize E004_S01 only, render exactly one frame, run semantic/style/identity QC, then continue only on PASS.
 
 
-## 12. Short-term actual-media style anchor — ACTIVE
+## 12. Historical short-term actual-media style anchor
 
 User verdict on the latest corrected render: ART STYLE PASS.
 

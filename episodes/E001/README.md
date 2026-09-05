@@ -1,5 +1,8 @@
 # E001 — 편의점 음유시인
 
+> HISTORICAL / INACTIVE. This file preserves that episode’s decisions and attempts. It does not authorize current production. Follow root CURRENT_STATE.md and current GENERATION_PROTOCOL.md on resumption; prior L8 deferral, text-only fallback and batch directions are superseded.
+
+
 Status: HISTORICAL PRE-v2 PROTOTYPE
 Date: 2026-09-04
 
@@ -7,7 +10,7 @@ E001 is preserved as process evidence from the earlier Instatoon system.
 
 It is NOT the active episode and its visual outputs are NOT current INSTATOON_STYLE_v2.0 references.
 
-Current work continues in episodes/E002/README.md.
+Current work is identified only by root CURRENT_STATE.md.
 
 ## Why preserve E001
 

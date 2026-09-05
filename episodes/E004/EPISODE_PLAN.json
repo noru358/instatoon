@@ -15,7 +15,9 @@
     "width": 1080,
     "height": 1350,
     "slide_count": 6,
-    "text_free_raster": true
+    "text_free_raster": true,
+    "panels_per_image": 1,
+    "delivery_mode": "SEPARATE_FILES"
   },
   "cast": {
     "main_cast": [

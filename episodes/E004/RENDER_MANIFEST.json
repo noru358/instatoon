@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "episode_id": "E004",
-  "episode_plan_git_blob_sha": "538a0d55d23dd3188b53f5e33d3d10f8a778c9ce",
+  "episode_plan_git_blob_sha": "ae5e60a067919233d3f6b4c1cf1abe67df47564e",
   "canonical_prompt_source": {
     "path": "MASTER_PROMPTS.md",
     "section_heading": "## 12. COMPILED PRODUCTION PROMPT"
@@ -10,7 +10,9 @@
     "aspect_ratio": "4:5",
     "width": 1080,
     "height": 1350,
-    "text_free_raster": true
+    "text_free_raster": true,
+    "panels_per_image": 1,
+    "delivery_mode": "SEPARATE_FILES"
   },
   "style_refs": [
     "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
@@ -219,7 +221,7 @@
       "source_id": "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
       "conditioning": "MUST_SUPPLY_MEDIA",
       "required": true,
-      "expected_hash": null
+      "expected_hash": "dbddf458a97c89781075e6be03ab2c393eff75b95e8856f044bd81f29310ec07"
     },
     {
       "requirement_id": "style_ref_02",
@@ -228,7 +230,7 @@
       "source_id": "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg",
       "conditioning": "MUST_SUPPLY_MEDIA",
       "required": true,
-      "expected_hash": null
+      "expected_hash": "b49683276f94ba5621e3602d7e3d714b0f2e637b2c41fc1fd132bdf6f336b049"
     }
   ]
 }

@@ -81,7 +81,9 @@
         "width",
         "height",
         "slide_count",
-        "text_free_raster"
+        "text_free_raster",
+        "panels_per_image",
+        "delivery_mode"
       ],
       "properties": {
         "aspect_ratio": {
@@ -103,6 +105,13 @@
         },
         "text_free_raster": {
           "const": true
+        },
+        "panels_per_image": {
+          "type": "integer",
+          "const": 1
+        },
+        "delivery_mode": {
+          "const": "SEPARATE_FILES"
         }
       }
     },

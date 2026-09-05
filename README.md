@@ -1,135 +1,78 @@
 # instatoon
 
-Semi-automated omnibus Instagram-toon / short-form production system.
+실제 사람이 쓴 인터넷 소재 → 대본/콘티 → 승인된 그림체의 만화 → 편집 가능한 대사 합성 → 검수/내보내기.
+최종 목표는 ChatGPT 대화 기억 없이 실행되는 독립 도구다.
 
-The project turns anecdotes, community/SNS material, everyday situations, user stories, and selected original premises into short comics and vertical short-form adaptations.
+현재는 **수동 제작 규칙 + 일부 입력 검증 코드** 단계다. 완성된 자동 생산기는 아니다.
+현재 제작 위치는 [CURRENT_STATE.md](CURRENT_STATE.md), 구현 현황·진단·외부화 순서는 [AUTOMATION_TRANSITION.md](AUTOMATION_TRANSITION.md)를 따른다.
 
-The durable identity is:
-1. the approved drawing language;
-2. the page/sequential grammar;
-3. the editorial voice;
-4. recurring characters when the story calls for them.
+## 작업 시작
 
-Main characters are reusable assets, not mandatory cast. Episode-specific characters are normal.
+1. 이 파일과 CURRENT_STATE.md에서 활성 에피소드와 현재 작업을 확인한다.
+2. SOURCE_STORY_PIPELINE.md의 소재·대사·캐스팅 순서를 읽는다.
+3. MASTER_PROMPTS.md, STYLE_LOCK.md, REFERENCE_SET.md와 필요한 **실제 이미지**를 확인한다.
+4. VISUAL_GRAMMAR.md, GENERATION_PROTOCOL.md와 활성 에피소드 README/EPISODE_PLAN/RENDER_MANIFEST를 읽는다.
+5. 제작 직전 `python pipeline/render_guard.py validate`를 실행한다.
 
-## Mandatory restore order
+외부화 작업일 때만 AUTOMATION_TRANSITION.md, 환경 이동·갱신 시 WORKFLOW_PROTOCOL.md를 추가로 읽는다.
+단계별로 필요한 입력을 사용하고, 전체 대화·과거 실패 기록을 이미지 프롬프트에 통째로 넣지 않는다.
 
-A clean session must NOT start production after reading only one random file.
+## 다섯 작업 묶음
 
-Minimum restore pack:
-1. CURRENT_STATE.md — exact live stage and next action.
-2. SOURCE_STORY_PIPELINE.md — content, dialogue, cast-routing, and agent/layer workflow.
-3. MASTER_PROMPTS.md — single canonical visual-generation prompt authority.
-4. VISUAL_GRAMMAR.md — 4:5 page, lettering, composition, and sequence rules.
-5. GENERATION_PROTOCOL.md — anchor/render/edit/QC procedure.
-6. REFERENCE_SET.md — which visual references are current vs legacy.
-7. active episode EPISODE_PLAN.json — machine-readable story/cast/scene contract.
-8. active episode RENDER_MANIFEST.json — exact render binding to the episode plan.
-9. run `python pipeline/render_guard.py validate` — fail-closed preflight.
+| 작업 | 기존 단계 | 결과 |
+|---|---|---|
+| 소재 수집 | L1–L3 | 실제 출처, 살릴 디테일·말투, 각색 범위 |
+| 대본 작성·사용자 검수 | L4–L9 | 비트와 자연스러운 대사, L8 명시 승인 |
+| 콘티·그림 | L10–L13 | 전체 컷 계획, 실제 참조 이미지가 전달된 그림 |
+| 대사·말풍선 합성 | L14 | 편집 가능한 글자/말풍선과 최종 이미지 |
+| 검수·출력 | L15, 이후 L16 | 순서·그림체·가독성을 확인한 만화; 성과는 후속 업무 |
 
-Read AUTOMATION_TRANSITION.md only when implementing the CLI/server pipeline.
-Read WORKFLOW_PROTOCOL.md when restoring across environments or when the user says 갱신.
+이는 기존 단계의 표시를 묶은 것이며 L8 승인이나 작업 순서를 없애지 않는다.
+한 실행자가 여러 역할을 맡을 수 있다. 별도 에이전트 실행을 의미하지 않는다.
 
-## Authority order
+## 기준의 소유자
 
-When current documents conflict:
+| 내용 | 단일 소유 문서 |
+|---|---|
+| 실제 승인 그림체·인물 기준, 참조 역할/파일 | REFERENCE_SET.md와 지정된 승인 이미지 |
+| 생성기에 보낼 스타일 문장 | MASTER_PROMPTS.md, 컴파일용 §12 |
+| 그림체 판정 경계 | STYLE_LOCK.md |
+| 소재·대사·캐스팅·L8 승인 | SOURCE_STORY_PIPELINE.md |
+| 컷 구성·비율·대사 배치 | VISUAL_GRAMMAR.md |
+| 생성·참조 전달·연속성·수정·QC | GENERATION_PROTOCOL.md |
+| 현재 에피소드·다음 행동 | CURRENT_STATE.md |
+| 회차별 내용 | episodes/<ID>/README.md 및 JSON |
+| 갱신·환경 이동 | WORKFLOW_PROTOCOL.md |
+| 구현 현황과 외부화 설계 | AUTOMATION_TRANSITION.md |
 
-1. MASTER_PROMPTS.md — canonical visual prompt implementation.
-2. STYLE_LOCK.md — visual pass/fail boundary.
-3. REFERENCE_SET.md — approved/legacy binary reference status.
-4. SOURCE_STORY_PIPELINE.md — story/dialogue/cast/agent workflow.
-5. VISUAL_GRAMMAR.md — sequential, composition, and text-layout grammar.
-6. GENERATION_PROTOCOL.md — rendering, episode-only identity continuity, minimal-edit, and QC execution.
-7. CURRENT_STATE.md — exact current episode and next action.
-8. WORKFLOW_PROTOCOL.md — cross-session reconciliation.
-9. AUTOMATION_TRANSITION.md — future executable implementation contract.
-10. episode-local artifacts.
+사용자의 명시 지시가 우선이다. 시각적 충돌은 승인 이미지로 판단하고, 공통 문장이 인물 고유 눈매·표정을 덮어쓰지 않게 고친다.
+에피소드의 장면·배우·의상 지시는 이야기 내용을 정하며 공통 그림체를 재설계하지 않는다.
+과거 회차는 현행 실행 지시가 아니다. 활성 에피소드는 CURRENT_STATE의 단일 `Active episode:` 줄로만 결정한다.
 
-A lower file may add detail but may not silently override a higher current rule.
+## 고정된 제작 원칙
 
-## Current production shape
+- 옴니버스. Gaeun/Harin/Taemin은 선택 가능한 주연이며 매번 강제하지 않는다.
+- 새 작품은 새 인간 소재부터 시작한다. 순수 창작은 SOURCE_STORY_PIPELINE의 예외 조건을 따른다.
+- 학습 단계에서는 L1–L7 결과를 제시하고 L8 사용자 승인 후에 콘티·그림으로 넘어간다.
+- INSTATOON_STYLE_v2.0. v1 이미지는 역사 자료이며 대체 참조가 아니다.
+- 기본 최종물은 4:5, 1080×1350. **한 컷 = 한 이미지 파일**, 생성 호출도 컷마다 분리한다. 통합 컷·콜라주는 대체 납품물이 아니다. 9:16은 파생본. 컷 수는 이야기에 맞춘다.
+- 그림은 무문자 원본, 대사·말풍선은 별도 편집 요소. 배경·인물을 각각 벡터화하는 것은 필수가 아니다.
+- 사용자 검수는 대본/흐름 → 첫 실제 컷의 그림체·인물 → 완성본. 중간 개별 컷은 운영자가 검수하며 진행한다. 상세 실행은 GENERATION_PROTOCOL §0.5.
+- 주연은 그림체+해당 인물 정체성, 조연은 그림체만 참조하고 나이·성별·차림새는 이야기로 정한다. 승인된 회차 이미지는 이후 컷의 실제 보조 이미지로 전달한다.
+- 좋은 그림의 국소 오류는 좋은 원본에서 해당 부분만 고친다.
 
-### Content
-- omnibus;
-- STORY_ARC and RELATABLE_SCENARIO are active;
-- source may be community/SNS/anecdote/observation/user story/original;
-- source facts and source voice are separated;
-- dialogue passes Humanization + USER VOICE GATE during the learning phase.
+## 코드가 현재 보장하는 범위
 
-### Cast
-Story/context decides cast per episode.
-- use Gaeun/Harin/Taemin only when editorially appropriate;
-- never insert a main character merely because a scene needs a person of that gender;
-- new episode-only characters are allowed;
-- episode-only people are designed internally from story/context before the batch render;
-- their compact identity digest is reused across the episode for continuity;
-- a separate visible character sheet or user approval gate is NOT required by default.
+`pipeline/render_guard.py`는 활성 회차, 계획/매니페스트 정합성, 로컬 필수 미디어 SHA-256,
+일부 필수 필드, 컴파일, 호출자가 제출한 미디어/QC 값의 일관성을 검사한다.
 
-### Visual
-- current style: INSTATOON_STYLE_v2.0;
-- previous tiny-eye/thin-brown-line v1.x style is retired;
-- 4:5 (1080×1350) is the feed/carousel master;
-- 9:16 (1080×1920) is the Reels/Shorts derivative;
-- 16:9 is not a default;
-- final semantic text should be editable, not baked into the raster master;
-- background is story-specific, not a mandatory fixed-set library.
+**이 코드는 생성기를 호출하지 않으며, L8 승인·실제 미디어 전송·실제 이미지 QC를 증명하지 않는다.**
+`validate` PASS와 CI 통과는 만화 품질 PASS가 아니다. 실제 생성 연결 전에는 운영자가 GENERATION_PROTOCOL을 실행해야 한다.
 
-### Production principle
+```sh
+python -m unittest pipeline.test_render_guard
+python pipeline/render_guard.py validate
+python pipeline/render_guard.py compile --episode E005 --slide 1
+```
 
-Plan the whole story first. Internally derive any episode-only character from context and carry the same identity digest across the batch. Add typography deterministically. Repair locally from the last known good frame when one exists.
-
-### Render-contract hard gate
-
-Production raster is never launched from free-form conversational memory.
-
-Before L13:
-1. materialize `episodes/<ID>/EPISODE_PLAN.json`;
-2. bind it by Git blob SHA in `episodes/<ID>/RENDER_MANIFEST.json`;
-3. compile each scene prompt from the canonical MASTER_PROMPTS section plus the structured slide contract;
-4. run `python pipeline/render_guard.py validate`;
-5. render one first frame and run semantic QC before allowing continuation.
-
-Prompt-binding policy:
-- `EXPLICIT_COMPILED_PAYLOAD` → first-frame gate, then the remaining batch may proceed.
-- `CONVERSATION_INFERRED` → no parallel batch; render exactly one frame at a time and require semantic QC PASS before the next frame.
-
-Any unrelated story, wrong cast, mascot/animal substitution, coding/self-help scene, collage, baked text, or other unplanned concept is a hard failure. The bad output is discarded and never becomes LAST_KNOWN_GOOD or a reference.
-
-## Root files
-
-- CURRENT_STATE.md
-- MASTER_PROMPTS.md
-- STYLE_LOCK.md
-- REFERENCE_SET.md
-- SOURCE_STORY_PIPELINE.md
-- VISUAL_GRAMMAR.md
-- GENERATION_PROTOCOL.md
-- WORKFLOW_PROTOCOL.md
-- AUTOMATION_TRANSITION.md
-
-Old overlapping root specifications are merged/retired; Git history is the archive.
-
-## Current episode
-
-See episodes/E004/README.md.
-
-episodes/E001/ is preserved as a historical pre-v2 prototype and is not current style authority.
-
-
-## Render contract hard gate — canonical
-
-Raster production is not authorized from free-form conversational memory.
-
-Before L13 every active episode must have:
-- `EPISODE_PLAN.json` matching `schemas/episode_plan.schema.json`;
-- `RENDER_MANIFEST.json` matching `schemas/render_manifest.schema.json`;
-- manifest bound to the exact EPISODE_PLAN Git blob SHA;
-- `python pipeline/render_guard.py validate` PASS.
-
-Prompt assembly is deterministic from the canonical MASTER_PROMPTS compiled-production section plus the structured slide contract.
-
-Renderer prompt binding:
-- `EXPLICIT_COMPILED_PAYLOAD`: first frame must pass semantic QC before the remaining batch.
-- `CONVERSATION_INFERRED`: never parallelize; generate one frame only, QC it, and require PASS before the next frame.
-
-An unrelated story/cast/concept, unplanned mascot/animal, coding/self-help substitution, collage/poster, or baked semantic text is a hard failure. Discard it immediately; it cannot become LAST_KNOWN_GOOD or a reference.
+예시의 회차 번호는 실행할 때 CURRENT_STATE에서 읽는다. 과거 파일·실패 기록은 보존하되 현행 지시와 혼합하지 않는다.

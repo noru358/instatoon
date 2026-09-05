@@ -1,6 +1,9 @@
 # E002 — 소개팅 셀프팔로우
 
-Status: ACTIVE — FRESH COORDINATED VISUAL PASS
+> HISTORICAL / INACTIVE. This file preserves that episode’s decisions and attempts. It does not authorize current production. Follow root CURRENT_STATE.md and current GENERATION_PROTOCOL.md on resumption; prior L8 deferral, text-only fallback and batch directions are superseded.
+
+
+Status: INACTIVE — prior learning episode
 
 ## 1. Purpose
 

@@ -1,6 +1,6 @@
 # HISTORICAL RESEARCH NOTE
 
-This candidate run belongs to the pre-v2/E001 prototype period. It is preserved as research evidence, not as the current production queue. Current active work is E002; see root CURRENT_STATE.md.
+This candidate run belongs to the pre-v2/E001 prototype period. It is preserved as research evidence, not as the current production queue. See root CURRENT_STATE.md for current active work.
 
 # SOURCE CANDIDATE RUN 001 — 2026-09-04
 

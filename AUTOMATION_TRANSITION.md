@@ -1,505 +1,221 @@
 # AUTOMATION_TRANSITION.md
 
-# MANUAL/CHAT → EXECUTABLE AUTOPIPELINE CONTRACT
 Updated: 2026-09-05
-Status: FUTURE IMPLEMENTATION AUTHORITY
-
-## 0. Purpose
-
-Convert the validated manual Instatoon workflow into a reproducible Python/CLI/server pipeline later.
-
-Do not automate the chat itself.
-Automate the production state machine that the chat is currently operating.
-
-## 1. Ownership split
-
-### Repository documents/config define WHAT is correct
-Current project authorities:
-- MASTER_PROMPTS.md
-- STYLE_LOCK.md
-- REFERENCE_SET.md
-- SOURCE_STORY_PIPELINE.md
-- VISUAL_GRAMMAR.md
-- GENERATION_PROTOCOL.md
-
-### Python defines WHEN/HOW execution proceeds
-Code owns:
-- stage order;
-- input/output schemas;
-- retries;
-- timeouts;
-- approval waits;
-- budgets;
-- tool adapters;
-- prompt assembly;
-- persistence;
-- QC routing;
-- artifact paths;
-- publishing;
-- analytics ingestion.
-
-Docs/config = policy.
-Python = orchestration/enforcement.
-
-## 2. Target stage machine
-
-Current conceptual flow:
-
-SOURCE_CANDIDATES
-→ HUMAN_SOURCE_SEED_CHECK
-→ SOURCE_SELECTED
-→ SOURCE_NORMALIZED
-→ STORY_PLANNED
-→ DIALOGUE_DRAFTED
-→ DIALOGUE_HUMANIZED
-→ USER_VOICE_GATE
-→ STORYBOARD_PLANNED
-→ CAST_ROUTED
-→ EPISODE_IDENTITY_REQUIRED?
-→ EPISODE_IDENTITY_READY
-→ VISUAL_PLAN_READY
-→ RASTER_RENDER
-→ VECTOR_LETTER
-→ FINAL_QC
-→ HUMAN_TASTE_GATE
-→ EXPORT_READY
-→ PUBLISHED
-→ PERFORMANCE_RECORDED
-
-The episode-identity branch is required only for a new non-main person appearing in 2+ cuts. It is an internal state transition, not a human approval gate or mandatory standalone character-sheet render.
-
-## 3. New mandatory runtime concepts
-
-### A. EpisodeCharacterIdentity
-Fields should eventually include:
-- identity_id;
-- episode_id;
-- character_role;
-- main_cast_or_episode_only;
-- identity traits;
-- compact identity digest;
-- optional temporary anchor artifact path/hash only when continuity repair needs one;
-- style version;
-- status;
-- last_known_good flag.
-
-### B. LastKnownGood
-Every repairable stage may point to an accepted prior artifact/state.
-
-If a retry regresses:
-- reject retry;
-- restore last_known_good;
-- do not chain future generation from the failed retry.
-
-### C. VoiceGate
-Dialogue cannot silently pass from draft into production while the project is still learning user voice.
-
-This is a blocking PRE-PRODUCTION approval state.
-The runtime must present the L1-L7 review package to the user and persist explicit approval before STORYBOARD_PLANNED / CAST_ROUTED / VISUAL_PLAN_READY / RASTER_RENDER may execute.
-Silence or the initial NEW_EPISODE command is never implicit approval.
-
-Store:
-- source/provenance summary presented for review;
-- story beats presented for review;
-- draft;
-- humanized draft;
-- user feedback;
-- explicit approval status;
-- accepted dialogue;
-- reusable voice rule when appropriate.
-
-### D. StageExecutionReport
-Every completed stage emits an auditable report.
-
-Fields:
-- stage_name;
-- worker_role;
-- execution_actor;
-- input_artifact_ids;
-- source_provenance;
-- output_artifact_ids;
-- status;
-- qc_summary;
-- blocker;
-- next_stage;
-- exact reference assets actually supplied when the stage is visual generation.
-
-The runtime must not claim that separate agents ran when one orchestrator executed multiple bounded roles.
-
-### F. RendererCapabilityProfile
-
-Every renderer adapter must expose capabilities before selection:
-- supports_explicit_reference_media: bool;
-- supported_reference_count / limits when known;
-- supported input media types;
-- prompt_binding_mode;
-- output constraints.
-
-The runtime compares these capabilities with the episode's reference_conditioning_requirement BEFORE a render job is created.
-
-For BINARY_REQUIRED:
-- supports_explicit_reference_media must be true;
-- all manifest style refs must be attached and recorded as supplied refs;
-- authorize must fail if any required ref is missing;
-- prompt-only / authority-only fallback is prohibited.
-
-A file existing in Git, being fetched, or being summarized by the orchestrator is not equivalent to renderer media injection.
-
-### E. OrderedBeat
-Story order is data, never inferred from file creation time.
-
-Each slide has:
-- index;
-- beat role;
-- state_before;
-- state_after;
-- reader_question_after;
-- landing/reveal relation.
-
-## 4. Typed-stage philosophy
-
-A model reasons inside a bounded stage.
-It does not invent a new workflow after failure.
-
-Examples:
-
-HUMAN_SOURCE_SEED_CHECK
-input: source candidates + user premise
-output: selected human-produced base material, provenance class (literal source / inspiration base / composite seed / pure original fallback), and reason
-
-SOURCE_NORMALIZE
-input: raw source
-output: source facts + source voice + provenance
-
-STORY_PLAN
-input: source pack + content grammar
-output: ordered beats
-
-DIALOGUE_HUMANIZE
-input: beats + source voice + draft
-output: humanized dialogue + flagged AI-like lines
-
-CAST_ROUTE
-input: story/context
-output: selected main cast + episode-only roles + rationale
-
-EPISODE_CHARACTER_IDENTITY
-input: episode-only role + style refs
-output: identity digest + optional temporary internal anchor only when needed
-
-RASTER_RENDER
-input: slide spec + exact references + prompt + renderer capability profile
-output: art artifact + metadata + reference-conditioning mode
-
-Renderer selection rule:
-- native/direct image generation is a valid first-class renderer;
-- do not invoke an external provider merely because it is connected;
-- external provider use requires explicit user request, a missing native capability, or a provider/automation test;
-- one provider's credit failure does not block RASTER_RENDER if another valid renderer path exists.
-
-QC
-input: planned beat + refs + artifact
-output: pass/fail + defect codes + repair scope + last-known-good action
-
-## 5. Prompt assembly
-
-Prompt assembly must be deterministic code.
-
-Load exact current blocks from MASTER_PROMPTS.md or a version-linked machine-readable mirror.
-
-Inputs:
-- current restore-pack/version check;
-- renderer capability profile;
-- scene facts;
-- story clarity;
-- output ratio;
-- text-safe region;
-- selected main-character reference;
-- episode-local identity digest;
-- current style reference;
-- last-known-good repair reference when needed;
-- stable visual blocks.
-
-The model must not rewrite the project style each time.
-
-## 6. Reference-role separation
-
-Runtime must distinguish:
-- RENDERER;
-- REFERENCE_CONDITIONING_MODE = BINARY_CONDITIONED | AUTHORITY_INFORMED_NON_BINARY_CONDITIONED;
-- STYLE_REFERENCE;
-- MAIN_CHARACTER_REFERENCE;
-- EPISODE_CHARACTER_IDENTITY;
-- LAST_KNOWN_GOOD_FRAME;
-- LOCATION_CONTINUITY_REFERENCE when needed.
-
-One role must not silently replace another.
-
-Legacy v1 style assets must be excluded by version/status.
-
-## 7. Repair routing
-
-### Local defect
-Examples:
-- wrong one-off character identity;
-- one hand;
-- one prop;
-- one expression;
-- text placement.
-
-Route:
-TARGETED_REPAIR from last-known-good.
-
-### Systemic defect
-Examples:
-- every background becomes over-rendered;
-- every new-person face becomes generic;
-- entire batch uses wrong style;
-- typography system is unreadable.
-
-Route:
-repair shared prompt/reference/layout configuration, then rerun only dependent outputs.
-
-No unbounded “try again”.
-
-## 8. Deterministic validations
-
-Prefer code for:
-- required fields;
-- slide indices;
-- no duplicate/missing order;
-- REVEAL before AFTERMATH;
-- output dimensions;
-- file hashes;
-- text safe margins;
-- text overflow;
-- minimum font sizes;
-- bubble ownership/tail metadata;
-- reference status/version;
-- episode-only identity digest presence when required;
-- retry/budget limits.
-
-Use model/vision judgment only where semantics or visual taste require it.
-
-## 9. Runtime storage
-
-GitHub:
-- durable project authorities;
-- versioned prompts;
-- canonical references;
-- schemas/config;
-- approved episode artifacts when useful.
-
-Runtime DB:
-- run/stage state;
-- stage execution reports with worker role / actual execution actor / provenance / outputs / QC;
-- attempts;
-- approvals;
-- tool IDs;
-- costs;
-- timestamps;
-- QC results.
-
-Object storage:
-- large/transient generated assets when server automation arrives.
-
-Git is not the live job queue.
-
-## 10. Integration hierarchy
-
-Manual/chat production:
-1. native/direct ChatGPT generation when it satisfies the required visual task;
-2. connected external renderer only when explicitly requested or materially necessary.
-
-Executable AutoPipeline:
-1. official provider API;
-2. MCP when cross-client interoperability matters;
-3. internal adapter;
-4. browser automation fallback.
-
-Renderer choice is capability-driven, not habit-driven.
-
-Browser/UI automation must be isolated behind adapters.
-
-## 11. First executable product
-
-CLI first, not dashboard.
-
-Capability target:
-
-autopipeline run instatoon --source <input>
-autopipeline status <run-id>
-autopipeline approve <run-id> voice-gate
-autopipeline approve <run-id> taste-gate
-autopipeline retry <run-id> --slide 5 --scope character
-autopipeline export <run-id>
-
-Exact syntax may change.
-
-Success means one run can proceed without hidden chat memory.
-
-## 12. Cost controls
-
-Every generation stage records:
-- renderer/tool;
-- reference-conditioning mode;
-- exact visual authorities inspected;
-- exact media inputs supplied when supported;
-- whether generation was paid, unlimited, or native;
-
-Every paid stage additionally records:
-- estimated cost if available;
-- actual cost;
-- provider/tool job ID;
-- attempts;
-- budget ceiling.
-
-Use:
-- whole-story planning;
-- one internal context-derived identity digest per relevant one-off;
-- one first pass;
-- targeted repair;
-- bounded retries.
-
-Automation is not permission for unattended spend.
-
-## 12.5 Human-source-first default
-
-Unless the user explicitly requests pure invention, source discovery should attempt to attach real human-produced material before story planning.
-
-The runtime may:
-- use one human anecdote as a base;
-- combine multiple human anecdotes/comments into a composite seed;
-- heavily fictionalize/restructure after collection.
-
-It must distinguish:
-- literal-source adaptation;
-- inspiration/base provenance;
-- composite human-seeded premise;
-- pure original fallback.
-
-The purpose is not factual purity. The purpose is to preserve human specificity, cadence, social awkwardness, and non-generic detail while preventing the model from inventing an entire premise in a vacuum by default.
-
-## 13. Human gates
-
-Current learning-phase human ownership:
-- source/premise approval when requested;
-- USER VOICE GATE;
-- final taste/publish decision;
-- material style/visual-grammar changes.
-
-Some operational gates may later become configurable after repeated evidence.
-
-Performance data may NOT silently mutate:
-- style;
-- reference promotion;
-- visual grammar;
-- voice rules;
-- mandatory main-cast policy.
-
-## 14. AutoPipeline ownership
-
-Generic orchestration belongs in noru358/AutoPipeline.
-
-Instatoon child repository owns:
-- creative rules;
-- prompts;
-- refs;
-- content grammar;
-- project config.
-
-Do not duplicate Instatoon-specific truths into the generic engine.
-
-## 15. Suggested implementation sequence
-
-Phase 0 — continue manual evidence extraction.
-Phase 1 — finalize schemas.
-Phase 2 — local CLI + state machine.
-Phase 3 — generation/research/publish adapters.
-Phase 4 — persistent DB/workers/object storage.
-Phase 5 — web control plane.
-Phase 6 — controlled autonomy.
-
-Do not build a polished dashboard before the engine works.
-
-## 16. Anti-patterns
-
-Do not:
-- give one supervisor every tool and say “make a post”;
-- depend on chat memory;
-- duplicate prompts in many code locations;
-- use a failed render as the next continuity base;
-- improvise a one-off character independently panel by panel instead of carrying one identity digest;
-- let file creation order define slide order;
-- let QC rewrite the whole episode;
-- loop paid generation indefinitely;
-- use Git as a runtime queue;
-- start browser-first when API/MCP exists.
-
-## 17. Automation-complete definition
-
-First automation milestone is complete when:
-1. clean environment discovers all project authorities;
-2. one command creates a persisted run;
-3. stages use typed inputs/outputs;
-4. episode-only identity-continuity requirements are enforced without adding a human gate;
-5. exact refs/prompts/versions are recorded;
-6. last-known-good repair works;
-7. retries are bounded;
-8. voice/taste gates are explicit;
-9. story order is deterministic;
-10. final assets are auditable;
-11. core style/voice cannot silently mutate;
-12. the generic engine can load another child project without copying Instatoon logic;
-13. every completed stage is auditable by worker role, actual execution actor, provenance/input, output, QC verdict, and next stage.
-
-
-## 16. RenderContract / PromptBinding runtime contract
-
-Mandatory states now include:
-VISUAL_PLAN_READY → EPISODE_PLAN_MATERIALIZED → RENDER_MANIFEST_BOUND → RENDER_PREFLIGHT_VALIDATED → FIRST_FRAME_RENDER → FIRST_FRAME_SEMANTIC_QC → RASTER_RENDER.
-
-Runtime must persist the episode-plan Git blob SHA, render-manifest path, prompt-binding mode, per-slide required/forbidden entities, and semantic-QC continuation state.
-
-Prompt-binding modes:
-- EXPLICIT_COMPILED_PAYLOAD: first-frame semantic gate, then remaining batch may continue.
-- CONVERSATION_INFERRED: one frame at a time; every next frame requires previous-frame semantic QC PASS.
-
-Any plan mutation invalidates the prior manifest. No raster call may occur before preflight PASS. A semantic mismatch stops the run and cannot become LAST_KNOWN_GOOD.
-
-Executable baseline is pipeline/render_guard.py with validate, compile, and authorize commands. CI must run its regression tests and validate the active episode.
-
-
-## 17. Actual style-media binding — SHORT-TERM IMPLEMENTATION CONTRACT
-
-Production renderer adapters must expose auditable runtime evidence for:
-- canonical_style_media_bound: YES | NO;
-- episode_style_anchor_bound: YES | NO;
-- exact media identity/path/hash where the adapter can expose it.
-
-Authorization is fail-closed:
-- canonical_style_media_bound must be YES for every production raster;
-- episode_style_anchor_bound must be YES for slide 2+ once the episode has an accepted style anchor.
-
-The current guard CLI represents these as:
-- `--style-media-bound YES|NO`
-- `--episode-anchor-bound YES|NO`
-
-Future provider adapters should derive these flags from the actual request payload, not from a model claim.
-
-A text prompt that names or describes a reference is not equivalent to media binding.
-
-
-## AutoPipeline generic media contract adapter
-
-The current child render guard is an adapter, not the future generic engine.
-
-Mapping:
-- child RENDER_MANIFEST.media_requirements -> AutoPipeline media job requirements;
-- renderer adapter capability -> AutoPipeline renderer profile;
-- actual tool/media handles -> AutoPipeline supplied evidence.
-
-The generic parent must not know REF_V2 names or Instatoon style semantics.
-Instatoon may add stricter checks, but cannot weaken MUST_SUPPLY_MEDIA.
-
-When generic AutoPipeline execution is implemented, move capability/supply authorization to the parent engine and keep only Instatoon-specific story/style/QC validation here.
+Status: VERIFIED BASELINE + FUTURE IMPLEMENTATION CONTRACT
+
+## 0. 목표와 판단
+
+목표는 실제 인간 소재 → 대본/콘티 → 승인 그림체로 그린 컷 → 대사 합성 → 완성 만화를 하나의 실행 경로로 연결하는 것이다.
+ChatGPT 대화 자체를 자동 조작하는 것이 아니라, 앱 밖에서도 같은 입력과 승인 상태로 이어지는 생산기를 만든다.
+
+현재는 **제작 매뉴얼과 입력 가드가 있는 수동 공정**이다. 대본·참조·콘티는 상당 부분 준비됐지만,
+그것을 실제 모델 호출·검수·합성·저장과 연결한 생산기는 아직 없다.
+정확한 무오류율을 산출할 자료는 없다. 리포에는 현행 v2 기준으로 전체 순서를 통과한 완성 회차가 보존돼 있지 않다.
+E001 최종 PNG/SVG는 v1 역사 자료이며, E004 스타일 합격 기록은 회차 전체 합격이 아니다.
+이는 과거 대화에서 좋은 이미지가 전혀 없었다는 뜻이 아니라, 새 환경에서 재현·계측할 증거가 부족하다는 뜻이다.
+
+## 1. 이번 감사에서 직접 확인한 것
+
+기준 원격 커밋: `2e13a3f7cc568646e4e5a7fd61bef42ce5525dbc`.
+범위: root 문서 10개, E001–E005 제작 기록과 구조화 입력, 코드/테스트/CI/스키마,
+현재 실제 D/E 이미지, 상위 AutoPipeline의 미디어 가드와 submodule 구조.
+새 이미지 생성이나 유료 API 호출은 하지 않았다.
+
+| 확인 | 결과 / 의미 |
+|---|---|
+| 기존 테스트 9개 + 활성 E005 validate | 모두 PASS. 입력 검사 통과를 의미하며 이미지 품질 근거는 아님 |
+| 그림·QC 파일 없이 최종 컷에 caller `PASS` 제출 | S07 AUTHORIZED. 순서/검수 상태를 저장·대조하지 않음 |
+| 격리한 복사본에서 필수 JPEG 내용을 비이미지 바이트로 교체 | 기존 validate PASS. 당시 expected_hash가 null이며 실제 해시 계산도 없었음 |
+| L8 확인 코드 | 없음. E005 승인은 README 기록에 있고 가드는 읽지 않음 |
+| 렌더러 호출 코드 | 자식/부모 가드 모두 없음. 미디어 전달 증거도 호출자가 제출 |
+| 스키마 파일 | 존재하나 가드가 전체 JSON Schema를 로드·검증하지 않음 |
+| 회차 보조 앵커 | 문서는 필수 재사용, E005 매니페스트는 D/E 두 이미지뿐. 등록/전달 경로 미구현 |
+| 대사·레이아웃 | E005 README에 대사 의도/일부 문장, JSON에는 확정 대사 객체·좌표 없음. L14 자동 합성기 없음 |
+| 현행 native 도구 | 이번 Work 도구에 명시적 prompt와 referenced_image_paths가 있음. 옛 'native 불가' 안내는 현행 능력 판정이 아님 |
+| 시각 기준과 문장 | D/E의 태민 고유 눈매와 제한적 표면 디테일을 공통 원형 눈·절대 무질감 문장이 덮을 위험 |
+
+## 2. 핵심 오류와 해결 방향
+
+### A. 단계 누락 / 다른 회차 진행 — 우선순위 1
+
+문서 안에 E003/E004/E005 현재 안내와 중복된 다음 행동이 섞여 있었다.
+가드는 계획/매니페스트 일치만 확인하므로 승인 전 대본을 만들어도 L8을 통과했는지 알 수 없다.
+
+이번 정리: CURRENT_STATE의 현재 회차/다음 행동을 하나로 통일하고 과거 기록을 비활성으로 표시했다.
+중복 게이트를 제거하고 각 규칙의 소유 문서를 README에 명시했다.
+
+필요한 실행 구현:
+- DB의 run/stage 상태로 순서를 결정한다. Markdown을 여러 군데 읽고 다음 단계를 추측하지 않는다.
+- 현재 검수 패키지의 해시와 사용자 L8 승인 기록을 연결한다.
+- 대본·비트가 실질적으로 바뀌면 해당 승인을 재검수한다. 단순 파일 포맷 변경으로 불필요하게 승인을 무효화하지 않는다.
+- 한 번 승인된 같은 패키지는 재승인을 요구하지 않는다.
+- 상태가 허용한 다음 작업만 실행하는 단일 진입점을 둔다.
+
+### B. 참조 미전달 / 그림체 이탈 — 우선순위 1
+
+파일 존재·파일 열람·실제 생성 입력은 서로 다르다. 현재 CLI는 마지막 항목을 자기신고로 받는다.
+따라서 필수 참조라고 적어도 생성 호출에서 이미지를 빠뜨릴 수 있다.
+
+이번 정리: 로컬 필수 미디어에 SHA-256을 기록하고 실제 파일과 대조하도록 고쳤다.
+현재 인터페이스의 입력 능력으로 경로를 선택하도록 낡은 native 단정을 제거했다.
+
+필요한 실행 구현:
+- 어댑터가 필수 참조 바이트/경로를 로드하고 동일 요청에 컴파일 프롬프트와 이미지 입력을 결합한다.
+- supplied evidence는 그 요청에서 도출한다. 모델이 '넣었다'고 쓴 값을 증거로 삼지 않는다.
+- 호출 직전 계획/프롬프트/참조의 스냅샷 해시와 실제 요청을 기록하고 결과 ID/파일에 연결한다.
+- 공급자가 명시적 이미지 입력·참조 수를 지원하는지 실제 인터페이스 기준으로 검사한다.
+- native/direct 우선 원칙을 유지한다. 연결돼 있다는 이유만으로 Higgsfield 등 외부 렌더러를 소환하지 않는다.
+- 실제 이미지 입력은 충실도 보장의 필요 조건이다. 그림체 합격 자체는 이미지 비교로 확인한다.
+
+### C. 공통 문장이 승인 이미지와 충돌 / 컷마다 얼굴 변화 — 우선순위 1
+
+실제 승인 이미지는 최상위 시각 기준이다. 눈 크기·눈꺼풀·표정까지 하나의 문장으로 강제하면 인물 고유 특징이 바뀐다.
+또한 회차 전용 인물의 글 설명만 매번 전달하는 것은 얼굴 연속성의 충분한 증거가 아니다.
+
+이번 정리: 승인 이미지가 일반화된 프롬프트보다 우선하도록 정합성을 맞췄다.
+공통 문장이 고유 눈매·자연 표정·승인된 선의 성질을 재설계하지 않도록 컴파일 문장에도 반영했다.
+스타일 참조에 있는 세 사람·거실·구도를 새 회차에 그대로 복제하지 않도록 역할을 명시했다.
+
+필요한 실행 구현:
+- 첫 실제 회차 컷을 스타일/인물 기준으로 확인하고, 승인 이미지를 후속 컷의 보조 실제 미디어로 등록한다.
+- 원래 그림체 참조 + 승인된 회차 인물 이미지 + 현재 컷 장면을 역할별로 전달한다.
+- 주연은 선택한 인물만, 단역은 대본에서 만든 동일 identity digest를 유지한다.
+- 일회성 인물의 별도 캐릭터 시트를 매번 만들 필요는 없다.
+- 앵커는 새 컷의 구도/동작을 고정하지 않는다. 실패한 이미지를 다음 참조로 연결하지 않는다.
+- E004 스타일 승인 앵커는 파일이 리포에 없으므로 해당 회차 재개 시 복구/재승인한다.
+
+A/B/C 원본 누락은 보존 공백이지만 D/E가 존재하는 E005의 당장 필수 차단 사유는 아니다.
+참조를 더 모으거나 학습 모델부터 만드는 것을 1순위 해결책으로 삼을 근거는 아직 없다.
+먼저 지금 가진 승인 이미지가 실제로 들어가는 경로부터 검증한다.
+
+### D. 그림은 있는데 읽을 수 있는 완성 만화가 없음 — 우선순위 1
+
+무문자 그림만 생산하면 폰 오발송·답장·층수 같은 핵심 정보가 전달되지 않는다.
+현재 E005의 구조화 계획에는 컷별 최종 한국어 대사와 말풍선 위치가 없고 L14 합성 코드도 없다.
+
+필요한 실행 구현:
+- 승인 대사를 한 곳에 보존하고 컷마다 text_id, 역할, 화자, 문장, 위치, 읽기 순서를 구조화한다.
+- 폰 화면/숫자도 중요한 이야기 텍스트면 같은 레이어에서 처리한다.
+- SVG 또는 동등한 편집 가능한 레이아웃으로 한글·말풍선을 결정적으로 합성한다.
+- 입력 캔버스와 최종 1080×1350 좌표 변환을 명시하고, 얼굴/손/핵심 소품을 자르거나 이미지를 늘리지 않는다.
+- 줄바꿈·최소 글자 크기·넘침·읽기 순서를 코드로 검사하고 휴대폰 크기로 최종 확인한다.
+- 최종 PNG와 편집 가능한 원본을 함께 저장한다. 배경·인물까지 전부 벡터 분리하는 것은 완료 조건이 아니다.
+
+### E. 검수 PASS가 실제 그림과 연결되지 않음 — 우선순위 1
+
+지금 `--previous-frame-qc PASS`는 어느 파일을 누가 봤는지 확인하지 않는다.
+전 컷 승인 문자열만으로 파일이 없는 다음 컷에 갈 수 있고, 기존 잘못된 결과를 자동 회수하지도 못한다.
+
+필요한 실행 구현:
+- QC verdict를 run_id / slide_id / attempt_id / 입력 버전 / 결과 파일 해시에 연결한다.
+- 실제 파일을 확인한 기록만 다음 단계에 사용한다. 다른 회차·다른 시도·수정 전 파일의 PASS는 재사용하지 않는다.
+- 첫 컷의 그림체/인물 합격 후 후속 컷을 진행하고, 후속 컷도 개별 이미지 검수를 거친 뒤 최종 내보낸다.
+- explicit payload는 첫 컷 뒤 묶음 생성 가능, inferred payload는 매 컷 순차 검수라는 기존 정책을 유지한다.
+- 자동 시각 판단은 후보 판정이며 취향 합격의 절대 증명이 아니다.
+- 국소 오류면 좋은 원본에서 해당 부분만 수정한다. 공통 오류면 공통 입력을 고치고 영향받는 컷만 다시 만든다.
+
+## 3. 이번 정리의 범위
+
+수정 완료:
+- 현재 상태/회차 혼선 및 중복된 게이트 설명 정리, 옛 회차를 비활성 기록으로 구분;
+- 승인 이미지 우선, 인물 눈매와 자연 표정 보존, 스타일/구도/배우 참조 역할 명료화;
+- 필수 로컬 미디어 SHA-256 고정·실제 대조;
+- Active episode 중복 선언 차단;
+- 컴파일 결과에 실제 story beat 포함, 미치환 INSERT 표식 제거;
+- 구현된 검사와 아직 없는 실행기/검수/합성 기능 구분.
+
+아직 구현하지 않음:
+- 외부 서비스 호출 어댑터;
+- L8/이미지 QC/실행 순서의 영속 상태;
+- 자동 소재 수집·대본 단계;
+- 회차 앵커 자동 등록;
+- 한글 합성기·완성본 내보내기;
+- 비용·재시도·중단/재개·중복 호출 방지 런타임.
+
+전체 JSON Schema 검증 연결, 상태 enum/캐스팅 참조 정합성 강화 등은 실제 실행기 입력 경계에서 함께 처리한다.
+각 필드를 위한 문서나 승인 단계를 따로 늘리지 않는다.
+
+## 4. 외부 도구의 최소 구조
+
+| 구성 | 책임 |
+|---|---|
+| Instatoon 리포 | 인간 소재/대사/그림체 규칙, 프롬프트, 승인 참조, 프로젝트별 입력·시각 QC 기준 |
+| AutoPipeline 엔진 | 실행 순서·승인·재시도·시간 제한·도구 호출·비용·저장·다음 작업 결정 |
+| 모델/공급자 어댑터 | 제한된 단계 입력으로 작업, 명시적 프롬프트+미디어 전달, 결과/요청 증거 반환 |
+| 런타임 DB | run/stage/attempt, 승인, QC, 입력·출력 해시, 오류·재시도·비용 기록 |
+| 아티팩트 저장소 | 생성 이미지, 편집 원본, 최종 내보내기; 초기는 로컬 디렉터리 가능 |
+| UI | 시작, 검수 승인, 문제 컷 수정, 결과 다운로드 |
+
+초기에는 Python CLI + SQLite + 로컬 아티팩트 폴더면 충분하다.
+서버 워커·큐·오브젝트 저장소는 실제 병렬 작업/운영 요구가 생길 때 추가한다. Git을 작업 큐로 쓰지 않는다.
+공급자 공식 API를 우선하고, MCP는 환경 간 연동이 유용할 때 사용한다. 브라우저 자동화는 가능하고 허용된 경우의 격리된 최후 어댑터다.
+ChatGPT Work의 도구 입력 가능 여부는 독립 API의 모델·비용·품질 동등성을 증명하지 않는다. 선택한 외부 API에서 별도 확인해야 한다.
+
+### 현행 운영 모드와 단일 컷 출력
+
+사용자 검수 시점과 참조 배분은 GENERATION_PROTOCOL §0.5를 단일 기준으로 삼는다.
+각 render job은 slide 하나와 하나의 출력 파일에 대응한다. `format.panels_per_image=1`, `delivery_mode=SEPARATE_FILES`를 계획/매니페스트에서 검사한다.
+전체 에피소드 콘티를 한 이미지 호출에 보내지 않는다. 여러 작업의 묶음 실행은 각각 독립 요청/파일이며 합본 이미지 생성을 뜻하지 않는다.
+향후 결과 검사기는 파일 수/slide ID 대응과 실제 이미지의 단일 패널 여부를 검사해야 한다. 현재 가드는 입력 선언만 검증한다.
+
+### 실행 상태와 입력
+
+UI의 다섯 묶음은 README 표를 따른다. 엔진은 다음 상태를 저장한다.
+
+SOURCE_CANDIDATES → SOURCE_SELECTED/NORMALIZED → STORY_PLANNED → DIALOGUE_DRAFTED/HUMANIZED
+→ USER_VOICE_GATE → STORYBOARD/CAST/EPISODE_IDENTITY_READY → VISUAL_PLAN_READY
+→ PLAN/MANIFEST_BOUND → PREFLIGHT_VALIDATED → FIRST_FRAME_RENDER/QC
+→ REMAINING_RASTER → VECTOR_LETTER → FINAL_QC → HUMAN_TASTE_GATE → EXPORT_READY.
+PUBLISHED / PERFORMANCE_RECORDED는 내보내기 이후의 선택적 운영 단계다.
+
+새 인물이 2컷 이상이면 identity digest를 내부에서 만든다. 별도 인간 승인 단계는 추가하지 않는다.
+L1–L16 역할은 유지하되 한 실행자가 순차 수행할 수 있다. 별도 에이전트 수가 품질 기준은 아니다.
+모든 완료 단계는 stage / role / actual actor / input & provenance / output / status / QC / next를 기록한다.
+
+### 공통 media contract
+
+AutoPipeline의 MEDIA_INPUT_CONTRACT가 공통 선언/능력/공급 모델을 소유한다.
+자식의 RENDER_MANIFEST.media_requirements를 공통 job requirements로 매핑한다.
+
+필드: requirement_id, role, media_type, source_id, conditioning, required, expected_hash.
+역할 예: style, character_identity, episode_anchor, repair_base, location_anchor.
+부모 엔진에 REF_V2 이름이나 특정 회차 분기를 하드코딩하지 않는다.
+
+현행 CLI 필드: `--renderer-explicit-media`, `--supported-media-type`, `--supplied-media`.
+`--style-media-bound` / `--episode-anchor-bound`는 현행 CLI에 존재하지 않는다.
+실행기 도입 시 실제 요청에서 공급 증거를 생성하고 별도 자기신고 플래그로 돌아가지 않는다.
+
+## 5. 구현 순서와 완료 조건
+
+1. **승인된 E005 한 편의 제작 경로 연결.** 신규 소재 발굴부터 다시 하지 않는다.
+   컴파일된 S01 + 실제 D/E → 이미지 → 검수/앵커 → 후속 컷 → 한글 합성 → 최종 파일까지 연결한다.
+   동시에 최소 실행 상태/승인/실패 기록을 저장한다. 문서 17단계를 모두 대형 프레임워크로 구현할 필요는 없다.
+2. **소재·대본 단계를 같은 엔진 앞에 연결.** 실제 출처·원문 말투/특이 디테일과 각색 범위를 보존한다.
+   현재 L8 승인은 유지한다. 소재를 못 찾았다고 인간 출처를 꾸며 쓰지 않는다.
+3. **독립 CLI에서 재개 가능한 실행.** 대화 기억 없이 시작·상태 조회·승인·컷 수정·내보내기 가능해야 한다.
+   예시: run / status / approve voice-gate / approve taste-gate / retry --slide --scope / export.
+4. **그 경로 위에 웹 화면.** 검수와 다운로드에 필요한 UI부터 붙이고, 무인 게시/성과 대시보드는 뒤로 미룬다.
+
+최소 반복 검증 제안은 같은 그림 20회가 아니라 서로 다른 구성의 완성 회차 3편이다.
+예: 실내 대화, 동작·소품 중심, 장소/의상이 바뀌는 이야기. 선택한 API/모델 버전을 기록한다.
+이는 초기 결함을 찾는 표본이며 3편 성공으로 통계적 무오류를 주장하지 않는다.
+
+측정:
+- 필수 이미지 누락 생성 호출 수;
+- 승인 없이 넘어간 단계 수;
+- 그림체 1차 합격 컷 / 전체 컷;
+- 얼굴/소품/대사 오류로 재작업한 컷;
+- 사용자 개입 횟수, 회차당 시간·비용;
+- 재시작 후 중복 과금 없이 이어졌는지;
+- 최종 순서·한글 가독성·편집 원본 존재.
+
+## 6. 운영 경계와 과잉 설계 방지
+
+- 현재 인간 게이트: L8 대본, 합의한 시각 검수, 최종 취향/게시, 중요한 스타일 변경.
+- 같은 승인에 반복 확인을 요구하지 않고 명시 승인 범위를 저장한다.
+- 유료 작업에는 공급자/요청 ID, 시도 횟수, 예상·실제 비용(알 수 있는 경우), 회차 예산과 중단 한도를 기록한다.
+- 로컬 수정과 공통 입력 수정을 구분하고 실패한 재시도에서 연쇄 생성하지 않는다.
+- 품질 판단은 이야기 이해, 합의 그림체, 인물/소품 연속성, 대사 가독성에 집중한다.
+- 수집 소재에 맞는 말투·이상한 디테일을 살리고, QC가 재미를 평균적인 교훈으로 바꾸지 않게 한다.
+- 성과는 주제/길이/훅 실험의 입력이며 그림체·목소리·주연 정책을 자동 변경하지 않는다.
+- 규칙은 소유 문서에 갱신하고 새 handoff/락/예외 파일을 계속 붙이지 않는다.

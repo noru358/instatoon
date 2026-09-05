@@ -1,5 +1,8 @@
 # E003 — 왜 죄송하지
 
+> HISTORICAL / INACTIVE. This file preserves that episode’s decisions and attempts. It does not authorize current production. Follow root CURRENT_STATE.md and current GENERATION_PROTOCOL.md on resumption; prior L8 deferral, text-only fallback and batch directions are superseded.
+
+
 Status: SOURCE/VOICE/STORYBOARD LOCKED — READY FOR NATIVE/DIRECT RASTER PASS
 
 ## 1. Provenance

@@ -44,12 +44,44 @@ Use an external renderer only when:
 - a reproducibility/automation/provider test specifically requires it.
 
 Reference handling:
-- if the renderer supports explicit reference-media inputs, supply the canonical binaries;
-- if a native/direct renderer has no explicit repository-media slot, the operator must first inspect the canonical binaries and compile their observed identity/style constraints together with MASTER_PROMPTS into the generation instruction;
-- in that second mode, report honestly that the output is authority-informed but not binary-conditioned;
-- such an output may be QC'd and used as a prototype, but must not be promoted to a new canonical reference solely because the prompt said it matched.
+- inspect the currently exposed tool parameters before judging capability;
+- use an explicit prompt and explicit local-image inputs when the tool provides them;
+- native/direct does not imply CONVERSATION_INFERRED; choose the mode from the actual interface;
+- pass the canonical binaries as actual media. Inspection or text descriptions alone do not satisfy BINARY_REQUIRED;
+- authority-only output is a prototype exception only when explicitly allowed by the episode, never the current v2 production fallback.
 
 Never substitute obsolete/legacy refs.
+
+## 0.5 Current semi-automatic working mode — 2026-09-05
+
+User checkpoints:
+1. L8: source, humanized dialogue and ordered story beats. Preserve existing approval; do not ask again for the same package.
+2. First usable episode frame: inspect drawing style and selected character identities before the remaining production. Prefer an actual story frame showing the relevant faces and a simple background, not a separate sheet. For E005 this is S01.
+3. Finished episode: all individual files with lettering, reading order and continuity checked.
+
+Between checkpoints the operator proceeds autonomously, reports progress, inspects every returned image and repairs material defects. Do not ask the user to approve every panel by default. Return to the user for unresolved taste/identity decisions or changes to approved content.
+
+Reference routing:
+- recurring lead: canonical style media + that selected lead’s actual identity reference;
+- episode-only person: canonical style media for drawing language only + the story-derived age, gender/presentation, body, hair, clothes and identity digest; do not inherit the reference cast’s identity or demographic;
+- mixed cast: assign the role per person; never apply a whole cast sheet indiscriminately;
+- after visual acceptance: include the accepted episode image as actual secondary identity/style media in every later call, alongside canonical style media. Keep the same fixed accepted anchor rather than replacing it with each latest unreviewed output;
+- add accepted location or repair media only when that task needs it. A local repair uses the specific accepted target, not an unrelated first frame;
+- a new character appearing later gets its identity checked at its first appearance. A new standalone character sheet is not mandatory.
+
+Separate what is fixed (drawing language) from what changes (age, gender, physique, clothing, location, action, expression). The style’s simplified adult proportions are a default for the current adult cast, not a universal age/body template.
+
+One frame / one file:
+- one built-in generation call requests exactly one planned slide;
+- supply only that slide’s scene/action contract, not the whole episode storyboard;
+- input reference sheets remain reference-only, never output layout examples;
+- deliver separate `slide_01.png`, `slide_02.png`, etc., with one panel in each file;
+- no comic strip, grid, collage or all-in-one episode image as a substitute;
+- a combined review sheet is optional only when requested, and never replaces individual files;
+- inspect the returned image for panel count as well as style. A merged multi-panel output fails the delivery contract; do not pass it off as the requested individual renders;
+- each accepted master and final export is mapped to its slide ID, real path and hash. Filenames in a prompt do not themselves save or split files.
+
+The schema/guard enforce the declared one-panel/separate-files contract. They do not inspect returned pixels or force a tool call to follow it; actual request dispatch and output inspection remain operator responsibilities until the runner is connected.
 
 ## 0.6 Renderer capability / reference-injection gate
 
@@ -80,13 +112,13 @@ The manifest is bound to the exact EPISODE_PLAN Git blob SHA. If the plan change
 Run:
 `python pipeline/render_guard.py validate`
 
-The executable guard verifies at minimum:
+The executable guard checks a subset of schema/business rules (it does not run full JSON Schema validation):
 - CURRENT_STATE active episode == plan episode == manifest episode;
 - continuous slide indices and exact slide count;
 - text-free raster output;
 - output ratio/dimensions;
 - episode-only identity digest when the person recurs;
-- exact current required visual-reference paths exist;
+- required local media paths exist and SHA-256 matches their manifest;
 - plan ↔ manifest scene contracts and required/forbidden entities are identical;
 - manifest is not stale.
 
@@ -106,7 +138,7 @@ Every renderer run records one prompt-binding mode:
 - semantic-QC that frame;
 - only a PASS authorizes the next frame.
 
-This stricter mode applies to native/direct tools when their actual renderer payload is not inspectable.
+This stricter mode applies only when the current interface lacks an explicit auditable payload. Tool names and old session limitations do not establish its mode.
 
 ### Semantic hard-stop
 
@@ -438,38 +470,7 @@ During the learning phase:
 - final taste/publish remains human.
 
 
-## 16. Structured render-contract enforcement — CANONICAL
-
-Before any raster call:
-- active episode must contain `EPISODE_PLAN.json`;
-- active episode must contain `RENDER_MANIFEST.json`;
-- manifest must bind the exact EPISODE_PLAN Git blob SHA;
-- `python pipeline/render_guard.py validate` must PASS.
-
-Free-form prompt rewriting at render time is prohibited. Compile with:
-`python pipeline/render_guard.py compile --episode <ID> --slide <N>`
-
-The compiler loads:
-- `MASTER_PROMPTS.md` → `## 12. COMPILED PRODUCTION PROMPT`;
-- active EPISODE_PLAN;
-- bound RENDER_MANIFEST.
-
-Prompt-binding modes:
-- `EXPLICIT_COMPILED_PAYLOAD`: render first frame, semantic-QC it, then allow remaining batch only after PASS.
-- `CONVERSATION_INFERRED`: renderer payload is not fully auditable; parallel batch is prohibited. Render one frame, QC, then authorize only the next frame after PASS.
-
-Semantic hard stop:
-If a returned image is from a different story or concept, uses the wrong cast, introduces forbidden/unplanned entities, becomes a mascot/self-help/coding/collage substitute, or bakes semantic text into a text-free raster stage:
-1. mark INVALID;
-2. stop further rendering;
-3. do not repair from it;
-4. do not promote it to LAST_KNOWN_GOOD or any reference;
-5. inspect plan/manifest/prompt-binding/renderer before retry.
-
-A renderer returning an image is not success. Success requires scene-contract compliance.
-
-
-## 17. Short-term style-binding lock — CANONICAL
+## 16. Short-term style-binding lock — CANONICAL
 
 For the current production phase, style-sensitive raster generation is production-authorized only when the canonical style reference is bound to the renderer as ACTUAL IMAGE MEDIA.
 
@@ -523,3 +524,9 @@ Future requirements such as:
 are added as new media_requirements entries. The authorization algorithm itself does not change.
 
 AutoPipeline owns the generic declared/capability/supplied model; Instatoon adds story, slide-order, style, and episode-specific validation.
+
+## 17. Implementation boundary
+
+The standalone guard does not call the renderer or inspect generated pixels. `--previous-frame-qc PASS` and supplied-media arguments are caller declarations, not stored inspection records.
+Manual production must check the actual request and output. Future runtime requirements are specified in AUTOMATION_TRANSITION.md: persist approval/QC bound to exact artifacts, build media evidence from the request and call the renderer through the same entry point.
+Do not claim CI or input authorization proves story/style correctness.

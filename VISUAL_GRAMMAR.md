@@ -27,6 +27,8 @@ Vertical derivative:
 
 All slides within one carousel should share one ratio.
 
+Current delivery requirement: ONE PANEL = ONE IMAGE FILE. Each planned slide is generated and delivered separately. A multi-panel page, strip, collage or review sheet cannot substitute for individual slide files. Optional combined previews require a user request and do not replace the masters.
+
 ## 2. Episode length
 
 Typical:
@@ -72,9 +74,9 @@ Choose one dominant archetype per slide:
 - EMPTY_BEAT
 - BEFORE_AFTER
 - SPLIT_COMPARE
-- SEQUENCE_WITHIN_SLIDE (only when 2–3 mini-beats truly belong together)
+- SEQUENCE_WITHIN_SLIDE is inactive under the current one-panel-per-file requirement; split sequential mini-beats into separate files.
 
-Default is one dominant composition.
+Current production requires one single-panel composition per file.
 Do not subdivide by habit.
 
 ## 5. Visual rhythm

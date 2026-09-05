@@ -1,6 +1,6 @@
 # E005 — 결혼할지도
 
-Status: L12 WHOLE-EPISODE VISUAL PLAN PASS — USER REVIEW BEFORE RENDER CONTRACT
+Status: L12 COMPLETE / CONTRACT PRESENT — S01 STYLE FAILED; VALID REFERENCE-CONDITIONED S01 NEXT
 
 ## 1. Provenance
 
@@ -123,7 +123,8 @@ No separate user-facing character sheet is required unless direct multi-slide co
 Primary master:
 - 4:5
 - 1080×1350
-- seven slides
+- seven slides, each a separate single-panel image file
+- one generation call per slide; no combined episode sheet
 - text-free raster masters
 - final lettering added at L14
 
@@ -222,15 +223,9 @@ Legacy v1 references are forbidden.
 
 ## 9. Exact next action
 
-L12.5 RENDER CONTRACT GATE:
-1. materialize/verify EPISODE_PLAN.json;
-2. create SHA-bound RENDER_MANIFEST.json;
-3. update CURRENT_STATE active episode to E005;
-4. run render_guard validate;
-5. compile and authorize E005_S01 only;
-6. render exactly one TEXT-FREE first frame;
-7. semantic/style/identity QC before authorizing S02.
+Follow root CURRENT_STATE.md: validate current inputs, inspect actual REF_V2_D/E images, use the current tool’s explicit prompt/image inputs, and generate S01 only. This audit did not create a new frame. The contract already exists; do not recreate the story or infer a new approval requirement from its old status heading.
 
+Do not continue to S02 before a valid S01 is accepted and stored as an actual secondary image input.
 
 ## 10. L12.5 / L13 first-frame execution — 2026-09-05
 
@@ -258,4 +253,4 @@ L13 E005_S01 attempt 1:
   - violates flat/simple v2 comic grammar
 - status: INVALID; not LAST_KNOWN_GOOD; not a reference.
 - continuation: STOP. E005_S02 is NOT authorized.
-- repair scope: SYSTEMIC renderer/style-binding failure. Recompile/reassert visual style before retrying S01; do not chain from this output.
+- repair scope: SYSTEMIC renderer/style-binding failure. Bind actual canonical reference media and the compiled scene prompt in the same call before retrying S01; do not chain from this output.
