@@ -91,10 +91,16 @@ def validate_episode_plan(plan: dict):
                 f'episode-only character {char.get("id")} needs a persistent identity digest'
             )
 
-    required_refs = plan["style"].get("required_refs", [])
-    forbidden_refs = set(plan["style"].get("forbidden_legacy_refs", []))
+    style = plan["style"]
+    required_refs = style.get("required_refs", [])
+    forbidden_refs = set(style.get("forbidden_legacy_refs", []))
+    conditioning = style.get("reference_conditioning_requirement")
     _require(required_refs, "required_refs must not be empty")
     _require(not (set(required_refs) & forbidden_refs), "required_refs contains a forbidden legacy ref")
+    _require(
+        conditioning in {"BINARY_REQUIRED","AUTHORITY_ONLY_ALLOWED"},
+        "style.reference_conditioning_requirement missing or invalid"
+    )
 
 
 def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: dict):
@@ -138,6 +144,10 @@ def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: 
     _require(
         contract.get("unexpected_concept_policy") == "FAIL_CLOSED",
         "unexpected concept policy must be FAIL_CLOSED"
+    )
+    _require(
+        contract.get("required_reference_conditioning") == plan["style"]["reference_conditioning_requirement"],
+        "manifest reference-conditioning requirement must match EPISODE_PLAN"
     )
     _require(
         manifest["batch_policy"].get("conversation_inferred") == "SEQUENTIAL_EVERY_FRAME_GATE",
@@ -203,6 +213,7 @@ def compile_prompt(repo_root: Path, episode_id: str, slide_index: int) -> str:
     required = ", ".join(slide["required_entities"])
     forbidden = ", ".join(slide["forbidden_entities"]) or "none"
     refs = "\n".join(f"- {x}" for x in manifest["style_refs"])
+    conditioning = manifest["renderer_contract"]["required_reference_conditioning"]
 
     return f"""{base}
 
@@ -211,6 +222,7 @@ EPISODE_ID: {plan['episode_id']}
 SLIDE_ID: {slide['slide_id']}
 OUTPUT: {plan['format']['aspect_ratio']} {plan['format']['width']}x{plan['format']['height']}
 RASTER_TEXT: NONE. No readable captions, dialogue, labels, logos, watermarks, or speech bubbles.
+REFERENCE_CONDITIONING_REQUIRED: {conditioning}
 
 MAIN CAST: {main_cast}
 EPISODE-LOCAL IDENTITIES:
@@ -231,19 +243,48 @@ STYLE REFERENCES REQUIRED BY CONTRACT:
 {refs}
 
 FAIL-CLOSED:
+The paths above are not evidence of media injection by themselves.
+If REFERENCE_CONDITIONING_REQUIRED is BINARY_REQUIRED, every required style reference must be supplied to the renderer as actual reference media before generation.
 Do not substitute a different story, mascot, animal, productivity/self-help theme, coding/Git scene, collage, poster, or unrelated character.
-If the renderer cannot follow this exact scene contract, return no production frame rather than inventing a replacement.
+If the renderer cannot satisfy the scene or reference-conditioning contract, return no production frame rather than inventing a replacement.
 """.strip() + "\n"
 
 
-def authorize(repo_root: Path, episode_id: str, slide_index: int, prompt_binding: str, previous_frame_qc: str) -> str:
+def authorize(
+    repo_root: Path,
+    episode_id: str,
+    slide_index: int,
+    prompt_binding: str,
+    previous_frame_qc: str,
+    reference_conditioning_mode: str,
+    supplied_refs: list[str] | None = None,
+) -> str:
     plan, manifest = validate_repository(repo_root, episode_id)
+    supplied_refs = supplied_refs or []
 
     _require(1 <= slide_index <= plan["format"]["slide_count"], "slide out of range")
+    contract = manifest["renderer_contract"]
+
     _require(
-        prompt_binding in manifest["renderer_contract"]["allowed_prompt_bindings"],
+        prompt_binding in contract["allowed_prompt_bindings"],
         f"prompt binding not allowed: {prompt_binding}"
     )
+    _require(
+        reference_conditioning_mode in contract["reference_conditioning_modes"],
+        f"reference conditioning mode not allowed: {reference_conditioning_mode}"
+    )
+
+    required_conditioning = contract["required_reference_conditioning"]
+    if required_conditioning == "BINARY_REQUIRED":
+        _require(
+            reference_conditioning_mode == "BINARY_CONDITIONED",
+            "binary reference conditioning is required; authority-only rendering is blocked"
+        )
+        missing = [ref for ref in manifest["style_refs"] if ref not in set(supplied_refs)]
+        _require(
+            not missing,
+            "binary conditioning evidence missing required supplied refs: " + ", ".join(missing)
+        )
 
     if prompt_binding == "CONVERSATION_INFERRED":
         if slide_index > 1:
@@ -287,6 +328,17 @@ def main():
         default="NOT_RUN",
         choices=["NOT_RUN","PASS","FAIL"]
     )
+    auth.add_argument(
+        "--reference-conditioning-mode",
+        required=True,
+        choices=["BINARY_CONDITIONED","AUTHORITY_INFORMED_NON_BINARY_CONDITIONED"]
+    )
+    auth.add_argument(
+        "--supplied-ref",
+        action="append",
+        default=[],
+        help="Repository-relative canonical ref actually supplied to renderer as media; repeat for each ref."
+    )
 
     args = parser.parse_args()
     root = Path(args.repo_root).resolve()
@@ -304,7 +356,13 @@ def main():
             print(compile_prompt(root, args.episode, args.slide), end="")
         else:
             print(authorize(
-                root, args.episode, args.slide, args.prompt_binding, args.previous_frame_qc
+                root,
+                args.episode,
+                args.slide,
+                args.prompt_binding,
+                args.previous_frame_qc,
+                args.reference_conditioning_mode,
+                args.supplied_ref,
             ))
     except GuardError as exc:
         print(f"RENDER_GUARD_FAIL: {exc}", file=sys.stderr)
