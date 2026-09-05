@@ -83,7 +83,9 @@
         "allowed_prompt_bindings",
         "reference_conditioning_modes",
         "required_reference_conditioning",
-        "unexpected_concept_policy"
+        "unexpected_concept_policy",
+        "style_reference_binding_policy",
+        "episode_style_anchor_policy"
       ],
       "properties": {
         "allowed_prompt_bindings": {
@@ -116,6 +118,12 @@
             "BINARY_REQUIRED",
             "AUTHORITY_ONLY_ALLOWED"
           ]
+        },
+        "style_reference_binding_policy": {
+          "const": "ACTUAL_MEDIA_REQUIRED_FOR_PRODUCTION"
+        },
+        "episode_style_anchor_policy": {
+          "const": "REQUIRED_AFTER_STYLE_PASS"
         }
       }
     },
