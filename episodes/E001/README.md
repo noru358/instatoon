@@ -1,6 +1,6 @@
 # E001 — RESET START
 
-Status: AWAITING_REVISED_SCREEN_SEQUENCE_APPROVAL
+Status: REFERENCE_MEDIA_PREFLIGHT_BLOCKED
 Created: 2026-09-06
 
 This is the first episode after the user-directed episode reset.
@@ -46,11 +46,13 @@ Project-wide rules now require:
 - LETTERING_PLAN.json — revised six-slide layout
 - PRODUCTION_STATE.json
 
+## Revised screen-sequence gate
+PASS — user replied "ㅇㅋ" after the revised six-slide screen-safe plan was presented.
+
+## Current block
+The plan/render contract is ready, but canonical L13 authorization is fail-closed because both listed BINARY_REQUIRED references must be supplied as actual renderer media.
+- REF_V2_D: an equivalent user-uploaded current copy is available in this conversation.
+- REF_V2_E: no verified actual renderer-media copy is currently available in this conversation.
+
 ## Next action
-User reviews the revised S03-S05 screen-safe sequence / six-slide plan.
-On PASS:
-1. advance state to render-contract-ready;
-2. run render guard;
-3. verify actual required reference media is present in the renderer;
-4. regenerate only the affected phone-centric slides under the new contracts;
-5. internal QC must include screen/device geometry before style/taste QC.
+Obtain/attach REF_V2_E (approved 3-person indoor/background application reference). Then revalidate media delivery and regenerate only affected phone-centric slides under the new contracts.
