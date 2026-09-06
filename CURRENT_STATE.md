@@ -25,8 +25,9 @@ Project-wide workflow/style/reference/QC lessons remain active.
 - corrected S01 after user supplied reference: USER PASS visual/taste anchor only; not machine-bound
 - later phone-centric prototypes: NOT APPROVED / NON-AUTHORITATIVE after systemic screen/UI geometry defects
 - current plan: revised from 7 to 6 slides
-- current stage: VISUAL_PLAN_READY
-- current checkpoint: REVISED_SCREEN_SEQUENCE_PLAN_USER_GATE
+- revised six-slide screen-safe plan: USER PASS (`ㅇㅋ`)
+- current stage: RENDER_CONTRACT_READY
+- current checkpoint: REFERENCE_MEDIA_PREFLIGHT_BLOCKED
 
 ## Global structural fix now canonical
 
@@ -80,5 +81,6 @@ Canonical v2 production references remain:
 Both remain BINARY_REQUIRED where the episode contract lists them.
 
 ## Exact next action
-Present/review the revised six-slide screen-safe plan.
-After user PASS, advance/revalidate and regenerate only affected phone-centric slides with the required actual reference media and new screen contracts.
+Do not render yet.
+REF_V2_D has an equivalent attached copy in the active conversation, but REF_V2_E does not.
+Obtain/attach the approved REF_V2_E 3-person indoor/background application reference, then revalidate actual media delivery and regenerate only the affected phone-centric slides under the new screen contracts.
