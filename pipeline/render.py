@@ -346,6 +346,12 @@ def to_contract_canvas(raw: bytes, width: int, height: int) -> bytes:
 # --------------------------------------------------------------------------
 
 def cmd_render(args) -> int:
+    if not args.exception_lane:
+        raise RenderError(
+            "direct full-frame generative rendering is retired as the default path. "
+            "Resolve an ASSET_GAP and use the shared AutoPipeline compositor. "
+            "Only an explicitly approved exceptional shot may use render --exception-lane."
+        )
     episode_id = resolve_episode(args.episode)
     plan, manifest = guard.validate_repository(REPO_ROOT, episode_id)
     state = load_state(episode_id)
@@ -670,6 +676,8 @@ def main() -> int:
     render.add_argument("--model", default=DEFAULT_MODEL)
     render.add_argument("--dry-run", action="store_true",
                         help="run every gate and print the binding, but do not call the provider")
+    render.add_argument("--exception-lane", action="store_true",
+                        help="explicitly authorize a declared full-frame generative exception")
 
     qc = sub.add_parser("qc", help="record a frame QC verdict bound to the actual rendered image")
     qc.add_argument("--slide", type=int, required=True)
