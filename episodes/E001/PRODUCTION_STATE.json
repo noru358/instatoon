@@ -1,0 +1,50 @@
+{
+  "state_version": "1.0",
+  "episode_id": "E001",
+  "current_stage": "RENDER_CONTRACT_READY",
+  "voice_gate": {
+    "status": "PASS",
+    "approved_scope": "L1_L7_FULL_PACKAGE",
+    "approval_kind": "USER_EXPLICIT",
+    "evidence": "2026-09-07: user replied '통과' to the revised complete L1-L7 package with B3+B4 merged and B5 '조졌네...' hollow crying-laugh landing."
+  },
+  "decisions": [
+    {
+      "decision_id": "E001_L8_APPROVED_20260907",
+      "type": "USER_GATE",
+      "status": "PASS",
+      "value": "Fresh E001 L1-L7 package explicitly approved by user with reply '통과'."
+    },
+    {
+      "decision_id": "E001_PRE_RASTER_PLAN_APPROVED_20260907",
+      "type": "USER_GATE",
+      "status": "PASS",
+      "value": "User replied 'ㄱ' after the 4-slide storyboard/cast/visual plan. Approved structure: B1 routine cleanup, B2 silent hesitation, B3+B4 merged visual loss reveal with only '어', B5 '조졌네...' hollow crying-laugh."
+    },
+    {
+      "decision_id": "E001_FAILED_NATIVE_S01_REJECTED_20260907",
+      "type": "RENDER_QC",
+      "status": "REJECTED_NON_AUTHORITATIVE",
+      "value": "A native chat image was generated outside the required active-episode/binary-reference/geometry dispatch path. It is discarded and must not become an anchor or QC artifact."
+    }
+  ],
+  "frame_qc": {},
+  "manual_validation": {
+    "status": "ACTIVE",
+    "auto_finish_allowed": false,
+    "current_checkpoint": "REFERENCE_MEDIA_DISPATCH_PREFLIGHT",
+    "next_user_gate": "S01_USER_ANCHOR_AFTER_AUTHORIZED_RENDER",
+    "per_slide_user_approval": false,
+    "note": "No raster is approved. S01 may be generated only after actual D/E/sub1 reference media are supplied to an eligible renderer and the screen geometry contract is bound."
+  },
+  "raster_set_gate": null,
+  "episode_anchor": null,
+  "identity_anchors": {},
+  "blockers": [
+    {
+      "blocker_id": "CHAT_NATIVE_REFERENCE_BRIDGE",
+      "status": "OPEN",
+      "reason": "Git contains the required D/E/sub1 binaries, but ChatGPT native image generation must not be treated as binary-conditioned unless those exact images are actually available to the renderer in the active conversation/tool path."
+    }
+  ]
+}
