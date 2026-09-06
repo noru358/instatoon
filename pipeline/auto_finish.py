@@ -462,12 +462,12 @@ def inspect_final_layout(
 
 
 def run_auto_finish(args) -> int:
-    episode_id = renderer.resolve_episode(args.episode)
-    state = renderer.load_state(episode_id)
     plan = manifest = None
     activated = False
 
     try:
+        episode_id = renderer.resolve_episode(args.episode)
+        state = renderer.load_state(episode_id)
         plan, manifest = guard.validate_repository(REPO_ROOT, episode_id)
         minimum_required = max(0, plan["format"]["slide_count"] - 1)
         if args.max_total_render_attempts < minimum_required:
