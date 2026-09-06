@@ -5,7 +5,7 @@ Repository: noru358/instatoon
 
 ## Production state — reset complete
 
-Execution authorization: **IDLE_NO_ACTIVE_EPISODE**.
+Execution authorization: **PENDING_L8_USER_GATE**.
 
 Active episode: NONE
 
@@ -32,17 +32,16 @@ Standard topology:
 One slide = one image file.
 One slide != one user approval gate.
 
-## Fresh E001 source candidate
+## Fresh E001 pending L8
 
-- Human-source candidate: https://theqoo.net/job/4123344083
-- Seed fact: while cleaning advertisement chat rooms, the poster accidentally left a four-year work team group chat containing work history and photos and had no backup.
-- Status: **CANDIDATE ONLY / NOT USER-APPROVED**.
+- L1-L7 package: `research/PENDING_L8.md`
+- Primary human source: https://theqoo.net/job/4123344083
+- Status: **L1-L7 COMPLETE / NOT USER-APPROVED**.
+- Active episode remains `NONE`.
 
-Do not storyboard, render or create an active episode package from this candidate before the L8 user gate.
+Do not storyboard, render or create an active episode package before the L8 user gate.
 
 ## Exact next action
 
-1. Run repository contract/CI checks for the reset.
-2. If they pass, execute fresh-E001 L1-L7 research/editorial work.
-3. Present the complete L8 package for explicit user approval.
-4. Only after L8 PASS create/activate the new `episodes/E001` package.
+Present `research/PENDING_L8.md` to the user and wait for explicit L8 approval.
+Only after L8 PASS continue to L10 storyboard/cast routing and create/activate the fresh `episodes/E001` package at the appropriate contract stage.
