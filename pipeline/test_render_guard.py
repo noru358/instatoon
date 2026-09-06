@@ -106,13 +106,21 @@ class RenderGuardTests(unittest.TestCase):
 
     def test_authorizes_when_generic_media_requirements_are_satisfied(self):
         eid, _, _ = self._active_plan_manifest()
-        self.assertEqual(
-            authorize(
-                REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN",
-                True, ["image"], self._supply_all_required(), require_active=False
-            ),
-            "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
-        )
+        supply = self._supply_all_required()
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td) / "repo"
+            shutil.copytree(REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            state_path = root / "episodes" / eid / "PRODUCTION_STATE.json"
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            state["current_stage"] = "RENDER_CONTRACT_READY"
+            state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+            self.assertEqual(
+                authorize(
+                    root, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN",
+                    True, ["image"], supply, require_active=False
+                ),
+                "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
+            )
 
     def test_literal_pass_cannot_skip_persisted_frame_qc(self):
         eid, plan, _ = self._active_plan_manifest()
