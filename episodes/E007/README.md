@@ -153,3 +153,36 @@ Policy:
 
 Next:
 S02 only, then manual user QC.
+
+
+## 8. S02 repeated context failure
+
+Current-context native/chat render path: HARD STOP.
+
+Two consecutive attempts intended for S02 produced the S01 office-group composition again.
+
+Required S02 contract:
+- Harin alone;
+- inside a closed office elevator;
+- public persona relaxes;
+- no coworkers or other passengers;
+- no readable text/signage/labels.
+
+Observed invalid output:
+- office-group scene;
+- multiple coworkers;
+- essentially S01 semantics.
+
+Classification:
+WRONG_SCENE / CONTEXT_CONTAMINATION.
+
+Both outputs are INVALID:
+- not S02;
+- not anchors;
+- not repair bases;
+- not LAST_KNOWN_GOOD.
+
+Per GENERATION_PROTOCOL, do not retry this conversation-inferred path again after two repeated hard-contract failures.
+
+Exact resume action:
+use a clean dedicated render context, restore the canonical refs and E007 S02 contract, render S02 only, then stop for user QC.
