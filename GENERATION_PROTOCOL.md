@@ -1,6 +1,6 @@
 # GENERATION_PROTOCOL.md
 
-# GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.4
+# GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.5
 Updated: 2026-09-06
 
 ## 0. Stage order
@@ -13,7 +13,7 @@ Production order:
 4. USER VOICE GATE during learning phase;
 5. whole-episode storyboard + cast router;
 6. internally derive any required episode-local character identity digest;
-7. whole-episode visual/text plan, including sequence-level shot direction and expression-amplitude plan;
+7. whole-episode visual/text plan, including adjacent-beat visual-delta/merge review, sequence-level shot direction, expression amplitude, and screen/interactive-prop contracts;
 8. text-free raster generation;
 9. editable lettering/composition;
 10. QC;
@@ -48,6 +48,7 @@ Reference handling:
 - use an explicit prompt and explicit local-image inputs when the tool provides them;
 - native/direct does not imply CONVERSATION_INFERRED; choose the mode from the actual interface;
 - pass the canonical binaries as actual media. Inspection or text descriptions alone do not satisfy BINARY_REQUIRED;
+- if a required reference is not actually available to the active renderer/tool, STOP and tell the user that production is blocked; do not make a prompt-only speculative image and ask forgiveness afterward;
 - authority-only output is a prototype exception only when explicitly allowed by the episode, never the current v2 production fallback.
 
 Never substitute obsolete/legacy refs.
@@ -142,6 +143,49 @@ A frontal camera is not automatically a neutral-direction frame; QC judges the a
 
 Expression planning follows the same principle: role and story beat determine amplitude. "Restrained," "not grotesque," or "not melodramatic" must not silently become a global low-energy acting lock.
 
+### Visual-delta merge rule — story beat != slide
+
+Before locking the storyboard into slides, compare adjacent beats for visual delta.
+
+A beat is a MERGE_CANDIDATE when actor/location/prop/basic action remain substantially the same and the new information is mainly a UI state, tiny reaction, or continuation of the same gesture.
+
+Do not preserve a separate slide merely because the script contains a separate sentence or state change.
+
+If a merge candidate is kept separate, the episode plan must state the visual delta that justifies the extra slide.
+
+UI inset/overlay is permitted inside one panel when it functions as information graphics attached to the scene, not as a second comic panel.
+
+### Screen-bearing prop contract
+
+Any slide containing a phone, tablet, laptop, monitor, TV, kiosk, or equivalent screen-bearing prop must declare:
+- `visual_information_owner`;
+- `screen_bearing_prop=true`;
+- a non-null `screen_contract` with prop id, subject-screen relation, camera-screen relation, geometry rule, UI profile and UI delivery mode.
+
+Non-screen slides declare `screen_bearing_prop=false` and `screen_contract=null`.
+
+Information ownership prevents impossible all-at-once framing:
+- CHARACTER_REACTION: face/body is primary; keep the physical device natural, use UI inset if needed;
+- SCREEN_INFORMATION: screen is primary; use POV/over-shoulder/other physically valid view;
+- PHYSICAL_ACTION: grip/tap/hand action is primary;
+- MIXED_WITH_DECLARED_PRIORITY: allowed only when the priority and geometry remain explicit.
+
+Never place a screen on the back of a device.
+Never make both character and audience see the same private phone display from mutually impossible directions.
+Never rotate a device into a presentation pose unless the character is actually showing it to someone in the story.
+
+### Interface profile routing
+
+UI is context-routed, not episode-hard-coded.
+
+Default for contemporary Korean everyday personal/group messaging when no service is named:
+`KR_EVERYDAY_MESSENGER_KAKAOTALK_INSPIRED`.
+
+This means KakaoTalk-like visual grammar, not mandatory logo/wordmark copying.
+Explicit story context overrides the default.
+
+Meaning-bearing message text, room titles, read/unread numerals and decrementing/disappearing read-status effects should normally be vector/layout elements. Raster generation provides a blank/simplified shell and correct geometry.
+
 ### One frame / one file
 
 - one generation request targets exactly one planned slide;
@@ -169,11 +213,17 @@ QC is ordered so cheap hard-contract checks run before subjective visual checks.
 - background density and finish;
 - no generic AI-webtoon beautification drift.
 
-**QC-2 anatomy / scene**
+**QC-2 anatomy / scene / geometry**
 - face/hand integrity;
 - occlusion;
 - prop interaction;
-- action/composition/story clarity.
+- action/composition/story clarity;
+- for every screen-bearing prop: display face is on the correct physical side;
+- character gaze/device orientation/camera view are mutually possible;
+- no audience-presentation pose exists without story justification;
+- declared visual-information owner is actually respected;
+- UI inset/overlay is visually attached to the beat and does not become a second comic panel;
+- resolved UI/platform profile is contextually coherent.
 
 **QC-3 sequence visual balance — after multiple/complete frames exist**
 - inspect the set as a viewer, not only frame-by-frame;
