@@ -11,12 +11,12 @@ Active episode: episodes/E007/README.md
 수집/소재 확정 → L1-L7 → L8 사용자 승인 → 캐스팅/콘티 → 구조화 계약 → 레퍼/프리플라이트 → 개별 래스터 → 분리 레터링 → 최종 QC → 완성.
 
 E007:
-- user explicitly reset the episode on 2026-09-06;
-- previous office-lunch E007 content and approvals are superseded and historical only;
-- fresh human-source seed selected: Reddit r/tifu "TIFU forgetting that elevators aren’t private";
-- new L1-L7 package is drafted in episodes/E007/README.md;
-- machine state: L8_AWAITING_APPROVAL;
-- no cast, storyboard, render contract, raster, anchor, or lettering is authorized yet.
+- fresh L1-L7 package: USER APPROVED on 2026-09-06;
+- cast/storyboard: drafted, awaiting user approval;
+- cast draft: episode-only male office worker + episode-only male security employee; Taemin is not used merely as a gender substitute;
+- storyboard draft: seven slides, public persona → private switch → private ritual → instant reset → security echoes phrase → suspicious cover → CCTV realization;
+- machine state: STORYBOARD_AWAITING_APPROVAL;
+- no character-design finalization, visual plan, render contract, raster, anchor, or lettering is authorized yet.
 
 ## 현재 운영 모드 — MANUAL_VALIDATION
 
@@ -25,12 +25,10 @@ Actual operating mode is manual validation.
 1. every meaningful production stage is shown to the user and explicitly reviewed;
 2. no auto-finish;
 3. L8 approval is mandatory before cast/storyboard;
-4. after storyboard/contract approval, raster slides are handled one at a time;
-5. raster and lettering remain separate;
-6. lettering proof is manually reviewed;
-7. final export is manually reviewed.
-
-Chat/native image generation may be used later for manual validation, but no image generation is authorized before the current L8 gate passes.
+4. cast/storyboard receives its own manual checkpoint;
+5. after later contract approval, raster slides are handled one at a time;
+6. raster and lettering remain separate;
+7. lettering proof and final export are manually reviewed.
 
 ## 현재 E007 소재
 
@@ -45,7 +43,7 @@ Korean-localized setting/dialogue is allowed, but no fake named company, discipl
 
 ## 정확한 다음 행동
 
-1. show the fresh E007 L1-L7 package to the user;
-2. wait for explicit L8 approval or edit feedback;
-3. only after approval, run L10 cast routing + storyboard;
-4. continue in MANUAL_VALIDATION with explicit user gates.
+1. show L10 cast + seven-slide storyboard to the user;
+2. wait for explicit approval or edits;
+3. only after approval, run L11 episode-local character design + L12 whole-episode visual plan;
+4. remain in MANUAL_VALIDATION and do not generate raster art yet.
