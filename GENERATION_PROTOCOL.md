@@ -103,6 +103,15 @@ Cast cardinality / role rule:
 
 Separate what is fixed (drawing language) from what changes (age, gender, physique, clothing, location, action, expression).
 
+Background-extra identity isolation:
+- a shared main-cast sheet may contain multiple recurring identities, but only explicitly selected main-cast identities may be instantiated as those characters;
+- unselected recurring identities are NOT templates for incidental coworkers, strangers, customers, guards, or other extras;
+- incidental extras inherit drawing language only: line, eye/face grammar range, flat color, simplification, and background integration;
+- when story constraints allow, vary extras across age band, face shape, eye size/shape within the approved style range, hair silhouette/texture, body build, and ordinary clothing;
+- extras must be visibly distinguishable from every recurring lead and must not read as a near-copy of Gaeun, Harin, or Taemin;
+- one-frame extras do not need a persistent identity digest unless reused later.
+
+
 ### One frame / one file
 
 - one generation request targets exactly one planned slide;
