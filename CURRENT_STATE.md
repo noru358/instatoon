@@ -2,85 +2,76 @@
 
 Updated: 2026-09-07
 Repository: noru358/instatoon
+Operating mode: MANUAL_VALIDATION
+Architecture: ASSET_COMPOSITION_v1
 
-## Production state — fresh E001 active
+## Production state — architecture migration active
 
-Execution authorization: **CLEAN_RENDER_HANDOFF_REQUIRED**.
+Execution authorization: **ASSET_SYSTEM_CALIBRATION_ONLY**.
 
-Active episode: episodes/E001/README.md
+The former E001 full-frame generative production run is **SUSPENDED / LEGACY EVIDENCE**.
+Do not resume S02-S04 through the old per-slide full-frame generation path.
+No legacy E001 raster is promoted into the new production asset registry automatically.
 
-Fresh E001 authority:
-- L8 full L1-L7 package: **USER PASS** (`통과`);
-- four-slide storyboard/cast/visual plan: **USER PASS** (`ㄱ`);
-- S01 visual direction: **USER PASS / CONTEXT-LOCAL TASTE ANCHOR** (`합격!`);
-- S01 is not repository-bound as a machine-authoritative raster artifact;
-- the S02-S04 images produced after the render context had already crossed the isolation-failure threshold are **REJECTED / QUARANTINED**;
-- machine state remains `FIRST_FRAME_QC_PENDING`;
-- machine-authoritative approved raster artifacts: **NONE**.
+The next publishable episode number remains E001 after the asset/composition pilot proves the new renderer architecture. Episode content may be replaced; durable structural lessons remain.
 
-## Canonical visual/runtime authority
+## Canonical final-visual authority
 
-Current style: **INSTATOON_STYLE_v2.1**.
-Canonical generation wording: **MASTER_PROMPTS v2.5**.
-Canonical production/QC method: **GENERATION_PROTOCOL v2.6**.
+Final visual path:
 
-Required production media for E001:
-- `REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg`;
-- `REF_V2_E_3PERSON_INDOOR_SCENE.jpeg`;
-- `sub1.png` as the supplemental style reference required by the active render manifest;
-- the exact user-approved S01 image when resuming S02+ as a context-local continuity/taste anchor.
+`story/storyboard → asset resolve → asset-gap authoring → APPROVED registry → deterministic compositor → editable lettering/UI → QC/export`
 
-Executable reference inventory:
-- `assets/style_refs/v2_current/registry.json`.
+Primary authority:
+- `ASSET_COMPOSITION_PROTOCOL.md`;
+- `assets/production/registry.json`;
+- `schemas/asset_registry.schema.json`;
+- `schemas/composition_scene.schema.json`;
+- `pipeline/compositor.py`.
 
-Current production is **BINARY_REQUIRED**:
-- repository presence or prompt descriptions do not count as renderer conditioning;
-- every manifest-required reference must be supplied as actual media to the eligible renderer;
-- screen-bearing slides must preserve physically valid subject/display/camera geometry.
+Existing authorities remain active in narrower roles:
+- `STYLE_LOCK.md`, `MASTER_PROMPTS.md`, `REFERENCE_SET.md`: asset-authoring/style/identity authority;
+- `GENERATION_PROTOCOL.md`: generative asset/exception QC, reference binding, quarantine and repair rules;
+- `VISUAL_GRAMMAR.md`: storyboard, shot semantics and composition planning;
+- `pipeline/lettering.py`: deterministic editable text layer.
 
-## Canonical operating mode — MANUAL_VALIDATION
+## Renderer ownership
 
-Standard topology:
+Default final renderer: **DETERMINISTIC_COMPOSITOR**.
 
-`pre-raster content/plan → S01 USER anchor → S02..final OPERATOR INTERNAL QC → complete text-free raster-set USER gate → lettering/final USER gate`.
+`pipeline/render.py` is no longer a normal final-frame renderer. It is retained only for an explicitly declared generative exception/legacy experiment and must not be used to continue the suspended E001 path.
 
-One slide = one image file.
-One slide != one user approval gate.
+A missing pose/expression/prop/background is an `ASSET_GAP`, not permission to regenerate the whole frame.
 
-## Latest rejected set — why it failed
+## Registry state
 
-The later S02-S04 candidates are not production assets.
+`assets/production/registry.json` currently contains **0 approved production assets**.
 
-Set-level failures:
-- viewer-perceived camera/face/body rhythm remained too biased toward the same safe portrait family;
-- S02 → S03 visual delta was weaker than the story-state change;
-- S03's loss cue read too much like generic floating data/icons instead of a concrete accumulated archive being lost;
-- S04 had a visible shoulder/torso/arm continuity failure on the character's right side;
-- S04 changed the intended semantic acting from hollow, resigned crying-laughter into a brighter/cuter laugh;
-- body language in S04 did not sufficiently carry depleted resignation.
+The existing style/cast/scene references are authoring authorities, not automatically composition-ready assets. They may be used to create the starter asset library, but must pass the new asset registration/approval contract before final composition.
 
-The E001 plan/manifest has been revised so these are now explicit render/QC requirements rather than chat-only feedback.
+## Current blockers
 
-## Current blocker
+1. No composition-ready approved asset starter pack exists yet.
+2. Existing recurring-character references are not yet normalized into production pose/view assets.
+3. No four-slide pilot scene contracts exist for the compositor.
+4. The new compositor requires Pillow in the execution environment.
 
-Blocker: `NATIVE_CONVERSATION_RENDER_ISOLATION`
-Status: **OPEN / STICKY FOR THE OLD CONTEXT**
-
-The prior render context crossed the hard-failure threshold after repeated multi-panel/full-episode reinterpretation of a single-slide request.
-
-A later superficially valid single-panel output in that same context does **not** clear the blocker.
-Outputs generated after the sticky-unsafe point are quarantined from anchor/QC promotion.
-
-Context reset is not episode reset.
+These are calibration blockers, not reasons to fall back to full-frame generation.
 
 ## Exact next action
 
-1. Start a **clean dedicated render session/context**.
-2. Read this file, `GENERATION_PROTOCOL.md`, `MASTER_PROMPTS.md`, the active E001 plan/manifest/state, and validate repository authority.
-3. Supply the exact D/E/sub1 media plus the user-approved S01 image as actual media.
-4. Resume at **S02**, not S01.
-5. Compile/render **current-shot only**: S02 → internal QC → S03 → internal QC → S04 → internal QC.
-6. Do not ask for intermediate user approval.
-7. Present the complete four-image, text-free set only after S02-S04 all pass internal frame + sequence QC.
+Build the minimum starter asset pack for one four-slide pilot, using the already-approved drawing style as authoring authority.
 
-Do not use any rejected S02-S04 image as a reference, repair base, composition seed or continuity anchor.
+Target pack:
+- one recurring character: a small set of story-useful view/pose/expression combinations;
+- one supporting/extra character asset if the pilot needs one;
+- 1–2 reusable background plates or local background components;
+- only the props/FX needed by the pilot.
+
+For every new asset:
+1. generate/import the asset only;
+2. user/QC approve it;
+3. materialize exact bytes under `assets/production/`;
+4. register SHA-256 + dimensions + scope;
+5. compose a slide from registry IDs.
+
+Pilot success criterion: four separate 4:5 frames assembled without full-frame generation except an explicitly approved exception, followed by deterministic lettering.
