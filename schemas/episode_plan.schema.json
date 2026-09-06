@@ -284,6 +284,62 @@
           }
         }
       }
+    },
+    "visual_direction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selection_policy",
+        "anti_hardcoding",
+        "expression_policy",
+        "candidate_dimensions",
+        "set_qc"
+      ],
+      "properties": {
+        "selection_policy": {
+          "const": "STORY_FIRST_REDUNDANCY_AWARE"
+        },
+        "anti_hardcoding": {
+          "const": true
+        },
+        "expression_policy": {
+          "const": "ROLE_ADAPTIVE_WITHIN_STYLE"
+        },
+        "candidate_dimensions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "camera_side",
+              "camera_height",
+              "shot_distance",
+              "body_orientation",
+              "face_orientation",
+              "gaze_direction"
+            ]
+          },
+          "minItems": 3,
+          "uniqueItems": true
+        },
+        "set_qc": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "reflection_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "skin_color_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
     }
   }
 }
