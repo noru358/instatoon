@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "episode_id": "E001",
-  "episode_plan_git_blob_sha": "f711a819b4c7b3a75aa120c50cc42089020cadc8",
+  "episode_plan_git_blob_sha": "f20668c7758d787b9266f118b037ed7caea8370a",
   "canonical_prompt_source": {
     "path": "MASTER_PROMPTS.md",
     "section_heading": "## 12. COMPILED PRODUCTION PROMPT"
@@ -101,7 +101,8 @@
         "the same private phone remains naturally oriented toward worker_01",
         "the hand has just stopped after a routine cleanup gesture",
         "expression is a subtle 'something is wrong' pause, not yet panic",
-        "no readable UI or explanatory text is baked into raster art"
+        "no readable UI or explanatory text is baked into raster art",
+        "the frame must not read as a near-copy of S01 with only a facial swap when a story-valid framing/body delta is available"
       ],
       "required_entities": [
         "worker_01",
@@ -128,8 +129,9 @@
         "worker_01 identity, hair and outfit remain exactly continuous from prior slides",
         "worker_01 says only '어' later in editable lettering; raster contains no dialogue",
         "the physical phone stays naturally oriented toward worker_01 and is not turned toward the audience",
-        "the four-year work-history/photo loss is carried by a separate editable UI/information overlay zone, not by explanatory dialogue and not by impossible physical phone geometry",
-        "the visual treatment should feel like a sudden concrete realization, not fantasy destruction or melodramatic explosion"
+        "the visual treatment should feel like a sudden concrete realization, not fantasy destruction or melodramatic explosion",
+        "the four-year work-history/photo loss is carried by a separate editable UI/information overlay zone using orderly message/photo/file archive shapes that visibly diminish or empty; generic floating decorative icons are insufficient",
+        "the overlay communicates accumulated-record loss as a state change while the physical phone remains naturally private and text-free"
       ],
       "required_entities": [
         "worker_01",
@@ -149,7 +151,8 @@
         "phone screen on device back",
         "audience-presentation phone pose",
         "fantasy explosion",
-        "cinematic lighting"
+        "cinematic lighting",
+        "generic decorative floating data icons as the sole loss cue"
       ]
     },
     {
@@ -157,10 +160,11 @@
       "slide_id": "E001_S04",
       "scene_contract": [
         "worker_01 identity, hair and outfit remain exactly continuous",
-        "final performance combines tears with a hollow involuntary laugh",
-        "expression is devastated and absurdly resigned, not polished sadness and not exaggerated gag-face comedy",
         "phone is secondary or out of frame; no screen information is needed",
-        "no readable text or speech bubble is baked into raster art"
+        "no readable text or speech bubble is baked into raster art",
+        "final performance combines tears with a weak hollow involuntary laugh and visibly depleted shoulders/upper-body posture",
+        "expression is devastated and absurdly resigned; do not beautify it into cheerful/cute crying-laughter, polished sadness or exaggerated gag-face comedy",
+        "choose an anatomically simple stable pose; shoulder, upper arm, forearm and hand continuity must remain legible even if a hand approaches the face"
       ],
       "required_entities": [
         "worker_01",
@@ -177,7 +181,9 @@
         "phone screen information",
         "melodramatic sobbing",
         "gag-face distortion",
-        "cinematic lighting"
+        "cinematic lighting",
+        "cheerful or cute delighted crying-laughter",
+        "anatomically ambiguous shoulder/arm occlusion"
       ]
     }
   ]
