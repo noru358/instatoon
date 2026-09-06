@@ -7,56 +7,78 @@ Active episode: episodes/E001/README.md
 
 ## Canonical operating mode — MANUAL_VALIDATION
 
-Current STANDARD user-facing approval topology:
+Standard topology:
+`pre-raster content/plan → S01 USER anchor → S02..final OPERATOR INTERNAL QC → complete text-free raster-set USER gate → lettering/final USER gate`.
 
-`pre-raster content/storyboard/contracts → S01 USER anchor → S02..final OPERATOR INTERNAL QC → complete text-free raster-set USER gate → lettering/final USER gate`.
+One slide = one image file.
+One slide != one user approval gate.
 
-Hard distinction:
-- **one slide = one image file**;
-- **one slide != one user approval gate**.
+## Episode reset boundary
+All concrete pre-reset episode content remains retired.
+Project-wide workflow/style/reference/QC lessons remain active.
 
-After S01 USER PASS, S02 through the final slide are produced sequentially as separate files and QC'd internally by the operator/runtime.
+## E001 reconciled state
+- L1-L7: PASS
+- L8 USER VOICE GATE: PASS
+- pre-raster plan gate: PASS
+- first S01 attempt without required reference media: INVALID / DISCARDED
+- corrected S01 after user supplied reference: USER PASS visual/taste anchor only; not machine-bound
+- later phone-centric prototypes: NOT APPROVED / NON-AUTHORITATIVE after systemic screen/UI geometry defects
+- current plan: revised from 7 to 6 slides
+- current stage: VISUAL_PLAN_READY
+- current checkpoint: REVISED_SCREEN_SEQUENCE_PLAN_USER_GATE
 
-## User-directed episode reset — 2026-09-06
+## Global structural fix now canonical
 
-All concrete prior E001-E007 episode content is retired from current execution.
-Repository-wide workflow, style/reference authority, visual grammar, QC/repair rules, sequence-direction/expression rules and automation improvements remain active.
-Git history is the archive for retired episode-specific material.
+### Adjacent visual-delta / merge
+Story beats are not automatically separate slides.
+Adjacent low-delta beats must be reviewed for merge before slide locking.
+UI-state-only or tiny-reaction continuations are merge candidates.
 
-## E001 current state
+### Visual information ownership
+Every slide declares one primary information owner:
+CHARACTER_REACTION / SCREEN_INFORMATION / PHYSICAL_ACTION / ENVIRONMENT / RELATIONSHIP / MIXED_WITH_DECLARED_PRIORITY.
 
-- L1-L7 revised package: PASS.
-- L8 USER VOICE GATE: PASS; user explicitly replied "합격".
-- L10 storyboard + cast routing: COMPLETE.
-- L11 episode-local character design: COMPLETE internally.
-- L12 whole-episode visual plan: COMPLETE.
-- L12.5 EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN: MATERIALIZED.
-- PRODUCTION_STATE.current_stage = VISUAL_PLAN_READY.
-- Current checkpoint = PRE_RASTER_PLAN_USER_GATE.
-- Raster generation remains fail-closed until this gate passes.
+### Screen-bearing prop contract
+Every screen-bearing slide declares:
+- subject-screen relation
+- camera-screen relation
+- geometry contract
+- UI profile
+- UI delivery mode
 
-Cast:
-- no recurring main cast forced into the premise;
-- worker_01 is an episode-only mid-20s service worker across all seven slides;
-- customer/helper coworker are one-frame extras.
+Hard failures:
+- UI on device back/case
+- impossible character/camera screen orientation
+- private phone unnaturally presented to the audience solely to expose information
+- screen/reaction/UI all forced into one incompatible composition
 
-Ending lock:
-- no protagonist explanation after the private DM;
-- no ending narration/internal monologue;
-- S07 contains no lettering at all and lands only through extreme embarrassment body language.
+### Interface routing
+UI profile is context-routed, not episode-hard-coded.
+Contemporary Korean ordinary personal/group messaging with no named service defaults to:
+`KR_EVERYDAY_MESSENGER_KAKAOTALK_INSPIRED`.
+
+Meaning-bearing chat text, room names, read/unread numerals and decrement/disappearing read-status effects are normally vector/layout content.
+
+### Reference fail-closed
+If required style/reference media is not actually available to the active renderer/tool, STOP and tell the user.
+Do not make a prompt-only production image.
+
+## E001 revised six-slide sequence
+1. customer conflict + coworker intervention
+2. private staff nook / opens messenger
+3. send + wrong-chat realization MERGED; reaction-led + KakaoTalk-inspired UI inset
+4. delete/too-late; over-shoulder/POV screen-information shot
+5. coworker private DM; reaction-led + DM inset
+6. silent embarrassment landing
 
 ## Reference binding
-
-Canonical production references remain:
+Canonical v2 production references remain:
 - `assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg`
-  - SHA-256 `dbddf458a97c89781075e6be03ab2c393eff75b95e8856f044bd81f29310ec07`
 - `assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg`
-  - SHA-256 `b49683276f94ba5621e3602d7e3d714b0f2e637b2c41fc1fd132bdf6f336b049`
 
-Both remain BINARY_REQUIRED for canonical L13 production.
+Both remain BINARY_REQUIRED where the episode contract lists them.
 
 ## Exact next action
-
-Present the seven-slide pre-raster package to the user.
-STOP for explicit approval.
-After PASS, advance/rebind the render contract, run full guard validation, then supply actual REF_V2_D + REF_V2_E media and generate only S01 for the USER anchor gate.
+Present/review the revised six-slide screen-safe plan.
+After user PASS, advance/revalidate and regenerate only affected phone-centric slides with the required actual reference media and new screen contracts.
