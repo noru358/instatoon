@@ -1,7 +1,7 @@
 # GENERATION_PROTOCOL.md
 
 # GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.5
-Updated: 2026-09-06
+Updated: 2026-09-07
 
 ## 0. Stage order
 
