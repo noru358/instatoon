@@ -25,11 +25,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install dependencies
-        run: pip install --quiet pillow
-      - name: Compile retained deterministic helpers
-        run: |
-          python -m py_compile             pipeline/lettering.py             pipeline/reference_registry.py
+      - name: Compile retained project helper
+        run: python -m py_compile pipeline/reference_registry.py
       - name: Current authoring reference registry matches binaries
         run: python pipeline/reference_registry.py
       - name: Production registry is valid JSON
