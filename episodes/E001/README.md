@@ -12,7 +12,7 @@ This is the first episode after the user-directed episode reset.
 
 ## Current pipeline state
 - Episode ID: E001
-- L1-L7: DRAFT COMPLETE
+- L1-L7: DRAFT COMPLETE, USER FEEDBACK APPLIED
 - Source pack: STORY_SOURCE_PACK.md
 - L8 USER VOICE GATE: PENDING
 - Storyboard/cast/render contract: NOT YET CREATED
@@ -21,5 +21,10 @@ This is the first episode after the user-directed episode reset.
 ## Current premise
 A worker accidentally sends an ambiguous message intended for friends to the workplace group chat, deletes it almost immediately, but dozens of coworkers have already seen it.
 
+## Current ending lock
+- No protagonist explanation after the coworker's DM.
+- No ending narration or internal monologue.
+- End on a purely visual, strongly readable extreme-embarrassment reaction.
+
 ## Next action
-Present STORY_SOURCE_PACK.md at L8 and wait for explicit user approval. Only after PASS proceed to L10 storyboard + cast routing.
+Present the revised STORY_SOURCE_PACK.md at L8 and wait for explicit user approval. Only after PASS proceed to L10 storyboard + cast routing.
