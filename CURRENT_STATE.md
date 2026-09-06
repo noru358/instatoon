@@ -18,9 +18,10 @@ E007:
 - structured files created: EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN;
 - machine stage: RENDER_CONTRACT_READY;
 - L12.5 structured contract: USER APPROVED;
-- current checkpoint: S02 render;
+- current checkpoint: S02 blocked in current render context; clean-context retry required;
 - no machine-bound raster, anchor, or frame QC exists yet.
 - S01 latest QC: USER PASSED visual quality after background-extra repair; baked raster text/signage remains a known deferred contract defect and is not considered compliant.
+- S02 current failure: two consecutive native/chat attempts reproduced the S01 office-group scene instead of the elevator-alone scene. Both outputs are INVALID and discarded.
 
 ## Reference binding
 
@@ -44,7 +45,8 @@ Both are BINARY_REQUIRED for production raster.
 
 ## 정확한 다음 행동
 
-1. render S02 only using the same canonical refs and S01 as visual continuity guidance where available;
-2. enforce no readable raster text/signage/labels;
-3. stop for manual S02 QC;
-4. do not render S03 before explicit S02 PASS.
+1. open a clean dedicated render context;
+2. restore CURRENT_STATE + E007 package + canonical REF_V2_D + REF_V2_E;
+3. render S02 only: Harin alone inside closed elevator, relaxed shoulders/face, no other people, no readable text;
+4. stop for manual S02 QC;
+5. do not render S03 before explicit S02 PASS.
