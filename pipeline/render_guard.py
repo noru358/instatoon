@@ -157,9 +157,26 @@ def validate_episode_plan(plan: dict):
     for slide in slides:
         expected_id = f'{plan["episode_id"]}_S{slide["index"]:02d}'
         _require(slide.get("slide_id") == expected_id, f"bad slide_id: expected {expected_id}")
-        for field in ("role","beat","location","action","scene_facts","story_clarity","required_entities","composition"):
+        for field in ("role","beat","location","action","scene_facts","story_clarity","required_entities","composition",
+                      "visual_information_owner","visual_delta_from_previous"):
             _require(slide.get(field), f'{slide["slide_id"]} missing {field}')
         _require("forbidden_entities" in slide, f'{slide["slide_id"]} missing forbidden_entities')
+        _require(type(slide.get("screen_bearing_prop")) is bool, f'{slide["slide_id"]} screen_bearing_prop must be boolean')
+        owner = slide.get("visual_information_owner")
+        _require(owner in {
+            "CHARACTER_REACTION","SCREEN_INFORMATION","PHYSICAL_ACTION",
+            "ENVIRONMENT","RELATIONSHIP","MIXED_WITH_DECLARED_PRIORITY"
+        }, f'{slide["slide_id"]} invalid visual_information_owner')
+        screen = slide.get("screen_contract")
+        if slide["screen_bearing_prop"]:
+            _require(isinstance(screen, dict), f'{slide["slide_id"]} screen-bearing slide needs screen_contract')
+            for field in ("prop_id","subject_screen_relation","camera_screen_relation","geometry_contract","ui_profile","ui_delivery"):
+                _require(screen.get(field), f'{slide["slide_id"]} screen_contract missing {field}')
+            _require(screen["ui_delivery"] in {
+                "RASTER_SHELL_PLUS_VECTOR_CONTENT","VECTOR_INSET","RASTER_SHELL_ONLY","NONE"
+            }, f'{slide["slide_id"]} invalid screen ui_delivery')
+        else:
+            _require(screen is None, f'{slide["slide_id"]} non-screen slide must use screen_contract=null')
 
     for char in plan["cast"].get("episode_only", []):
         if len(char.get("appears_in", [])) >= 2:
@@ -360,6 +377,12 @@ STORY CLARITY: {slide['story_clarity']}
 
 SCENE FACTS — ALL MUST BE TRUE:
 {facts}
+
+VISUAL INFORMATION OWNER: {slide['visual_information_owner']}
+VISUAL DELTA FROM PREVIOUS: {slide['visual_delta_from_previous']}
+SCREEN_BEARING_PROP: {slide['screen_bearing_prop']}
+SCREEN CONTRACT:
+{json.dumps(slide.get('screen_contract'), ensure_ascii=False, indent=2)}
 
 REQUIRED ENTITIES: {required}
 FORBIDDEN / UNPLANNED ENTITIES: {forbidden}
