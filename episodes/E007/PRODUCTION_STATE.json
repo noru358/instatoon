@@ -56,6 +56,12 @@
       "type": "RENDER_CONTRACT",
       "status": "PASS",
       "value": "User explicitly replied '통과' to the L12.5 structured contract."
+    },
+    {
+      "decision_id": "E007_S01_NATIVE_QC_FEEDBACK_20260906_V1",
+      "type": "VISUAL_QC",
+      "status": "PARTIAL_PASS_REPAIR_REQUIRED",
+      "value": "User approved Harin identity in S01, but background extras resembled recurring main characters. Operator also detected baked raster text/signage, which violates text-free raster contract. Preserve Harin/composition; repair extras and remove readable raster text."
     }
   ],
   "frame_qc": {},
@@ -64,6 +70,6 @@
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "S01_RENDER_NEXT"
+    "current_checkpoint": "S01_TARGETED_REPAIR_AND_REVIEW"
   }
 }
