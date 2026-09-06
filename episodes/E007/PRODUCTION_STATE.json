@@ -1,0 +1,31 @@
+{
+  "state_version": "1.0",
+  "episode_id": "E007",
+  "current_stage": "L8_AWAITING_APPROVAL",
+  "voice_gate": {
+    "status": "PENDING",
+    "approved_scope": "NONE",
+    "approval_kind": "NONE",
+    "evidence": "2026-09-06 user selected candidate C for E007; L1-L7 human-seeded lunch-decision package awaits explicit review."
+  },
+  "decisions": [
+    {
+      "decision_id": "E007_TOPIC_SELECTED_20260906",
+      "type": "TOPIC",
+      "status": "SELECTED",
+      "value": "office lunch decision loop: long menu debate ends at the familiar usual place"
+    }
+  ],
+  "frame_qc": {},
+  "blockers": [
+    {
+      "blocker_id": "E007_L8_APPROVAL_20260906",
+      "stage": "L8",
+      "status": "AWAITING_USER_APPROVAL",
+      "requirement": "L1_L7_FULL_PACKAGE",
+      "required_media": [],
+      "reason": "E007 must pass the user voice gate before cast/storyboard/render contracts or any raster generation."
+    }
+  ],
+  "episode_anchor": null
+}
