@@ -384,7 +384,9 @@ Before raster generation, the visual director reviews the episode as one sequenc
 - no obvious repeated face/camera orientation is being selected simply because it is the safest generation pose;
 - expression amplitude matches each beat's function;
 - mirror/reflection beats have a plausible camera/reflection plan;
-- skin/local-color treatment remains coherent across main and supporting cast.
+- skin/local-color treatment remains coherent across main and supporting cast;
+- materially different adjacent beats do not read as the same safe portrait with only an expression swap when a story-valid visual delta exists;
+- the planned body language carries the same semantic meaning as the facial expression, rather than defaulting to a prettier/cuter reaction.
 
 This is an optimization pass, not a direction quota.
 
@@ -403,7 +405,9 @@ Before production art:
 10. adjacent beats were reviewed for meaningful visual delta / merge;
 11. every screen-bearing prop has one information owner and a physically valid screen/camera contract;
 12. context-sensitive UI/platform profile is resolved where relevant;
-13. output ratio is fixed.
+13. output ratio is fixed;
+14. high-risk hand/face/torso or prop-contact poses have a readable anatomy/occlusion plan;
+15. any information overlay has a concrete semantic job and a planned visual state change rather than decorative filler.
 
 ## 15. Visual hard fails
 
@@ -427,7 +431,11 @@ Repair/reject when:
 - character gaze, device face and camera view are physically incompatible;
 - a private device is held in an unnatural audience-presentation pose only to expose UI;
 - adjacent low-delta beats were split into repetitive slides without a defensible visual reason;
-- a contextually resolved UI profile is ignored without story reason.
+- a contextually resolved UI profile is ignored without story reason;
+- a meaningful beat change is rendered as a near-duplicate safe portrait even though a story-valid camera/body/gaze alternative exists;
+- the intended emotion is semantically replaced by a beautified/cute/cheerful or melodramatic default (for example, hollow resignation reads as delighted laughter);
+- shoulder/torso/arm/hand continuity is visibly broken or hidden by an implausible garment/occlusion solution;
+- an information overlay that owns a concrete story fact reads only as generic floating icons/data decoration and fails to communicate the declared state.
 
 ## 16. Change control
 
