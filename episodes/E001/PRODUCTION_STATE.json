@@ -1,7 +1,7 @@
 {
   "state_version": "1.0",
   "episode_id": "E001",
-  "current_stage": "VISUAL_PLAN_READY",
+  "current_stage": "RENDER_CONTRACT_READY",
   "voice_gate": {
     "status": "PASS",
     "approved_scope": "L1_L7_FULL_PACKAGE",
@@ -80,16 +80,22 @@
       "type": "VISUAL_PLAN",
       "status": "READY_FOR_USER_REVIEW",
       "value": "E001 reduced from seven to six slides by merging send + wrong-chat realization. Screen information now uses explicit over-shoulder or UI-inset delivery instead of impossible phone presentation."
+    },
+    {
+      "decision_id": "E001_REVISED_SCREEN_SEQUENCE_APPROVED_20260906",
+      "type": "USER_GATE",
+      "status": "PASS",
+      "value": "User replied 'ㅇㅋ' immediately after the revised six-slide screen-safe plan was presented; treated as explicit approval to continue."
     }
   ],
   "frame_qc": {},
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "REVISED_SCREEN_SEQUENCE_PLAN_USER_GATE",
-    "next_user_gate": "REVISED_SCREEN_SEQUENCE_APPROVAL",
+    "current_checkpoint": "REFERENCE_MEDIA_PREFLIGHT_BLOCKED",
+    "next_user_gate": "RASTER_SET_QC_PENDING_AFTER_REGENERATION",
     "per_slide_user_approval": false,
-    "note": "Do not continue raster production from the old phone-centric prototypes. Review/approve the revised six-slide screen-safe plan first; then revalidate and regenerate affected phone-centric slides under the new screen contracts."
+    "note": "Revised six-slide plan approved. Raster authorization is blocked because the active renderer currently has an attached/equivalent copy of REF_V2_D but no verified actual media input for required REF_V2_E. Fail closed until REF_V2_E is supplied."
   },
   "raster_set_gate": null,
   "episode_anchor": {
