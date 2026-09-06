@@ -130,3 +130,26 @@ Exact next action:
 2. render S01 only;
 3. stop for user manual QC;
 4. no S02 render before S01 explicit PASS.
+
+
+## 7. S01 manual QC
+
+User verdict: PASS WITH KNOWN TEXT DEFECT.
+
+Passed:
+- Harin identity;
+- overall drawing quality;
+- background-extra diversity after repair;
+- scene readability.
+
+Known deferred defect:
+- readable caption/background text was baked into the raster despite the text-free contract.
+
+Policy:
+- do not reinterpret this as contract-compliant;
+- continue only because the user explicitly chose to proceed for this manual validation run;
+- later slides should enforce no readable raster text more strongly;
+- S01 remains a visual continuity/taste anchor only unless a repository-bound artifact/attempt record is later created.
+
+Next:
+S02 only, then manual user QC.
