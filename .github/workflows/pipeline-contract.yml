@@ -6,10 +6,14 @@ on:
       - "pipeline/**"
       - "schemas/**"
       - ".github/workflows/**"
+      - "REFERENCE_SET.md"
+      - "assets/style_refs/v2_current/**"
       - "AUTOMATION_TRANSITION.md"
       - "GENERATION_PROTOCOL.md"
       - "SETUP_RENDER.md"
       - "CURRENT_STATE.md"
+      - "REFERENCE_SET.md"
+      - "assets/style_refs/v2_current/**"
   push:
     branches: ["main"]
     paths:
@@ -36,7 +40,11 @@ jobs:
             pipeline/render_guard.py \
             pipeline/render.py \
             pipeline/lettering.py \
-            pipeline/auto_finish.py
+            pipeline/auto_finish.py \
+            pipeline/reference_registry.py
+
+      - name: Current reference registry must match actual binaries
+        run: python pipeline/reference_registry.py
 
       - name: Existing render-guard regression suite
         run: python -m unittest pipeline.test_render_guard
