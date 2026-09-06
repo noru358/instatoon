@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "directory": "assets/style_refs/v2_current",
+  "assets": [
+    {
+      "asset_id": "REF_V2_D",
+      "path": "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+      "asset_class": "PROJECT_CANONICAL",
+      "role": "MAIN_CAST_IDENTITY_AND_STYLE",
+      "required_for_canonical_v2": true,
+      "sha256": "dbddf458a97c89781075e6be03ab2c393eff75b95e8856f044bd81f29310ec07",
+      "size_bytes": 343173
+    },
+    {
+      "asset_id": "REF_V2_E",
+      "path": "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg",
+      "asset_class": "PROJECT_CANONICAL",
+      "role": "SCENE_STYLE_AND_MULTIPERSON_APPLICATION",
+      "required_for_canonical_v2": true,
+      "sha256": "b49683276f94ba5621e3602d7e3d714b0f2e637b2c41fc1fd132bdf6f336b049",
+      "size_bytes": 392279
+    }
+  ]
+}
