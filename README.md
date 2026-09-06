@@ -35,7 +35,7 @@ Canonical path:
    - 신규 생성 asset/exception QC: `GENERATION_PROTOCOL.md`
 4. 최종 컷 제작 전 `assets/production/registry.json`에서 필요한 승인 asset을 resolve한다.
 5. 없는 시각 요소만 asset으로 제작·승인·등록한다.
-6. `pipeline/compositor.py`로 무문자 컷을 결정적으로 조립한다.
+6. AutoPipeline `pipeline/compositor.py`로 무문자 컷을 결정적으로 조립한다.
 7. `pipeline/lettering.py` 계열에서 텍스트를 별도 합성한다.
 
 대화 기억만으로 old S01→S02 full-frame generation workflow를 복구하지 않는다.
