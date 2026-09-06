@@ -1,6 +1,6 @@
 # GENERATION_PROTOCOL.md
 
-# GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.3
+# GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.4
 Updated: 2026-09-06
 
 ## 0. Stage order
@@ -13,7 +13,7 @@ Production order:
 4. USER VOICE GATE during learning phase;
 5. whole-episode storyboard + cast router;
 6. internally derive any required episode-local character identity digest;
-7. whole-episode visual/text plan;
+7. whole-episode visual/text plan, including sequence-level shot direction and expression-amplitude plan;
 8. text-free raster generation;
 9. editable lettering/composition;
 10. QC;
@@ -124,6 +124,24 @@ Background-extra identity isolation:
 - one-frame extras do not need a persistent identity digest unless reused later.
 
 
+### Sequence-level shot planning — anti-hardcoding invariant
+
+The visual director plans camera/framing across the episode before or during coordinated raster production.
+
+This is NOT a direction-counting rule. Never hard-code "one left-facing frame," equal left/right counts, or a fixed camera-angle recipe.
+
+For beats with multiple valid visual solutions:
+- maintain a small candidate set or equivalent internal alternatives;
+- describe alternatives by camera side/height, shot distance, body orientation, face orientation and gaze;
+- choose the option that best serves the beat while reducing unnecessary similarity to nearby/earlier frames;
+- if only one composition clearly serves the story, use it even if it repeats a direction.
+
+The pass condition is that the completed sequence does not feel directionally or compositionally biased because of renderer defaults. Viewer perception outranks token counts.
+
+A frontal camera is not automatically a neutral-direction frame; QC judges the actual apparent face orientation.
+
+Expression planning follows the same principle: role and story beat determine amplitude. "Restrained," "not grotesque," or "not melodramatic" must not silently become a global low-energy acting lock.
+
 ### One frame / one file
 
 - one generation request targets exactly one planned slide;
@@ -156,6 +174,16 @@ QC is ordered so cheap hard-contract checks run before subjective visual checks.
 - occlusion;
 - prop interaction;
 - action/composition/story clarity.
+
+**QC-3 sequence visual balance — after multiple/complete frames exist**
+- inspect the set as a viewer, not only frame-by-frame;
+- detect repeated apparent face orientation, gaze direction, body turn, camera side/height or shot distance that creates a perceptual bias without story reason;
+- do NOT use fixed left/right/front quotas as the pass criterion. Compare visual redundancy against story-valid alternatives;
+- check whether anti-exaggeration wording flattened comedy/reaction/reveal beats into uniformly small acting;
+- check story-relevant mirrors/reflections for coherent face/torso/limb geometry;
+- check supporting-character skin/local-color treatment for a different yellow/sepia cast from the main character without justification;
+- when the set fails, identify the minimum subset of frames driving the problem and rerender/repair those frames only. Do not regenerate the whole episode by default.
+
 
 High-risk anatomy cues raise scrutiny but do not forbid the pose:
 hands near face, multiple exposed fingers, overlapping hands, phone/utensil grip, chopsticks, and physical contact.
