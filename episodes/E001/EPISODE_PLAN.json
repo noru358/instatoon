@@ -104,13 +104,14 @@
       "role": "TRIGGER",
       "beat": "silence after one wrong exit action",
       "location": "same office workspace",
-      "action": "after one more routine deletion/exit gesture, worker_01's hand stops and the face shifts from neutral routine to a small frozen hesitation",
+      "action": "worker_01 has just stopped mid-cleanup gesture after a routine exit action; gaze locks on the private phone with a restrained 'something is wrong' hesitation, while body tension and framing create a clear visual delta from S01 without escalating to panic",
       "scene_facts": [
         "worker_01 identity, hair and outfit remain exactly continuous from slide 1",
         "the same private phone remains naturally oriented toward worker_01",
         "the hand has just stopped after a routine cleanup gesture",
         "expression is a subtle 'something is wrong' pause, not yet panic",
-        "no readable UI or explanatory text is baked into raster art"
+        "no readable UI or explanatory text is baked into raster art",
+        "the frame must not read as a near-copy of S01 with only a facial swap when a story-valid framing/body delta is available"
       ],
       "story_clarity": "The reader should feel a tiny break in rhythm before knowing exactly what went wrong.",
       "required_entities": [
@@ -130,7 +131,7 @@
         "dramatic panic",
         "cinematic lighting"
       ],
-      "composition": "slightly tighter than slide 1; character reaction primary while phone remains secondary and physically natural",
+      "composition": "story-valid medium or slightly tighter three-quarter/side relationship that emphasizes the stopped hand and fixed gaze; avoid reproducing S01's same safe portrait rhythm while preserving office and identity continuity",
       "visual_information_owner": "CHARACTER_REACTION",
       "visual_delta_from_previous": "routine tapping stops; neutral face becomes a small frozen hesitation",
       "screen_bearing_prop": true,
@@ -149,15 +150,16 @@
       "role": "TURN_AND_STAKES_REVEAL",
       "beat": "어 — 팀방이 사라졌고 4년치 업무 히스토리와 사진의 손실 규모를 시각적으로 인지",
       "location": "same office workspace",
-      "action": "worker_01 freezes as the missing team room is recognized; visual-only information communicates roughly four years of accumulated work history and work photos being lost",
+      "action": "worker_01 freezes as the missing team room is recognized; a separate ordered archive-loss information zone shows accumulated message/photo/file blocks visibly thinning, emptying or fading so roughly four years of history feels concrete without exposing an impossible phone screen",
       "scene_facts": [
         "worker_01 identity, hair and outfit remain exactly continuous from prior slides",
         "worker_01 says only '어' later in editable lettering; raster contains no dialogue",
         "the physical phone stays naturally oriented toward worker_01 and is not turned toward the audience",
-        "the four-year work-history/photo loss is carried by a separate editable UI/information overlay zone, not by explanatory dialogue and not by impossible physical phone geometry",
-        "the visual treatment should feel like a sudden concrete realization, not fantasy destruction or melodramatic explosion"
+        "the visual treatment should feel like a sudden concrete realization, not fantasy destruction or melodramatic explosion",
+        "the four-year work-history/photo loss is carried by a separate editable UI/information overlay zone using orderly message/photo/file archive shapes that visibly diminish or empty; generic floating decorative icons are insufficient",
+        "the overlay communicates accumulated-record loss as a state change while the physical phone remains naturally private and text-free"
       ],
-      "story_clarity": "One beat must simultaneously reveal that the wrong room was the team room and make the four-year accumulated loss feel concrete without explanatory speech.",
+      "story_clarity": "One beat must reveal that the wrong room was the team room and make the accumulated four-year work-history/photo loss concrete through an orderly archive-loss state change, not generic decorative data symbols.",
       "required_entities": [
         "worker_01",
         "smartphone",
@@ -176,9 +178,10 @@
         "phone screen on device back",
         "audience-presentation phone pose",
         "fantasy explosion",
-        "cinematic lighting"
+        "cinematic lighting",
+        "generic decorative floating data icons as the sole loss cue"
       ],
-      "composition": "reaction-led medium-close shot with deliberate negative/overlay space; character remains primary, UI/information is secondary and added in composition stage",
+      "composition": "reaction-led medium-close shot with one deliberate negative/overlay zone; distinguish this recognition beat from S02 through framing/body/gaze tension while keeping character primary and the information zone secondary",
       "visual_information_owner": "MIXED_WITH_DECLARED_PRIORITY",
       "visual_delta_from_previous": "hesitation becomes full recognition and the hidden stakes become visually concrete",
       "screen_bearing_prop": true,
@@ -197,15 +200,16 @@
       "role": "LANDING",
       "beat": "조졌네... — 허탈하게 울면서 웃음",
       "location": "same office workspace",
-      "action": "worker_01 breaks into a hollow laugh while tears gather or fall, conveying devastated amusement rather than melodramatic sobbing",
+      "action": "worker_01's shoulders and upper torso lose tension as tears gather or fall and a weak hollow laugh leaks out; the phone is lowered or rests secondarily, and the whole pose reads as devastated resignation rather than cheerful crying or a cute laugh",
       "scene_facts": [
         "worker_01 identity, hair and outfit remain exactly continuous",
-        "final performance combines tears with a hollow involuntary laugh",
-        "expression is devastated and absurdly resigned, not polished sadness and not exaggerated gag-face comedy",
         "phone is secondary or out of frame; no screen information is needed",
-        "no readable text or speech bubble is baked into raster art"
+        "no readable text or speech bubble is baked into raster art",
+        "final performance combines tears with a weak hollow involuntary laugh and visibly depleted shoulders/upper-body posture",
+        "expression is devastated and absurdly resigned; do not beautify it into cheerful/cute crying-laughter, polished sadness or exaggerated gag-face comedy",
+        "choose an anatomically simple stable pose; shoulder, upper arm, forearm and hand continuity must remain legible even if a hand approaches the face"
       ],
-      "story_clarity": "The final image should land on the human residue of 'this is so bad I can only laugh' rather than a punchline or moral.",
+      "story_clarity": "The landing is 'this is so bad I can only laugh': tears, slack body language and a weak hollow smile must read as resigned devastation, never delighted/cute laughter or melodramatic sobbing.",
       "required_entities": [
         "worker_01",
         "hollow crying-laugh expression",
@@ -221,9 +225,11 @@
         "phone screen information",
         "melodramatic sobbing",
         "gag-face distortion",
-        "cinematic lighting"
+        "cinematic lighting",
+        "cheerful or cute delighted crying-laughter",
+        "anatomically ambiguous shoulder/arm occlusion"
       ],
-      "composition": "medium close-up prioritizing face and upper-body performance; phone may be lowered or outside the important visual area",
+      "composition": "medium close-up that keeps face plus shoulders/upper torso readable; use a slight slump or head tilt and a simple anatomically stable arm pose so the shoulder→arm→hand chain remains clear; phone secondary/lowered",
       "visual_information_owner": "CHARACTER_REACTION",
       "visual_delta_from_previous": "frozen recognition releases into a hollow crying-laugh reaction",
       "screen_bearing_prop": false,
@@ -250,6 +256,6 @@
     ],
     "reflection_policy": "No story-relevant reflection required; do not introduce mirrors/screens as reflection devices.",
     "skin_color_policy": "Use the same local-color treatment as the canonical v2 style; no yellow/sepia cast drift.",
-    "notes": "S03 uses editable UI/information overlay to carry four-year loss facts; raster itself remains text-free."
+    "notes": "S02-S04 must show meaningful beat-to-beat visual delta without left/right quotas. S03 uses an orderly editable archive-loss information zone rather than generic floating icons. S04 prioritizes semantically accurate hollow resignation plus readable shoulder/arm anatomy over a cute or decorative pose."
   }
 }
