@@ -57,7 +57,7 @@
       "scene_facts": [
         "Harin is the canonical main-cast Harin identity from REF_V2_D",
         "Harin wears a neat office-casual version of her established wardrobe without changing face or hair identity",
-        "one or two background coworkers may appear only as low-detail extras and must not compete with Harin",
+        "one or two background coworkers may appear only as low-detail extras; they share the drawing language but must be visibly distinct from all recurring leads, with varied age/face/hair/body/clothing where natural",
         "the office elevator lobby is simple and lower-detail than the character",
         "no readable text, caption, signage, logo, or speech bubble is baked into the raster"
       ],
@@ -76,7 +76,8 @@
         "readable company logo",
         "romance-webtoon polish",
         "cinematic lighting",
-        "complex crowd"
+        "complex crowd",
+        "background extra that copies a recurring main-cast identity"
       ],
       "composition": "4:5 medium shot at eye level; Harin is the clear focal point with modest upper safe space reserved for a later caption."
     },
