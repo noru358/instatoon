@@ -52,45 +52,95 @@ Reference handling:
 
 Never substitute obsolete/legacy refs.
 
-## 0.5 Current semi-automatic working mode — 2026-09-05
+## 0.5 Current operating mode — MANUAL_VALIDATION (temporary, 2026-09-06)
 
-User checkpoints:
-1. L8: source, humanized dialogue and ordered story beats. Preserve existing approval; do not ask again for the same package.
-2. First usable episode frame: inspect drawing style and selected character identities before the remaining production. Prefer an actual story frame showing the relevant faces and a simple background, not a separate sheet. For E005 this is S01.
-3. Finished episode: all individual files with lettering, reading order and continuity checked.
+The long-term target remains anchor-gated automation, but the current learning phase is intentionally manual until the image API/provider adapter is connected and real cost/quality are measured.
 
-Between checkpoints the operator proceeds autonomously, reports progress, inspects every returned image and repairs material defects. Do not ask the user to approve every panel by default. Return to the user for unresolved taste/identity decisions or changes to approved content.
+User checkpoints now occur at every material stage:
+1. L1-L7 / source-dialogue-story package;
+2. cast + ordered storyboard + final dialogue intent;
+3. structured EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN + preflight;
+4. reference authority confirmation;
+5. each raster slide individually;
+6. lettering proof;
+7. final export.
 
-Reference routing:
+Do not auto-continue merely because an earlier checkpoint passed.
+Do not ask the user to re-approve an unchanged package; preserve approvals and move only to the next unresolved checkpoint.
+
+During MANUAL_VALIDATION:
+- one raster request targets exactly one planned slide;
+- each returned slide is inspected before the next slide is attempted;
+- raster art and lettering remain separate;
+- AUTO_FINISH is disabled as the default operating path;
+- chat/native generation may be used as a temporary visual-validation renderer, but it is not a reproducible machine-bound attempt unless an explicit sanctioned ingest path records the artifact and evidence.
+
+### Conversation-inferred renderer isolation rule
+
+E007 demonstrated that a long conversational image context can reinterpret a single-slide request as "complete the whole comic page".
+
+Therefore, for CONVERSATION_INFERRED/manual native generation:
+- never treat the full episode conversation as reliable request isolation;
+- if MULTI_PANEL, BAKED_TEXT, wrong-cast, or unrelated-scene hard failures repeat twice in the same context, stop retrying that path;
+- use a clean dedicated render context for the next manual experiment, or remain blocked until the explicit API renderer is available;
+- repeated hard-contract failures are renderer/context failures, not ordinary stochastic noise.
+
+### Reference routing
 
 Cast cardinality / role rule:
 - determine cast from the approved premise and beat requirements, never from a recurring-character quota;
 - a scene or episode may use 0–3 recurring leads;
 - supporting/episode-only characters are first-class cast when the story role requires them;
 - do not add Gaeun/Harin/Taemin merely to create a reaction shot or fill a three-person composition;
-- if an episode-local character appears in 2+ cuts, give that character a persistent identity digest before raster generation.
-- this routing policy is global pipeline behavior; episode packages store only the resolved cast/roles for that episode and must not redefine the global cardinality rule.
+- if an episode-local character appears in 2+ cuts, give that character a persistent identity digest before raster generation;
+- this routing policy is global pipeline behavior; episode packages store only the resolved cast/roles for that episode.
 
 - recurring lead: canonical style media + that selected lead’s actual identity reference;
-- episode-only person: canonical style media for drawing language only + the story-derived age, gender/presentation, body, hair, clothes and identity digest; do not inherit the reference cast’s identity or demographic;
+- episode-only person: canonical style media for drawing language only + the story-derived age, gender/presentation, body, hair, clothes and identity digest;
 - mixed cast: assign the role per person; never apply a whole cast sheet indiscriminately;
-- after visual acceptance: include the accepted episode image as actual secondary identity/style media in every later call, alongside canonical style media. Keep the same fixed accepted anchor rather than replacing it with each latest unreviewed output;
-- add accepted location or repair media only when that task needs it. A local repair uses the specific accepted target, not an unrelated first frame;
-- a new character appearing later gets its identity checked at its first appearance. A new standalone character sheet is not mandatory.
+- after a machine-valid visual acceptance: include the accepted episode image as actual secondary identity/style media in later calls;
+- a native/chat image that was merely liked by the user but is not persisted/bound may inform taste, but must not be falsely recorded as a machine-valid anchor.
 
-Separate what is fixed (drawing language) from what changes (age, gender, physique, clothing, location, action, expression). The style’s simplified adult proportions are a default for the current adult cast, not a universal age/body template.
+Separate what is fixed (drawing language) from what changes (age, gender, physique, clothing, location, action, expression).
 
-One frame / one file:
-- one built-in generation call requests exactly one planned slide;
-- supply only that slide’s scene/action contract, not the whole episode storyboard;
+### One frame / one file
+
+- one generation request targets exactly one planned slide;
+- supply only that slide’s scene/action contract when the interface allows explicit isolation;
 - input reference sheets remain reference-only, never output layout examples;
 - deliver separate `slide_01.png`, `slide_02.png`, etc., with one panel in each file;
 - no comic strip, grid, collage or all-in-one episode image as a substitute;
 - a combined review sheet is optional only when requested, and never replaces individual files;
-- inspect the returned image for panel count as well as style. A merged multi-panel output fails the delivery contract; do not pass it off as the requested individual renders;
-- each accepted master and final export is mapped to its slide ID, real path and hash. Filenames in a prompt do not themselves save or split files.
+- inspect panel count before style/anatomy QC. A merged multi-panel output is an immediate contract FAIL.
 
-The schema/guard enforce the declared one-panel/separate-files contract. They do not inspect returned pixels or force a tool call to follow it; actual request dispatch and output inspection remain operator responsibilities until the runner is connected.
+### QC order
+
+QC is ordered so cheap hard-contract checks run before subjective visual checks.
+
+**QC-0 contract**
+- exactly one slide artifact;
+- expected aspect / dimensions when machine-verifiable;
+- one panel, not a grid/collage/page;
+- no baked important readable dialogue/caption text;
+- expected slide/cast semantics.
+
+**QC-1 style / identity**
+- approved drawing language;
+- recurring identity / hair / clothing continuity;
+- background density and finish;
+- no generic AI-webtoon beautification drift.
+
+**QC-2 anatomy / scene**
+- face/hand integrity;
+- occlusion;
+- prop interaction;
+- action/composition/story clarity.
+
+High-risk anatomy cues raise scrutiny but do not forbid the pose:
+hands near face, multiple exposed fingers, overlapping hands, phone/utensil grip, chopsticks, and physical contact.
+
+A larger mouth during laughter or strong expression is NOT a defect by itself.
+Fail only when the mouth treatment breaks the approved drawing language, identity, or facial proportions.
 
 ## 0.6 Renderer capability / reference-injection gate
 

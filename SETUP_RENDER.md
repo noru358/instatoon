@@ -1,10 +1,18 @@
 # SETUP_RENDER.md — 렌더 실행 설정
 
-`pipeline/render.py`는 그림을 만드는 **유일한 정식 경로**다.
-참조 이미지를 실제로 요청에 싣고, 결과를 저장하고, 무엇을 보냈는지 기록한다.
-채팅 안의 내장 이미지 도구는 프로덕션에 쓰지 않는다.
+이 문서는 두 운영 단계를 구분한다.
 
-파이썬 설치나 터미널은 필요 없다. 전부 GitHub 브라우저에서 한다.
+**현재: MANUAL_VALIDATION**
+- 아직 이미지 API를 실제 운영에 연결하지 않는다.
+- ChatGPT/native 이미지는 단계별 수동 시각 검증에 임시 사용 가능하다.
+- 단, 대화형 native 결과는 repository attempt/hash에 묶이지 않은 한 재현 가능한 production artifact로 가장하지 않는다.
+- 모든 컷/레터링/최종본을 사용자가 단계별로 직접 검수한다.
+
+**장기: API_PRODUCTION**
+- `pipeline/render.py` 계열의 explicit provider adapter가 정식 raster 경로가 된다.
+- 한 요청=한 컷, 실제 참조 바이너리, 요청/결과 증거, 재시도/비용 로그를 강제한다.
+
+AUTO_FINISH 코드는 장기 구조 검증용으로 보존하지만 현재 기본 운영에서는 사용하지 않는다.
 
 ---
 
@@ -55,28 +63,21 @@ ChatGPT 구독과는 **별개 과금**이다. 실제 비용은 출력 크기·�
 | slide | 방금 본 컷 번호 |
 | verdict | PASS 또는 FAIL |
 | note | FAIL이면 이유 한 줄 |
-| finish_mode | S01 PASS 뒤 `auto_finish` 또는 `standard`. 실험 기본값은 `auto_finish` |
+| finish_mode | S01 PASS 뒤 `standard` 또는 `auto_finish`. 현재 MANUAL_VALIDATION 기본값은 `standard` |
 
-### 순서
-
-실험 기본 경로:
+### 현재 순서 — MANUAL_VALIDATION
 
 ```
-render S01 → 사람 눈으로 앵커 확인 → qc S01 PASS + auto_finish
-                                      ↓
-                         remaining raster 생성
-                                      ↓
-                       자동 vision QC / 제한 재시도
-                                      ↓
-                    deterministic lettering overlay
-                                      ↓
-                         final layout vision QC
-                                      ↓
-                              EXPORT_READY
+structured contracts + preflight → 사람 승인
+→ S01 한 장 → 사람 QC
+→ S02 한 장 → 사람 QC
+→ ... 전 컷 반복
+→ separated lettering proof → 사람 QC
+→ final export → 사람 QC
 ```
 
-기존 경로는 삭제하지 않는다. S01 QC에서 `finish_mode=standard`를 선택하거나
-AUTO_FINISH가 실패하면 기존의 컷별 render → 사람 QC → LETTERING 경로로 돌아간다.
+현재는 `finish_mode=standard`가 기본이다.
+AUTO_FINISH는 코드에서 제거하지 않지만 API_PRODUCTION 전환 전까지 기본 활성화하지 않는다.
 
 ---
 
@@ -205,3 +206,26 @@ AUTO_FINISH도 레이어 분리를 유지한다.
 
 이미 합격한 컷은 유지하고 실패 컷 이후를 수동 표준 경로로 이어간다.
 AUTO_FINISH용 별도 mutable state 파일은 만들지 않는다.
+
+
+---
+
+## 장기 API_PRODUCTION provider 전략
+
+목표는 특정 벤더를 영구 하드코딩하는 것이 아니라 provider adapter 뒤에서 교체 가능하게 만드는 것이다.
+
+초기 벤치마크 후보:
+- image render: GPT-Image-2;
+- vision QC: DeepSeek Flash Vision;
+- lettering: existing deterministic Python compositor.
+
+권장 라우팅 원칙:
+- image generation은 medium/default quality부터 시작;
+- QC 실패 또는 anatomy-high-risk 컷만 필요한 경우 고품질/재시도 승격;
+- vision QC보다 먼저 로컬 QC-0(파일/비율/패널/텍스트 계약)을 수행;
+- 첫 3개 API 완성 회차에서 실제 provider/model, attempts, first-pass rate, repair reasons, cost를 기록;
+- 예상 편당 달러 숫자를 영구 정책으로 하드코딩하지 않고 실측 후 예산 cap을 결정한다.
+
+장기 사용자 UX는 여전히:
+`콘티 승인 → 레퍼 확인 → S01 승인 → 완성본`.
+API는 사용자가 매번 조작하는 외부 툴이 아니라 내부 격리 렌더 엔진이다.

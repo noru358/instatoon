@@ -1,12 +1,12 @@
 {
   "state_version": "1.0",
   "episode_id": "E007",
-  "current_stage": "L8_AWAITING_APPROVAL",
+  "current_stage": "STORYBOARD_READY",
   "voice_gate": {
-    "status": "PENDING",
-    "approved_scope": "NONE",
-    "approval_kind": "NONE",
-    "evidence": "2026-09-06 user selected candidate C for E007; L1-L7 human-seeded lunch-decision package awaits explicit review."
+    "status": "PASS",
+    "approved_scope": "L1_L7_FULL_PACKAGE",
+    "approval_kind": "USER_EXPLICIT",
+    "evidence": "2026-09-06 user explicitly said '통과' after reviewing the E007 candidate-C L1-L7 package."
   },
   "decisions": [
     {
@@ -14,18 +14,54 @@
       "type": "TOPIC",
       "status": "SELECTED",
       "value": "office lunch decision loop: long menu debate ends at the familiar usual place"
+    },
+    {
+      "decision_id": "E007_CAST_STORYBOARD_APPROVED_20260906",
+      "type": "CAST_STORYBOARD",
+      "status": "APPROVED",
+      "value": "Gaeun + Harin + Taemin; six-slide lunch-decision storyboard recorded in episodes/E007/README.md"
+    },
+    {
+      "decision_id": "E007_REFERENCE_SET_CONFIRMED_20260906",
+      "type": "REFERENCE_AUTHORITY",
+      "status": "CONFIRMED",
+      "value": "REF_V2_D character sheet + REF_V2_E three-person indoor scene"
+    },
+    {
+      "decision_id": "E007_NATIVE_S01_TASTE_APPROVED_20260906",
+      "type": "VISUAL_TASTE",
+      "status": "APPROVED_NOT_MACHINE_BOUND",
+      "value": "chat-native S01 was visually approved but has no repository attempt/hash and is not a valid episode_anchor"
+    },
+    {
+      "decision_id": "MANUAL_VALIDATION_MODE_20260906",
+      "type": "OPERATING_MODE",
+      "status": "ACTIVE",
+      "value": "manual user review at every stage until API production renderer is connected"
     }
   ],
   "frame_qc": {},
   "blockers": [
     {
-      "blocker_id": "E007_L8_APPROVAL_20260906",
-      "stage": "L8",
-      "status": "AWAITING_USER_APPROVAL",
-      "requirement": "L1_L7_FULL_PACKAGE",
-      "required_media": [],
-      "reason": "E007 must pass the user voice gate before cast/storyboard/render contracts or any raster generation."
+      "blocker_id": "E007_STRUCTURED_CONTRACTS_20260906",
+      "stage": "STORYBOARD_READY",
+      "status": "AWAITING_BUILD_AND_USER_REVIEW",
+      "requirement": "EPISODE_PLAN_RENDER_MANIFEST_LETTERING_PLAN",
+      "required_media": [
+        "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+        "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+      ],
+      "reason": "Approved story/cast/storyboard must be serialized and manually reviewed before any further production raster."
     }
   ],
-  "episode_anchor": null
+  "episode_anchor": null,
+  "manual_validation": {
+    "status": "ACTIVE",
+    "auto_finish_allowed": false,
+    "current_checkpoint": "STRUCTURED_CONTRACT_REVIEW_NEXT",
+    "invalid_native_outputs": [
+      "multi-panel episode-page outputs after S01",
+      "raster outputs with baked Korean dialogue/labels"
+    ]
+  }
 }
