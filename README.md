@@ -50,7 +50,7 @@ Canonical path:
 | drawing language / character authoring | STYLE_LOCK.md + MASTER_PROMPTS.md + REFERENCE_SET.md |
 | generative asset/exception QC | GENERATION_PROTOCOL.md |
 | approved composition assets | assets/production/registry.json |
-| deterministic raster composition | pipeline/compositor.py |
+| deterministic raster composition | AutoPipeline pipeline/compositor.py |
 | lettering / editable text | pipeline/lettering.py |
 | current execution state | CURRENT_STATE.md |
 | historical automation notes | AUTOMATION_TRANSITION.md |
@@ -76,11 +76,12 @@ Canonical path:
 Default final raster:
 
 ```sh
-python pipeline/compositor.py \
-  --project-root . \
+# run from the AutoPipeline superproject root
+python -m pipeline.compositor \
+  --project-root instatoon \
   --registry assets/production/registry.json \
-  --scene episodes/<ID>/composition/slide_01.json \
-  --output episodes/<ID>/renders/slide_01_art.png
+  --scene instatoon/episodes/<ID>/composition/slide_01.json \
+  --output instatoon/episodes/<ID>/renders/slide_01_art.png
 ```
 
 Legacy/full-frame generative adapter:
