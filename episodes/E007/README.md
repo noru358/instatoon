@@ -1,335 +1,129 @@
 # E007 — 엘리베이터 혼자 타면
 
-Status: L10 STORYBOARD AWAITING USER APPROVAL — MANUAL_VALIDATION
+Status: L12.5 STRUCTURED CONTRACT AWAITING USER APPROVAL — MANUAL_VALIDATION
 Updated: 2026-09-06
 
 ## 0. Reset record
 
 The user explicitly reset E007 on 2026-09-06 and requested a fresh production run in actual MANUAL_VALIDATION mode.
+The previous office-lunch E007 package and approvals are historical only and do not authorize current production.
 
-The previous E007 office-lunch package, its L1-L7 approval, cast/storyboard approval, reference confirmation, and native-chat S01 taste approval are superseded for active production.
-Git history preserves them as historical evidence only.
-They do not authorize any current storyboard, render contract, raster, anchor, or lettering work.
+## 1. Source / L1-L7 — USER APPROVED
 
-Production restarted from L1 SOURCE DISCOVERY.
-
-## 1. L1 — SOURCE DISCOVERY / COLLECTION
-
-Selected human-source seed:
+Human-source seed:
 - Reddit r/tifu
-- post: "TIFU forgetting that elevators aren’t private"
-- URL: https://www.reddit.com/r/tifu/comments/1ll61ou/tifu_forgetting_that_elevators_arent_private/
-- provenance class: HUMAN_SEEDED_INSPIRATION
+- "TIFU forgetting that elevators aren’t private"
+- https://www.reddit.com/r/tifu/comments/1ll61ou/tifu_forgetting_that_elevators_arent_private/
+- provenance: HUMAN_SEEDED_INSPIRATION
 
-Source facts worth preserving:
-- the poster behaves very restrained/professional at work;
-- when alone in the office elevator, he repeatedly acts goofy: dancing, posing, talking to himself;
-- he assumes the elevator is private enough for this;
-- a security clerk later echoes one of his private bits and gives him finger guns;
-- the poster realizes the elevator has cameras and security has likely seen the behavior.
+Approved engine:
+professional office persona → goofy private elevator ritual → security mirrors the private phrase → CCTV realization.
 
-Why this seed:
-the comedy is carried by visible behavior and a reveal, not exposition.
+Approved adaptation boundary:
+- Korean-localize setting/dialogue;
+- no named-company fabrication;
+- no punishment, viral exposure, coworkers watching footage, or stronger humiliation.
 
-## 2. L2 — HUMAN-INTEREST GATE
-
-PASS.
-
-- sceneability: HIGH — office, elevator, lobby/security desk;
-- state change: professional facade → private silliness → exposure;
-- specificity: mirror poses, self-talk, finger guns, CCTV;
-- emotion: private freedom → instant social horror;
-- recognition/novelty: familiar elevator-alone behavior plus an unusually clean reveal;
-- landing potential: the guard's echoed phrase / finger guns makes the realization land without a moral.
-
-No stronger humiliation, punishment, firing, viral-video consequence, or public shaming may be invented.
-
-## 3. L3 — SOURCE NORMALIZATION
-
-### SOURCE FACTS
-1. protagonist is professionally restrained outside the elevator;
-2. alone in the elevator, he repeatedly does goofy private behavior;
-3. one day a security employee says/does something that mirrors that private behavior;
-4. protagonist realizes CCTV/security could see it.
-
-### SOURCE VOICE / HUMAN TEXTURE
-Useful texture from the post:
-- contrast between corporate/professional language and stupid private behavior;
-- exaggerated self-hype while looking in the mirror;
-- guard casually mirroring the bit;
-- protagonist's immediate flushed, frozen reaction.
-
-### ADAPTATION BOUNDARY
-Allowed:
-- Korean-localize the office/lobby/elevator;
-- compress the repeated two-year history into a short visual montage or caption;
-- replace English/music-specific jokes with natural Korean self-talk;
-- simplify the guard exchange.
-
-Not allowed:
-- invent a named Korean company;
-- imply the source literally happened in Korea;
-- add disciplinary consequences or coworkers watching recordings.
-
-## 4. L4 — STORY SHAPE
-
-FORMAT: STORY_ARC
-SHAPE: PRIVATE_RITUAL → REPETITION → ACCIDENTAL_EXPOSURE → SILENT_REALIZATION
-
-Core engine:
-**outside elevator = composed office worker / inside elevator alone = private idiot / security mirrors him / CCTV realization.**
-
-Landing type:
-DEADPAN + HUMAN_RESIDUE.
-
-## 5. L5 — STORY ROOM
-
-One-sentence premise:
-회사에서는 늘 각 잡고 다니는 직장인이 혼자 탄 엘리베이터에서만 이상한 포즈와 혼잣말을 해왔는데, 어느 날 경비 직원이 그 멘트를 그대로 따라 하면서 CCTV의 존재를 깨닫는다.
-
-Emotional engine:
-private release → harmless confidence → exposure panic.
-
-Specific details to preserve:
-- elevator mirror;
-- solo pose / tiny dance or exaggerated shoulder flex;
-- one repeatable self-hype phrase;
-- professional reset when doors open;
-- security desk;
-- guard echoes phrase;
-- finger guns;
-- final look toward CCTV.
-
-Ordered beats:
-1. Outside: protagonist is stiff, polite, professional.
-2. Elevator doors close and he is alone; persona instantly drops.
-3. He does a dumb mirror pose / mini-dance and hypes himself up.
-4. Doors open; he immediately returns to professional mode and walks out normally.
-5. Later in the lobby, security casually echoes the exact private phrase.
-6. Protagonist freezes; guard covers with "아, 저희끼리 한 말입니다" and gives finger guns.
-7. Protagonist slowly looks up at the elevator CCTV. End.
-
-## 6. L6 — DIALOGUE DRAFT
-
-Register: short spoken lines + minimal captions.
-
+Approved text:
 - caption: "회사에선 나름 멀쩡한 척함."
-- private phrase: "오~ 오늘 좀 나오는데?"
-- guard echo: "오~ 오늘 좀 나오는데~"
-- protagonist: "…네?"
-- guard cover: "아, 아닙니다. 저희끼리 한 말이에요."
-- final thought: "설마."
+- Harin: "오~ / 오늘 좀 나오는데?"
+- security: "오~ 오늘 좀 나오는데~"
+- Harin: "…네?"
+- final reaction: "!?"
 
-No explanatory ending caption.
+L8 evidence:
+2026-09-06 user replied "ㅇㅋ" after reviewing the full fresh L1-L7 package.
 
-## 7. L7 — DIALOGUE HUMANIZATION
+## 2. L10 cast / storyboard — USER APPROVED WITH EDITS
 
-Applied:
-- removed polished explanatory sentences from spoken dialogue;
-- avoided a narrator explaining the CCTV reveal;
-- kept the repeated phrase mundane enough to plausibly leak from a private habit;
-- guard does not deliver a crafted punchline;
-- ending is the protagonist looking at CCTV, not a moral or summary;
-- no fake conflict, punishment, or viral consequence.
+Main protagonist:
+- Harin.
 
-## 8. L8 — USER VOICE GATE
+Episode-only supporting character:
+- security_01: middle-aged Korean building security employee; dry/calm, not mocking.
 
-Status: PASS — USER EXPLICIT.
-Evidence:
-- 2026-09-06 user replied "ㅇㅋ" after reviewing the complete fresh E007 L1-L7 package.
+User edits incorporated:
+- replace the original episode-only male protagonist with Harin;
+- delete the awkward security line "아, 아닙니다. 저희끼리 한 말이에요.";
+- after Harin says "…네?", security_01 responds only with a quick finger gesture;
+- replace final "설마." with "!?"
 
-Approved scope:
-- source/provenance;
-- adaptation boundary;
-- story shape;
-- ordered beats;
-- dialogue/humanization candidate.
+Seven-slide sequence:
+1. S01 public persona — Harin appears composed at work.
+2. S02 switch — elevator doors close; she visibly relaxes.
+3. S03 private ritual — silly mirror pose / small dance; "오~ 오늘 좀 나오는데?"
+4. S04 instant reset — doors open; Harin returns to professional mode.
+5. S05 phrase leaks — security_01 casually repeats "오~ 오늘 좀 나오는데~".
+6. S06 suspicion — Harin "…네?"; security_01 gives a silent quick finger gesture.
+7. S07 landing — Harin looks up at CCTV; reaction text "!?"
 
-This approval authorizes L10 storyboard/cast routing.
-It does not authorize raster production.
+## 3. L11/L12 visual plan — USER APPROVED
 
-## 9. L10 — STORYBOARD + CAST ROUTER
+- Harin identity remains canonical; face/hair/drawing grammar must not be redesigned.
+- office-casual staging may adapt clothing only within the established character language.
+- security_01 is episode-local and visually plain, non-threatening, non-caricatured.
+- backgrounds: simple office elevator lobby, elevator interior, building lobby/security desk.
+- S03 comedy is body/shoulder/expression driven; avoid complex finger anatomy.
+- S06 uses one simplified hand gesture; hand QC risk HIGH.
+- S07 uses understated frozen realization, not screaming.
+- raster remains text-free; lettering is separate.
 
-Status: AWAITING USER APPROVAL.
+## 4. Reference authority — CONFIRMED 2026-09-06
 
-### Cast decision
+The user supplied two images in the active conversation.
 
-#### Episode-only protagonist
-- male office worker, late 20s to early 30s;
-- ordinary Korean office styling;
-- neat, restrained public presentation;
-- visibly sillier only when alone;
-- NOT Taemin.
+They exactly match the repository canonical binaries by dimensions and SHA-256:
 
-Reason:
-The story needs an anonymous office-worker identity more than a recurring-main identity.
-Using Taemin merely because the source protagonist is male would violate story-first casting.
+### REF_V2_D — main cast / Harin identity authority
+- repo path: assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg
+- dimensions: 1448 × 1086
+- SHA-256: dbddf458a97c89781075e6be03ab2c393eff75b95e8856f044bd81f29310ec07
+- role: Harin face/hair/body/line/color/character-identity authority.
 
-#### Episode-only security employee
-- male, approximately 40s–50s;
-- calm, dry, non-mocking demeanor;
-- ordinary building security uniform;
-- the comedy comes from casual familiarity, not bullying.
+### REF_V2_E — scene/style application authority
+- repo path: assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg
+- dimensions: 1536 × 864
+- SHA-256: b49683276f94ba5621e3602d7e3d714b0f2e637b2c41fc1fd132bdf6f336b049
+- role: scene-level drawing language, indoor background density, character/environment integration.
 
-#### Background extras
-- optional generic coworkers in S01 only;
-- no continuity requirement unless visually reused.
+Production requirement:
+both references are BINARY_REQUIRED and must be supplied as actual image media to the renderer for every canonical raster call.
+The user-uploaded active-conversation copies are equivalent to the repo binaries.
 
-### Seven-slide storyboard
+## 5. L12.5 structured contract — BUILT, USER REVIEW PENDING
 
-#### S01 — public persona
-Location:
-office hallway / elevator lobby.
+Created:
+- episodes/E007/EPISODE_PLAN.json
+- episodes/E007/RENDER_MANIFEST.json
+- episodes/E007/LETTERING_PLAN.json
 
-Visual:
-protagonist with one or two coworkers nearby, posture straight, polite neutral face, bag or office item kept minimal.
-He looks completely ordinary and composed.
+Contract:
+- 7 slides;
+- 4:5, 1080×1350;
+- exactly one panel per image;
+- separate files;
+- raster text-free;
+- Harin main cast;
+- security_01 episode-local continuity on S05-S06;
+- REF_V2_D + REF_V2_E exact canonical media required;
+- unexpected concept policy FAIL_CLOSED;
+- conversation-inferred rendering is sequential and every frame is user-gated in MANUAL_VALIDATION.
 
-Text role:
-caption only:
-"회사에선 나름 멀쩡한 척함."
+Lettering plan locks only the already-approved copy:
+- S01 caption;
+- S03 Harin line;
+- S05 security line;
+- S06 Harin "…네?";
+- S07 "!?"
+with S02/S04 textless.
 
-Purpose:
-establish public baseline.
+## 6. Current manual checkpoint
 
-State delta:
-none yet; baseline.
+STOP before raster.
 
-#### S02 — doors close / switch flips
-Location:
-inside office elevator.
-
-Visual:
-doors just closed; protagonist confirms he is alone.
-Shoulders drop, face loosens, posture immediately changes.
-No big dance yet.
-
-Text:
-none.
-
-Purpose:
-make the public/private switch visually legible before the gag.
-
-State delta:
-professional persona → private persona.
-
-#### S03 — private ritual
-Location:
-same elevator, mirror visible.
-
-Visual:
-protagonist looks at himself in the mirror, does an intentionally dumb shoulder-flex / small dance / model-like pose.
-Expression is self-satisfied and unserious, not grotesque.
-
-Dialogue:
-"오~"
-"오늘 좀 나오는데?"
-
-Purpose:
-concretize the private habit.
-
-State delta:
-private persona → specific repeatable ritual.
-
-QC note:
-avoid complicated hand choreography.
-Prefer elbows/shoulders/body pose over exposed multi-finger gestures.
-
-#### S04 — instant reset
-Location:
-elevator doors opening onto office floor.
-
-Visual:
-doors open and protagonist is already back to stiff professional posture and neutral face while stepping out.
-The contrast with S03 is the joke.
-
-Text:
-none.
-
-Purpose:
-show that this is a practiced secret routine.
-
-State delta:
-private persona → public mask restored.
-
-#### S05 — phrase leaks
-Location:
-building lobby / security desk, later.
-
-Visual:
-protagonist walks past.
-Security employee recognizes him and casually says the exact private phrase.
-The guard is relaxed, not sinister.
-
-Security:
-"오~ 오늘 좀 나오는데~"
-
-Protagonist:
-abrupt stop / slight turn.
-
-Purpose:
-private information enters public space.
-
-State delta:
-protagonist's supposedly private ritual is echoed by another person.
-
-#### S06 — suspicious cover
-Location:
-same lobby.
-
-Visual:
-protagonist frozen and confused.
-Security employee gives a casual finger-gun gesture while trying to brush it off.
-
-Protagonist:
-"…네?"
-
-Security:
-"아, 아닙니다."
-"저희끼리 한 말이에요."
-
-Purpose:
-make the coincidence less plausible without explicitly explaining CCTV.
-
-State delta:
-surprise → suspicion.
-
-QC note:
-finger guns are an anatomy-risk gesture.
-If rendered, hand QC is HIGH.
-A simplified single-hand finger-gun silhouette is preferred over two complex hands.
-
-#### S07 — realization / landing
-Location:
-near elevator / lobby.
-
-Visual:
-close or medium-close on protagonist slowly looking upward.
-A small ceiling-mounted elevator/lobby CCTV camera is clearly visible in his eyeline.
-Face: flushed/frozen realization, understated rather than screaming.
-
-Inner text:
-"설마."
-
-Purpose:
-silent reveal.
-
-State delta:
-suspicion → mechanism understood.
-
-Ending rule:
-no explanatory caption after this.
-No security-room cutaway.
-No montage of guards laughing.
-No punishment or public humiliation.
-
-### Camera rhythm
-
-S01 medium → S02 medium → S03 medium/full-body enough for pose → S04 medium → S05 two-shot medium → S06 tighter two-shot → S07 medium-close/upward eyeline.
-
-This keeps the episode readable without overusing identical standing shots.
-
-### Current manual checkpoint
-
-STOP here.
-Do not proceed to L11/L12/L12.5 or image generation until the user approves or edits this cast/storyboard package.
+User must review/approve the structured contract.
+After approval:
+1. mark production stage RENDER_CONTRACT_READY;
+2. perform final media-binding preflight;
+3. render S01 only with both actual reference images;
+4. user manually reviews S01 before any S02 call.
