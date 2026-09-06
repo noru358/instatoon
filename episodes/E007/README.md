@@ -1,6 +1,6 @@
 # E007 — 엘리베이터 혼자 타면
 
-Status: L12.5 STRUCTURED CONTRACT AWAITING USER APPROVAL — MANUAL_VALIDATION
+Status: RENDER CONTRACT READY — S01 NEXT / MANUAL_VALIDATION
 Updated: 2026-09-06
 
 ## 0. Reset record
@@ -117,13 +117,16 @@ Lettering plan locks only the already-approved copy:
 - S07 "!?"
 with S02/S04 textless.
 
-## 6. Current manual checkpoint
+## 6. L12.5 approval and next manual checkpoint
 
-STOP before raster.
+L12.5 structured contract: USER APPROVED 2026-09-06.
+Evidence: user replied "통과".
 
-User must review/approve the structured contract.
-After approval:
-1. mark production stage RENDER_CONTRACT_READY;
-2. perform final media-binding preflight;
-3. render S01 only with both actual reference images;
-4. user manually reviews S01 before any S02 call.
+Current production stage:
+RENDER_CONTRACT_READY.
+
+Exact next action:
+1. final media-binding preflight using exact REF_V2_D + REF_V2_E binaries;
+2. render S01 only;
+3. stop for user manual QC;
+4. no S02 render before S01 explicit PASS.
