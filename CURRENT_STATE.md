@@ -7,47 +7,100 @@ Active episode: episodes/E007/README.md
 
 ## 현재 위치
 
-큰 흐름: 수집/소재 확정 → L1-L7 재구성 → 사용자 보이스 게이트 → 캐스팅/콘티 → 렌더 계약 → S01 앵커 → 나머지 컷 → 분리 레터링 → 완성.
+큰 흐름:
+수집/소재 확정 → L1-L7 → 캐스팅/콘티 → 구조화 계약 → 레퍼/프리플라이트 → 개별 래스터 → 분리 레터링 → 최종 QC → 완성.
 
-E007 신규 공정을 시작했다.
-현재 PRODUCTION_STATE = L8_AWAITING_APPROVAL.
+E007:
+- L1-L7: USER APPROVED.
+- cast: Gaeun / Harin / Taemin, USER APPROVED for this episode.
+- six-slide storyboard/dialogue intent: USER APPROVED.
+- reference authority: REF_V2_D + REF_V2_E, USER CONFIRMED.
+- machine state: STORYBOARD_READY.
+- EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN: not built yet.
+- machine-valid episode anchor: none.
 
-선택 소재:
-- 직장 점심 메뉴를 한참 고민함;
-- 모두 "아무거나"라고 하지만 실제 제안은 계속 탈락;
-- 결국 맨날 가던 익숙한 곳으로 감.
+A chat-native S01 was visually approved, but it has no repository render attempt/hash.
+It is taste evidence only and must not be falsely recorded as a machine-bound anchor.
 
-Human-seeded primary source:
-- Reddit r/SideProject — "The 'where do you want to eat / I don't know where do YOU want to eat' conversation ends here"
-- 실제 글의 핵심 패턴은 긴 선택 대화 끝에 결국 늘 가던 곳으로 돌아가는 것.
-- E007은 이를 한국 직장 점심 맥락으로 각색하되 원문을 한국 회사의 실제 사건인 것처럼 위장하지 않는다.
+Several subsequent native-chat attempts are INVALID:
+- six slides merged into one page;
+- baked Korean text / labels;
+- small-panel anatomy degradation, including face/hand defects.
 
-E007 L1-L7 review package:
-- episodes/E007/README.md
+These failed outputs are not references or repair bases.
 
-## 반자동 실험 운영
+## 현재 운영 모드 — MANUAL_VALIDATION
 
-- 콘티/L8 승인 전 이미지 생성 금지.
-- 승인 후 cast → storyboard → EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN 순.
-- 사용자가 레퍼 이미지를 pre-render 단계에서 다시 제공.
-- S01은 ChatGPT/native direct generation으로 한 장만 생성해 사람 앵커 승인.
-- S01 PASS 후 후속 컷 생성/QC/분리 레터링/완성까지 내부 진행하는 반자동 흐름을 시험.
-- 이미지와 레터링은 끝까지 분리 유지.
-- AUTO_FINISH runner의 외부 이미지 provider 경로를 이번 채팅 내 반자동 이미지 생성에 억지로 사용하지 않는다.
+Temporary policy until the image API/provider adapter is connected and measured:
 
-## 전역 시각 기준
+1. every stage is shown to the user and explicitly reviewed;
+2. no auto-finish after S01;
+3. each raster slide is handled one at a time;
+4. raster and lettering remain separate;
+5. lettering proof is manually reviewed;
+6. final export is manually reviewed.
 
-- INSTATOON_STYLE_v2.0.
-- approved reference binaries outrank generalized prose.
-- one panel = one image file.
-- feed/carousel master 4:5, 1080×1350 unless explicitly changed.
-- raster art is text-free; lettering is added later.
+This phase is for validating the production specification while staying within the ChatGPT subscription where possible.
+It is intentionally more manual than the long-term target.
 
-## 정확한 다음 행동
+The GitHub QC workflow therefore defaults to STANDARD, not AUTO_FINISH.
+AUTO_FINISH code is preserved as future infrastructure but is not the default operating mode.
 
-1. user reviews E007 L1-L7 package;
-2. on PASS, resolve smallest story-sufficient cast;
-3. build ordered 5–6 slide storyboard and final dialogue;
-4. build EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN;
-5. receive the user's reference images;
-6. generate S01 only and request anchor approval.
+## Renderer diagnosis from E007
+
+The user's reference upload was not the problem.
+The failure came from using a long-context conversational native image interface as if it were an isolated batch renderer.
+
+Observed repeated failure:
+- request intended for one slide was reinterpreted as "complete the whole six-panel comic";
+- single-panel / text-free constraints were overridden by global episode context.
+
+Therefore:
+- do not treat repeated MULTI_PANEL / BAKED_TEXT as ordinary stochastic image noise;
+- after two repeated hard-contract failures in the same conversation-inferred path, stop retrying that path;
+- use a clean dedicated manual render context as a temporary workaround;
+- long-term fix is an explicit provider adapter with one request = one slide.
+
+## Long-term target — API_PRODUCTION
+
+User-facing checkpoints should eventually shrink again to:
+storyboard approval → reference confirmation → S01 approval → finished episode.
+
+Internal target:
+- isolated image API request per slide;
+- explicit compiled payload;
+- actual canonical refs + approved S01 anchor supplied as binaries;
+- image-provider adapter; GPT-Image-2 is the initial benchmark candidate, not a hardcoded permanent choice;
+- local deterministic QC-0 for file count / ratio / single-panel / no baked semantic text where detectable;
+- low-cost vision QC adapter; DeepSeek Flash Vision is the initial benchmark candidate;
+- QC-1 style/identity, QC-2 anatomy/scene;
+- deterministic Python lettering;
+- cost, attempt count, first-pass rate, repair reason, and provider/model logged per slide.
+
+Do not hardcode estimated dollar cost as a permanent policy before measuring real episodes.
+Use the first three API-produced episodes to establish actual cost and first-pass-rate baselines.
+
+## Visual QC clarification
+
+A larger open mouth while laughing is not itself a defect.
+Fail only when mouth treatment breaks the approved drawing language, identity, or facial proportions.
+
+Anatomy high-risk cues include:
+- hands near face;
+- multiple exposed fingers;
+- crossed/overlapping hands;
+- phone or utensil grip;
+- chopsticks;
+- physical contact / occlusion.
+
+These cues raise QC strictness; they do not prohibit the pose.
+
+## 정확한 다음 행동 — next session
+
+1. read CURRENT_STATE + episodes/E007/README.md + PRODUCTION_STATE.json;
+2. serialize the already-approved E007 package into EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN;
+3. run preflight / consistency checks;
+4. show those structured contracts and preflight result to the user for manual approval;
+5. only then resume one-slide-at-a-time raster validation.
+
+Do not re-ask approval for L1-L7 or the approved six-slide storyboard unless the content materially changes.
