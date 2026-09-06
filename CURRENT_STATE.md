@@ -2,76 +2,67 @@
 
 Updated: 2026-09-07
 Repository: noru358/instatoon
-Operating mode: MANUAL_VALIDATION
 Architecture: ASSET_COMPOSITION_v1
+Operating mode: CALIBRATION
 
-## Production state — architecture migration active
+## Active production
 
-Execution authorization: **ASSET_SYSTEM_CALIBRATION_ONLY**.
+Active episode: **NONE**
+Next publishable episode: **E001 after renderer pilot**
 
-The former E001 full-frame generative production run is **SUSPENDED / LEGACY EVIDENCE**.
-Do not resume S02-S04 through the old per-slide full-frame generation path.
-No legacy E001 raster is promoted into the new production asset registry automatically.
+The old full-frame E001 experiment is retired from the working tree. Git history is the archive.
 
-The next publishable episode number remains E001 after the asset/composition pilot proves the new renderer architecture. Episode content may be replaced; durable structural lessons remain.
+## Final-render boundary
 
-## Canonical final-visual authority
+`story → storyboard → asset resolve → ASSET_GAP authoring → approved registry → deterministic composition → editable lettering/UI → QC/export`
 
-Final visual path:
+Default final renderer: AutoPipeline `pipeline/compositor.py`.
 
-`story/storyboard → asset resolve → asset-gap authoring → APPROVED registry → deterministic compositor → editable lettering/UI → QC/export`
+Full-frame generation is exception-only. Instatoon `pipeline/render.py` remains only for a declared exceptional shot and fails closed without `--exception-lane`.
 
-Primary authority:
-- `ASSET_COMPOSITION_PROTOCOL.md`;
-- `assets/production/registry.json`;
-- `schemas/asset_registry.schema.json`;
-- AutoPipeline `schemas/composition_scene.schema.json`;
-- AutoPipeline `pipeline/compositor.py`.
+## Pilot policy
 
-Existing authorities remain active in narrower roles:
-- `STYLE_LOCK.md`, `MASTER_PROMPTS.md`, `REFERENCE_SET.md`: asset-authoring/style/identity authority;
-- `GENERATION_PROTOCOL.md`: generative asset/exception QC, reference binding, quarantine and repair rules;
-- `VISUAL_GRAMMAR.md`: storyboard, shot semantics and composition planning;
-- `pipeline/lettering.py`: deterministic editable text layer.
+Architecture calibration uses **exactly 4 slides**.
 
-## Renderer ownership
+This is a TEST FIXTURE, not an Instatoon content rule.
 
-Default final renderer: **DETERMINISTIC_COMPOSITOR**.
+Why fixed:
+- enough frames to test asset reuse, sequence variation and dependency invalidation;
+- small enough that new asset demand does not swamp the renderer test;
+- keeps frame count from becoming another moving variable while the compositor is being validated.
 
-`pipeline/render.py` is no longer a normal final-frame renderer. It is retained only for an explicitly declared generative exception/legacy experiment and must not be used to continue the suspended E001 path.
+After the pilot passes, production slide count is story-driven under VISUAL_GRAMMAR:
+- no four-cut requirement;
+- no fixed count inherited from the pilot;
+- do not pad or cut a story merely to match the calibration fixture.
 
-A missing pose/expression/prop/background is an `ASSET_GAP`, not permission to regenerate the whole frame.
+## Current approved visual inputs
 
-## Registry state
+Authoring/style authority:
+- `assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg`
+- `assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg`
+- optional supplemental `assets/style_refs/v2_current/sub1.png`
 
-`assets/production/registry.json` currently contains **0 approved production assets**.
+Production registry:
+- `assets/production/registry.json`
+- current approved composition assets: **0**
 
-The existing style/cast/scene references are authoring authorities, not automatically composition-ready assets. They may be used to create the starter asset library, but must pass the new asset registration/approval contract before final composition.
+Reference images are authoring authority, not automatically composition-ready assets.
 
-## Current blockers
+## Next action
 
-1. No composition-ready approved asset starter pack exists yet.
-2. Existing recurring-character references are not yet normalized into production pose/view assets.
-3. No four-slide pilot scene contracts exist for the compositor.
-4. The new compositor requires Pillow in the execution environment.
+Build one fixed four-slide compositor pilot.
 
-These are calibration blockers, not reasons to fall back to full-frame generation.
+1. Choose a minimal pilot story that exercises at least:
+   - one repeated character;
+   - two meaningfully different framings/poses;
+   - one reusable background/local plate;
+   - one prop or interaction.
+2. Resolve required assets against the registry.
+3. Author only ASSET_GAP items and user-QC them.
+4. Register approved bytes with hash/dimensions/scope.
+5. Compose exactly four separate 4:5 art frames with the shared AutoPipeline compositor.
+6. Apply lettering separately.
+7. Review whether identity, style, framing variety and story readability survive without full-frame generation.
 
-## Exact next action
-
-Build the minimum starter asset pack for one four-slide pilot, using the already-approved drawing style as authoring authority.
-
-Target pack:
-- one recurring character: a small set of story-useful view/pose/expression combinations;
-- one supporting/extra character asset if the pilot needs one;
-- 1–2 reusable background plates or local background components;
-- only the props/FX needed by the pilot.
-
-For every new asset:
-1. generate/import the asset only;
-2. user/QC approve it;
-3. materialize exact bytes under `assets/production/`;
-4. register SHA-256 + dimensions + scope;
-5. compose a slide from registry IDs.
-
-Pilot success criterion: four separate 4:5 frames assembled without full-frame generation except an explicitly approved exception, followed by deterministic lettering.
+Pilot PASS authorizes fresh E001 preproduction. Pilot content itself does not become E001 unless explicitly chosen.
