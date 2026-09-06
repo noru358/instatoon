@@ -38,18 +38,36 @@
       "type": "RENDER_CONTEXT",
       "status": "BLOCKED",
       "value": "After S01 approval, two consecutive S02 attempts were reinterpreted by the conversation-inferred native renderer as multi-panel/full-episode comic outputs. Both violate one-frame/one-file and slide isolation. Per renderer isolation policy, stop retrying this conversation path and resume S02 in a clean dedicated render context."
+    },
+    {
+      "decision_id": "E001_POST_BLOCK_S02_S04_SET_REJECTED_20260907",
+      "type": "RASTER_SET_QC",
+      "status": "FAIL",
+      "value": "User rejected the post-block S02-S04 candidate set. Set-level issues: repeated safe portrait/directional-composition bias; weak S02→S03 visual delta; S03 generic/abstract loss information; S04 right-side shoulder/torso/arm anatomy failure; S04 bright/cute crying-laugh instead of hollow resigned crying-laugh."
+    },
+    {
+      "decision_id": "E001_RENDER_CONTEXT_STICKY_UNSAFE_20260907",
+      "type": "RENDER_CONTEXT",
+      "status": "BLOCKED",
+      "value": "Once the conversation render context crossed the repeated hard-isolation-failure threshold, later superficially valid single-panel outputs did not rehabilitate that context. Post-threshold S02-S04 outputs are quarantined and production must resume from S02 in a clean render context."
     }
   ],
   "frame_qc": {},
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "S01_VISUAL_PASS_CONTEXT_LOCAL__S02_BLOCKED_BY_RENDER_CONTEXT",
-    "next_user_gate": "RASTER_SET_QC_PENDING_AFTER_S02_S04",
+    "current_checkpoint": "S01_VISUAL_PASS_CONTEXT_LOCAL__POST_BLOCK_SET_REJECTED__CLEAN_CONTEXT_REQUIRED",
+    "next_user_gate": "RASTER_SET_QC_PENDING_AFTER_CLEAN_S02_S04",
     "per_slide_user_approval": false,
-    "note": "S01 is user-approved visually in the active conversation. S02 has two consecutive hard isolation failures (multi-panel/full-episode reinterpretation). Do not retry S02 in this conversation context. Resume in a clean dedicated render session with S01 + D/E/sub1 as actual media; then produce S02-S04 sequentially with internal QC."
+    "note": "Preserve the user-approved S01 visual direction. Do not regenerate S01. Quarantine all old-context S02-S04 candidates. In a clean render context, supply S01 + D/E/sub1 as actual media and render S02-S04 sequentially with frame QC plus final sequence QC before returning to the user."
   },
-  "raster_set_gate": null,
+  "raster_set_gate": {
+    "status": "FAIL",
+    "approval_kind": "USER_EXPLICIT",
+    "evidence": "2026-09-07: user identified set-level directional/compositional bias, S04 right-side body anatomy failure, and S04 expression mismatch; follow-up QC also identified weak S02→S03 visual delta and overly generic S03 loss visualization.",
+    "approved_at": null,
+    "artifacts": []
+  },
   "episode_anchor": {
     "status": "VISUAL_TASTE_ANCHOR_ONLY",
     "slide_id": "E001_S01",
@@ -60,7 +78,7 @@
     {
       "blocker_id": "NATIVE_CONVERSATION_RENDER_ISOLATION",
       "status": "OPEN",
-      "reason": "Two consecutive S02 native-chat attempts produced multi-panel/full-episode outputs instead of the requested single slide. Clean dedicated render context required before S02."
+      "reason": "Old conversation render context is sticky-unsafe after repeated single-slide isolation failures. Later outputs from that context are quarantined. Clean dedicated render context required; resume at S02 with approved S01 + required style media."
     }
   ]
 }
