@@ -68,10 +68,28 @@
       "type": "VISUAL_QC",
       "status": "USER_PASS_WITH_KNOWN_CONTRACT_DEFECT",
       "value": "User explicitly passed S01 visual quality and chose to proceed despite baked raster text. Harin identity/style/background-extra diversity passed; baked caption/background text remains a known deferred raster-text defect and is not reclassified as compliant."
+    },
+    {
+      "decision_id": "E007_S02_NATIVE_CONTEXT_FAILURE_20260906",
+      "type": "RENDER_FAILURE",
+      "status": "HARD_STOP_CONTEXT_CONTAMINATION",
+      "value": "Two consecutive native/chat attempts intended for S02 reproduced the S01 office-group scene instead of the required elevator-alone scene. Both are INVALID WRONG_SCENE outputs and must not be used as anchors or repair bases."
     }
   ],
   "frame_qc": {},
-  "blockers": [],
+  "blockers": [
+    {
+      "blocker_id": "E007_S02_CLEAN_RENDER_CONTEXT_REQUIRED_20260906",
+      "stage": "L13",
+      "status": "BLOCKED_CURRENT_CONTEXT",
+      "requirement": "CLEAN_DEDICATED_RENDER_CONTEXT_OR_EXPLICIT_ISOLATED_RENDERER",
+      "required_media": [
+        "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+        "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+      ],
+      "reason": "Repeated WRONG_SCENE hard-contract failure twice in the same conversation-inferred render path. Stop retrying this context and resume S02 in a clean dedicated render context."
+    }
+  ],
   "episode_anchor": {
     "status": "VISUAL_TASTE_ANCHOR_ONLY",
     "slide_id": "E007_S01",
@@ -80,6 +98,6 @@
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "S02_RENDER_NEXT"
+    "current_checkpoint": "S02_CLEAN_CONTEXT_RETRY_REQUIRED"
   }
 }
