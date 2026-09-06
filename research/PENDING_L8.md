@@ -99,7 +99,7 @@ No moral, no clever comeback, no invented coworker response.
 
 ### Ordered beats
 
-User revision applied: previous B3/B4 are merged. Current story has **4 beats**, not 5.
+User revision applied: previous B3/B4 are merged. Current story has **4 effective beats**. Preserve audit labels as B1 → B2 → B3+4 (merged) → B5.
 
 **B1 — BASELINE / HOOK**
 - Action: clearing accumulated advertisement chats.
@@ -111,14 +111,14 @@ User revision applied: previous B3/B4 are merged. Current story has **4 beats**,
 - State delta: a routine action has included the wrong target.
 - Reader question: “뭐 잘못 눌렀나?”
 
-**B3 — TURN + STAKES REVEAL (MERGED)**
+**B3+4 — TURN + STAKES REVEAL (MERGED)**
 - Action: the team room is no longer where expected.
 - Reaction text: “어”
 - Visual reveal: roughly four years of work history and work photos are shown as having vanished/lost with the exited room. This information is carried by image/UI staging, not explanatory dialogue.
 - State delta: cleanup becomes mistake recognition and the loss acquires concrete weight in the same beat.
 - Reader question: “백업은 했겠지?”
 
-**B4 — LANDING**
+**B5 — LANDING**
 - Realization: there is no backup.
 - Spoken/inner reaction: “조졌네...”
 - Performance: hollow laugh while crying; amused and devastated at the same time, not melodramatic sobbing.
@@ -136,11 +136,11 @@ B2
 - no explanatory caption
 - REACTION: “…”
 
-B3
+B3+4
 - INNER: “어”
 - VISUAL ONLY: 4년치 업무 히스토리와 업무 사진이 날아간 사실을 화면/연출로 전달. 설명 대사 금지.
 
-B4
+B5
 - INNER: “조졌네...”
 - PERFORMANCE: 허탈하게 울면서 웃음.
 
@@ -154,11 +154,11 @@ B1
 B2
 - silence
 
-B3
+B3+4
 - “어”
 - 4년치 업무 히스토리/업무 사진 손실은 **visual-only information**. 대사로 설명하지 않는다.
 
-B4
+B5
 - “조졌네...”
 - 허탈하게 울면서 웃는 반응으로 끝낸다.
 
@@ -200,7 +200,7 @@ Not authorized:
 | L2 | Editorial Screener | ChatGPT | selected source | BASE | gate decision | PASS | no hard-kill | L3 |
 | L3 | Source Editor | ChatGPT | source text | SOURCE FACTS / VOICE | normalized facts/unknowns | PASS | invention boundary explicit | L4 |
 | L4 | Story Architect | ChatGPT | normalized source | BASE | STORY_ARC / INCIDENT_ESCALATION | PASS | no fake spiral | L5 |
-| L5 | Story Writer | ChatGPT | normalized source | BASE | 4 ordered beats | PASS | B3 recognition+stakes merged; every beat has state delta | L6 |
+| L5 | Story Writer | ChatGPT | normalized source | BASE | 4 effective beats | PASS | B3+B4 merged; labels preserve B5 landing for audit continuity | L6 |
 | L6 | Dialogue Writer | ChatGPT | beats + source voice | source-derived + neutral connective | draft copy | PASS | no invented social conflict | L7 |
 | L7 | Dialogue Editor | ChatGPT | draft copy | source voice prioritized | humanized copy | PASS | fragments/silence retained | **L8 USER** |
 
