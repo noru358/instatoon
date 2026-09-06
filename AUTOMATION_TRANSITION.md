@@ -364,3 +364,29 @@ The authoritative active-episode facts are:
 
 Historical E005/E006/E007 findings may be described here only when they support a durable architecture decision. Stale cast/storyboard/next-session details must be removed from this root file rather than competing with CURRENT_STATE.
 
+## 2026-09-06 approved visual-direction / expression architecture
+
+E007 exposed two renderer-default failure modes that must be solved structurally rather than with per-episode hard-coded directions:
+
+1. **Perceptual shot-direction bias** — individually valid frames can still form a set that repeatedly presents the same apparent face orientation / camera relationship.
+2. **Anti-expression overconstraint** — phrases such as restrained / not melodramatic / simple gesture can accumulate into uniformly low-energy acting.
+
+Approved production architecture:
+- the visual-director stage reasons over the whole episode, not isolated frames;
+- for beats with more than one valid composition, maintain candidate alternatives described by camera side/height, shot distance, body orientation, face orientation and gaze;
+- select story-first while applying a redundancy penalty against nearby/earlier frames;
+- never encode a quota such as equal left/right/front counts or a mandatory left-facing frame; the target is viewer-perceived balance, not direction arithmetic;
+- after a multi-frame/complete raster set exists, run sequence-level visual-balance QC and rerender only the minimum subset driving the bias;
+- expression amplitude is role-adaptive and may be strong when the beat requires it, provided identity/style are preserved and distortion does not become grotesque or import another visual grammar;
+- mirror/reflection beats receive explicit geometry QC; prefer camera/reflection arrangements that make the real body and reflected face/limbs checkable;
+- supporting-character skin/local-color treatment stays in the same flat palette logic as the main cast; age/supporting status never implies a yellow/sepia cast.
+
+Automation implementation target:
+- represent this policy in episode structured input (current schema now accepts visual_direction);
+- future compiler should generate/select shot candidates or an equivalent internal choice set;
+- future vision QC should score perceptual redundancy across the sequence rather than count fixed direction labels;
+- persist the chosen visual-direction rationale / candidate descriptors enough for later repair without freezing the entire composition;
+- targeted repair must not mutate accepted unrelated frames.
+
+Migration note: visual_direction is schema-supported but optional for backward compatibility with historical episode packages. New/actively revised episodes should populate it; a future schema-version migration may make it mandatory after legacy fixtures are migrated.
+
