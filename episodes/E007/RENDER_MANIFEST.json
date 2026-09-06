@@ -1,0 +1,255 @@
+{
+  "manifest_version": "1.0",
+  "episode_id": "E007",
+  "episode_plan_git_blob_sha": "6a5646f3a397e09fa6859a15de888f65019f9482",
+  "canonical_prompt_source": {
+    "path": "MASTER_PROMPTS.md",
+    "section_heading": "## 12. COMPILED PRODUCTION PROMPT"
+  },
+  "output": {
+    "aspect_ratio": "4:5",
+    "width": 1080,
+    "height": 1350,
+    "slide_count": 7,
+    "text_free_raster": true,
+    "panels_per_image": 1,
+    "delivery_mode": "SEPARATE_FILES"
+  },
+  "style_refs": [
+    "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+    "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+  ],
+  "renderer_contract": {
+    "allowed_prompt_bindings": [
+      "EXPLICIT_COMPILED_PAYLOAD",
+      "CONVERSATION_INFERRED"
+    ],
+    "reference_conditioning_modes": [
+      "BINARY_CONDITIONED",
+      "AUTHORITY_INFORMED_NON_BINARY_CONDITIONED"
+    ],
+    "required_reference_conditioning": "BINARY_REQUIRED",
+    "unexpected_concept_policy": "FAIL_CLOSED"
+  },
+  "batch_policy": {
+    "explicit_payload": "FIRST_FRAME_GATE_THEN_BATCH",
+    "conversation_inferred": "SEQUENTIAL_EVERY_FRAME_GATE"
+  },
+  "slides": [
+    {
+      "index": 1,
+      "slide_id": "E007_S01",
+      "scene_contract": [
+        "Harin is the canonical main-cast Harin identity from REF_V2_D",
+        "Harin wears a neat office-casual version of her established wardrobe without changing face or hair identity",
+        "one or two background coworkers may appear only as low-detail extras and must not compete with Harin",
+        "the office elevator lobby is simple and lower-detail than the character",
+        "no readable text, caption, signage, logo, or speech bubble is baked into the raster"
+      ],
+      "required_entities": [
+        "Harin",
+        "office elevator lobby"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "readable company logo",
+        "romance-webtoon polish",
+        "cinematic lighting",
+        "complex crowd"
+      ]
+    },
+    {
+      "index": 2,
+      "slide_id": "E007_S02",
+      "scene_contract": [
+        "Harin is alone in the elevator",
+        "the identity, face, hair, and outfit remain continuous from slide 1",
+        "the pose change is immediate but still small: relaxed shoulders, softened stance, loosened expression",
+        "the elevator interior is simple with one mirror surface or reflective panel available for later continuity",
+        "no readable floor labels, buttons, signs, captions, dialogue, or speech bubbles are baked into the raster"
+      ],
+      "required_entities": [
+        "Harin",
+        "elevator interior",
+        "closed elevator doors"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "other passengers",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "dramatic dance pose",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 3,
+      "slide_id": "E007_S03",
+      "scene_contract": [
+        "Harin preserves exact identity and outfit continuity from slides 1-2",
+        "a mirror or reflective elevator panel is visibly relevant to her pose",
+        "the comedy comes from shoulders, torso, stance, and expression rather than complicated finger choreography",
+        "the expression is playful and self-satisfied, not grotesque and not generic anime exaggeration",
+        "no readable dialogue, caption, button labels, or speech bubbles are baked into the raster"
+      ],
+      "required_entities": [
+        "Harin",
+        "elevator mirror",
+        "silly shoulder or body pose"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "other passengers",
+        "complex multi-finger hand pose",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "webtoon glamour pose",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 4,
+      "slide_id": "E007_S04",
+      "scene_contract": [
+        "Harin remains the same identity and outfit",
+        "the elevator doors are visibly opening",
+        "Harin's expression and posture are clearly more restrained than slide 3",
+        "the visual contrast with slide 3 is the joke; no extra gag or character is needed",
+        "no readable signage, dialogue, caption, or speech bubble is baked into the raster"
+      ],
+      "required_entities": [
+        "Harin",
+        "opening elevator doors",
+        "office floor or lobby"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "extra gag props",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 5,
+      "slide_id": "E007_S05",
+      "scene_contract": [
+        "Harin preserves canonical identity and current episode outfit",
+        "security_01 appears in the locked episode-local identity and uniform",
+        "security_01 is calm and casual rather than mocking, sinister, or theatrical",
+        "a simple security desk establishes the building-lobby context",
+        "no readable dialogue, badge text, company logo, signage, or speech bubbles are baked into the raster"
+      ],
+      "required_entities": [
+        "Harin",
+        "security_01",
+        "security desk",
+        "building lobby"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "extra security staff",
+        "laughing crowd",
+        "monitor showing Harin footage",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "readable badge or company logo",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 6,
+      "slide_id": "E007_S06",
+      "scene_contract": [
+        "Harin and security_01 preserve exact continuity from slide 5",
+        "Harin's face reads as confused and suspicious rather than angry",
+        "security_01 remains dry and casual with no mocking grin",
+        "the gesture uses one simplified hand silhouette and avoids two-handed or intricate finger anatomy",
+        "no readable dialogue, labels, signs, or speech bubbles are baked into the raster"
+      ],
+      "required_entities": [
+        "Harin",
+        "security_01",
+        "simple single-hand finger gesture",
+        "security desk"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "two-handed finger guns",
+        "complex exposed fingers",
+        "laughing crowd",
+        "monitor showing Harin footage",
+        "readable text",
+        "speech bubbles",
+        "readable logo",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 7,
+      "slide_id": "E007_S07",
+      "scene_contract": [
+        "Harin preserves the same face, hair, and outfit identity",
+        "the CCTV camera is visibly connected to Harin's upward eyeline",
+        "Harin's reaction is understated frozen realization rather than screaming or melodrama",
+        "security_01 does not need to appear in this frame",
+        "no security-room cutaway, footage monitor, explanatory caption, readable text, or speech bubble is baked into the raster"
+      ],
+      "required_entities": [
+        "Harin",
+        "ceiling-mounted CCTV camera",
+        "upward eyeline"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "security-room cutaway",
+        "monitor showing recorded footage",
+        "laughing staff",
+        "punishment scene",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "cinematic lighting"
+      ]
+    }
+  ],
+  "media_requirements": [
+    {
+      "requirement_id": "style_ref_01",
+      "role": "style",
+      "media_type": "image",
+      "source_id": "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+      "conditioning": "MUST_SUPPLY_MEDIA",
+      "required": true,
+      "expected_hash": "dbddf458a97c89781075e6be03ab2c393eff75b95e8856f044bd81f29310ec07"
+    },
+    {
+      "requirement_id": "style_ref_02",
+      "role": "style",
+      "media_type": "image",
+      "source_id": "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg",
+      "conditioning": "MUST_SUPPLY_MEDIA",
+      "required": true,
+      "expected_hash": "b49683276f94ba5621e3602d7e3d714b0f2e637b2c41fc1fd132bdf6f336b049"
+    }
+  ]
+}
