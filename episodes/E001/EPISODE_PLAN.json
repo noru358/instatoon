@@ -14,7 +14,7 @@
     "aspect_ratio": "4:5",
     "width": 1080,
     "height": 1350,
-    "slide_count": 7,
+    "slide_count": 6,
     "text_free_raster": true,
     "panels_per_image": 1,
     "delivery_mode": "SEPARATE_FILES"
@@ -31,8 +31,7 @@
           3,
           4,
           5,
-          6,
-          7
+          6
         ],
         "identity_digest": "Mid-20s Korean woman; shoulder-length straight dark-brown hair with soft inward ends and an off-center part; slightly rounded everyday face; cream short-sleeve T-shirt under a muted sage service apron, dark straight pants, slim-normal build, no glasses or jewelry; intentionally ordinary and non-glamorous."
       }
@@ -87,7 +86,11 @@
         "cinematic lighting",
         "complex crowd"
       ],
-      "composition": "4:5 medium-wide eye-level scene from a slight side angle; worker_01 remains the emotional focus, helper coworker creates a clear spatial buffer, customer stays secondary; reserve no major text zone because this beat should read visually."
+      "composition": "4:5 medium-wide eye-level scene from a slight side angle; worker_01 remains the emotional focus, helper coworker creates a clear spatial buffer, customer stays secondary; reserve no major text zone because this beat should read visually.",
+      "visual_information_owner": "RELATIONSHIP",
+      "visual_delta_from_previous": "OPENING: establishes the uncomfortable customer interaction and coworker intervention.",
+      "screen_bearing_prop": false,
+      "screen_contract": null
     },
     {
       "index": 2,
@@ -120,125 +123,134 @@
         "speech bubbles",
         "cinematic lighting"
       ],
-      "composition": "4:5 medium shot from slightly above and behind one shoulder, allowing the phone and relaxed shoulders to read while keeping a clean screen/text overlay zone."
+      "composition": "4:5 medium shot from slightly above and behind one shoulder, allowing the phone and relaxed shoulders to read while keeping a clean screen/text overlay zone.",
+      "visual_information_owner": "CHARACTER_REACTION",
+      "visual_delta_from_previous": "SPATIAL+EMOTION: moves from public counter conflict to private decompression in the staff nook.",
+      "screen_bearing_prop": true,
+      "screen_contract": {
+        "prop_id": "worker_phone",
+        "subject_screen_relation": "worker_01 looks at the physical display face while holding the phone naturally.",
+        "camera_screen_relation": "camera may see the phone edge/back or only a limited oblique glimpse; full UI readability is not required.",
+        "geometry_contract": "The phone display remains on the physical front face. Do not expose the full screen by twisting the handset away from worker_01.",
+        "ui_profile": "KR_EVERYDAY_MESSENGER_KAKAOTALK_INSPIRED",
+        "ui_delivery": "RASTER_SHELL_ONLY"
+      }
     },
     {
       "index": 3,
       "slide_id": "E001_S03",
-      "role": "send",
-      "beat": "She sends the message she intended for her friends.",
+      "role": "send + wrong-chat realization",
+      "beat": "She sends the message, immediately notices it went to the workplace group, and the read-status begins collapsing almost at once.",
       "location": "same staff nook",
-      "action": "close insert of worker_01's hands and smartphone at the instant her thumb taps the send control; only a partial simple glimpse of her torso/apron is needed.",
+      "action": "worker_01 holds the phone naturally toward herself; her face snaps from casual focus to horrified realization. A separate UI inset/overlay at one side shows the KakaoTalk-inspired group-chat shell, the just-sent message area, workplace-group context, and rapidly decrementing/disappearing read-status numerals.",
       "scene_facts": [
-        "same phone, clothing and body continuity from slide 2",
-        "the phone screen provides a clean blank chat bubble area for later vector lettering",
-        "the send gesture is simple and anatomically clear with no intricate finger pose",
-        "no actual message text, chat title, app logo, or system text is baked into the raster"
+        "worker_01 identity, apron, hair and clothing remain exactly continuous from slide 2",
+        "old separate send and realization beats are intentionally merged because their visual delta was too small",
+        "the physical phone remains naturally oriented toward worker_01; the audience does not need to read its physical display",
+        "screen information is carried by one separate UI inset/overlay inside the same panel, not by a second comic panel",
+        "the UI shell is KakaoTalk-inspired for contemporary Korean everyday messaging, without copied logo/wordmark",
+        "actual message text, room title, reaction text and decrementing/disappearing read-status numerals belong to vector/layout, not raster"
       ],
-      "story_clarity": "The viewer understands a message has just been sent.",
+      "story_clarity": "The viewer instantly understands that she sent the message to the wrong workplace group and people are already reading it.",
       "required_entities": [
-        "worker_01 hands",
+        "worker_01",
         "smartphone",
-        "send gesture"
+        "shocked realization",
+        "UI inset zone"
       ],
       "forbidden_entities": [
         "Gaeun",
         "Harin",
         "Taemin",
-        "extra people",
-        "readable text",
-        "speech bubbles",
+        "physical coworker",
+        "readable raster text",
+        "baked room title",
+        "baked read-count numerals",
+        "speech bubbles in raster",
         "app logo",
-        "complex fingers",
+        "device screen on phone back",
+        "audience-presentation phone pose",
         "cinematic lighting"
       ],
-      "composition": "4:5 close insert dominated by the phone and one clear thumb action; leave the upper-middle phone screen visually uncluttered for the later chat text."
+      "composition": "4:5 medium-close reaction shot; worker_01's face/body owns the scene while a compact UI inset sits to one side. The physical handset stays naturally facing her.",
+      "visual_information_owner": "CHARACTER_REACTION",
+      "visual_delta_from_previous": "ACTION+INFORMATION: sending becomes immediate wrong-chat realization; previous S03/S04 were merged after low visual-delta review.",
+      "screen_bearing_prop": true,
+      "screen_contract": {
+        "prop_id": "worker_phone",
+        "subject_screen_relation": "worker_01 looks at the real display face; the handset is oriented for her, not for the audience.",
+        "camera_screen_relation": "camera prioritizes worker_01 reaction and may see only back/edge/oblique handset; UI information is shown separately as an inset.",
+        "geometry_contract": "Never put chat UI on the phone back and never rotate the handset into an audience-facing presentation pose. Reaction and UI are separated spatially.",
+        "ui_profile": "KR_EVERYDAY_MESSENGER_KAKAOTALK_INSPIRED",
+        "ui_delivery": "VECTOR_INSET"
+      }
     },
     {
       "index": 4,
       "slide_id": "E001_S04",
-      "role": "realization",
-      "beat": "One beat after sending, she notices the chat is the workplace group rather than her friend group.",
+      "role": "too late / delete",
+      "beat": "She deletes immediately, but the group-read state shows that the message already spread too far.",
       "location": "same staff nook",
-      "action": "worker_01 jerks her gaze from the phone screen to its header area, eyes widening and body stiffening; the mistake registers instantly.",
+      "action": "over-shoulder or adjacent POV relationship from behind/near worker_01 lets both her and the camera see the physical phone display face while she performs one simple delete action.",
       "scene_facts": [
-        "worker_01 identity and outfit remain continuous",
-        "the phone is angled so a clean header/title area can receive later vector lettering identifying the workplace group",
-        "her expression jumps clearly from relaxed to shocked without grotesque distortion",
-        "no readable chat title, message, caption, or speech bubble is baked into the raster"
+        "worker_01 and phone remain continuous from slide 3",
+        "this is screen-information-led: choose a physically valid over-shoulder/POV screen-readable view",
+        "the physical display face is visible to worker_01 and camera from compatible directions",
+        "the UI shell is KakaoTalk-inspired; deleted-message state and read/unread count are later vector content",
+        "no readable system text, room title, message, logo, numeral or speech bubble is baked into the raster"
       ],
-      "story_clarity": "The viewer understands she has just realized she sent the message to the wrong group chat.",
+      "story_clarity": "The viewer understands that she deletes the message but it is already too late.",
       "required_entities": [
-        "worker_01",
-        "smartphone",
-        "shocked realization"
+        "worker_01 partial silhouette or shoulder",
+        "smartphone display face",
+        "delete gesture",
+        "screen UI shell"
       ],
       "forbidden_entities": [
         "Gaeun",
         "Harin",
         "Taemin",
-        "other people",
-        "readable text",
-        "speech bubbles",
-        "dramatic screaming",
+        "recognizable recurring-cast avatars",
+        "readable raster text",
+        "app logo",
+        "phone back presented as screen",
+        "impossible character/camera screen geometry",
+        "complex fingers",
         "cinematic lighting"
       ],
-      "composition": "4:5 medium-close reaction shot with phone in the lower foreground and face dominant; use a story-valid angle distinct from the previous insert and leave a small speech-bubble zone for the later '...어?'."
+      "composition": "4:5 over-shoulder/POV-biased screen-information shot. Phone display is naturally visible to both worker_01 and camera; her face need not be frontal.",
+      "visual_information_owner": "SCREEN_INFORMATION",
+      "visual_delta_from_previous": "VIEWPOINT+ACTION: changes from reaction-led merged realization to a physically screen-readable deletion shot.",
+      "screen_bearing_prop": true,
+      "screen_contract": {
+        "prop_id": "worker_phone",
+        "subject_screen_relation": "worker_01 directly sees the display face while deleting.",
+        "camera_screen_relation": "camera is placed over/near her shoulder so it can also see the same display face without reversing the phone.",
+        "geometry_contract": "Character and camera share a plausible view of the display face. No back-screen hybrid and no front-facing reaction requirement.",
+        "ui_profile": "KR_EVERYDAY_MESSENGER_KAKAOTALK_INSPIRED",
+        "ui_delivery": "RASTER_SHELL_PLUS_VECTOR_CONTENT"
+      }
     },
     {
       "index": 5,
       "slide_id": "E001_S05",
-      "role": "too late",
-      "beat": "She immediately deletes the message, but the interface already makes it obvious that dozens of coworkers saw it.",
-      "location": "same staff nook",
-      "action": "worker_01 rapidly operates the phone with one simple thumb while staring at a dense cluster of tiny generic read/seen indicators; panic is visible in her partial face or posture.",
-      "scene_facts": [
-        "worker_01 and phone remain continuous",
-        "the interface must visually support a generic deleted-message/read-receipt concept without copying a branded app",
-        "reserve clean vector zones for a deleted-message system line and a 40-plus read indicator",
-        "the read indicators may be generic small avatar dots/icons, not recognizable recurring cast faces",
-        "no readable system text, number, message, app logo, or speech bubble is baked into the raster"
-      ],
-      "story_clarity": "The viewer understands she deleted it almost immediately but far too many coworkers had already seen it.",
-      "required_entities": [
-        "worker_01",
-        "smartphone",
-        "delete gesture",
-        "generic read indicators"
-      ],
-      "forbidden_entities": [
-        "Gaeun",
-        "Harin",
-        "Taemin",
-        "recognizable main-cast avatars",
-        "other physical people",
-        "readable text",
-        "speech bubbles",
-        "app logo",
-        "complex fingers",
-        "cinematic lighting"
-      ],
-      "composition": "4:5 close shot that keeps the phone large enough for later lettering while retaining part of worker_01's panicked face/shoulders so the frame is not only UI."
-    },
-    {
-      "index": 6,
-      "slide_id": "E001_S06",
       "role": "private check-in",
       "beat": "A coworker privately messages her asking if she is okay and what happened.",
       "location": "same staff nook",
-      "action": "worker_01 holds the phone frozen at chest height as a clean notification/private-message area is visually available; her face goes from panic to mortified stillness.",
+      "action": "worker_01 freezes with the phone held naturally toward herself; her face/body shows mortified stillness. A small separate UI inset carries the private-message information.",
       "scene_facts": [
         "worker_01 identity and outfit remain continuous",
         "the coworker exists only through later vector chat text; do not invent a physical second person",
-        "reserve a clean phone/notification area for two short private messages",
-        "expression is mortified and frozen, not angry or tearful",
-        "no readable DM text, sender name, caption, or speech bubble is baked into the raster"
+        "the handset stays naturally oriented to worker_01; do not turn the screen toward the audience",
+        "a separate KakaoTalk-inspired DM inset reserves space for two short later messages",
+        "expression is mortified and frozen, not frantic, angry or tearful",
+        "no readable DM text, sender name, logo or speech bubble is baked into the raster"
       ],
       "story_clarity": "The viewer understands someone from work has already privately contacted her about the accidental message.",
       "required_entities": [
         "worker_01",
         "smartphone",
-        "private-message notification area"
+        "DM UI inset zone"
       ],
       "forbidden_entities": [
         "Gaeun",
@@ -246,27 +258,40 @@
         "Taemin",
         "physical coworker",
         "customer",
-        "readable text",
-        "speech bubbles",
+        "readable raster text",
+        "app logo",
+        "audience-presentation phone pose",
         "crying breakdown",
         "cinematic lighting"
       ],
-      "composition": "4:5 medium shot with phone slightly forward and worker_01's face fully readable; keep the upper or side phone area open for later private-message lettering."
+      "composition": "4:5 medium reaction shot with face fully readable and handset natural; DM information sits in a compact separate UI inset.",
+      "visual_information_owner": "CHARACTER_REACTION",
+      "visual_delta_from_previous": "EMOTION+INFORMATION: changes from active deletion to frozen mortification after a private coworker message.",
+      "screen_bearing_prop": true,
+      "screen_contract": {
+        "prop_id": "worker_phone",
+        "subject_screen_relation": "worker_01 looks at the physical display face held toward herself.",
+        "camera_screen_relation": "camera prioritizes her face/body; physical screen may be oblique or hidden, with DM information supplied by inset.",
+        "geometry_contract": "Do not make worker_01 show the private phone to the audience. Use the declared inset for message readability.",
+        "ui_profile": "KR_EVERYDAY_MESSENGER_KAKAOTALK_INSPIRED",
+        "ui_delivery": "VECTOR_INSET"
+      }
     },
     {
-      "index": 7,
-      "slide_id": "E001_S07",
+      "index": 6,
+      "slide_id": "E001_S06",
       "role": "silent landing",
       "beat": "She says absolutely nothing and is overwhelmed by embarrassment.",
       "location": "same staff nook",
-      "action": "worker_01 folds inward on the bench, torso bent, face buried in both hands or nearly hidden, shoulders raised, ears/cheeks visibly flushed; the phone remains nearby or loosely held but no new action occurs.",
+      "action": "worker_01 folds inward on the bench, torso bent, face buried in both hands or nearly hidden, shoulders raised, visibly flushed; the phone rests beside her or stays secondary with no screen information.",
       "scene_facts": [
-        "worker_01 identity, hair, apron and clothing remain continuous even with the face partly hidden",
-        "the final emotion must read as extreme embarrassment through whole-body pose rather than dialogue or narration",
-        "strong expressive pose is allowed within style; do not flatten the body language into a neutral seated pose",
-        "no reply, narration, internal monologue, reaction text, caption, message, or speech bubble appears in the final frame"
+        "worker_01 identity, hair, apron and clothing remain continuous even with face partly hidden",
+        "final emotion must read as extreme embarrassment through whole-body pose",
+        "strong expressive pose is allowed within style",
+        "phone is secondary and its screen is not story information",
+        "no reply, narration, internal monologue, reaction text, caption, message or speech bubble appears"
       ],
-      "story_clarity": "The viewer understands she is so embarrassed she wants to disappear, without any explanatory words.",
+      "story_clarity": "The viewer understands she is so embarrassed she wants to disappear, without explanatory words.",
       "required_entities": [
         "worker_01",
         "strong embarrassment pose",
@@ -284,7 +309,11 @@
         "dramatic crying",
         "cinematic lighting"
       ],
-      "composition": "4:5 slightly high wider reaction shot showing the whole folded posture; phone is secondary; give the frame enough empty breathing room that the silent embarrassment lands visually."
+      "composition": "4:5 slightly high wider reaction shot showing the whole folded posture; phone is secondary; allow empty breathing room.",
+      "visual_information_owner": "CHARACTER_REACTION",
+      "visual_delta_from_previous": "EMOTIONAL_LANDING: moves from frozen phone reaction to fully embodied silent embarrassment.",
+      "screen_bearing_prop": false,
+      "screen_contract": null
     }
   ],
   "visual_direction": {
@@ -300,13 +329,14 @@
       "gaze_direction"
     ],
     "set_qc": [
-      "Judge the seven-frame sequence for viewer-perceived directional and compositional repetition rather than fixed left/right/front quotas.",
-      "Phone-heavy beats must still vary distance and body/face participation so S03-S06 do not become four near-identical device close-ups.",
-      "The S04 realization, S05 panic, S06 mortified freeze and S07 silent embarrassment must each read as distinct emotional states at phone size.",
-      "Replace only the minimum frame if the final set drifts toward one default three-quarter face direction or repeated camera side."
+      "Judge the completed sequence for viewer-perceived directional/compositional redundancy rather than fixed direction quotas.",
+      "Adjacent beats must have a defensible visual delta; UI-state-only continuations are merge candidates.",
+      "For every screen-bearing slide, verify information owner, display-face geometry, subject gaze, camera visibility and UI delivery mode.",
+      "No device may show UI on its back/case, and no private handset may be twisted toward the audience without story justification.",
+      "Korean everyday messaging defaults to a KakaoTalk-inspired UI profile unless explicit story context overrides it."
     ],
-    "reflection_policy": "No story-relevant mirror/reflection is required in this episode; if incidental reflections appear, keep them simple and geometrically plausible.",
-    "skin_color_policy": "worker_01, customer and helper coworker share the same flat local-color grammar; one-frame extras must not receive an automatic yellow/orange/sepia cast.",
-    "notes": "Seven slides are used because each slide changes the state: intervention -> private intent -> send -> wrong-chat realization -> too-late deletion/read evidence -> private check-in -> silent embarrassment."
+    "reflection_policy": "No story-relevant mirror/reflection is required in this episode; incidental reflections must remain plausible.",
+    "skin_color_policy": "Main/supporting characters share the same flat local-color grammar; no automatic yellow/orange/sepia cast.",
+    "notes": "Revised after prototype QC: old send/realization slides were merged; screen information and character reaction are separated by declared information ownership and physically valid screen contracts."
   }
 }
