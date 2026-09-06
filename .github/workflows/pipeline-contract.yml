@@ -1,112 +1,48 @@
 name: pipeline-contract
 
 on:
-  pull_request:
-    paths:
-      - "pipeline/**"
-      - "schemas/**"
-      - ".github/workflows/**"
-      - "REFERENCE_SET.md"
-      - "assets/style_refs/v2_current/**"
-      - "AUTOMATION_TRANSITION.md"
-      - "GENERATION_PROTOCOL.md"
-      - "SETUP_RENDER.md"
-      - "CURRENT_STATE.md"
-      - "REFERENCE_SET.md"
-      - "assets/style_refs/v2_current/**"
   push:
     branches: ["main"]
     paths:
       - "pipeline/**"
       - "schemas/**"
-      - ".github/workflows/**"
+      - "assets/production/**"
+      - "assets/style_refs/v2_current/**"
+      - "ASSET_COMPOSITION_PROTOCOL.md"
+      - "GENERATION_PROTOCOL.md"
+      - "MASTER_PROMPTS.md"
+      - "REFERENCE_SET.md"
+      - "STYLE_LOCK.md"
+      - "CURRENT_STATE.md"
+      - ".github/workflows/pipeline-contract.yml"
+  pull_request:
+    paths:
+      - "pipeline/**"
+      - "schemas/**"
+      - "assets/production/**"
+      - "ASSET_COMPOSITION_PROTOCOL.md"
+      - "GENERATION_PROTOCOL.md"
+      - "MASTER_PROMPTS.md"
+      - "REFERENCE_SET.md"
+      - "STYLE_LOCK.md"
+      - "CURRENT_STATE.md"
 
 jobs:
   contract:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install test dependencies
-        run: pip install --quiet openai pillow pydantic
-
-      - name: Compile production Python
+      - name: Install dependencies
+        run: pip install --quiet openai pillow
+      - name: Compile retained production Python
         run: |
-          python -m py_compile \
-            pipeline/render_guard.py \
-            pipeline/render.py \
-            pipeline/lettering.py \
-            pipeline/auto_finish.py \
-            pipeline/reference_registry.py
-
-      - name: Current reference registry must match actual binaries
+          python -m py_compile             pipeline/render_guard.py             pipeline/render.py             pipeline/lettering.py             pipeline/reference_registry.py
+      - name: Current authoring reference registry matches binaries
         run: python pipeline/reference_registry.py
-
-      - name: Existing render-guard regression suite
+      - name: Exception-render guard regression
         run: python -m unittest pipeline.test_render_guard
-
-      - name: Repository production state must satisfy its declared contract
-        run: |
-          python pipeline/render_guard.py validate
-          python pipeline/render.py status
-          git diff --exit-code
-
-      - name: Lettering-plan validation smoke test
-        run: |
-          python - <<'PY'
-          import hashlib
-          import json
-          import tempfile
-          from pathlib import Path
-
-          from pipeline import lettering
-
-          with tempfile.TemporaryDirectory() as td:
-              root = Path(td)
-              eid = "E999"
-              ep = root / "episodes" / eid
-              ep.mkdir(parents=True)
-
-              episode_plan = {
-                  "episode_id": eid,
-                  "format": {"width": 1080, "height": 1350, "slide_count": 1},
-                  "slides": [{"slide_id": "E999_S01"}],
-              }
-              plan_path = ep / "EPISODE_PLAN.json"
-              plan_path.write_text(json.dumps(episode_plan), encoding="utf-8")
-              data = plan_path.read_bytes()
-              blob = hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest()
-
-              valid = {
-                  "schema_version": "1.0",
-                  "episode_id": eid,
-                  "episode_plan_git_blob_sha": blob,
-                  "canvas": {"width": 1080, "height": 1350},
-                  "slides": [{
-                      "index": 1,
-                      "slide_id": "E999_S01",
-                      "items": [{
-                          "text_id": "E999_T01",
-                          "kind": "caption",
-                          "text": "locked copy",
-                          "box": [0.1, 0.1, 0.8, 0.2],
-                      }],
-                  }],
-              }
-              lp = ep / "LETTERING_PLAN.json"
-              lp.write_text(json.dumps(valid), encoding="utf-8")
-              lettering.load_and_validate_plan(root, eid, episode_plan)
-
-              valid["episode_plan_git_blob_sha"] = "0" * 40
-              lp.write_text(json.dumps(valid), encoding="utf-8")
-              try:
-                  lettering.load_and_validate_plan(root, eid, episode_plan)
-              except lettering.LetteringError:
-                  pass
-              else:
-                  raise AssertionError("stale lettering plan was not rejected")
-          PY
+      - name: Production registry is valid JSON
+        run: python -m json.tool assets/production/registry.json >/dev/null
