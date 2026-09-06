@@ -44,16 +44,57 @@
       "type": "RENDER_CONTRACT",
       "status": "BUILT_AWAITING_PRE_RASTER_USER_GATE",
       "value": "EPISODE_PLAN, RENDER_MANIFEST and LETTERING_PLAN are materialized but raster authorization remains fail-closed until the pre-raster user gate passes and production state advances."
+    },
+    {
+      "decision_id": "E001_PRE_RASTER_PLAN_APPROVED_20260906",
+      "type": "USER_GATE",
+      "status": "PASS",
+      "value": "User replied 'pass' to the pre-raster package before S01 generation."
+    },
+    {
+      "decision_id": "E001_S01_FIRST_ATTEMPT_DISCARDED_NO_REF_20260906",
+      "type": "RENDER_FAILURE",
+      "status": "INVALID_DISCARDED",
+      "value": "First S01 generation occurred without the required actual reference image being supplied. User explicitly discarded it. Missing required reference media is now a structural hard stop before render."
+    },
+    {
+      "decision_id": "E001_S01_REFERENCE_SUPPLIED_USER_PASS_20260906",
+      "type": "VISUAL_QC",
+      "status": "USER_PASS_VISUAL_TASTE_ANCHOR",
+      "value": "After the user supplied the canonical style reference image, corrected S01 was generated and explicitly approved. It is a visual/taste anchor only because no repository-bound artifact hash was persisted."
+    },
+    {
+      "decision_id": "E001_SCREEN_GEOMETRY_QC_FAILURE_20260906",
+      "type": "SYSTEMIC_VISUAL_QC",
+      "status": "PLAN_REVISION_REQUIRED",
+      "value": "Phone-centric prototypes exposed repeated structural failures: generic non-Korean messenger shell, UI on/through the device back, impossible subject/camera screen orientation, audience-presentation phone poses, and low-visual-delta slide splitting."
+    },
+    {
+      "decision_id": "E001_SCREEN_GRAMMAR_GLOBAL_FIX_20260906",
+      "type": "GLOBAL_PIPELINE_CHANGE",
+      "status": "APPLIED",
+      "value": "Global visual grammar/schema/guard now require adjacent-beat visual-delta review, one visual-information owner per slide, explicit screen-bearing prop contracts, physically valid display geometry, context-routed UI profiles, and KakaoTalk-inspired Korean everyday messaging as an overrideable domain default."
+    },
+    {
+      "decision_id": "E001_REVISED_SIX_SLIDE_PLAN_20260906",
+      "type": "VISUAL_PLAN",
+      "status": "READY_FOR_USER_REVIEW",
+      "value": "E001 reduced from seven to six slides by merging send + wrong-chat realization. Screen information now uses explicit over-shoulder or UI-inset delivery instead of impossible phone presentation."
     }
   ],
   "frame_qc": {},
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "PRE_RASTER_PLAN_USER_GATE",
-    "next_user_gate": "PRE_RASTER_PLAN_APPROVAL",
+    "current_checkpoint": "REVISED_SCREEN_SEQUENCE_PLAN_USER_GATE",
+    "next_user_gate": "REVISED_SCREEN_SEQUENCE_APPROVAL",
     "per_slide_user_approval": false,
-    "note": "L8 passed. L10-L12.5 package is built for review. Do not render S01 until user approves this pre-raster package and state is advanced/revalidated."
+    "note": "Do not continue raster production from the old phone-centric prototypes. Review/approve the revised six-slide screen-safe plan first; then revalidate and regenerate affected phone-centric slides under the new screen contracts."
   },
-  "raster_set_gate": null
+  "raster_set_gate": null,
+  "episode_anchor": {
+    "status": "VISUAL_TASTE_ANCHOR_ONLY",
+    "slide_id": "E001_S01",
+    "note": "Corrected S01 with user-supplied reference was explicitly approved, but no repository-bound artifact hash/attempt record exists."
+  }
 }
