@@ -99,6 +99,8 @@ No moral, no clever comeback, no invented coworker response.
 
 ### Ordered beats
 
+User revision applied: previous B3/B4 are merged. Current story has **4 beats**, not 5.
+
 **B1 — BASELINE / HOOK**
 - Action: clearing accumulated advertisement chats.
 - State delta: clutter is disappearing routinely.
@@ -109,19 +111,17 @@ No moral, no clever comeback, no invented coworker response.
 - State delta: a routine action has included the wrong target.
 - Reader question: “뭐 잘못 눌렀나?”
 
-**B3 — TURN / RECOGNITION**
+**B3 — TURN + STAKES REVEAL (MERGED)**
 - Action: the team room is no longer where expected.
-- State delta: cleanup becomes mistake recognition.
-- Reader question: “설마 중요한 방?”
-
-**B4 — ESCALATION OF STAKES**
-- Thought: that room held roughly four years of work history and work photos.
-- State delta: the mistake acquires concrete weight.
+- Reaction text: “어”
+- Visual reveal: roughly four years of work history and work photos are shown as having vanished/lost with the exited room. This information is carried by image/UI staging, not explanatory dialogue.
+- State delta: cleanup becomes mistake recognition and the loss acquires concrete weight in the same beat.
 - Reader question: “백업은 했겠지?”
 
-**B5 — LANDING**
-- Thought: no backup.
-- Reaction: blank/panicked residue, ending on the source's mundane frustration.
+**B4 — LANDING**
+- Realization: there is no backup.
+- Spoken/inner reaction: “조졌네...”
+- Performance: hollow laugh while crying; amused and devastated at the same time, not melodramatic sobbing.
 - State delta: the obvious fallback disappears.
 - Final beat; no manufactured cliffhanger.
 
@@ -138,16 +138,11 @@ B2
 
 B3
 - INNER: “어”
-- INNER: “잠깐”
+- VISUAL ONLY: 4년치 업무 히스토리와 업무 사진이 날아간 사실을 화면/연출로 전달. 설명 대사 금지.
 
 B4
-- INNER: “팀방 나갔네”
-- INNER: “거기 4년치 업무 히스토리랑 사진 다 있는데”
-
-B5
-- INNER: “백업도 안 해놨는데…”
-- REACTION: “아놔…”
-- REACTION: “돈다 돌아”
+- INNER: “조졌네...”
+- PERFORMANCE: 허탈하게 울면서 웃음.
 
 ## L7 — Dialogue humanization
 
@@ -161,31 +156,30 @@ B2
 
 B3
 - “어”
-- “잠깐”
+- 4년치 업무 히스토리/업무 사진 손실은 **visual-only information**. 대사로 설명하지 않는다.
 
 B4
-- “팀방 나갔네”
-- “거기 4년치 업무 히스토리랑 사진 다 있는데”
-
-B5
-- “백업도 안 해놨는데…”
-- “아놔…”
-- “돈다 돌아”
+- “조졌네...”
+- 허탈하게 울면서 웃는 반응으로 끝낸다.
 
 Humanization decisions:
+- merged the recognition and stakes beats because their visual/state delta is one continuous realization;
+- removed “잠깐”, “팀방 나갔네”, and the explanatory 4-year-history line because the image should own that information;
 - removed any “순간 심장이 철렁했다” style narration;
 - did not write “내 4년이 사라졌다” because it overstates the source;
 - did not add a coworker/boss response;
-- did not add “ㅋㅋ” or a punchline;
-- kept fragments and silence;
-- preserved the source's ordinary panic cadence.
+- did not add “ㅋㅋ” or a manufactured punchline;
+- kept the final line short and colloquial: “조졌네...”;
+- the ending emotion is mixed: hollow laughter + tears, not polished tragedy or exaggerated comedy.
 
 ## Adaptation / invention ledger
 
 Allowed neutral staging introduced for visualization:
 - a visible rhythm of clearing chats;
 - a brief pause/recognition beat after the mistaken exit;
-- looking for the missing team room.
+- looking for the missing team room;
+- visualizing the lost four-year work history/photos without turning that fact into dialogue;
+- the final hollow crying-laugh performance.
 
 These are connective visual staging only. They do not add new conflict or consequence.
 
