@@ -147,9 +147,9 @@ If anatomy/identity is wrong in an approved asset:
 
 ## 10. Migration state
 
-Legacy full-frame render infrastructure remains in the repository only as the exception lane and as historical test infrastructure.
+Legacy per-slide full-frame render infrastructure is removed from the working tree. Git history preserves it if historical inspection is needed.
 
-Fresh production must not resume E001 through the old S02→S04 full-frame generation path.
+Full-frame exceptions are routed through the shared AutoPipeline asset-production/dispatch contract and registered as EXCEPTION_OUTPUT assets.
 
 Migration completion criteria:
 1. registry format exists and validates approved/hash-bound assets;
