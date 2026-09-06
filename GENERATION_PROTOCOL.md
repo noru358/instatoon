@@ -1,4 +1,7 @@
 # GENERATION_PROTOCOL.md
+> **ARCHITECTURE MIGRATION NOTICE — 2026-09-07**
+> For final visual production, `ASSET_COMPOSITION_PROTOCOL.md` has precedence.
+> Sections below that describe one-full-slide-per-generative-call are retained for **asset authoring, exception rendering and historical QC behavior**, not as the default final renderer. Missing visual capability is routed as an ASSET_GAP and final frames are assembled from approved registered assets by the shared AutoPipeline compositor.
 
 # GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.6
 Updated: 2026-09-07
