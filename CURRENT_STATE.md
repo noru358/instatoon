@@ -7,7 +7,7 @@ Operating mode: CALIBRATION
 
 ## Active production
 
-Active episode: **NONE**
+Active episode: NONE
 Next publishable episode: **E001 after renderer pilot**
 
 The old full-frame E001 experiment is retired from the working tree. Git history is the archive.
@@ -18,7 +18,7 @@ The old full-frame E001 experiment is retired from the working tree. Git history
 
 Default final renderer: AutoPipeline `pipeline/compositor.py`.
 
-Full-frame generation is exception-only. Instatoon `pipeline/render.py` remains only for a declared exceptional shot and fails closed without `--exception-lane`.
+Full-frame generation is exception-only and is routed through the shared AutoPipeline asset-production/dispatch path. Instatoon keeps no legacy per-slide renderer/state machine.
 
 ## Pilot policy
 
