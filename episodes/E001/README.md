@@ -1,6 +1,6 @@
 # E001 — RESET START
 
-Status: AWAITING_L8_USER_VOICE_GATE
+Status: AWAITING_PRE_RASTER_PLAN_GATE
 Created: 2026-09-06
 
 This is the first episode after the user-directed episode reset.
@@ -12,19 +12,42 @@ This is the first episode after the user-directed episode reset.
 
 ## Current pipeline state
 - Episode ID: E001
-- L1-L7: DRAFT COMPLETE, USER FEEDBACK APPLIED
-- Source pack: STORY_SOURCE_PACK.md
-- L8 USER VOICE GATE: PENDING
-- Storyboard/cast/render contract: NOT YET CREATED
-- Raster generation: BLOCKED
+- L1-L7: APPROVED
+- L8 USER VOICE GATE: PASS — user said "합격"
+- L10 STORYBOARD + CAST ROUTER: COMPLETE, awaiting pre-raster review
+- L11 EPISODE-LOCAL CHARACTER DESIGN: COMPLETE internally for worker_01
+- L12 WHOLE-EPISODE VISUAL PLAN: COMPLETE
+- L12.5 RENDER CONTRACT: MATERIALIZED, not yet raster-authorized
+- Raster generation: BLOCKED until pre-raster user gate passes and state advances
 
-## Current premise
-A worker accidentally sends an ambiguous message intended for friends to the workplace group chat, deletes it almost immediately, but dozens of coworkers have already seen it.
+## Cast
+- recurring main cast: none
+- worker_01: episode-only protagonist, mid-20s service worker, strict episode continuity
+- customer: one-frame extra
+- helper coworker: one-frame extra
+- private coworker in S06: text-only sender, not a physical character
 
-## Current ending lock
-- No protagonist explanation after the coworker's DM.
-- No ending narration or internal monologue.
-- End on a purely visual, strongly readable extreme-embarrassment reaction.
+## Seven-slide storyboard
+1. uncomfortable customer interaction; helper coworker steps in
+2. worker_01 alone afterward, opens phone to tell friends
+3. sends "오늘 우리 매장 애들 진짜 미쳤다"
+4. realizes the header says workplace group; "...어?"
+5. deletes immediately, but 43 people have already read it
+6. private DM arrives: "괜찮아?" / "무슨 일 있었어?"
+7. no reply, no narration, no text — only extreme embarrassment
+
+## Current artifacts
+- STORY_SOURCE_PACK.md
+- EPISODE_PLAN.json
+- RENDER_MANIFEST.json
+- LETTERING_PLAN.json
+- PRODUCTION_STATE.json
 
 ## Next action
-Present the revised STORY_SOURCE_PACK.md at L8 and wait for explicit user approval. Only after PASS proceed to L10 storyboard + cast routing.
+User reviews the pre-raster cast/storyboard/visual/render package.
+On explicit PASS:
+1. advance plan/state to raster-ready;
+2. rebind manifest/lettering if the EPISODE_PLAN blob changes;
+3. run full render-guard validation;
+4. restore/supply actual REF_V2_D + REF_V2_E media;
+5. generate only E001_S01 as the USER visual anchor.
