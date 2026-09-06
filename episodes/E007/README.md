@@ -1,207 +1,184 @@
-# E007 — 결국 또 거기
+# E007 — 엘리베이터 혼자 타면
 
-Status: STORYBOARD APPROVED — MANUAL VALIDATION / STRUCTURED CONTRACT NEXT
+Status: L8 AWAITING USER APPROVAL — MANUAL_VALIDATION
 Updated: 2026-09-06
 
-## 1. Selected topic and provenance
+## 0. Reset record
 
-Selected topic:
-- office lunch decision fatigue;
-- coworkers spend too long discussing what to eat;
-- everyone says they are flexible, then rejects actual suggestions;
-- after the debate, the group ends up at the familiar place they always visit.
+The user explicitly reset E007 on 2026-09-06 and requested a fresh production run in actual MANUAL_VALIDATION mode.
 
-Core comic engine:
-**lengthy choice process → fake openness → rejection cascade → familiar default wins.**
+The previous E007 office-lunch package, its L1-L7 approval, cast/storyboard approval, reference confirmation, and native-chat S01 taste approval are superseded for active production.
+Git history preserves them as historical evidence only.
+They do not authorize any current storyboard, render contract, raster, anchor, or lettering work.
 
-Primary human-source seed:
-- Reddit r/SideProject
-- thread: "The 'where do you want to eat / I don't know where do YOU want to eat' conversation ends here"
-- URL: https://www.reddit.com/r/SideProject/comments/1thxc9n/the_where_do_you_want_to_eat_i_dont_know_where_do/
-- provenance class: HUMAN_SEEDED_INSPIRATION.
+Production restarts from L1 SOURCE DISCOVERY.
 
-Source-faithfulness rule:
-- preserve the recognizable decision loop and familiar-default ending;
-- do not claim the source literally happened in a Korean office;
-- Korean-localize setting, food, timing and dialogue;
-- do not fabricate a named company, restaurant, or exact autobiographical incident.
+## 1. L1 — SOURCE DISCOVERY / COLLECTION
 
-## 2. L1-L7 — USER APPROVED 2026-09-06
+Selected human-source seed:
+- Reddit r/tifu
+- post: "TIFU forgetting that elevators aren’t private"
+- URL: https://www.reddit.com/r/tifu/comments/1ll61ou/tifu_forgetting_that_elevators_arent_private/
+- provenance class: HUMAN_SEEDED_INSPIRATION
 
-### L1 SOURCE DISCOVERY
-Selected because the source contains a compact, highly sceneable social loop:
-people ask for preferences, refuse to choose, reject actual suggestions, then default to the usual place.
+Source facts worth preserving:
+- the poster behaves very restrained/professional at work;
+- when alone in the office elevator, he repeatedly acts goofy: dancing, posing, talking to himself;
+- he assumes the elevator is private enough for this;
+- a security clerk later echoes one of his private bits and gives him finger guns;
+- the poster realizes the elevator has cameras and security has likely seen the behavior.
 
-### L2 HUMAN-INTEREST GATE
-PASS:
-- near-universal "뭐 먹지?" recognition;
-- low exposition burden;
-- strong repetition/payoff structure;
-- visually cheap;
-- no moral lesson required.
+Why this seed:
+the comedy is carried by visible behavior and a reveal, not exposition.
 
-### L3 SOURCE NORMALIZATION
-Pattern:
-- someone initiates lunch selection;
-- nobody wants decision responsibility;
-- "anything is fine" is not actually true;
-- concrete suggestions reveal hidden preferences;
-- time is wasted;
-- familiarity beats choice.
+## 2. L2 — HUMAN-INTEREST GATE
 
-Tone:
-- light annoyance, not real conflict;
-- nobody is the villain;
-- understated ordinary coworker banter;
-- no meta "직장인 공감" caption.
+PASS.
 
-### L4 STORY SHAPE
-DECISION_LOOP → REJECTION CASCADE → FAMILIAR DEFAULT.
+- sceneability: HIGH — office, elevator, lobby/security desk;
+- state change: professional facade → private silliness → exposure;
+- specificity: mirror poses, self-talk, finger guns, CCTV;
+- emotion: private freedom → instant social horror;
+- recognition/novelty: familiar elevator-alone behavior plus an unusually clean reveal;
+- landing potential: the guard's echoed phrase / finger guns makes the realization land without a moral.
 
-### L5-L7
-Final structure below supersedes the earlier draft.
+No stronger humiliation, punishment, firing, viral-video consequence, or public shaming may be invented.
 
-## 3. Cast — USER APPROVED 2026-09-06
+## 3. L3 — SOURCE NORMALIZATION
 
-Three recurring leads are used because the three-way preference loop materially improves the comic rhythm.
+### SOURCE FACTS
+1. protagonist is professionally restrained outside the elevator;
+2. alone in the elevator, he repeatedly does goofy private behavior;
+3. one day a security employee says/does something that mirrors that private behavior;
+4. protagonist realizes CCTV/security could see it.
 
-- Harin: initiates / mediates the menu discussion.
-- Gaeun: brighter reaction energy; says she is flexible but rejects at least one option.
-- Taemin: deadpan / practical rejection role.
+### SOURCE VOICE / HUMAN TEXTURE
+Useful texture from the post:
+- contrast between corporate/professional language and stupid private behavior;
+- exaggerated self-hype while looking in the mirror;
+- guard casually mirroring the bit;
+- protagonist's immediate flushed, frozen reaction.
 
-This is an episode-specific functional choice, not a project-wide three-person quota.
+### ADAPTATION BOUNDARY
+Allowed:
+- Korean-localize the office/lobby/elevator;
+- compress the repeated two-year history into a short visual montage or caption;
+- replace English/music-specific jokes with natural Korean self-talk;
+- simplify the guard exchange.
 
-## 4. Six-slide storyboard — USER APPROVED 2026-09-06
+Not allowed:
+- invent a named Korean company;
+- imply the source literally happened in Korea;
+- add disciplinary consequences or coworkers watching recordings.
 
-### S01 — lunch question / openness
-Location: ordinary office lunch area / meeting-table area, shortly before noon.
+## 4. L4 — STORY SHAPE
 
-Dialogue intent:
-- Harin: "오늘 점심 뭐 먹지?"
-- Gaeun: "난 아무거나 좋아."
-- Taemin: "나도."
+FORMAT: STORY_ARC
+SHAPE: PRIVATE_RITUAL → REPETITION → ACCIDENTAL_EXPOSURE → SILENT_REALIZATION
 
-Visual intent:
-- all three still relaxed;
-- clear three-person identity/style anchor opportunity;
-- no baked text in production raster.
+Core engine:
+**outside elevator = composed office worker / inside elevator alone = private idiot / security mirrors him / CCTV realization.**
 
-### S02 — first proposal rejected
-- Harin: "그럼 제육?"
-- Gaeun: "어제 먹었잖아…"
-- Taemin listens.
+Landing type:
+DEADPAN + HUMAN_RESIDUE.
 
-Tone:
-Gaeun is not angry; mildly apologetic / matter-of-fact rejection.
+## 5. L5 — STORY ROOM
 
-### S03 — second proposal rejected
-- Harin: "그럼 냉면?"
-- Taemin: "오늘은 좀 차갑지 않냐…"
+One-sentence premise:
+회사에서는 늘 각 잡고 다니는 직장인이 혼자 탄 엘리베이터에서만 이상한 포즈와 혼잣말을 해왔는데, 어느 날 경비 직원이 그 멘트를 그대로 따라 하면서 CCTV의 존재를 깨닫는다.
 
-Tone:
-deadpan practical objection; discussion is starting to drag.
+Emotional engine:
+private release → harmless confidence → exposure panic.
 
-### S04 — third proposal rejected
-- Gaeun: "돈까스는?"
-- Taemin: "거기 점심때 줄 길걸."
-- Harin: "그럼 대체 뭐 먹어…"
+Specific details to preserve:
+- elevator mirror;
+- solo pose / tiny dance or exaggerated shoulder flex;
+- one repeatable self-hype phrase;
+- professional reset when doors open;
+- security desk;
+- guard echoes phrase;
+- finger guns;
+- final look toward CCTV.
 
-Tone:
-visible fatigue increases.
-If hands are near faces or multiple fingers are exposed, mark anatomy risk HIGH for QC.
+Ordered beats:
+1. Outside: protagonist is stiff, polite, professional.
+2. Elevator doors close and he is alone; persona instantly drops.
+3. He does a dumb mirror pose / mini-dance and hypes himself up.
+4. Doors open; he immediately returns to professional mode and walks out normally.
+5. Later in the lobby, security casually echoes the exact private phrase.
+6. Protagonist freezes; guard covers with "아, 저희끼리 한 말입니다" and gives finger guns.
+7. Protagonist slowly looks up at the elevator CCTV. End.
 
-### S05 — time / hunger realization
-- Harin: "우리 이 얘기 몇 분째 하는 거야?"
-- Taemin: "배고픈데 결정은 더 안 됨."
-- Gaeun: "그냥 무난한 데 갈까…"
+State deltas:
+1→2 public persona changes to private persona.
+2→3 private ritual becomes concrete.
+3→4 comic contrast becomes visible.
+4→5 private information leaks into public space.
+5→6 suspicion becomes certainty.
+6→7 the mechanism of exposure is understood.
 
-Visual:
-phone or clock check is enough; do not let incidental text become baked semantic lettering.
+## 6. L6 — DIALOGUE DRAFT
 
-### S06 — familiar-place payoff
-Location: generic familiar Korean lunch restaurant, no real brand.
+Register: short spoken lines + minimal captions.
 
-- Gaeun: "역시 여기가 제일 무난해."
-- Taemin: "처음부터 여기 올 걸."
-- Harin: "그러니까…"
+Beat 1 caption:
+- "회사에선 나름 멀쩡한 척함."
 
-Visual:
-already seated and eating; unusually calm / routine.
-The scene itself is the punchline.
-Avoid decorative signage/menu text unless required by the final lettering plan.
+Elevator self-talk:
+- "오~"
+- "오늘 좀 나오는데?"
 
-## 5. Reference authority — USER CONFIRMED 2026-09-06
+Optional tiny reaction:
+- "ㅋㅋ"
 
-The user re-supplied the same current visual authorities during this session.
+When doors open:
+- no dialogue; immediate composed face.
 
-Canonical repository equivalents:
-- REF_V2_D: assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg
-- REF_V2_E: assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg
+Security:
+- "오~ 오늘 좀 나오는데~"
 
-Roles:
-- REF_V2_D: character identity + face/line/color authority.
-- REF_V2_E: multi-character scene drawing language + background density / character-environment integration.
+Protagonist:
+- "…네?"
 
-Approved binaries outrank generalized prompt prose.
+Security:
+- "아, 아닙니다. 저희끼리 한 말이에요."
 
-## 6. Native-chat S01 and failed continuation experiment
+Security gesture:
+- finger guns; no extra line required.
 
-A ChatGPT/native S01 image was visually approved by the user in this session.
-However:
-- it was not produced by the repository render adapter;
-- no repository attempt record / artifact hash is bound to it;
-- therefore it is **visual taste evidence only**, not a machine-valid PRODUCTION_STATE episode_anchor.
+Final inner reaction:
+- "설마."
 
-Do not fabricate an attempt or anchor record for it.
+No explanatory ending caption.
 
-After that S01 approval, several native-chat continuation attempts failed the production contract:
-- outputs repeatedly collapsed S02-S06 into one six-panel page;
-- Korean dialogue / labels were baked into the raster;
-- at least one panel showed face/hand degradation, especially under small-panel + hand-near-face conditions.
+## 7. L7 — DIALOGUE HUMANIZATION
 
-All such multi-panel/baked-text outputs are INVALID and must not be used as anchors, repair bases, or final art.
+Applied:
+- removed polished explanatory sentences from spoken dialogue;
+- avoided a narrator explaining the CCTV reveal;
+- kept the repeated phrase mundane enough to plausibly leak from a private habit;
+- guard does not deliver a crafted punchline;
+- ending is the protagonist looking at CCTV, not a moral or summary;
+- no fake conflict, punishment, or viral consequence.
 
-Finding:
-the long conversational context caused native image generation to optimize for "complete the episode/page" rather than the isolated requested slide.
-This is a renderer/context isolation failure, not evidence that the supplied references are inadequate.
+Current candidate wording to be approved:
+- caption: "회사에선 나름 멀쩡한 척함."
+- private phrase: "오~ 오늘 좀 나오는데?"
+- guard echo: "오~ 오늘 좀 나오는데~"
+- protagonist: "…네?"
+- guard cover: "아, 아닙니다. 저희끼리 한 말이에요."
+- final thought: "설마."
 
-## 7. Current operating mode — MANUAL_VALIDATION
+## 8. L8 — USER VOICE GATE
 
-Until the image API/provider adapter is actually connected and measured:
-- every production stage is user-reviewed manually;
-- no automatic continuation after S01;
-- each raster slide is generated and reviewed one at a time;
-- lettering remains separate and is reviewed separately;
-- final export is reviewed separately.
+Status: PENDING.
 
-Chat/native image generation may be used temporarily for manual visual experiments, but it is not treated as a reproducible machine-bound production attempt unless the artifact is explicitly ingested through a future sanctioned ingest path.
+This L1-L7 package must receive explicit user approval before:
+- cast routing;
+- storyboard;
+- character design;
+- whole-episode visual plan;
+- render contract;
+- any raster generation.
 
-If a conversation-inferred renderer repeats a hard contract failure such as MULTI_PANEL or BAKED_TEXT twice:
-- stop retrying in the same contaminated context;
-- use a clean dedicated render context or wait for the explicit API renderer;
-- do not burn repeated attempts on the same failure mode.
-
-## 8. Long-term target — API_PRODUCTION
-
-Target user experience remains:
-**storyboard approval → reference confirmation → S01 approval → finished episode**.
-
-Internally, the long-term runner should use isolated requests:
-- one request = exactly one slide;
-- explicit canonical prompt + only that slide contract;
-- actual reference binaries + approved S01 anchor as media inputs;
-- image provider adapter, initially benchmarking GPT-Image-2;
-- deterministic local contract QC first;
-- low-cost vision QC provider adapter, initially benchmarking DeepSeek Flash Vision;
-- deterministic Python lettering;
-- cost / retry / first-pass-rate logging.
-
-Model names are initial benchmark candidates, not permanent architecture constants.
-
-## 9. Exact next action for the next session
-
-1. restore this README + PRODUCTION_STATE + CURRENT_STATE;
-2. create EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN from the already-approved six-slide package;
-3. show the structured contracts / preflight result to the user for manual approval;
-4. only after that approval, perform one-slide-at-a-time raster validation;
-5. do not auto-finish while MANUAL_VALIDATION is active.
+MANUAL_VALIDATION remains active.
