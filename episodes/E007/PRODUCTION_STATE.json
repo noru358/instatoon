@@ -1,7 +1,7 @@
 {
   "state_version": "1.0",
   "episode_id": "E007",
-  "current_stage": "RENDER_CONTRACT_READY",
+  "current_stage": "REMAINING_RENDER",
   "voice_gate": {
     "status": "PASS",
     "approved_scope": "L1_L7_FULL_PACKAGE",
@@ -62,14 +62,24 @@
       "type": "VISUAL_QC",
       "status": "PARTIAL_PASS_REPAIR_REQUIRED",
       "value": "User approved Harin identity in S01, but background extras resembled recurring main characters. Operator also detected baked raster text/signage, which violates text-free raster contract. Preserve Harin/composition; repair extras and remove readable raster text."
+    },
+    {
+      "decision_id": "E007_S01_USER_PASS_WITH_TEXT_EXCEPTION_20260906",
+      "type": "VISUAL_QC",
+      "status": "USER_PASS_WITH_KNOWN_CONTRACT_DEFECT",
+      "value": "User explicitly passed S01 visual quality and chose to proceed despite baked raster text. Harin identity/style/background-extra diversity passed; baked caption/background text remains a known deferred raster-text defect and is not reclassified as compliant."
     }
   ],
   "frame_qc": {},
   "blockers": [],
-  "episode_anchor": null,
+  "episode_anchor": {
+    "status": "VISUAL_TASTE_ANCHOR_ONLY",
+    "slide_id": "E007_S01",
+    "note": "User-approved native/chat S01 may guide visual continuity, but no repository-bound attempt/artifact hash has been persisted; do not mislabel as machine-valid anchor."
+  },
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "S01_TARGETED_REPAIR_AND_REVIEW"
+    "current_checkpoint": "S02_RENDER_NEXT"
   }
 }
