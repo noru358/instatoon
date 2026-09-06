@@ -35,10 +35,10 @@ Beat 3: types an ambiguous Korean-localized line: "오늘 우리 매장 애들 �
 Beat 4: send → one beat later notices the chat title is the workplace group.
 Beat 5: immediate delete. Seen/read count is already huge.
 Beat 6: private DM arrives from a coworker: "괜찮아? 무슨 일 있었어?"
-Beat 7: protagonist frantically explains that the message was about the incident / meant for friends, while internally wanting to disappear.
+Beat 7: no reply and no narration. The protagonist freezes in extreme embarrassment and visibly wants to disappear.
 
 ## L5 — DIALOGUE DRAFT
-Protagonist (to self / intended friend message):
+Protagonist (intended friend message):
 "오늘 우리 매장 애들 진짜 미쳤다"
 
 After noticing wrong chat:
@@ -48,20 +48,20 @@ Private coworker DM:
 "괜찮아?"
 "무슨 일 있었어?"
 
-Protagonist reply:
-"아니 그게"
-"그 뜻이 아니라"
-"아까 그 손님 때문에..."
-
-Ending internal line:
-"진짜 나라 옮기고 싶었음."
+Ending:
+NO PROTAGONIST REPLY.
+NO NARRATION.
+NO INTERNAL MONOLOGUE.
+End only on a strongly readable visual of extreme embarrassment.
 
 ## L6 — HUMANIZATION PASS
-- keep fragments and panic-stacking instead of polished explanation;
+- no polished explanation after the mistake;
+- let the silence after the coworker's DM carry the embarrassment;
+- final emotion is shown through face/body/pose rather than narration;
 - no moral or lesson;
 - do not add a manager confrontation, firing risk, public pile-on, or revenge;
 - preserve mundane messenger behavior as the comedy engine;
-- avoid excessive ㅋㅋ or narrator explanation.
+- avoid excessive ㅋㅋ or explanatory captions.
 
 ## L7 — ADAPTATION / FACT BOUNDARY
 BASE / INSPIRATION:
@@ -69,19 +69,22 @@ BASE / INSPIRATION:
 - ~10-second delete;
 - 40+ viewers;
 - coworker private check-in;
-- panic explanation;
+- source author then panicked and explained;
 - "move to another country" embarrassment framing.
 
 Localized adaptation:
-- original English phrase is replaced with the Korean-ambiguous "오늘 우리 매장 애들 진짜 미쳤다" to preserve the same social-misread function.
-- no claim that the Korean wording appeared in the source.
-- workplace setting remains a generic service/bar-cafe-like workplace rather than a named real business.
+- original English phrase is replaced with the Korean-ambiguous "오늘 우리 매장 애들 진짜 미쳤다" to preserve the same social-misread function;
+- no claim that the Korean wording appeared in the source;
+- workplace setting remains a generic service/bar-cafe-like workplace rather than a named real business;
+- the source author's later explanation is intentionally omitted from the episode;
+- the source's "move countries" embarrassment sentiment is translated into a silent visual reaction instead of narration.
 
 Not added:
 - no punishment;
 - no boss escalation;
 - no public ridicule;
-- no invented romance/conflict.
+- no invented romance/conflict;
+- no protagonist explanatory dialogue after the DM.
 
 ## L8 USER VOICE GATE
 PENDING — explicit user approval required before L10 storyboard/cast routing.
