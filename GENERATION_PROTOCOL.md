@@ -105,7 +105,7 @@ If one approved asset is replaced:
 
 ## 8. Full-frame exception lane
 
-Instatoon pipeline/render.py is exception-only and requires --exception-lane.
+Instatoon has no retained per-slide renderer. Full-frame exceptions use the shared AutoPipeline asset-production/dispatch path.
 
 An exception record must state:
 - scene ID;
