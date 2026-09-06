@@ -3,6 +3,15 @@
 실제 사람이 쓴 인터넷 소재 → 대본/콘티 → 승인된 그림체의 만화 → 편집 가능한 대사 합성 → 검수/내보내기.
 최종 목표는 ChatGPT 대화 기억 없이 실행되는 독립 도구다.
 
+## 시리즈별 작업 진입점
+
+이 리포의 기존 루트 제작 규칙·실행기는 기존 썰 인스타툰을 기본 대상으로 한다.
+새 집밥 콘텐츠의 **기획·설계 초안**은 [series/jipbap/README.md](series/jipbap/README.md)에서 시작한다.
+집밥의 활성 기획·승인은 해당 폴더의 `STATE.json`이 소유하며, 루트 `Active episode:`를 변경하지 않는다.
+집밥은 아직 기존 CLI/CI에 연결되지 않았다. `EPISODE_DESIGN.json`을 기존 `EPISODE_PLAN.json`으로 간주하거나
+집밥 작업에 기본 `render`/`qc` 워크플로를 실행하지 않는다. 실제 생성 전 시리즈별 입력 연결과 검증이 필요하다.
+공유할 제작 원칙과 집밥에 별도로 설계한 내용은 집밥 README의 적용 범위 표에 명시한다.
+
 현재는 **수동 제작 규칙 + 일부 입력 검증 코드** 단계다. 완성된 자동 생산기는 아니다.
 현재 제작 위치는 [CURRENT_STATE.md](CURRENT_STATE.md), 구현 현황·진단·외부화 순서는 [AUTOMATION_TRANSITION.md](AUTOMATION_TRANSITION.md)를 따른다.
 

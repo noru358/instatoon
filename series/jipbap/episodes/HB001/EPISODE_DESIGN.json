@@ -1,0 +1,287 @@
+{
+  "design_version": "jipbap.design.v0.1",
+  "series_id": "jipbap",
+  "episode_id": "HB001",
+  "title": "간장계란밥에 김 한 장",
+  "status": "PLAN_APPROVED_AWAITING_RENDER_PREP",
+  "executable_render_contract": false,
+  "premise": "간장계란밥을 먹다가 바삭한 흰자 끝을 발견하고, 다음 숟갈에는 김을 얹어 먹는다.",
+  "sensory_focus": [
+    "노른자와 간장이 묻은 밥",
+    "바삭하게 익힌 흰자 가장자리",
+    "다음 입에 더하는 김의 식감"
+  ],
+  "landing": "말을 더하지 않고 김을 얹은 다음 숟갈로 이어간다.",
+  "source": {
+    "provenance_class": "ORIGINAL_STAGED_MEAL",
+    "personal_testimonial": false,
+    "basis": "사용자의 집밥 콘텐츠 제작 요청을 바탕으로 제안한 창작 재연. 특정 실제 식사 후기나 인터넷 썰의 각색이 아니다.",
+    "user_photo_role": "추어탕 사진은 시리즈 발상 계기이며 본 회차의 메뉴·그림체·필수 렌더 참조가 아니다.",
+    "food_fact_check": "PENDING_PRE_RENDER",
+    "fact_check_scope": [
+      "계란은 가장자리가 바삭하고 노른자가 흐르는 조리 상태로 일관되게 표현",
+      "김은 별도 반찬 접시에 놓인 잘라진 구운 김",
+      "먹는 순서에 따른 음식량·형태 연결"
+    ],
+    "external_sources": []
+  },
+  "delivery": {
+    "primary": {
+      "type": "CAROUSEL",
+      "aspect_ratio": "4:5",
+      "width": 1080,
+      "height": 1350,
+      "slide_count": 5
+    },
+    "optional_derivative": {
+      "type": "NARRATED_LIGHT_ANIMATION",
+      "aspect_ratio": "9:16",
+      "width": 1080,
+      "height": 1920,
+      "planned_duration_seconds": 28,
+      "status": "DESIGN_ONLY_NOT_AUTHORIZED_FOR_GENERATION"
+    },
+    "text_free_art": true,
+    "panels_per_image": 1,
+    "delivery_mode": "SEPARATE_FILES",
+    "crop_policy": "음식·입·손을 보존하는 재배치/배경 확장 우선. 무조건 중앙 크롭하거나 늘이지 않음"
+  },
+  "visual": {
+    "style_status": "APPROVED_STYLE_REFERENCE_BOUND_PENDING_RENDER_CONTRACT",
+    "direction": "JIPBAP_REF_001의 둥근 손그림 2D 인물·선명한 검은 외곽선·읽기 쉬운 면 채색을 기준으로 한다. 음식에는 재료 구분에 필요한 제한적 질감을 같은 작화 언어 안에서 검증한다.",
+    "candidate_reference_paths": [
+      "assets/style_refs/jipbap/JIPBAP_REF_001_KOREAN_WEBTOON_MEAL_DIRECTION.jpeg"
+    ],
+    "candidate_reference_scope": "사용자 승인 JIPBAP style reference. 패널 분할/대사/치과 서사/고유 인물·배경은 제외. 첫 렌더부터 actual style media input으로 전달",
+    "required_reference_bindings": [
+      {
+        "id": "JIPBAP_REF_001",
+        "path": "assets/style_refs/jipbap/JIPBAP_REF_001_KOREAN_WEBTOON_MEAL_DIRECTION.jpeg",
+        "sha256": "792be650dc2aae9a2ca5ee6d2fadd51054475d9171eaf5b427fb5192893ec972",
+        "role": "style",
+        "conditioning_requirement": "BINARY_REQUIRED",
+        "exclude": [
+          "text",
+          "speech_bubbles",
+          "panel_layout",
+          "dental_story",
+          "specific_character_identity",
+          "specific_location"
+        ]
+      }
+    ],
+    "approved_anchor": null,
+    "cast": [
+      {
+        "id": "diner_01",
+        "role": "혼자 집밥을 먹는 성인",
+        "identity_status": "TO_BE_DERIVED_BEFORE_S01",
+        "recurring_instatoon_identity": null,
+        "appears_in": [
+          "HB001_S01",
+          "HB001_S02",
+          "HB001_S03",
+          "HB001_S04",
+          "HB001_S05"
+        ]
+      }
+    ],
+    "meal_continuity": {
+      "bowl": "무늬 없는 밝은 밥그릇 하나",
+      "utensil": "오른손으로 사용하는 단순한 숟가락 하나",
+      "side_dish": "작은 접시 하나에 잘라진 구운 김",
+      "table": "단순한 가정 식탁, 그릇과 김 접시의 상대 위치 유지",
+      "food": "밥·가장자리가 바삭한 반숙 계란·간장으로 정한 회차용 간장계란밥",
+      "lighting": "음식의 고유 색과 재료 구분을 보존, 최종 스타일은 시안 검증"
+    }
+  },
+  "copy": [
+    {
+      "id": "C01",
+      "role": "INNER_NARRATION",
+      "speaker": "diner_01",
+      "text": "오늘은 간장계란밥.",
+      "status": "DRAFT"
+    },
+    {
+      "id": "C02",
+      "role": "INNER_NARRATION",
+      "speaker": "diner_01",
+      "text": "흰자 끝이 바삭하네.",
+      "status": "DRAFT"
+    },
+    {
+      "id": "C03",
+      "role": "INNER_NARRATION",
+      "speaker": "diner_01",
+      "text": "이번엔 김 얹어서.",
+      "status": "DRAFT"
+    }
+  ],
+  "audio_design": {
+    "narration": "짧은 속말. 대사 원문은 copy 객체만 사용. 목소리 미선정, 녹음/합성 없음",
+    "lip_sync_required": false,
+    "background_music": "NONE_FOR_PILOT",
+    "foley_status": "PLANNED_NOT_GENERATED",
+    "timing_status": "PROVISIONAL_UNTIL_VOICE_AND_MOTION_ARE_CHECKED"
+  },
+  "slides": [
+    {
+      "slide_id": "HB001_S01",
+      "order": 1,
+      "beat": "음식을 보고 첫 숟갈을 준비한다",
+      "sensory_job": "노른자·흰자 가장자리·밥을 식별하고 한입을 기대하게 한다",
+      "camera": "식탁 전면의 약한 사선 중경. 음식이 전경의 주초점이고 뒤쪽에 식사자의 얼굴과 상체 일부가 함께 보임",
+      "visible_cast": "diner_01 얼굴·상체·숟가락 든 손",
+      "expression": "그릇을 보며 먹을 준비를 하는 자연스러운 관심. 정면 우향 얼굴을 기준으로 강제하지 않음",
+      "food_state_before": "노른자가 아직 터지지 않은 계란이 밥 위에 있고 간장이 일부 묻어 있음. 김은 접시에 있음",
+      "depicted_instant": "숟가락이 노른자에 닿기 직전",
+      "food_state_after": "아직 먹거나 섞지 않음",
+      "utensil_action": "오른손 숟가락으로 첫 동작 준비",
+      "copy_ids": [
+        "C01"
+      ],
+      "text_placement": "빈 식탁 쪽 짧은 캡션, 음식과 얼굴을 덮지 않음",
+      "sound_cues": [
+        "작은 그릇/수저 접촉음",
+        "C01 속말"
+      ],
+      "video_timing": {
+        "start": 0,
+        "end": 5
+      },
+      "motion_intent": "필요하면 손이 그릇 쪽으로 조금 이동. 정지 화면도 허용",
+      "qc_focus": [
+        "음식과 인물이 같은 그림체인가",
+        "첫 화면이 먹고 싶은가",
+        "복수 컷/제목 카드/생성 글자가 없는가"
+      ]
+    },
+    {
+      "slide_id": "HB001_S02",
+      "order": 2,
+      "beat": "노른자를 터뜨려 밥에 묻힌다",
+      "sensory_job": "노른자가 퍼지고 밥의 색이 달라지는 순간",
+      "camera": "그릇 위에서 비스듬히 내려다보는 음식·손 접사. 얼굴 없음",
+      "visible_cast": "diner_01 오른손 일부",
+      "expression": null,
+      "food_state_before": "S01의 터지지 않은 노른자",
+      "depicted_instant": "숟가락 옆으로 노른자가 흘러 일부 밥에 묻는 순간",
+      "food_state_after": "한입 뜰 수 있도록 노른자·간장을 묻힌 밥. 흰자 가장자리 조각은 구분됨",
+      "utensil_action": "오른손 숟가락으로 한 방향으로 눌러 섞음",
+      "copy_ids": [],
+      "text_placement": "무문자",
+      "sound_cues": [
+        "짧은 밥 섞는 소리"
+      ],
+      "video_timing": {
+        "start": 5,
+        "end": 11
+      },
+      "motion_intent": "노른자 흐름과 짧은 섞기. 음식/숟가락 형태가 안정적인 길이로 제한",
+      "qc_focus": [
+        "단일 순간 한 컷인가",
+        "계란이 치즈처럼 늘어나지 않는가",
+        "노른자와 밥의 경계가 읽히는가"
+      ]
+    },
+    {
+      "slide_id": "HB001_S03",
+      "order": 3,
+      "beat": "첫입에서 바삭한 흰자 끝을 느낀다",
+      "sensory_job": "부드러운 밥 속 바삭한 끝의 대비",
+      "camera": "식사자의 오른쪽에서 본 눈높이 반응 근접샷. 머리는 그릇 쪽으로 자연스럽게 향함",
+      "visible_cast": "diner_01 얼굴·어깨·숟가락 든 손",
+      "expression": "한입을 삼키기 전 짧은 만족/발견. 눈꺼풀과 입의 자연스러운 변화 허용",
+      "food_state_before": "섞인 밥과 흰자 가장자리 조각 한입을 숟가락에 뜸",
+      "depicted_instant": "한입 먹고 숟가락을 입에서 조금 뗀 순간",
+      "food_state_after": "밥이 한입 줄고 숟가락은 비어 있음",
+      "utensil_action": "먹은 뒤 오른손 숟가락이 입에서 떨어져 있음",
+      "copy_ids": [
+        "C02"
+      ],
+      "text_placement": "속말 캡션을 얼굴/입/손 밖의 여백에 배치",
+      "sound_cues": [
+        "작고 짧은 바삭한 식감 소리",
+        "삼키는 호흡 뒤 C02 속말"
+      ],
+      "video_timing": {
+        "start": 11,
+        "end": 17
+      },
+      "motion_intent": "입으로 가져오기와 반응 연결. 긴 씹기 반복이나 과한 입 확대 없이 필요한 동작만",
+      "qc_focus": [
+        "수저와 입이 융합되지 않는가",
+        "S01 인물 정체성이 유지되는가",
+        "맛을 느끼는 표정인가"
+      ]
+    },
+    {
+      "slide_id": "HB001_S04",
+      "order": 4,
+      "beat": "다음 숟갈에 김을 얹는다",
+      "sensory_job": "같은 밥에 마른 김의 질감이 더해지는 변화",
+      "camera": "식사자의 시선에 가까운 숟가락·김·밥 접사. 음식이 가장 선명한 초점",
+      "visible_cast": "diner_01 오른손, 필요하면 김 접시 곁 왼손 일부",
+      "expression": null,
+      "food_state_before": "한입 줄어든 섞인 밥, 김은 접시에 있음",
+      "depicted_instant": "새로 뜬 밥 위에 김 한 조각이 이미 얹힌 숟가락",
+      "food_state_after": "김 한 조각이 접시에서 숟가락으로 옮겨짐. 아직 두 번째 입은 먹지 않음",
+      "utensil_action": "오른손이 김과 밥을 담은 숟가락을 지탱",
+      "copy_ids": [
+        "C03"
+      ],
+      "text_placement": "숟가락과 음식이 아닌 배경 여백",
+      "sound_cues": [
+        "김의 짧은 바스락 소리",
+        "C03 속말"
+      ],
+      "video_timing": {
+        "start": 17,
+        "end": 23
+      },
+      "motion_intent": "김 얹기 또는 얹힌 숟가락 들기 중 필요한 한 동작. 복잡한 양손 안무로 확장하지 않음",
+      "qc_focus": [
+        "김이 숟가락이나 손가락과 붙지 않는가",
+        "김 접시와 음식량이 이어지는가",
+        "밥이 S01의 안 섞인 상태로 돌아가지 않는가"
+      ]
+    },
+    {
+      "slide_id": "HB001_S05",
+      "order": 5,
+      "beat": "김을 얹은 다음 입을 먹으며 끝난다",
+      "sensory_job": "다음 한입으로 이어지는 식사의 리듬과 만족",
+      "camera": "식탁 옆 낮은 중경, 그릇과 손을 중심에 두고 얼굴 반응도 일부 읽힘",
+      "visible_cast": "diner_01 얼굴 일부·손·상체",
+      "expression": "두 번째 한입 뒤 자연스럽게 식사를 이어갈 표정. 억지 교훈이나 광고형 미소 없음",
+      "food_state_before": "S04의 김을 얹은 밥 한 숟갈",
+      "depicted_instant": "두 번째 입을 먹은 후 숟가락을 그릇 쪽으로 내리는 순간",
+      "food_state_after": "밥 두 입과 김 한 조각을 먹음. 그릇은 아직 대부분 차 있음",
+      "utensil_action": "오른손의 빈 숟가락이 그릇 쪽으로 돌아옴",
+      "copy_ids": [],
+      "text_placement": "무문자, 별도 결론 카드 없음",
+      "sound_cues": [
+        "작은 식기 소리",
+        "짧은 실내 정적"
+      ],
+      "video_timing": {
+        "start": 23,
+        "end": 28
+      },
+      "motion_intent": "짧은 반응과 수저 내리기. 실제 먹는 양을 고려해 갑자기 빈 그릇으로 끝내지 않음",
+      "qc_focus": [
+        "작은 만족으로 끝나는가",
+        "음식량이 실제 두 입과 부합하는가",
+        "형태가 되감기는 강제 루프가 없는가"
+      ]
+    }
+  ],
+  "pre_render_unresolved": [
+    "음식 외형·조리 상태·식감 가설의 자료 확인",
+    "diner_01의 구체적 정체성 도출",
+    "집밥용 시리즈 경로/승인/프롬프트 연결과 실행 계약 검증",
+    "JIPBAP_REF_001을 실제 style media input으로 전달하는 집밥용 생성 계약/adapter 검증"
+  ],
+  "approval_state_owner": "series/jipbap/STATE.json"
+}

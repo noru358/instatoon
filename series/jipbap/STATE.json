@@ -1,0 +1,83 @@
+{
+  "state_version": "jipbap.design-state.v0.1",
+  "series_id": "jipbap",
+  "updated": "2026-09-06",
+  "branch": "design/jipbap-series",
+  "base_commit": "350ce40c9c3f9214b9ca64e0a33efa6c4635cc9d",
+  "current_stage": "RENDER_PREP_PENDING",
+  "active_episode_id": "HB001",
+  "active_episode_design": "series/jipbap/episodes/HB001/EPISODE_DESIGN.json",
+  "series_authority": "series/jipbap/README.md",
+  "authorized_scope": {
+    "planning_and_structure": true,
+    "image_generation": false,
+    "audio_generation": false,
+    "video_generation": false,
+    "publishing": false,
+    "evidence": "사용자: 집밥 시리즈 방향·HB001 기획/콘티·공개 GitHub 업로드 승인. 이미지 생성은 다음 세션에서 진행하도록 지시."
+  },
+  "gates": {
+    "G0_PLAN": {
+      "status": "PASS",
+      "approved_scope": "SERIES_DIRECTION_HB001_STORYBOARD_COPY_AND_PUBLIC_REPOSITORY_UPLOAD",
+      "evidence": "2026-09-06 user replied “ㅇㅇ 승인. 그리고 이미지 레퍼런스는 이걸로 해보자. 작업 다되면 새 세션에서 이어가보자.”",
+      "package_sha256": {
+        "series/jipbap/README.md": "fef864d93a69399e9dd2dccfd1ce8f300a6b5f4d747bb4e6ccafe370cf05a097",
+        "series/jipbap/episodes/HB001/EPISODE_DESIGN.json": "eda3417476bf43a2f62dfd7d1ed6d7c28ca55e950c0e78c750b7fd5f4732cd82"
+      }
+    },
+    "G1_FIRST_FRAME": {
+      "status": "NOT_STARTED",
+      "artifact_sha256": null,
+      "evidence": null
+    },
+    "G2_FULL_ART_SET": {
+      "status": "NOT_STARTED",
+      "artifact_sha256": [],
+      "evidence": null
+    },
+    "G3_FINAL": {
+      "status": "NOT_STARTED",
+      "artifact_sha256": [],
+      "evidence": null
+    }
+  },
+  "execution": {
+    "actor": "ChatGPT",
+    "delegated_agents": 0,
+    "completed": [
+      "REPOSITORY_REVIEW",
+      "SERIES_DESIGN_DRAFT",
+      "HB001_STORYBOARD_AND_COPY_DRAFT",
+      "G0_PLAN_USER_APPROVAL",
+      "JIPBAP_REF_001_ASSET_INGESTION_AND_BINDING"
+    ],
+    "food_research": "PENDING_PRE_RENDER",
+    "approved_visual_references": [
+      {
+        "id": "JIPBAP_REF_001",
+        "path": "assets/style_refs/jipbap/JIPBAP_REF_001_KOREAN_WEBTOON_MEAL_DIRECTION.jpeg",
+        "sha256": "792be650dc2aae9a2ca5ee6d2fadd51054475d9171eaf5b427fb5192893ec972",
+        "role": "style",
+        "source": "user_provided",
+        "approved": "2026-09-06"
+      }
+    ],
+    "generated_artifacts": [],
+    "generation_calls": 0,
+    "existing_runtime_integration": "NOT_IMPLEMENTED",
+    "render_authorized": false
+  },
+  "next_action": "새 세션에서 JIPBAP_REF_001을 실제 style media input으로 연결할 생성 계약을 준비하고, 간장계란밥 외형 자료와 diner_01 정체성을 확정한 뒤 S01 한 컷을 생성·검수한다.",
+  "resume_order": [
+    "series/jipbap/README.md",
+    "series/jipbap/STATE.json",
+    "series/jipbap/episodes/HB001/EPISODE_DESIGN.json"
+  ],
+  "isolation": {
+    "root_active_episode": "E007",
+    "modify_root_active_episode": false,
+    "advance_autopipeline_default_pointer": false,
+    "note": "시리즈별 설계 격리. 기존 render/qc Actions는 집밥용 경로를 지원하기 전 실행하지 않는다."
+  }
+}
