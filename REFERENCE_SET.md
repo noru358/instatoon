@@ -1,7 +1,7 @@
 # REFERENCE_SET.md
 
 # CURRENT REFERENCE MAP — INSTATOON_STYLE_v2.0
-Updated: 2026-09-05
+Updated: 2026-09-07
 
 ## Legacy assets
 
@@ -61,6 +61,98 @@ It confirms:
 - correct direction for scene-level application of the canonical style.
 
 Do not classify this image as visual drift merely because it contains a full scene rather than a character sheet.
+
+## Reference asset classes and request policy
+
+Reference requests are routed by **role and reuse scope**, not by episode improvisation.
+
+### Class A — PROJECT_CANONICAL
+
+Purpose:
+- drawing language;
+- recurring lead identity;
+- reusable background/scene grammar.
+
+Storage:
+- materialized binary under the project asset tree;
+- stable path + SHA-256 recorded in this reference map;
+- reusable across episodes when the role matches.
+
+Promotion:
+- requires explicit user approval as a reusable project reference;
+- never infer promotion merely because one episode used the image successfully.
+
+### Class B — PROJECT_REUSABLE
+
+Purpose:
+- a recurring need not yet strong enough to redefine the canonical style, such as a reusable expression-range sample, extra/background-person diversity sample, recurring location, or recurrent prop grammar.
+
+Storage:
+- materialized binary in a reusable project asset area;
+- role, intended scope and hash recorded before production relies on it.
+
+Promotion:
+- may later become PROJECT_CANONICAL only after repeated usefulness + explicit user approval;
+- otherwise remains a bounded reusable library asset.
+
+### Class C — EPISODE_LOCAL
+
+Purpose:
+- one-off location, person, food/object, outfit, device, spatial arrangement, or factual visual evidence needed only for one story.
+
+Storage:
+- bind to the episode package/work packet with actual bytes or a verified immutable source;
+- hash and role are recorded;
+- do not add it to the global style/reference set automatically.
+
+Lifecycle:
+- it may be archived with the episode;
+- promote it only if a later cross-episode need appears and the user explicitly approves reuse.
+
+### Class D — ACCEPTED_OUTPUT_ANCHOR
+
+Purpose:
+- last-known-good generated frame;
+- episode-local identity/geometry/pose continuity.
+
+Storage:
+- artifact hash + exact accepted file;
+- bound to the approval/QC record.
+
+Authority:
+- secondary only;
+- never silently replaces PROJECT_CANONICAL style media.
+
+### Class E — RESEARCH_ONLY
+
+Purpose:
+- external examples used to understand composition, behavior, culture, product UI, food state, or other real-world detail.
+
+Authority:
+- not renderer-conditioning media by default;
+- must not be treated as a canonical style reference unless separately approved and registered.
+
+### When to ask the user for a new reference
+
+Before requesting a file, the visual preflight must answer:
+
+1. **What visual role is missing?**
+2. **Can current registered references already cover that role?**
+3. **Can the requirement be solved deterministically by layout/vector/UI/scene contract instead of a new image reference?**
+4. **Is the need project-reusable or episode-local?**
+5. **Will lack of this reference materially reduce correctness or reproducibility?**
+
+Ask the user only when the missing evidence is material and cannot be satisfied by current registered assets or deterministic construction.
+
+When asking, state:
+- the missing role;
+- expected scope: PROJECT_CANONICAL / PROJECT_REUSABLE / EPISODE_LOCAL;
+- why current assets are insufficient;
+- where it will be registered if supplied.
+
+Do **not** repeatedly ask the user to re-upload a reference that is already materialized and hash-verified in the repository/work packet and can be delivered to the active renderer.
+
+If a supplied image should be reusable, register it once and reuse it by asset identity. If it is episode-only, keep it episode-scoped. Never solve a missing binary by copying its visual description into a prompt and pretending the reference requirement was satisfied.
 
 ## Episode-local character references
 

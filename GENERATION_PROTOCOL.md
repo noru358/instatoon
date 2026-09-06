@@ -1,7 +1,7 @@
 # GENERATION_PROTOCOL.md
 
 # GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.5
-Updated: 2026-09-06
+Updated: 2026-09-07
 
 ## 0. Stage order
 
@@ -97,6 +97,37 @@ Therefore, for CONVERSATION_INFERRED/manual native generation:
 - if MULTI_PANEL, BAKED_TEXT, wrong-cast, or unrelated-scene hard failures repeat twice in the same context, stop retrying that path;
 - use a clean dedicated render context for the next manual experiment, or remain blocked until the explicit API renderer is available;
 - repeated hard-contract failures are renderer/context failures, not ordinary stochastic noise.
+
+### Reference acquisition preflight — anti-hardcoding invariant
+
+A new reference request is a **resource-routing decision**, not an episode-specific prompt patch.
+
+Before asking the user for any image/audio/video reference:
+1. derive the missing visual/media role from the approved storyboard or render contract;
+2. check the registered project canonical and reusable asset set;
+3. check whether deterministic UI/vector/layout/geometry construction solves the need without new generative conditioning;
+4. classify the missing evidence as PROJECT_CANONICAL, PROJECT_REUSABLE, EPISODE_LOCAL, ACCEPTED_OUTPUT_ANCHOR, or RESEARCH_ONLY;
+5. ask only if the missing evidence materially affects correctness/reproducibility.
+
+When a user supplies a reusable reference:
+- materialize the actual binary;
+- record stable asset path, role, scope and SHA-256;
+- update the project reference registry;
+- bind future render contracts by asset identity instead of asking for the same upload again.
+
+When a user supplies an episode-local reference:
+- keep it bound to that episode/work packet;
+- do not promote it into global style authority automatically.
+
+Do not request a new raster reference for requirements that are fundamentally:
+- editable messenger/chat UI;
+- text placement;
+- read/unread indicators;
+- simple information overlays;
+- deterministic screen geometry;
+- other vector/layout logic already owned by the composition system.
+
+If a required binary is absent, fail closed and request the missing classified asset. Do not compensate by adding more prose to the image prompt.
 
 ### Reference routing
 
