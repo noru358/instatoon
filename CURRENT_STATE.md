@@ -16,8 +16,9 @@ E007:
 - visual plan: USER APPROVED;
 - reference authority: USER SUPPLIED and hash-confirmed against canonical REF_V2_D + REF_V2_E;
 - structured files created: EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN;
-- machine stage: VISUAL_PLAN_READY;
-- current checkpoint: L12.5 structured-contract user review;
+- machine stage: RENDER_CONTRACT_READY;
+- L12.5 structured contract: USER APPROVED;
+- current checkpoint: S01 render;
 - no raster, anchor, or frame QC exists yet.
 
 ## Reference binding
@@ -42,9 +43,7 @@ Both are BINARY_REQUIRED for production raster.
 
 ## 정확한 다음 행동
 
-1. present the L12.5 structured contract summary to the user;
-2. wait for explicit approval or edits;
-3. after approval set stage RENDER_CONTRACT_READY;
-4. run final media-binding authorization for S01 using both exact reference binaries;
-5. generate S01 only;
-6. stop for manual S01 QC.
+1. run final media-binding authorization for S01 using both exact reference binaries;
+2. generate S01 only;
+3. stop for manual S01 QC;
+4. do not generate S02 before explicit S01 PASS.
