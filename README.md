@@ -62,9 +62,16 @@ A new slide is not, by itself, a reason to call an image generator.
 
 ## Full-frame exception
 
-`pipeline/render.py` is retained only for an explicitly declared exceptional shot and fails closed without `--exception-lane`.
+A complete-frame stochastic exception is still allowed by ASSET_COMPOSITION_PROTOCOL, but there is **no legacy child renderer/state machine** for it.
 
-Old S01-anchor → S02..final full-frame generation, AUTO_FINISH, render/qc Actions workflows and retired E001 packages are not current production paths.
+Route the exception as a normal AutoPipeline asset-production job:
+- explicit scene/reason;
+- actual media bindings;
+- bounded generation;
+- user/QC approval;
+- register result as `EXCEPTION_OUTPUT`, episode-local by default.
+
+The retired S01-anchor → S02..final renderer, AUTO_FINISH, render/qc Actions and old episode schemas are intentionally removed.
 
 ## Current state
 
