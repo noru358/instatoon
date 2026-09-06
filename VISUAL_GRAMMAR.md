@@ -1,6 +1,6 @@
 # VISUAL_GRAMMAR.md
 
-# INSTATOON_VISUAL_GRAMMAR_v0.4 — SEQUENCE / COMPOSITION / LETTERING
+# INSTATOON_VISUAL_GRAMMAR_v0.5 — SEQUENCE / COMPOSITION / LETTERING
 Updated: 2026-09-06
 
 STYLE authority: STYLE_LOCK.md / MASTER_PROMPTS.md
@@ -74,9 +74,12 @@ Choose one dominant archetype per slide:
 - EMPTY_BEAT
 - BEFORE_AFTER
 - SPLIT_COMPARE
-- SEQUENCE_WITHIN_SLIDE is inactive under the current one-panel-per-file requirement; split sequential mini-beats into separate files.
+- SEQUENCE_WITHIN_SLIDE is inactive under the current one-panel-per-file requirement; do not create mini-panel strips.
+- SCREEN_INFORMATION
+- REACTION_WITH_UI_INSET
 
 Current production requires one single-panel composition per file.
+A UI inset/overlay is allowed when it is one informational layer inside a single composition, not a second comic panel.
 Do not subdivide by habit.
 
 ## 5. Visual rhythm
@@ -120,7 +123,41 @@ Do not interpret anti-exaggeration rules as a requirement for uniformly small re
 
 A style-preserving expressive pose is preferred over a technically safe but emotionally flat pose.
 
-### 5.3 Reflection / mirror staging
+### 5.3 Adjacent-beat visual-delta / merge preflight
+
+Story beats and visual slides are not the same thing.
+
+Before locking slide boundaries, compare every adjacent beat. If two beats keep the same actor, location, prop and basic action, and the meaningful change is mostly screen/UI state or a tiny reaction, mark them as a MERGE_CANDIDATE.
+
+Prefer one stronger slide when:
+- the second beat would otherwise become another near-identical person-looking-at-phone frame;
+- the state change can be communicated by a UI inset/overlay, reaction change, or one clear prop action;
+- splitting would force the renderer to invent an unnatural presentation pose merely to expose information.
+
+Keep beats separate only when the new slide has a meaningful visual delta such as a new action, location, relationship, body state, information viewpoint, or emotional landing.
+
+This is not a fixed slide-count reduction rule. It is a redundancy/clarity test.
+
+### 5.4 Screen-bearing props / information ownership
+
+Phones, tablets, laptops, monitors, TVs, kiosks and similar screen-bearing props require an explicit screen contract before raster generation.
+
+For each screen-bearing slide, declare:
+- one primary visual-information owner: CHARACTER_REACTION, SCREEN_INFORMATION, PHYSICAL_ACTION, ENVIRONMENT, RELATIONSHIP, or MIXED_WITH_DECLARED_PRIORITY;
+- what side of the physical device the character is actually looking at;
+- what side/edge the camera can physically see;
+- whether UI is carried by the physical screen or by a separate UI inset/overlay;
+- the UI/platform profile, when applicable.
+
+Geometry invariant:
+- readable screen content exists on the display face, never on the device back;
+- character gaze, device orientation and camera view must be mutually possible;
+- do not rotate a phone into an impossible "show the audience everything" pose;
+- if reaction and screen information both matter, prefer either an over-shoulder/POV screen shot OR a reaction shot with a separate UI inset.
+
+A character must not appear to be deliberately presenting a private screen to the audience unless the story actually calls for that action.
+
+### 5.5 Reflection / mirror staging
 
 Mirrors and reflective panels are geometry-sensitive story elements.
 
@@ -153,6 +190,22 @@ Default when the story does not require a specific demographic:
 
 A background extra that reads as an unselected main character is a cast-routing QC failure, not harmless style similarity.
 
+
+## 6.5 Interface / platform profiles
+
+UI follows context, not a single hard-coded app.
+
+Resolve an interface profile from story context before rendering. Domain defaults are allowed when they are natural and remain overrideable.
+
+Current Korean everyday-messaging default:
+- locale/context: contemporary Korea + ordinary personal/group messaging + no explicitly named service;
+- visual profile: KakaoTalk-inspired messaging grammar;
+- use familiar Korean chat hierarchy, bubble placement, group/private distinction and read/unread behavior;
+- do not require copying logos, wordmarks, trademarks, exact branded chrome, or baked readable UI text.
+
+If the story explicitly uses another service, workplace messenger, social DM, SMS, overseas setting, banking app, map app, delivery app, etc., that context overrides the Korean everyday-messaging default.
+
+Meaning-bearing chat text, room names, read-count numerals and animated/decrementing read-status effects should normally be vector/layout elements. The raster supplies the device, shell, blank UI zones and spatially correct geometry.
 
 ## 7. Art / text separation
 
@@ -334,7 +387,10 @@ Before production art:
 7. each slide has text role(s);
 8. text safe area is planned;
 9. camera rhythm is intentional;
-10. output ratio is fixed.
+10. adjacent beats were reviewed for meaningful visual delta / merge;
+11. every screen-bearing prop has one information owner and a physically valid screen/camera contract;
+12. context-sensitive UI/platform profile is resolved where relevant;
+13. output ratio is fixed.
 
 ## 15. Visual hard fails
 
@@ -353,7 +409,12 @@ Repair/reject when:
 - perceptual directional bias across the set is obvious and comes from repeated default-like face/camera orientation rather than story need;
 - a reaction/peak is materially flattened because anti-exaggeration was misread as anti-expression;
 - a story-relevant mirror/reflection has visibly inconsistent face/limb geometry;
-- a supporting character receives a visibly different yellow/sepia skin-color treatment without story justification.
+- a supporting character receives a visibly different yellow/sepia skin-color treatment without story justification;
+- a screen appears on the back/wrong face of a device;
+- character gaze, device face and camera view are physically incompatible;
+- a private device is held in an unnatural audience-presentation pose only to expose UI;
+- adjacent low-delta beats were split into repetitive slides without a defensible visual reason;
+- a contextually resolved UI profile is ignored without story reason.
 
 ## 16. Change control
 
