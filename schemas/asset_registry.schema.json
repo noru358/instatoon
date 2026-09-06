@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Instatoon Production Asset Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "assets"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "asset_id", "category", "scope", "status", "path", "sha256",
+          "width", "height", "approved_by"
+        ],
+        "properties": {
+          "asset_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9_.:-]+$"},
+          "category": {
+            "enum": [
+              "CHARACTER_POSE", "CHARACTER_EXPRESSION", "EXTRA_POSE",
+              "PROP", "BACKGROUND", "FX", "UI_SHELL", "EPISODE_LOCAL",
+              "EXCEPTION_OUTPUT"
+            ]
+          },
+          "scope": {
+            "enum": [
+              "PROJECT_CANONICAL", "PROJECT_REUSABLE",
+              "EPISODE_LOCAL", "EXCEPTION_OUTPUT"
+            ]
+          },
+          "status": {"enum": ["APPROVED", "REJECTED", "RETIRED"]},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "width": {"type": "integer", "minimum": 1},
+          "height": {"type": "integer", "minimum": 1},
+          "character_id": {"type": ["string", "null"]},
+          "episode_id": {"type": ["string", "null"]},
+          "view": {"type": ["string", "null"]},
+          "pose": {"type": ["string", "null"]},
+          "expression": {"type": ["string", "null"]},
+          "approved_by": {"enum": ["USER", "AUTHORIZED_OPERATOR"]},
+          "approval_note": {"type": "string"}
+        }
+      }
+    }
+  }
+}
