@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Instatoon renderer adapter — the only sanctioned production image path.
+"""Instatoon generative exception renderer.\n\nThe default final visual path is deterministic asset composition via\npipeline/compositor.py. This adapter is retained for approved exception shots,\nasset-authoring experiments that intentionally use its frame contract, and\nhistorical compatibility.\n\nLegacy note: this was formerly the only sanctioned production image path.
 
 Design rule: evidence is DERIVED, never submitted.
 This process loads the reference bytes, builds the request, calls the image
