@@ -41,14 +41,18 @@ jobs:
       - name: Existing render-guard regression suite
         run: python -m unittest pipeline.test_render_guard
 
-      - name: Wrong-stage auto-finish must not mutate E006
+      - name: Idle state must fail closed for production execution
         run: |
+          python pipeline/render_guard.py validate
           set +e
-          python -m pipeline.auto_finish run --episode E006
-          CODE=$?
+          python pipeline/render.py status
+          RENDER_CODE=$?
+          python -m pipeline.auto_finish run
+          AUTO_CODE=$?
           set -e
-          test "$CODE" -eq 2
-          git diff --exit-code -- episodes/E006/PRODUCTION_STATE.json
+          test "$RENDER_CODE" -eq 2
+          test "$AUTO_CODE" -eq 2
+          git diff --exit-code
 
       - name: Lettering-plan validation smoke test
         run: |

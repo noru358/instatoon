@@ -35,12 +35,27 @@ def git_blob_sha(path: Path) -> str:
     return hashlib.sha1(header + data).hexdigest()
 
 
-def active_episode_id(repo_root: Path) -> str:
+def active_episode_id(repo_root: Path) -> str | None:
     state = (repo_root / "CURRENT_STATE.md").read_text(encoding="utf-8")
-    matches = re.findall(r"^Active episode:\s+episodes/(E\d+)/README\.md\s*$", state, re.M)
-    if len(matches) != 1:
-        raise GuardError("CURRENT_STATE.md has no single parseable Active episode line")
-    return matches[0]
+    values = re.findall(r"^Active episode:\s*(.*?)\s*$", state, re.M)
+    if len(values) != 1:
+        raise GuardError("CURRENT_STATE.md must contain exactly one Active episode line")
+
+    value = values[0]
+    if value == "NONE":
+        return None
+
+    match = re.fullmatch(r"episodes/(E\d+)/README\.md", value)
+    if match is None:
+        raise GuardError("Active episode must be NONE or episodes/E###/README.md")
+    return match.group(1)
+
+
+def require_active_episode(repo_root: Path) -> str:
+    episode_id = active_episode_id(repo_root)
+    if episode_id is None:
+        raise GuardError("no active episode: CURRENT_STATE.md declares Active episode: NONE")
+    return episode_id
 
 
 def extract_markdown_section(path: Path, heading: str) -> str:
@@ -112,7 +127,7 @@ def validate_production_state(plan: dict, state: dict):
 
 
 def validate_active_state(repo_root: Path):
-    eid = active_episode_id(repo_root)
+    eid = require_active_episode(repo_root)
     state = load_json(repo_root / "episodes" / eid / "PRODUCTION_STATE.json")
     validate_production_state_shape(state, eid)
     return eid, state
@@ -264,7 +279,7 @@ def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: 
     )
 
     if require_active:
-        active = active_episode_id(repo_root)
+        active = require_active_episode(repo_root)
         _require(
             active == plan["episode_id"],
             f"active episode mismatch: CURRENT_STATE={active}, requested={plan['episode_id']}"
@@ -318,7 +333,8 @@ def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: 
 
 def validate_repository(repo_root: Path, episode_id: str | None = None, require_active: bool = True):
     active = active_episode_id(repo_root)
-    eid = episode_id or active
+    eid = episode_id if episode_id is not None else active
+    _require(eid is not None, "no active episode: CURRENT_STATE.md declares Active episode: NONE")
     episode_dir = repo_root / "episodes" / eid
     plan = load_json(episode_dir / "EPISODE_PLAN.json")
     manifest = load_json(episode_dir / "RENDER_MANIFEST.json")
@@ -495,7 +511,15 @@ def main():
 
     try:
         if args.cmd == "validate":
-            eid = args.episode or active_episode_id(root)
+            eid = args.episode if args.episode is not None else active_episode_id(root)
+            if eid is None:
+                print(json.dumps({
+                    "status":"PASS",
+                    "episode_id":None,
+                    "current_stage":"NO_ACTIVE_EPISODE",
+                    "render_ready":False
+                }, ensure_ascii=False))
+                return
             state = load_json(root / "episodes" / eid / "PRODUCTION_STATE.json")
             validate_production_state_shape(state, eid)
             if PRODUCTION_STAGES[state["current_stage"]] < PRODUCTION_STAGES["RENDER_CONTRACT_READY"]:

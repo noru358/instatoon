@@ -108,7 +108,12 @@ def slide_id_for(plan: dict, slide: int) -> str:
 
 
 def resolve_episode(explicit: str | None) -> str:
-    return explicit or guard.active_episode_id(REPO_ROOT)
+    if explicit:
+        return explicit
+    episode_id = guard.active_episode_id(REPO_ROOT)
+    if episode_id is None:
+        raise RenderError("no active episode: production is idle until a fresh episode package is created")
+    return episode_id
 
 
 def latest_attempt(episode_id: str, slide_id: str) -> dict | None:

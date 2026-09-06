@@ -20,12 +20,33 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 class RenderGuardTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls._fixture_tmp = tempfile.TemporaryDirectory()
+        cls.FIXTURE_REPO = Path(cls._fixture_tmp.name) / "repo"
+        shutil.copytree(REPO, cls.FIXTURE_REPO, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+
+        legacy = cls.FIXTURE_REPO / "archive" / "pre_redesign" / "E001"
+        active = cls.FIXTURE_REPO / "episodes" / "E001"
+        if not legacy.is_dir():
+            raise RuntimeError("archived pre-redesign E001 fixture is missing")
+        active.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(legacy, active)
+        (cls.FIXTURE_REPO / "CURRENT_STATE.md").write_text(
+            "Active episode: episodes/E001/README.md\n",
+            encoding="utf-8",
+        )
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._fixture_tmp.cleanup()
+
     def _active(self):
-        return active_episode_id(REPO)
+        return active_episode_id(self.FIXTURE_REPO)
 
     def _active_plan_manifest(self):
         candidates = []
-        for plan_path in (REPO / "episodes").glob("E*/EPISODE_PLAN.json"):
+        for plan_path in (self.FIXTURE_REPO / "episodes").glob("E*/EPISODE_PLAN.json"):
             eid = plan_path.parent.name
             if not (plan_path.parent / "RENDER_MANIFEST.json").is_file():
                 continue
@@ -37,8 +58,8 @@ class RenderGuardTests(unittest.TestCase):
         if not candidates:
             self.fail("no render-ready fixture episode")
         eid = sorted(candidates)[-1]
-        plan = json.loads((REPO / "episodes" / eid / "EPISODE_PLAN.json").read_text(encoding="utf-8"))
-        manifest = json.loads((REPO / "episodes" / eid / "RENDER_MANIFEST.json").read_text(encoding="utf-8"))
+        plan = json.loads((self.FIXTURE_REPO / "episodes" / eid / "EPISODE_PLAN.json").read_text(encoding="utf-8"))
+        manifest = json.loads((self.FIXTURE_REPO / "episodes" / eid / "RENDER_MANIFEST.json").read_text(encoding="utf-8"))
         return eid, plan, manifest
 
     def _supply_all_required(self):
@@ -54,11 +75,16 @@ class RenderGuardTests(unittest.TestCase):
             if r.get("required") is True and r.get("conditioning") == "MUST_SUPPLY_MEDIA"
         ]
 
+    def test_repository_idle_state_is_parseable_and_fail_closed(self):
+        self.assertIsNone(active_episode_id(REPO))
+        with self.assertRaisesRegex(GuardError, "no active episode"):
+            validate_repository(REPO)
+
     def test_active_episode_validates(self):
-        eid, state = validate_active_state(REPO)
+        eid, state = validate_active_state(self.FIXTURE_REPO)
         self.assertEqual(state["episode_id"], eid)
         if PRODUCTION_STAGES[state["current_stage"]] >= PRODUCTION_STAGES["RENDER_CONTRACT_READY"]:
-            plan, _ = validate_repository(REPO, eid)
+            plan, _ = validate_repository(self.FIXTURE_REPO, eid)
             self.assertEqual(plan["episode_id"], eid)
 
     def test_raster_set_gate_stage_sits_between_remaining_and_lettering(self):
@@ -69,7 +95,7 @@ class RenderGuardTests(unittest.TestCase):
         active = self._active()
         candidates = sorted(
             p.parent.name
-            for p in (REPO / "episodes").glob("E*/EPISODE_PLAN.json")
+            for p in (self.FIXTURE_REPO / "episodes").glob("E*/EPISODE_PLAN.json")
             if p.parent.name != active
             and (p.parent / "RENDER_MANIFEST.json").is_file()
             and json.loads(p.read_text(encoding="utf-8")).get("schema_version") == "1.0"
@@ -77,11 +103,11 @@ class RenderGuardTests(unittest.TestCase):
         if not candidates:
             self.skipTest("no non-active canonical episode")
         with self.assertRaises(GuardError):
-            validate_repository(REPO, candidates[-1])
+            validate_repository(self.FIXTURE_REPO, candidates[-1])
 
     def test_compiled_prompt_contains_generic_media_requirements(self):
         eid, plan, manifest = self._active_plan_manifest()
-        prompt = compile_prompt(REPO, eid, 1, require_active=False)
+        prompt = compile_prompt(self.FIXTURE_REPO, eid, 1, require_active=False)
         self.assertIn(plan["slides"][0]["slide_id"], prompt)
         self.assertIn("REQUIRED MEDIA INPUTS:", prompt)
         for req in manifest["media_requirements"]:
@@ -95,24 +121,24 @@ class RenderGuardTests(unittest.TestCase):
     def test_blocks_renderer_without_explicit_media_support(self):
         eid, _, _ = self._active_plan_manifest()
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", False, ["image"], [], require_active=False)
+            authorize(self.FIXTURE_REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", False, ["image"], [], require_active=False)
 
     def test_blocks_missing_required_media(self):
         eid, _, _ = self._active_plan_manifest()
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", True, ["image"], [], require_active=False)
+            authorize(self.FIXTURE_REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", True, ["image"], [], require_active=False)
 
     def test_blocks_wrong_media_type_capability(self):
         eid, _, _ = self._active_plan_manifest()
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", True, ["audio"], self._supply_all_required(), require_active=False)
+            authorize(self.FIXTURE_REPO, eid, 1, "CONVERSATION_INFERRED", "NOT_RUN", True, ["audio"], self._supply_all_required(), require_active=False)
 
     def test_authorizes_when_generic_media_requirements_are_satisfied(self):
         eid, _, _ = self._active_plan_manifest()
         supply = self._supply_all_required()
         with tempfile.TemporaryDirectory() as td:
             root = Path(td) / "repo"
-            shutil.copytree(REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            shutil.copytree(self.FIXTURE_REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
             state_path = root / "episodes" / eid / "PRODUCTION_STATE.json"
             state = json.loads(state_path.read_text(encoding="utf-8"))
             state["current_stage"] = "RENDER_CONTRACT_READY"
@@ -131,13 +157,13 @@ class RenderGuardTests(unittest.TestCase):
             self.skipTest("active episode has only one slide")
         supply = self._supply_all_required()
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "NOT_RUN", True, ["image"], supply, require_active=False)
+            authorize(self.FIXTURE_REPO, eid, 2, "CONVERSATION_INFERRED", "NOT_RUN", True, ["image"], supply, require_active=False)
         with self.assertRaises(GuardError):
-            authorize(REPO, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply, require_active=False)
+            authorize(self.FIXTURE_REPO, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply, require_active=False)
 
     def test_partial_cast_decision_is_not_l8_approval(self):
         eid, plan, _ = self._active_plan_manifest()
-        state = json.loads((REPO / "episodes" / eid / "PRODUCTION_STATE.json").read_text(encoding="utf-8"))
+        state = json.loads((self.FIXTURE_REPO / "episodes" / eid / "PRODUCTION_STATE.json").read_text(encoding="utf-8"))
         state["current_stage"] = "CAST_RESOLVED"
         state["voice_gate"] = {
             "status": "PENDING",
@@ -155,7 +181,7 @@ class RenderGuardTests(unittest.TestCase):
         supply = self._supply_all_required()
         with tempfile.TemporaryDirectory() as td:
             root = Path(td) / "repo"
-            shutil.copytree(REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            shutil.copytree(self.FIXTURE_REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
             state_path = root / "episodes" / eid / "PRODUCTION_STATE.json"
             state = json.loads(state_path.read_text(encoding="utf-8"))
             state["current_stage"] = "REMAINING_RENDER"
@@ -212,7 +238,7 @@ class RenderGuardTests(unittest.TestCase):
 
     def test_single_panel_compiler_isolates_requested_scene(self):
         eid, plan, _ = self._active_plan_manifest()
-        prompt = compile_prompt(REPO, eid, 1, require_active=False)
+        prompt = compile_prompt(self.FIXTURE_REPO, eid, 1, require_active=False)
         self.assertIn("Exactly ONE panel in ONE image", prompt)
         self.assertIn("Reference sheets are input references only", prompt)
         if len(plan["slides"]) > 1:
@@ -232,7 +258,7 @@ class RenderGuardTests(unittest.TestCase):
         eid, _, manifest = self._active_plan_manifest()
         with tempfile.TemporaryDirectory() as td:
             root = Path(td) / "repo"
-            shutil.copytree(REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            shutil.copytree(self.FIXTURE_REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
             (root / manifest["style_refs"][0]).write_bytes(b"not the approved image")
             with self.assertRaisesRegex(GuardError, "local media SHA-256 mismatch"):
                 validate_repository(root, eid, require_active=False)
@@ -241,7 +267,7 @@ class RenderGuardTests(unittest.TestCase):
         eid, _, manifest = self._active_plan_manifest()
         with tempfile.TemporaryDirectory() as td:
             root = Path(td) / "repo"
-            shutil.copytree(REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            shutil.copytree(self.FIXTURE_REPO, root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
             manifest["media_requirements"][0]["expected_hash"] = None
             (root / "episodes" / eid / "RENDER_MANIFEST.json").write_text(json.dumps(manifest))
             with self.assertRaisesRegex(GuardError, "needs a SHA-256"):
@@ -251,7 +277,7 @@ class RenderGuardTests(unittest.TestCase):
         eid, _, _ = self._active_plan_manifest()
         with tempfile.TemporaryDirectory() as td:
             root = Path(td) / "repo"
-            shutil.copytree(REPO, root, dirs_exist_ok=True)
+            shutil.copytree(self.FIXTURE_REPO, root, dirs_exist_ok=True)
             plan_path = root / "episodes" / eid / "EPISODE_PLAN.json"
             plan_path.write_text(plan_path.read_text(encoding="utf-8") + "\n", encoding="utf-8")
             with self.assertRaises(GuardError):

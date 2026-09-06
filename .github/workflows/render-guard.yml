@@ -14,5 +14,5 @@ jobs:
           python-version: "3.12"
       - name: Unit tests
         run: python -m unittest pipeline.test_render_guard
-      - name: Validate active episode render contract
+      - name: Validate active-or-idle production state
         run: python pipeline/render_guard.py validate
