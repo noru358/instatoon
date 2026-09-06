@@ -18,9 +18,9 @@ E007:
 - structured files created: EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN;
 - machine stage: RENDER_CONTRACT_READY;
 - L12.5 structured contract: USER APPROVED;
-- current checkpoint: S01 targeted repair + user review;
+- current checkpoint: S02 render;
 - no machine-bound raster, anchor, or frame QC exists yet.
-- S01 latest QC: Harin identity visually approved; overall frame NOT PASS because background extras leaked main-cast-like identities and raster contained baked text/signage.
+- S01 latest QC: USER PASSED visual quality after background-extra repair; baked raster text/signage remains a known deferred contract defect and is not considered compliant.
 
 ## Reference binding
 
@@ -44,7 +44,7 @@ Both are BINARY_REQUIRED for production raster.
 
 ## 정확한 다음 행동
 
-1. run final media-binding authorization for S01 using both exact reference binaries;
-2. generate S01 only;
-3. stop for manual S01 QC;
-4. do not generate S02 before explicit S01 PASS.
+1. render S02 only using the same canonical refs and S01 as visual continuity guidance where available;
+2. enforce no readable raster text/signage/labels;
+3. stop for manual S02 QC;
+4. do not render S03 before explicit S02 PASS.
