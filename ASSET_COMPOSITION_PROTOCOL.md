@@ -153,9 +153,11 @@ Fresh production must not resume E001 through the old S02→S04 full-frame gener
 
 Migration completion criteria:
 1. registry format exists and validates approved/hash-bound assets;
-2. deterministic compositor can build one 4:5 slide from registered assets;
-3. a small starter library covers at least one 4-slide pilot;
-4. the pilot is completed without full-frame generation except explicitly approved exception shots;
+2. the shared AutoPipeline compositor can build one 4:5 slide from registered assets;
+3. a small starter library covers the **fixed four-slide calibration pilot**;
+4. all four pilot frames are completed without full-frame generation except an explicitly approved exception shot;
 5. lettering remains separate and deterministic.
 
-Until 1–3 are satisfied, production state is `ASSET_SYSTEM_CALIBRATION`, not episode raster production.
+The four-slide count belongs only to the calibration fixture. Normal Instatoon episode length remains story-driven by VISUAL_GRAMMAR and must not inherit a four-slide constraint.
+
+Until 1–3 are satisfied, production state is `ASSET_SYSTEM_CALIBRATION`, not episode production.
