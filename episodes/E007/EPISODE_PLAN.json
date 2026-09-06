@@ -91,7 +91,7 @@
       "scene_facts": [
         "Harin is alone in the elevator",
         "the identity, face, hair, and outfit remain continuous from slide 1",
-        "the pose change is immediate but still small: relaxed shoulders, softened stance, loosened expression",
+        "the public-to-private change is immediate and clearly readable at phone size: shoulders drop, stance loosens, and expression visibly relaxes; keep it style-consistent but do not artificially suppress the reaction",
         "the elevator interior is simple with one mirror surface or reflective panel available for later continuity",
         "no readable floor labels, buttons, signs, captions, dialogue, or speech bubbles are baked into the raster"
       ],
@@ -123,7 +123,7 @@
       "action": "Harin looks at herself in the mirror and does an intentionally dumb shoulder-flex, tiny dance, or model-like body pose with self-satisfied unserious energy.",
       "scene_facts": [
         "Harin preserves exact identity and outfit continuity from slides 1-2",
-        "a mirror or reflective elevator panel is visibly relevant to her pose",
+        "a mirror or reflective elevator panel is visibly relevant to her pose, and the reflected head/torso/limbs must be geometrically coherent with the real Harin and mirror plane",
         "the comedy comes from shoulders, torso, stance, and expression rather than complicated finger choreography",
         "the expression is playful and self-satisfied, not grotesque and not generic anime exaggeration",
         "no readable dialogue, caption, button labels, or speech bubbles are baked into the raster"
@@ -146,7 +146,7 @@
         "webtoon glamour pose",
         "cinematic lighting"
       ],
-      "composition": "4:5 medium-to-three-quarter body shot with mirror context visible; pose readable at phone size; reserve a clean upper-side region for later Harin dialogue."
+      "composition": "4:5 medium-to-three-quarter body shot with mirror context visible; prefer a side/rear or otherwise geometry-checkable camera relationship so the real pose and reflected face/body agree; reserve a clean upper-side region for later Harin dialogue."
     },
     {
       "index": 4,
@@ -192,7 +192,9 @@
         "security_01 appears in the locked episode-local identity and uniform",
         "security_01 is calm and casual rather than mocking, sinister, or theatrical",
         "a simple security desk establishes the building-lobby context",
-        "no readable dialogue, badge text, company logo, signage, or speech bubbles are baked into the raster"
+        "no readable dialogue, badge text, company logo, signage, or speech bubbles are baked into the raster",
+        "Harin's surprise/stop must read clearly through face, gaze, shoulders or body interruption; do not reduce it to a barely changed neutral pose",
+        "security_01 skin uses the same flat local-color grammar as Harin, allowing natural complexion difference but no yellow/sepia cast"
       ],
       "story_clarity": "Private information unexpectedly enters public space through the security employee.",
       "required_entities": [
@@ -224,10 +226,11 @@
       "action": "Harin is frozen and confused; security_01 gives one simple casual single-hand finger-gun-like flick or pointing gesture with no spoken response.",
       "scene_facts": [
         "Harin and security_01 preserve exact continuity from slide 5",
-        "Harin's face reads as confused and suspicious rather than angry",
+        "Harin reads clearly as confused and suspicious rather than angry; expression, gaze, shoulders and stance may be amplified within the approved style so the beat is not visually flat",
         "security_01 remains dry and casual with no mocking grin",
         "the gesture uses one simplified hand silhouette and avoids two-handed or intricate finger anatomy",
-        "no readable dialogue, labels, signs, or speech bubbles are baked into the raster"
+        "no readable dialogue, labels, signs, or speech bubbles are baked into the raster",
+        "security_01 skin remains within the same flat local-color grammar as Harin"
       ],
       "story_clarity": "The silent gesture makes the coincidence feel deliberate without explaining the CCTV reveal.",
       "required_entities": [
@@ -260,7 +263,7 @@
       "scene_facts": [
         "Harin preserves the same face, hair, and outfit identity",
         "the CCTV camera is visibly connected to Harin's upward eyeline",
-        "Harin's reaction is understated frozen realization rather than screaming or melodrama",
+        "Harin's realization is clear and frozen rather than grotesque screaming: widened eyes, tightened shoulders/hands, blush/sweat or a stronger upward posture are allowed within style; 'not melodramatic' must not suppress readable reaction energy",
         "security_01 does not need to appear in this frame",
         "no security-room cutaway, footage monitor, explanatory caption, readable text, or speech bubble is baked into the raster"
       ],
@@ -285,5 +288,26 @@
       ],
       "composition": "4:5 medium-close shot with Harin in the lower-middle area and the CCTV clearly visible above in her eyeline; preserve a tiny clean reaction-text area near Harin without making the frame poster-like."
     }
-  ]
+  ],
+  "visual_direction": {
+    "selection_policy": "STORY_FIRST_REDUNDANCY_AWARE",
+    "anti_hardcoding": true,
+    "expression_policy": "ROLE_ADAPTIVE_WITHIN_STYLE",
+    "candidate_dimensions": [
+      "camera_side",
+      "camera_height",
+      "shot_distance",
+      "body_orientation",
+      "face_orientation",
+      "gaze_direction"
+    ],
+    "set_qc": [
+      "Judge the completed sequence for viewer-perceived directional/compositional bias rather than fixed left/right/front counts.",
+      "If repeated default-like orientation/framing creates bias, replace only the minimum frames causing it with story-valid alternatives.",
+      "Ensure reaction/comedy/reveal beats are not flattened by anti-exaggeration wording."
+    ],
+    "reflection_policy": "Story-relevant mirror/reflection geometry must plausibly match the real subject and mirror plane; prefer checkable side/rear staging over fake duplicated front views.",
+    "skin_color_policy": "Main and supporting characters share the same flat local-color grammar; supporting or older characters must not receive an automatic yellow/orange/sepia cast.",
+    "notes": "Approved 2026-09-06 after E007 prototype. Direction variety is perceptual and story-first; no hard-coded left-facing minimum or equal-direction quota."
+  }
 }
