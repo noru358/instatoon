@@ -134,4 +134,4 @@ A material style change requires:
 3. user approval;
 4. version update.
 
-MASTER_PROMPTS.md is the canonical full prompt implementation.
+MASTER_PROMPTS.md is the canonical asset-authoring prompt implementation. Final-frame assembly is governed by ASSET_COMPOSITION_PROTOCOL.md.
