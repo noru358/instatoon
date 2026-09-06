@@ -1,6 +1,6 @@
 # E007 — 엘리베이터 혼자 타면
 
-Status: L8 AWAITING USER APPROVAL — MANUAL_VALIDATION
+Status: L10 STORYBOARD AWAITING USER APPROVAL — MANUAL_VALIDATION
 Updated: 2026-09-06
 
 ## 0. Reset record
@@ -11,7 +11,7 @@ The previous E007 office-lunch package, its L1-L7 approval, cast/storyboard appr
 Git history preserves them as historical evidence only.
 They do not authorize any current storyboard, render contract, raster, anchor, or lettering work.
 
-Production restarts from L1 SOURCE DISCOVERY.
+Production restarted from L1 SOURCE DISCOVERY.
 
 ## 1. L1 — SOURCE DISCOVERY / COLLECTION
 
@@ -109,45 +109,16 @@ Ordered beats:
 6. Protagonist freezes; guard covers with "아, 저희끼리 한 말입니다" and gives finger guns.
 7. Protagonist slowly looks up at the elevator CCTV. End.
 
-State deltas:
-1→2 public persona changes to private persona.
-2→3 private ritual becomes concrete.
-3→4 comic contrast becomes visible.
-4→5 private information leaks into public space.
-5→6 suspicion becomes certainty.
-6→7 the mechanism of exposure is understood.
-
 ## 6. L6 — DIALOGUE DRAFT
 
 Register: short spoken lines + minimal captions.
 
-Beat 1 caption:
-- "회사에선 나름 멀쩡한 척함."
-
-Elevator self-talk:
-- "오~"
-- "오늘 좀 나오는데?"
-
-Optional tiny reaction:
-- "ㅋㅋ"
-
-When doors open:
-- no dialogue; immediate composed face.
-
-Security:
-- "오~ 오늘 좀 나오는데~"
-
-Protagonist:
-- "…네?"
-
-Security:
-- "아, 아닙니다. 저희끼리 한 말이에요."
-
-Security gesture:
-- finger guns; no extra line required.
-
-Final inner reaction:
-- "설마."
+- caption: "회사에선 나름 멀쩡한 척함."
+- private phrase: "오~ 오늘 좀 나오는데?"
+- guard echo: "오~ 오늘 좀 나오는데~"
+- protagonist: "…네?"
+- guard cover: "아, 아닙니다. 저희끼리 한 말이에요."
+- final thought: "설마."
 
 No explanatory ending caption.
 
@@ -161,24 +132,204 @@ Applied:
 - ending is the protagonist looking at CCTV, not a moral or summary;
 - no fake conflict, punishment, or viral consequence.
 
-Current candidate wording to be approved:
-- caption: "회사에선 나름 멀쩡한 척함."
-- private phrase: "오~ 오늘 좀 나오는데?"
-- guard echo: "오~ 오늘 좀 나오는데~"
-- protagonist: "…네?"
-- guard cover: "아, 아닙니다. 저희끼리 한 말이에요."
-- final thought: "설마."
-
 ## 8. L8 — USER VOICE GATE
 
-Status: PENDING.
+Status: PASS — USER EXPLICIT.
+Evidence:
+- 2026-09-06 user replied "ㅇㅋ" after reviewing the complete fresh E007 L1-L7 package.
 
-This L1-L7 package must receive explicit user approval before:
-- cast routing;
-- storyboard;
-- character design;
-- whole-episode visual plan;
-- render contract;
-- any raster generation.
+Approved scope:
+- source/provenance;
+- adaptation boundary;
+- story shape;
+- ordered beats;
+- dialogue/humanization candidate.
 
-MANUAL_VALIDATION remains active.
+This approval authorizes L10 storyboard/cast routing.
+It does not authorize raster production.
+
+## 9. L10 — STORYBOARD + CAST ROUTER
+
+Status: AWAITING USER APPROVAL.
+
+### Cast decision
+
+#### Episode-only protagonist
+- male office worker, late 20s to early 30s;
+- ordinary Korean office styling;
+- neat, restrained public presentation;
+- visibly sillier only when alone;
+- NOT Taemin.
+
+Reason:
+The story needs an anonymous office-worker identity more than a recurring-main identity.
+Using Taemin merely because the source protagonist is male would violate story-first casting.
+
+#### Episode-only security employee
+- male, approximately 40s–50s;
+- calm, dry, non-mocking demeanor;
+- ordinary building security uniform;
+- the comedy comes from casual familiarity, not bullying.
+
+#### Background extras
+- optional generic coworkers in S01 only;
+- no continuity requirement unless visually reused.
+
+### Seven-slide storyboard
+
+#### S01 — public persona
+Location:
+office hallway / elevator lobby.
+
+Visual:
+protagonist with one or two coworkers nearby, posture straight, polite neutral face, bag or office item kept minimal.
+He looks completely ordinary and composed.
+
+Text role:
+caption only:
+"회사에선 나름 멀쩡한 척함."
+
+Purpose:
+establish public baseline.
+
+State delta:
+none yet; baseline.
+
+#### S02 — doors close / switch flips
+Location:
+inside office elevator.
+
+Visual:
+doors just closed; protagonist confirms he is alone.
+Shoulders drop, face loosens, posture immediately changes.
+No big dance yet.
+
+Text:
+none.
+
+Purpose:
+make the public/private switch visually legible before the gag.
+
+State delta:
+professional persona → private persona.
+
+#### S03 — private ritual
+Location:
+same elevator, mirror visible.
+
+Visual:
+protagonist looks at himself in the mirror, does an intentionally dumb shoulder-flex / small dance / model-like pose.
+Expression is self-satisfied and unserious, not grotesque.
+
+Dialogue:
+"오~"
+"오늘 좀 나오는데?"
+
+Purpose:
+concretize the private habit.
+
+State delta:
+private persona → specific repeatable ritual.
+
+QC note:
+avoid complicated hand choreography.
+Prefer elbows/shoulders/body pose over exposed multi-finger gestures.
+
+#### S04 — instant reset
+Location:
+elevator doors opening onto office floor.
+
+Visual:
+doors open and protagonist is already back to stiff professional posture and neutral face while stepping out.
+The contrast with S03 is the joke.
+
+Text:
+none.
+
+Purpose:
+show that this is a practiced secret routine.
+
+State delta:
+private persona → public mask restored.
+
+#### S05 — phrase leaks
+Location:
+building lobby / security desk, later.
+
+Visual:
+protagonist walks past.
+Security employee recognizes him and casually says the exact private phrase.
+The guard is relaxed, not sinister.
+
+Security:
+"오~ 오늘 좀 나오는데~"
+
+Protagonist:
+abrupt stop / slight turn.
+
+Purpose:
+private information enters public space.
+
+State delta:
+protagonist's supposedly private ritual is echoed by another person.
+
+#### S06 — suspicious cover
+Location:
+same lobby.
+
+Visual:
+protagonist frozen and confused.
+Security employee gives a casual finger-gun gesture while trying to brush it off.
+
+Protagonist:
+"…네?"
+
+Security:
+"아, 아닙니다."
+"저희끼리 한 말이에요."
+
+Purpose:
+make the coincidence less plausible without explicitly explaining CCTV.
+
+State delta:
+surprise → suspicion.
+
+QC note:
+finger guns are an anatomy-risk gesture.
+If rendered, hand QC is HIGH.
+A simplified single-hand finger-gun silhouette is preferred over two complex hands.
+
+#### S07 — realization / landing
+Location:
+near elevator / lobby.
+
+Visual:
+close or medium-close on protagonist slowly looking upward.
+A small ceiling-mounted elevator/lobby CCTV camera is clearly visible in his eyeline.
+Face: flushed/frozen realization, understated rather than screaming.
+
+Inner text:
+"설마."
+
+Purpose:
+silent reveal.
+
+State delta:
+suspicion → mechanism understood.
+
+Ending rule:
+no explanatory caption after this.
+No security-room cutaway.
+No montage of guards laughing.
+No punishment or public humiliation.
+
+### Camera rhythm
+
+S01 medium → S02 medium → S03 medium/full-body enough for pose → S04 medium → S05 two-shot medium → S06 tighter two-shot → S07 medium-close/upward eyeline.
+
+This keeps the episode readable without overusing identical standing shots.
+
+### Current manual checkpoint
+
+STOP here.
+Do not proceed to L11/L12/L12.5 or image generation until the user approves or edits this cast/storyboard package.
