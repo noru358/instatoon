@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "episode_id": "E007",
-  "episode_plan_git_blob_sha": "6a5646f3a397e09fa6859a15de888f65019f9482",
+  "episode_plan_git_blob_sha": "72451243b817dbf316cc02db51c0fdb033470434",
   "canonical_prompt_source": {
     "path": "MASTER_PROMPTS.md",
     "section_heading": "## 12. COMPILED PRODUCTION PROMPT"
@@ -41,7 +41,7 @@
       "scene_contract": [
         "Harin is the canonical main-cast Harin identity from REF_V2_D",
         "Harin wears a neat office-casual version of her established wardrobe without changing face or hair identity",
-        "one or two background coworkers may appear only as low-detail extras and must not compete with Harin",
+        "one or two background coworkers may appear only as low-detail extras; they share the drawing language but must be visibly distinct from all recurring leads, with varied age/face/hair/body/clothing where natural",
         "the office elevator lobby is simple and lower-detail than the character",
         "no readable text, caption, signage, logo, or speech bubble is baked into the raster"
       ],
@@ -59,7 +59,8 @@
         "readable company logo",
         "romance-webtoon polish",
         "cinematic lighting",
-        "complex crowd"
+        "complex crowd",
+        "background extra that copies a recurring main-cast identity"
       ]
     },
     {
