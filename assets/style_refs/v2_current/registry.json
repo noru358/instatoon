@@ -19,6 +19,15 @@
       "required_for_canonical_v2": true,
       "sha256": "b49683276f94ba5621e3602d7e3d714b0f2e637b2c41fc1fd132bdf6f336b049",
       "size_bytes": 392279
+    },
+    {
+      "asset_id": "REF_V2_SUB_01",
+      "path": "assets/style_refs/v2_current/sub1.png",
+      "asset_class": "PROJECT_REUSABLE",
+      "role": "SUPPLEMENTAL_STYLE_REFERENCE",
+      "required_for_canonical_v2": false,
+      "sha256": "1bd41fc701bc824ebe103954acb38f6d70e144886e48a152245af29f0c8c3486",
+      "size_bytes": 1971514
     }
   ]
 }
