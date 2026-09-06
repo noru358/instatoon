@@ -1,7 +1,7 @@
 # VISUAL_GRAMMAR.md
 
-# INSTATOON_VISUAL_GRAMMAR_v0.3 — SEQUENCE / COMPOSITION / LETTERING
-Updated: 2026-09-05
+# INSTATOON_VISUAL_GRAMMAR_v0.4 — SEQUENCE / COMPOSITION / LETTERING
+Updated: 2026-09-06
 
 STYLE authority: STYLE_LOCK.md / MASTER_PROMPTS.md
 CONTENT authority: SOURCE_STORY_PIPELINE.md
@@ -92,6 +92,43 @@ Avoid six nearly identical medium two-shots.
 
 Do not vary camera merely for spectacle.
 Variation should clarify the story.
+
+### 5.1 Sequence-level directional balance — perceptual, not quota-based
+
+Face direction and camera direction are judged across the whole episode as a viewer experiences it, not one frame at a time.
+
+The failure to avoid is **perceptual directional bias**: several frames repeatedly presenting the same apparent face orientation, gaze, body turn, camera side, height and distance until the set feels mechanically biased.
+
+Do NOT solve this with a hard-coded quota such as "at least one left-facing face" or "equal numbers of left/right/front." Those counts are not the objective and can create artificial blocking.
+
+Instead:
+1. for each beat, identify more than one story-valid shot when alternatives naturally exist;
+2. describe candidate shots using dimensions such as camera side, camera height, shot distance, body orientation, face orientation and gaze direction;
+3. select the shot that best preserves story clarity and continuity while reducing redundant visual similarity with nearby/earlier frames;
+4. allow front, either three-quarter direction, profile, over-shoulder, back view, high/low angle, upward/downward gaze, or other camera relationships only when they serve the beat;
+5. after the raster set exists, inspect the whole sequence for repeated perceived orientation/framing and replace only the frames materially causing the bias.
+
+The goal is **balanced visual experience**, not mathematically even direction counts.
+
+A frontal camera does not automatically mean a neutral face direction. Judge the face as it is actually perceived in the output.
+
+### 5.2 Role-adaptive expression amplitude
+
+Expression should be strong enough to read at phone size.
+
+Do not interpret anti-exaggeration rules as a requirement for uniformly small reactions. Quiet/setup beats may be restrained; comedy, surprise, reveal, embarrassment and reaction beats may use clearly amplified facial expression, gaze, shoulders, torso, hands and stance as long as the approved drawing language and identity remain intact.
+
+A style-preserving expressive pose is preferred over a technically safe but emotionally flat pose.
+
+### 5.3 Reflection / mirror staging
+
+Mirrors and reflective panels are geometry-sensitive story elements.
+
+When a reflection matters:
+- the reflected face, torso and limbs must correspond plausibly to the actual subject pose and mirror plane;
+- avoid using a near-duplicate front-facing figure as a fake reflection when the camera/mirror relationship would not support it;
+- when useful, prefer a camera position from the side or behind the subject so the real body and reflected face can be checked against each other clearly;
+- reflection correctness outranks decorative symmetry.
 
 ## 6. Cast visibility
 
@@ -274,6 +311,17 @@ For STRICT_EPISODE:
 - episode-only important character uses episode-local anchor;
 - accepted prior frame may support pose/location continuity but does not replace the canonical style reference.
 
+## 13.5 Sequence visual-direction preflight
+
+Before raster generation, the visual director reviews the episode as one sequence and confirms:
+- camera/framing choices are story-first rather than model-default;
+- no obvious repeated face/camera orientation is being selected simply because it is the safest generation pose;
+- expression amplitude matches each beat's function;
+- mirror/reflection beats have a plausible camera/reflection plan;
+- skin/local-color treatment remains coherent across main and supporting cast.
+
+This is an optimization pass, not a direction quota.
+
 ## 14. Whole-episode preflight
 
 Before production art:
@@ -301,7 +349,11 @@ Repair/reject when:
 - text covers the main action;
 - composition changes dramatically during a local repair;
 - background detail/polish competes with characters;
-- STYLE_LOCK is violated.
+- STYLE_LOCK is violated;
+- perceptual directional bias across the set is obvious and comes from repeated default-like face/camera orientation rather than story need;
+- a reaction/peak is materially flattened because anti-exaggeration was misread as anti-expression;
+- a story-relevant mirror/reflection has visibly inconsistent face/limb geometry;
+- a supporting character receives a visibly different yellow/sepia skin-color treatment without story justification.
 
 ## 16. Change control
 
