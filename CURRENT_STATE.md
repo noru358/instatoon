@@ -18,8 +18,9 @@ E007:
 - structured files created: EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN;
 - machine stage: RENDER_CONTRACT_READY;
 - L12.5 structured contract: USER APPROVED;
-- current checkpoint: S01 render;
-- no raster, anchor, or frame QC exists yet.
+- current checkpoint: S01 targeted repair + user review;
+- no machine-bound raster, anchor, or frame QC exists yet.
+- S01 latest QC: Harin identity visually approved; overall frame NOT PASS because background extras leaked main-cast-like identities and raster contained baked text/signage.
 
 ## Reference binding
 
