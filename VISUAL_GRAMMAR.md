@@ -9,7 +9,7 @@ CONTENT authority: SOURCE_STORY_PIPELINE.md
 ## 0. Core principle
 
 Plan the entire episode first.
-Render individual slides only after the sequence, cast, text roles, and visual rhythm are coherent.
+Compose individual slides only after the sequence, cast, text roles, and visual rhythm are coherent.
 
 A slide exists because it performs one story job.
 
@@ -40,7 +40,7 @@ Vertical derivative:
 
 All slides within one carousel should share one ratio.
 
-Current delivery requirement: ONE PANEL = ONE IMAGE FILE. Each planned slide is generated and delivered separately. A multi-panel page, strip, collage or review sheet cannot substitute for individual slide files. Optional combined previews require a user request and do not replace the masters.
+Current delivery requirement: ONE PANEL = ONE IMAGE FILE. Each planned slide is composed and delivered separately. A multi-panel page, strip, collage or review sheet cannot substitute for individual slide files. Optional combined previews require a user request and do not replace the masters.
 
 ## 2. Episode length
 
