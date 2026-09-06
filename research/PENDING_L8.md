@@ -79,7 +79,7 @@ Do not convert it into an ERROR_SPIRAL by inventing additional failures.
 ## L5 — Story room
 
 ### One-sentence premise
-광고 카톡방을 정리하던 직장인이 실수로 4년치 업무 히스토리와 사진이 들어 있던 팀 단톡방을 나가버리고, 뒤늦게 백업도 안 해둔 걸 떠올리며 멍해진다.
+광고 카톡방을 정리하던 직장인이 실수로 4년치 업무 히스토리와 사진이 들어 있던 팀 단톡방을 나가버리고, 뒤늦게 백업도 안 해둔 걸 깨달은 뒤 “조졌네...” 하며 허탈하게 울면서 웃는다.
 
 ### Emotional engine
 A tiny routine gesture suddenly feels irreversible because the loss is specific and accumulated over years.
@@ -200,7 +200,7 @@ Not authorized:
 | L2 | Editorial Screener | ChatGPT | selected source | BASE | gate decision | PASS | no hard-kill | L3 |
 | L3 | Source Editor | ChatGPT | source text | SOURCE FACTS / VOICE | normalized facts/unknowns | PASS | invention boundary explicit | L4 |
 | L4 | Story Architect | ChatGPT | normalized source | BASE | STORY_ARC / INCIDENT_ESCALATION | PASS | no fake spiral | L5 |
-| L5 | Story Writer | ChatGPT | normalized source | BASE | 5 ordered beats | PASS | every beat has state delta | L6 |
+| L5 | Story Writer | ChatGPT | normalized source | BASE | 4 ordered beats | PASS | B3 recognition+stakes merged; every beat has state delta | L6 |
 | L6 | Dialogue Writer | ChatGPT | beats + source voice | source-derived + neutral connective | draft copy | PASS | no invented social conflict | L7 |
 | L7 | Dialogue Editor | ChatGPT | draft copy | source voice prioritized | humanized copy | PASS | fragments/silence retained | **L8 USER** |
 
