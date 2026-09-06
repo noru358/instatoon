@@ -31,6 +31,8 @@ class RenderGuardTests(unittest.TestCase):
         if not legacy.is_dir():
             raise RuntimeError("archived pre-redesign E001 fixture is missing")
         active.parent.mkdir(parents=True, exist_ok=True)
+        if active.exists():
+            shutil.rmtree(active)
         shutil.copytree(legacy, active)
         (cls.FIXTURE_REPO / "CURRENT_STATE.md").write_text(
             "Active episode: episodes/E001/README.md\n",
@@ -76,9 +78,12 @@ class RenderGuardTests(unittest.TestCase):
         ]
 
     def test_repository_idle_state_is_parseable_and_fail_closed(self):
-        self.assertIsNone(active_episode_id(REPO))
-        with self.assertRaisesRegex(GuardError, "no active episode"):
-            validate_repository(REPO)
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "CURRENT_STATE.md").write_text("Active episode: NONE\n", encoding="utf-8")
+            self.assertIsNone(active_episode_id(root))
+            with self.assertRaisesRegex(GuardError, "no active episode"):
+                validate_repository(root)
 
     def test_active_episode_validates(self):
         eid, state = validate_active_state(self.FIXTURE_REPO)
