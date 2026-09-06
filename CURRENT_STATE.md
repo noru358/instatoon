@@ -42,6 +42,10 @@ Git history is the archive for retired episode-specific material.
 - Fresh post-reset E001.
 - L1-L7 draft package complete in `episodes/E001/STORY_SOURCE_PACK.md`.
 - HUMAN-SOURCE-FIRST satisfied with a real Reddit anecdote.
+- User feedback applied at L8 review:
+  - remove protagonist explanatory reply after the coworker's DM;
+  - remove ending narration/internal monologue;
+  - end on a silent, strongly readable extreme-embarrassment visual.
 - Current stage = L8_USER_VOICE_GATE.
 - L8 approval = PENDING.
 - No storyboard, cast routing, episode-local character design, visual plan, render contract or raster artifact exists.
@@ -55,6 +59,6 @@ Canonical production references remain:
 
 ## Exact next action
 
-Present the E001 L1-L7 package to the user.
+Present the revised E001 L1-L7 package to the user.
 STOP for explicit L8 approval.
 After PASS, proceed to L10 storyboard + cast routing, then L11/L12/L12.5 in canonical order.
