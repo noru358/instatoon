@@ -1,6 +1,6 @@
 # E007 — 엘리베이터 혼자 타면
 
-Status: RENDER CONTRACT READY — S01 NEXT / MANUAL_VALIDATION
+Status: S01 USER APPROVED — REMAINING RASTER INTERNAL QC / CLEAN CONTEXT REQUIRED
 Updated: 2026-09-06
 
 ## 0. Reset record
@@ -90,7 +90,7 @@ Production requirement:
 both references are BINARY_REQUIRED and must be supplied as actual image media to the renderer for every canonical raster call.
 The user-uploaded active-conversation copies are equivalent to the repo binaries.
 
-## 5. L12.5 structured contract — BUILT, USER REVIEW PENDING
+## 5. L12.5 structured contract — USER APPROVED
 
 Created:
 - episodes/E007/EPISODE_PLAN.json
@@ -107,7 +107,7 @@ Contract:
 - security_01 episode-local continuity on S05-S06;
 - REF_V2_D + REF_V2_E exact canonical media required;
 - unexpected concept policy FAIL_CLOSED;
-- conversation-inferred rendering is sequential and every frame is user-gated in MANUAL_VALIDATION.
+- conversation-inferred rendering is sequential after S01, but S02~final use operator/internal QC rather than per-frame user approval.
 
 Lettering plan locks only the already-approved copy:
 - S01 caption;
@@ -117,19 +117,23 @@ Lettering plan locks only the already-approved copy:
 - S07 "!?"
 with S02/S04 textless.
 
-## 6. L12.5 approval and next manual checkpoint
+## 6. L12.5 + S01 gates — PASSED
 
 L12.5 structured contract: USER APPROVED 2026-09-06.
 Evidence: user replied "통과".
 
-Current production stage:
-RENDER_CONTRACT_READY.
+S01 visual anchor: USER APPROVED 2026-09-06, with one explicitly tolerated defect recorded below.
 
-Exact next action:
-1. final media-binding preflight using exact REF_V2_D + REF_V2_E binaries;
-2. render S01 only;
-3. stop for user manual QC;
-4. no S02 render before S01 explicit PASS.
+Current production stage:
+REMAINING_RENDER.
+
+MANUAL_VALIDATION approval topology now applied to this episode:
+- S01 was the user-facing visual anchor gate;
+- S02~S07 are produced as separate files with operator/internal QC;
+- the next normal user gate is the COMPLETE text-free raster set;
+- lettering begins only after that full-set user PASS.
+
+The current conversation-inferred render context is blocked for S02 because it repeated the wrong S01 scene twice. This is a renderer-context blocker, not a request for another user approval.
 
 
 ## 7. S01 manual QC
@@ -152,7 +156,7 @@ Policy:
 - S01 remains a visual continuity/taste anchor only unless a repository-bound artifact/attempt record is later created.
 
 Next:
-S02 only, then manual user QC.
+resume at S02 in a clean render context. Internally QC S02, then continue S03~S07. Do not ask for per-slide user approval unless a material taste/contract decision cannot be resolved internally. Present the complete text-free raster set for the next user gate.
 
 
 ## 8. S02 repeated context failure
@@ -185,4 +189,9 @@ Both outputs are INVALID:
 Per GENERATION_PROTOCOL, do not retry this conversation-inferred path again after two repeated hard-contract failures.
 
 Exact resume action:
-use a clean dedicated render context, restore the canonical refs and E007 S02 contract, render S02 only, then stop for user QC.
+1. use a clean dedicated render context;
+2. restore REF_V2_D + REF_V2_E and the exact E007 S02 contract;
+3. render S02 only and perform operator/internal QC;
+4. if PASS, continue S03~S07 sequentially with the same internal-QC rule;
+5. after every raster is acceptable, present the complete text-free art set to the user;
+6. only that full-set USER PASS authorizes lettering.

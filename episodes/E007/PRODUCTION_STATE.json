@@ -49,7 +49,7 @@
       "decision_id": "MANUAL_VALIDATION_MODE_20260906",
       "type": "OPERATING_MODE",
       "status": "ACTIVE",
-      "value": "manual user review at every stage; no auto-finish"
+      "value": "major user gates only: pre-raster plan, S01 anchor, complete text-free raster set, lettering/final; S02~final use operator internal QC"
     },
     {
       "decision_id": "E007_STRUCTURED_CONTRACT_APPROVED_20260906_V2",
@@ -74,6 +74,12 @@
       "type": "RENDER_FAILURE",
       "status": "HARD_STOP_CONTEXT_CONTAMINATION",
       "value": "Two consecutive native/chat attempts intended for S02 reproduced the S01 office-group scene instead of the required elevator-alone scene. Both are INVALID WRONG_SCENE outputs and must not be used as anchors or repair bases."
+    },
+    {
+      "decision_id": "E007_MANUAL_APPROVAL_TOPOLOGY_RECONCILED_20260906",
+      "type": "OPERATING_MODE",
+      "status": "ACTIVE",
+      "value": "S01 remains the user visual anchor. S02-S07 are sequential internal-QC work. Next normal user gate is the complete text-free raster set, then lettering/final."
     }
   ],
   "frame_qc": {},
@@ -81,13 +87,15 @@
     {
       "blocker_id": "E007_S02_CLEAN_RENDER_CONTEXT_REQUIRED_20260906",
       "stage": "L13",
-      "status": "BLOCKED_CURRENT_CONTEXT",
+      "status": "BLOCKED_CURRENT_RENDER_CONTEXT_ONLY",
       "requirement": "CLEAN_DEDICATED_RENDER_CONTEXT_OR_EXPLICIT_ISOLATED_RENDERER",
       "required_media": [
         "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
         "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
       ],
-      "reason": "Repeated WRONG_SCENE hard-contract failure twice in the same conversation-inferred render path. Stop retrying this context and resume S02 in a clean dedicated render context."
+      "reason": "Two repeated WRONG_SCENE failures block only this contaminated conversation-inferred render context. Resume S02 in a clean context and continue remaining frames with operator/internal QC; no per-slide user approval is required.",
+      "blocking_scope": "RENDERER_CONTEXT_ONLY",
+      "user_approval_required": false
     }
   ],
   "episode_anchor": {
@@ -98,6 +106,10 @@
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "S02_CLEAN_CONTEXT_RETRY_REQUIRED"
-  }
+    "current_checkpoint": "REMAINING_RASTER_INTERNAL_QC",
+    "next_user_gate": "COMPLETE_TEXT_FREE_RASTER_SET",
+    "per_slide_user_approval": false,
+    "note": "S01 USER PASS already obtained. Resume S02-S07 internally in a clean render context."
+  },
+  "raster_set_gate": null
 }

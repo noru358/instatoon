@@ -32,7 +32,7 @@
   },
   "batch_policy": {
     "explicit_payload": "FIRST_FRAME_GATE_THEN_BATCH",
-    "conversation_inferred": "SEQUENTIAL_EVERY_FRAME_GATE"
+    "conversation_inferred": "FIRST_FRAME_USER_GATE_THEN_SEQUENTIAL_INTERNAL_QC"
   },
   "slides": [
     {
