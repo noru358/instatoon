@@ -104,6 +104,19 @@ If an episode-only character appears in 2+ cuts, GENERATION_PROTOCOL requires on
 
 Do not substitute a familiar main character just to solve continuity cheaply.
 
+### Background / incidental extras
+
+Incidental extras use the same drawing language but do not clone recurring-lead identities.
+
+Default when the story does not require a specific demographic:
+- distribute age and appearance rather than making every extra a same-age peer;
+- vary face shape, eye scale/shape within the approved style range, hair silhouette, body build and ordinary clothing;
+- keep extras visually subordinate to the focal character;
+- do not let a shared main-cast reference sheet cause unselected Gaeun/Harin/Taemin identities to leak into background roles.
+
+A background extra that reads as an unselected main character is a cast-routing QC failure, not harmless style similarity.
+
+
 ## 7. Art / text separation
 
 Final page has three logical layers:
