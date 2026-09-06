@@ -29,6 +29,7 @@
         "RENDER_CONTRACT_READY",
         "FIRST_FRAME_QC_PENDING",
         "REMAINING_RENDER",
+        "RASTER_SET_QC_PENDING",
         "LETTERING",
         "FINAL_QC",
         "EXPORT_READY"
@@ -74,7 +75,55 @@
     "frame_qc": {
       "type": "object",
       "additionalProperties": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "inspector": {
+            "enum": [
+              "USER",
+              "OPERATOR_INTERNAL",
+              "AUTO_VISION"
+            ]
+          }
+        }
+      }
+    },
+    "raster_set_gate": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true,
+      "required": [
+        "status",
+        "approval_kind",
+        "evidence"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PENDING",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "approval_kind": {
+          "enum": [
+            "USER_EXPLICIT",
+            "NONE"
+          ]
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "approved_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "artifacts": {
+          "type": "array"
+        }
       }
     }
   }

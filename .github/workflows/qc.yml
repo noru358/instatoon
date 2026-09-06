@@ -1,14 +1,21 @@
 name: qc
 
-# MANUAL_VALIDATION is the current operating mode.
-# Human QC remains authoritative at every slide. finish_mode=standard is the
-# default; auto_finish is preserved for later API_PRODUCTION experiments.
+# MANUAL_VALIDATION approval topology:
+# content/storyboard approval -> S01 USER anchor PASS -> S02..final OPERATOR_INTERNAL QC
+# -> COMPLETE raster-set USER gate -> lettering/final.
+# One slide = one file, but one slide != one user-approval gate.
 on:
   workflow_dispatch:
     inputs:
-      slide:
-        description: "Slide number you just looked at"
+      scope:
+        description: "frame = one artifact QC; raster_set = user verdict on complete text-free set"
         required: true
+        type: choice
+        options: ["frame", "raster_set"]
+        default: "frame"
+      slide:
+        description: "Frame scope only: slide number"
+        required: false
         default: "1"
       verdict:
         description: "PASS or FAIL"
@@ -16,22 +23,27 @@ on:
         type: choice
         options: ["PASS", "FAIL"]
         default: "PASS"
+      inspection_kind:
+        description: "Frame scope only. S01 PASS must be user; S02+ normally operator_internal."
+        required: true
+        type: choice
+        options: ["operator_internal", "user"]
+        default: "operator_internal"
       note:
-        description: "Optional short reason, especially for FAIL"
+        description: "Optional reason/evidence"
         required: false
         default: ""
       finish_mode:
-        description: "After human PASS on slide 1"
+        description: "S01 USER PASS only: standard keeps manual gates; auto_finish bypasses later human gates"
         required: true
         type: choice
-        options: ["auto_finish", "standard"]
+        options: ["standard", "auto_finish"]
         default: "standard"
       episode:
         description: "Episode ID. Leave empty to use the active episode"
         required: false
         default: ""
 
-# Render, human QC, and auto-finish mutate the same episode state/artifacts.
 concurrency:
   group: instatoon-production
   cancel-in-progress: false
@@ -51,8 +63,8 @@ jobs:
       - name: Install dependencies
         run: pip install --quiet openai pillow pydantic
 
-      - name: Install Korean font for deterministic lettering
-        if: ${{ inputs.finish_mode == 'auto_finish' && inputs.slide == '1' && inputs.verdict == 'PASS' }}
+      - name: Install Korean font for auto-finish
+        if: ${{ inputs.scope == 'frame' && inputs.finish_mode == 'auto_finish' && inputs.slide == '1' && inputs.verdict == 'PASS' && inputs.inspection_kind == 'user' }}
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y fonts-nanum
@@ -70,18 +82,29 @@ jobs:
           echo "id=$EID" >> "$GITHUB_OUTPUT"
           echo "resolved episode: $EID"
 
-      - name: Record human verdict
+      - name: Record frame verdict
+        if: ${{ inputs.scope == 'frame' }}
         env:
           SLIDE: ${{ inputs.slide }}
           VERDICT: ${{ inputs.verdict }}
           NOTE: ${{ inputs.note }}
+          INSPECTION_KIND: ${{ inputs.inspection_kind }}
           EPISODE: ${{ steps.ep.outputs.id }}
         run: |
-          python pipeline/render.py qc \
-            --slide "$SLIDE" --verdict "$VERDICT" --note "$NOTE" --episode "$EPISODE"
+          if [ "$INSPECTION_KIND" = "user" ]; then INSPECTOR=USER; else INSPECTOR=OPERATOR_INTERNAL; fi
+          python pipeline/render.py qc             --slide "$SLIDE" --verdict "$VERDICT" --note "$NOTE"             --inspector "$INSPECTOR" --episode "$EPISODE"
 
-      - name: Auto-finish after approved anchor
-        if: ${{ inputs.finish_mode == 'auto_finish' && inputs.slide == '1' && inputs.verdict == 'PASS' }}
+      - name: Record complete raster-set user verdict
+        if: ${{ inputs.scope == 'raster_set' }}
+        env:
+          VERDICT: ${{ inputs.verdict }}
+          NOTE: ${{ inputs.note }}
+          EPISODE: ${{ steps.ep.outputs.id }}
+        run: |
+          python pipeline/render.py raster-set-qc             --verdict "$VERDICT" --note "$NOTE" --episode "$EPISODE"
+
+      - name: Auto-finish after approved S01 anchor
+        if: ${{ inputs.scope == 'frame' && inputs.finish_mode == 'auto_finish' && inputs.slide == '1' && inputs.verdict == 'PASS' && inputs.inspection_kind == 'user' }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           EPISODE: ${{ steps.ep.outputs.id }}
@@ -100,56 +123,30 @@ jobs:
           SLIDE: ${{ inputs.slide }}
           VERDICT: ${{ inputs.verdict }}
           FINISH_MODE: ${{ inputs.finish_mode }}
+          SCOPE: ${{ inputs.scope }}
         run: |
           set -euo pipefail
           git config user.name "instatoon-render"
           git config user.email "render@users.noreply.github.com"
-          printf -v SLIDE_PAD '%02d' "$SLIDE"
 
-          # A human verdict and every auto-finish artifact are valid only for the
-          # exact authority snapshot checked out by this run. Never rebase them
-          # onto changed prompts/plans/references/state.
           assert_production_inputs_unchanged() {
             git fetch origin "${GITHUB_REF_NAME}"
-            if ! git diff --quiet "$GITHUB_SHA" "origin/${GITHUB_REF_NAME}" -- \
-              CURRENT_STATE.md \
-              MASTER_PROMPTS.md \
-              GENERATION_PROTOCOL.md \
-              AUTOMATION_TRANSITION.md \
-              pipeline/render_guard.py \
-              pipeline/render.py \
-              pipeline/auto_finish.py \
-              pipeline/lettering.py \
-              schemas/lettering_plan.schema.json \
-              "episodes/$EID/EPISODE_PLAN.json" \
-              "episodes/$EID/RENDER_MANIFEST.json" \
-              "episodes/$EID/LETTERING_PLAN.json" \
-              "episodes/$EID/PRODUCTION_STATE.json" \
-              assets/style_refs/v2_current; then
+            if ! git diff --quiet "$GITHUB_SHA" "origin/${GITHUB_REF_NAME}" --               CURRENT_STATE.md               MASTER_PROMPTS.md               GENERATION_PROTOCOL.md               AUTOMATION_TRANSITION.md               pipeline/render_guard.py               pipeline/render.py               pipeline/auto_finish.py               pipeline/lettering.py               schemas/production_state.schema.json               schemas/lettering_plan.schema.json               "episodes/$EID/EPISODE_PLAN.json"               "episodes/$EID/RENDER_MANIFEST.json"               "episodes/$EID/LETTERING_PLAN.json"               "episodes/$EID/PRODUCTION_STATE.json"               assets/style_refs/v2_current; then
               echo "::error::production inputs changed on origin while this run was in flight; discarding stale QC/auto-finish output"
               exit 2
             fi
           }
 
           assert_production_inputs_unchanged
-
           git add "episodes/$EID/PRODUCTION_STATE.json"
-          for path in \
-            "episodes/$EID/renders" \
-            "episodes/$EID/qc" \
-            "episodes/$EID/lettering" \
-            "episodes/$EID/exports"; do
-            if [ -e "$path" ]; then
-              git add -A "$path"
-            fi
+          for path in "episodes/$EID/renders" "episodes/$EID/qc" "episodes/$EID/lettering" "episodes/$EID/exports"; do
+            if [ -e "$path" ]; then git add -A "$path"; fi
           done
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
 
-          if git diff --cached --quiet; then
-            echo "nothing to commit"
-            exit 0
-          fi
-
-          if [ "$FINISH_MODE" = "auto_finish" ] && [ "$SLIDE" = "1" ] && [ "$VERDICT" = "PASS" ]; then
+          if [ "$SCOPE" = "raster_set" ]; then
+            MSG="qc: $EID raster-set $VERDICT"
+          elif [ "$FINISH_MODE" = "auto_finish" ] && [ "$SLIDE" = "1" ] && [ "$VERDICT" = "PASS" ]; then
             MSG="auto-finish: $EID from approved anchor"
           else
             printf -v MSG 'qc: %s slide_%02d %s' "$EID" "$SLIDE" "$VERDICT"

@@ -7,8 +7,11 @@ AUTO_FINISH changes only the approval topology:
 - After that approval, remaining raster frames are rendered sequentially,
   inspected by a vision QC model, lettered from a deterministic LETTERING_PLAN,
   final-QC'd, and exported without additional human approval.
+- This intentionally BYPASSES the STANDARD manual full-raster-set user gate.
+  STANDARD mode instead uses S01 user approval -> remaining internal QC ->
+  complete raster-set user approval -> lettering/final.
 - Any expected production failure fails closed into STANDARD mode at the nearest
-  resumable stage. Existing human render/qc commands remain authoritative.
+  resumable stage. Existing manual render/qc commands remain authoritative.
 
 No second mutable state store is introduced. Automation status is stored as an
 optional object inside episodes/<ID>/PRODUCTION_STATE.json; detailed QC evidence

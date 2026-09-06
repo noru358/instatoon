@@ -75,6 +75,7 @@ PRODUCTION_STAGES = {
     "RENDER_CONTRACT_READY": 60,
     "FIRST_FRAME_QC_PENDING": 70,
     "REMAINING_RENDER": 80,
+    "RASTER_SET_QC_PENDING": 85,
     "LETTERING": 90,
     "FINAL_QC": 100,
     "EXPORT_READY": 110,
@@ -276,8 +277,11 @@ def validate_manifest(repo_root: Path, episode_dir: Path, plan: dict, manifest: 
         "manifest reference-conditioning requirement must match EPISODE_PLAN"
     )
     _require(
-        manifest["batch_policy"].get("conversation_inferred") == "SEQUENTIAL_EVERY_FRAME_GATE",
-        "conversation-inferred rendering must be sequentially gated"
+        manifest["batch_policy"].get("conversation_inferred") in {
+            "FIRST_FRAME_USER_GATE_THEN_SEQUENTIAL_INTERNAL_QC",
+            "SEQUENTIAL_EVERY_FRAME_GATE",
+        },
+        "conversation-inferred rendering must use first-frame user gate + sequential internal QC"
     )
     _require(
         manifest["batch_policy"].get("explicit_payload") == "FIRST_FRAME_GATE_THEN_BATCH",

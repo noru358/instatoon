@@ -61,6 +61,10 @@ class RenderGuardTests(unittest.TestCase):
             plan, _ = validate_repository(REPO, eid)
             self.assertEqual(plan["episode_id"], eid)
 
+    def test_raster_set_gate_stage_sits_between_remaining_and_lettering(self):
+        self.assertLess(PRODUCTION_STAGES["REMAINING_RENDER"], PRODUCTION_STAGES["RASTER_SET_QC_PENDING"])
+        self.assertLess(PRODUCTION_STAGES["RASTER_SET_QC_PENDING"], PRODUCTION_STAGES["LETTERING"])
+
     def test_non_active_episode_fails(self):
         active = self._active()
         candidates = sorted(
@@ -150,7 +154,8 @@ class RenderGuardTests(unittest.TestCase):
                 "status": "PASS",
                 "inspected_output": True,
                 "attempt_id": "test-attempt-001",
-                "artifact_sha256": "a" * 64
+                "artifact_sha256": "a" * 64,
+                "inspector": "USER"
             }
             state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
             self.assertEqual(

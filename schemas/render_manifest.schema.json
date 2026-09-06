@@ -141,7 +141,10 @@
           "const": "FIRST_FRAME_GATE_THEN_BATCH"
         },
         "conversation_inferred": {
-          "const": "SEQUENTIAL_EVERY_FRAME_GATE"
+          "enum": [
+            "FIRST_FRAME_USER_GATE_THEN_SEQUENTIAL_INTERNAL_QC",
+            "SEQUENTIAL_EVERY_FRAME_GATE"
+          ]
         }
       }
     },

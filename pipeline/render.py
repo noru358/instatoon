@@ -453,6 +453,10 @@ def cmd_qc(args) -> int:
     episode_id = resolve_episode(args.episode)
     plan, _ = guard.validate_repository(REPO_ROOT, episode_id)
     state = load_state(episode_id)
+    inspector = args.inspector
+
+    if args.verdict == "PASS" and args.slide == 1 and inspector != "USER":
+        raise RenderError("S01 anchor PASS requires inspector=USER; later slides may use OPERATOR_INTERNAL")
 
     slide = args.slide
     if not 1 <= slide <= plan["format"]["slide_count"]:
@@ -481,8 +485,9 @@ def cmd_qc(args) -> int:
             "artifact_path": str(path.relative_to(REPO_ROOT)),
             "note": args.note or "",
             "recorded_at": now_iso(),
+            "inspector": inspector,
         }
-        if state.get("episode_anchor") is None:
+        if slide == 1 and state.get("episode_anchor") is None:
             state["episode_anchor"] = {
                 "slide": slide,
                 "slide_id": sid,
@@ -500,7 +505,20 @@ def cmd_qc(args) -> int:
             if state.get("frame_qc", {}).get(s["slide_id"], {}).get("status") == "PASS"
         }
         if len(passed) == plan["format"]["slide_count"]:
-            state["current_stage"] = "LETTERING"
+            state["current_stage"] = "RASTER_SET_QC_PENDING"
+            state["raster_set_gate"] = {
+                "status": "PENDING",
+                "approval_kind": "NONE",
+                "evidence": "All raster slides have artifact-bound QC PASS; awaiting full-set user review.",
+                "approved_at": None,
+                "artifacts": [
+                    {
+                        "slide_id": item["slide_id"],
+                        "artifact_sha256": state["frame_qc"][item["slide_id"]]["artifact_sha256"],
+                    }
+                    for item in plan["slides"]
+                ],
+            }
     else:
         state.get("frame_qc", {}).pop(sid, None)
         anchor = state.get("episode_anchor")
@@ -509,24 +527,82 @@ def cmd_qc(args) -> int:
         for cid, identity_anchor in list(state.get("identity_anchors", {}).items()):
             if identity_anchor.get("slide") == slide:
                 del state["identity_anchors"][cid]
+        state.pop("raster_set_gate", None)
         if slide == 1:
             # a failed first frame reopens the first-frame gate, nothing later may run
             state["current_stage"] = "RENDER_CONTRACT_READY"
         else:
             # a failed later frame reopens the normal remaining-frame render stage,
-            # including when a previously complete episode had already reached LETTERING.
+            # including when a previously complete episode had already reached the set gate.
             state["current_stage"] = "REMAINING_RENDER"
 
     save_state(episode_id, state)
 
     print(f"{sid}: {args.verdict}  sha256={digest[:12]}  attempt={attempt['attempt_id']}")
     print(f"stage: {state['current_stage']}")
-    if args.verdict == "PASS" and slide < plan["format"]["slide_count"]:
-        print(f"next: render --slide {slide + 1}")
+    if args.verdict == "PASS" and state["current_stage"] == "RASTER_SET_QC_PENDING":
+        print("next: user reviews the COMPLETE text-free raster set, then run raster-set-qc --verdict PASS")
+    elif args.verdict == "PASS" and slide < plan["format"]["slide_count"]:
+        print(f"next: render --slide {slide + 1}  (operator internal QC; no user gate required)")
     elif args.verdict == "PASS":
-        print("next: L14 lettering")
+        print("next: full raster-set user review")
     else:
         print(f"next: fix the plan or the canonical prompt, then render --slide {slide} again")
+    return 0
+
+
+def cmd_raster_set_qc(args) -> int:
+    episode_id = resolve_episode(args.episode)
+    plan, _ = guard.validate_repository(REPO_ROOT, episode_id)
+    state = load_state(episode_id)
+
+    if state.get("current_stage") != "RASTER_SET_QC_PENDING":
+        raise RenderError(
+            f"full raster-set review requires RASTER_SET_QC_PENDING, got {state.get('current_stage')}"
+        )
+
+    artifacts = []
+    for slide in plan["slides"]:
+        index = slide["index"]
+        sid = slide["slide_id"]
+        if verify_recorded_qc(plan, state, episode_id, index) != "PASS":
+            raise RenderError(f"{sid}: current artifact does not have a valid QC PASS")
+        record = state.get("frame_qc", {}).get(sid, {})
+        if record.get("inspected_output") is not True:
+            raise RenderError(f"{sid}: QC is not bound to an inspected output")
+        artifacts.append({
+            "slide_id": sid,
+            "artifact_sha256": record.get("artifact_sha256"),
+        })
+
+    first_sid = plan["slides"][0]["slide_id"]
+    if state.get("frame_qc", {}).get(first_sid, {}).get("inspector") != "USER":
+        raise RenderError("S01 must have a persisted USER visual PASS before full raster-set approval")
+
+    if args.verdict == "PASS":
+        state["raster_set_gate"] = {
+            "status": "PASS",
+            "approval_kind": "USER_EXPLICIT",
+            "evidence": args.note or "User explicitly approved the complete text-free raster set.",
+            "approved_at": now_iso(),
+            "artifacts": artifacts,
+        }
+        state["current_stage"] = "LETTERING"
+        print("full raster set: USER PASS")
+        print("next: L14 lettering")
+    else:
+        state["raster_set_gate"] = {
+            "status": "FAIL",
+            "approval_kind": "USER_EXPLICIT",
+            "evidence": args.note or "User rejected the complete raster set.",
+            "approved_at": now_iso(),
+            "artifacts": artifacts,
+        }
+        state["current_stage"] = "REMAINING_RENDER"
+        print("full raster set: USER FAIL")
+        print("next: mark the affected frame(s) FAIL, repair them, then rebuild the set")
+
+    save_state(episode_id, state)
     return 0
 
 
@@ -544,6 +620,8 @@ def cmd_status(args) -> int:
     print(f"stage          : {state['current_stage']}")
     print(f"slides         : {plan['format']['slide_count']}")
     print(f"episode anchor : {anchor['slide_id'] if anchor else 'not registered'}")
+    raster_gate = state.get("raster_set_gate")
+    print(f"raster set gate: {raster_gate.get('status') if raster_gate else 'not reached'}")
     identity_anchors = state.get("identity_anchors", {})
     print(
         "identity anchors: "
@@ -588,11 +666,18 @@ def main() -> int:
     render.add_argument("--dry-run", action="store_true",
                         help="run every gate and print the binding, but do not call the provider")
 
-    qc = sub.add_parser("qc", help="record a QC verdict bound to the actual rendered image")
+    qc = sub.add_parser("qc", help="record a frame QC verdict bound to the actual rendered image")
     qc.add_argument("--slide", type=int, required=True)
     qc.add_argument("--verdict", required=True, choices=["PASS", "FAIL"])
     qc.add_argument("--note", default="")
     qc.add_argument("--episode")
+    qc.add_argument("--inspector", choices=["USER", "OPERATOR_INTERNAL"], default="OPERATOR_INTERNAL",
+                    help="S01 PASS must be USER; S02+ normally use OPERATOR_INTERNAL")
+
+    raster_set_qc = sub.add_parser("raster-set-qc", help="record the user verdict for the complete text-free raster set")
+    raster_set_qc.add_argument("--verdict", required=True, choices=["PASS", "FAIL"])
+    raster_set_qc.add_argument("--note", default="")
+    raster_set_qc.add_argument("--episode")
 
     status = sub.add_parser("status", help="show stage, what is rendered, passed and next")
     status.add_argument("--episode")
@@ -606,6 +691,8 @@ def main() -> int:
             return cmd_render(args)
         if args.cmd == "qc":
             return cmd_qc(args)
+        if args.cmd == "raster-set-qc":
+            return cmd_raster_set_qc(args)
         if args.cmd == "resolve":
             return cmd_resolve(args)
         return cmd_status(args)
