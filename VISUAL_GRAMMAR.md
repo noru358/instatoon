@@ -1,7 +1,7 @@
 # VISUAL_GRAMMAR.md
 
-# INSTATOON_VISUAL_GRAMMAR_v0.5 — SEQUENCE / COMPOSITION / LETTERING
-Updated: 2026-09-06
+# INSTATOON_VISUAL_GRAMMAR_v0.6 — SEQUENCE / COMPOSITION / LETTERING
+Updated: 2026-09-07
 
 STYLE authority: STYLE_LOCK.md / MASTER_PROMPTS.md
 CONTENT authority: SOURCE_STORY_PIPELINE.md
@@ -12,6 +12,19 @@ Plan the entire episode first.
 Render individual slides only after the sequence, cast, text roles, and visual rhythm are coherent.
 
 A slide exists because it performs one story job.
+
+### 0.1 Approved creative baseline — 2026-09-07
+
+This is the project-level visual/storytelling baseline, not a fixed episode template.
+
+- One slide should have one primary information or emotion beat. Supporting cues may exist, but the slide should have a clear owner of attention.
+- Empty space is functional. Do not fill unused space merely to make the frame feel busier or more "finished."
+- A face is not mandatory as the carrier of meaning. A phone, object, hand, posture, room distance, empty chair, or other scene element may carry the beat when that communicates the story better.
+- Text and art divide labor. Do not narrate what the image already makes obvious, and do not force the raster to explain information better handled by editable text/UI.
+- Reaction and silence are valid story jobs. A quiet reaction, pause, or object-only beat may earn a slide when it changes the reader's interpretation or emotional state.
+- Dialogue-led, object-led, reaction-led, and scene-led episodes may use different proportions. Do not force a recurring visual recipe, fixed four-cut structure, or mandatory reversal.
+
+This baseline governs composition decisions together with the episode-specific story contract. STYLE_LOCK still owns drawing language; this section does not redefine the art style.
 
 ## 1. Canvas / distribution
 
