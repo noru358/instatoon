@@ -80,6 +80,12 @@
       "type": "OPERATING_MODE",
       "status": "ACTIVE",
       "value": "S01 remains the user visual anchor. S02-S07 are sequential internal-QC work. Next normal user gate is the complete text-free raster set, then lettering/final."
+    },
+    {
+      "decision_id": "E007_VISUAL_DIRECTION_RULES_APPROVED_20260906",
+      "type": "GLOBAL_VISUAL_POLICY",
+      "status": "APPROVED",
+      "value": "User approved structural sequence-level visual-direction balance, role-adaptive expression amplitude, mirror/reflection geometry QC, and supporting-character skin-color coherence. No hard-coded left/right/front direction quotas."
     }
   ],
   "frame_qc": {},
@@ -87,14 +93,14 @@
     {
       "blocker_id": "E007_S02_CLEAN_RENDER_CONTEXT_REQUIRED_20260906",
       "stage": "L13",
-      "status": "BLOCKED_CURRENT_RENDER_CONTEXT_ONLY",
+      "status": "RESOLVED",
       "requirement": "CLEAN_DEDICATED_RENDER_CONTEXT_OR_EXPLICIT_ISOLATED_RENDERER",
       "required_media": [
         "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
         "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
       ],
-      "reason": "Two repeated WRONG_SCENE failures block only this contaminated conversation-inferred render context. Resume S02 in a clean context and continue remaining frames with operator/internal QC; no per-slide user approval is required.",
-      "blocking_scope": "RENDERER_CONTEXT_ONLY",
+      "reason": "Resolved in a clean session after restoring actual REF_V2_D + REF_V2_E media; S02-S07 chat-native prototypes rendered. Rule approval was obtained, but prototypes are not machine-bound raster artifacts.",
+      "blocking_scope": "NONE",
       "user_approval_required": false
     }
   ],
@@ -109,7 +115,7 @@
     "current_checkpoint": "REMAINING_RASTER_INTERNAL_QC",
     "next_user_gate": "COMPLETE_TEXT_FREE_RASTER_SET",
     "per_slide_user_approval": false,
-    "note": "S01 USER PASS already obtained. Resume S02-S07 internally in a clean render context."
+    "note": "S01 USER PASS already obtained. Clean-context rendering succeeded and global visual-direction/expression rules were approved. COMPLETE_TEXT_FREE_RASTER_SET user PASS is still not recorded; chat-native prototypes are not machine-bound artifacts."
   },
   "raster_set_gate": null
 }
