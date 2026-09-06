@@ -1,6 +1,6 @@
 # GENERATION_PROTOCOL.md
 
-# GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.5
+# GENERATION / CONTINUITY / REPAIR / QC PROTOCOL — v2.6
 Updated: 2026-09-07
 
 ## 0. Stage order
@@ -97,6 +97,9 @@ Therefore, for CONVERSATION_INFERRED/manual native generation:
 - if MULTI_PANEL, BAKED_TEXT, wrong-cast, or unrelated-scene hard failures repeat twice in the same context, stop retrying that path;
 - use a clean dedicated render context for the next manual experiment, or remain blocked until the explicit API renderer is available;
 - repeated hard-contract failures are renderer/context failures, not ordinary stochastic noise.
+- once that isolation threshold is crossed, the context is **sticky-unsafe** for production: a later superficially valid-looking image in the same context does not clear the blocker;
+- any outputs produced after the sticky-unsafe point are quarantined from anchor/QC promotion until the same target is reproduced or explicitly revalidated in a clean render context;
+- context reset is not episode reset: restore the repository state, approved anchor scope and current render cursor, then resume only the blocked/current slide.
 
 ### Reference acquisition preflight — anti-hardcoding invariant
 
@@ -171,6 +174,8 @@ For beats with multiple valid visual solutions:
 The pass condition is that the completed sequence does not feel directionally or compositionally biased because of renderer defaults. Viewer perception outranks token counts.
 
 A frontal camera is not automatically a neutral-direction frame; QC judges the actual apparent face orientation.
+
+Neighboring beats that carry materially different story states must not collapse into the same safe portrait with only a small facial swap when another story-valid composition exists. Conversely, continuity does not require gratuitous camera novelty: change only what helps the beat read. The target is meaningful visual delta, not variety for its own sake.
 
 Expression planning follows the same principle: role and story beat determine amplitude. "Restrained," "not grotesque," or "not melodramatic" must not silently become a global low-energy acting lock.
 
@@ -249,6 +254,8 @@ QC is ordered so cheap hard-contract checks run before subjective visual checks.
 - occlusion;
 - prop interaction;
 - action/composition/story clarity;
+- high-risk anatomy/interaction chains remain readable: when a hand crosses the face or torso, verify shoulder → upper arm → elbow/forearm → hand continuity, torso/garment structure and occlusion; simplify to a story-valid pose rather than accepting ambiguous anatomy;
+- when an information inset/overlay carries a concrete story fact, its shapes/state change must communicate that declared fact rather than reading as generic decorative data debris;
 - for every screen-bearing prop: display face is on the correct physical side;
 - character gaze/device orientation/camera view are mutually possible;
 - no audience-presentation pose exists without story justification;
@@ -261,6 +268,8 @@ QC is ordered so cheap hard-contract checks run before subjective visual checks.
 - detect repeated apparent face orientation, gaze direction, body turn, camera side/height or shot distance that creates a perceptual bias without story reason;
 - do NOT use fixed left/right/front quotas as the pass criterion. Compare visual redundancy against story-valid alternatives;
 - check whether anti-exaggeration wording flattened comedy/reaction/reveal beats into uniformly small acting;
+- check semantic acting fidelity: expression, shoulders/torso, hands and prop position must preserve the intended emotional meaning/energy; reject beautified, cute, cheerful or melodramatic defaults when they change the declared beat;
+- if adjacent frames read as near-duplicates despite a meaningful beat change, identify whether camera, body orientation, gaze, shot distance or acting can change without violating continuity; do not solve this with left/right quotas;
 - check story-relevant mirrors/reflections for coherent face/torso/limb geometry;
 - check supporting-character skin/local-color treatment for a different yellow/sepia cast from the main character without justification;
 - when the set fails, identify the minimum subset of frames driving the problem and rerender/repair those frames only. Do not regenerate the whole episode by default.
