@@ -1,9 +1,46 @@
 # CURRENT_STATE.md
 
-Updated: 2026-09-06
+Updated: 2026-09-07
 Repository: noru358/instatoon
 
+## SESSION HANDOFF — RESET BOUNDARY / DO NOT CONTINUE LEGACY E001
+
+Canonical user decision:
+- all concrete episode content created before the redesigned production system is retired;
+- production numbering restarts from a fresh E001 under the new AutoPipeline structure;
+- project-wide workflow/style/reference/QC lessons remain active.
+
+Conflict detected in this session:
+- this file and `pipeline/render_guard.py` still assume one parseable active episode;
+- the current `episodes/E001` package is therefore still present as a legacy machine fixture/state;
+- continuing, rendering, repairing, or creatively extending that E001 would mix retired episode content with the new system.
+
+Execution authorization: **BLOCKED_RESET_PENDING**.
+
+The parseable line below is retained temporarily only because the current render guard and CI require it. It does **not** authorize creative continuation of this episode.
+
 Active episode: episodes/E001/README.md
+
+### Completed before handoff
+- 2026-09-07 approved creative baseline was merged into `VISUAL_GRAMMAR.md`.
+- AutoPipeline durable artifact bridge and PROJECT/EPISODE work-scope separation are merged.
+- Parent AutoPipeline was pinned to the approved instatoon/jipbap creative-baseline revisions before this reset conflict was detected.
+- No new redesigned E001 story package was created in this session.
+
+### Unapproved source candidate for the fresh E001
+- Human-source candidate: https://theqoo.net/job/4123344083
+- Seed fact: while cleaning advertisement chat rooms, the poster accidentally left a four-year work team group chat containing work history and photos and had no backup.
+- Status: **CANDIDATE ONLY / NOT USER-APPROVED / DO NOT STORYBOARD YET**.
+
+### Exact next single action
+In a new session:
+1. re-read AutoPipeline and instatoon authority;
+2. change the state/render-guard contract so `Active episode: NONE` is a valid fail-closed non-rendering state;
+3. move the current legacy `episodes/E001` package out of the active production namespace without losing useful failure evidence;
+4. set no active episode and run CI;
+5. only then start the fresh E001 at L1-L7 and present the L8 package for explicit user approval.
+
+Reason for new-session handoff: repository authority conflicts with the current canonical reset decision, which is a configured context-contamination signal.
 
 ## Canonical operating mode — MANUAL_VALIDATION
 
