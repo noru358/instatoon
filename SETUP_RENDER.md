@@ -3,10 +3,10 @@
 이 문서는 두 운영 단계를 구분한다.
 
 **현재: MANUAL_VALIDATION**
-- 아직 이미지 API를 실제 운영에 연결하지 않는다.
-- ChatGPT/native 이미지는 단계별 수동 시각 검증에 임시 사용 가능하다.
-- 단, 대화형 native 결과는 repository attempt/hash에 묶이지 않은 한 재현 가능한 production artifact로 가장하지 않는다.
-- 모든 컷/레터링/최종본을 사용자가 단계별로 직접 검수한다.
+- 현재 일상 제작은 ChatGPT/native 수동 검증을 우선하고, 유료 API 렌더는 벤치마크/전환 준비 경로로 보존한다.
+- 대화형 native 결과는 repository attempt/hash에 묶이지 않은 한 재현 가능한 production artifact로 가장하지 않는다.
+- 사용자 기본 게이트는 사전 내용/콘티·계약 → S01 앵커 → 전체 무문자 래스터 세트 → 레터링/완성본이다.
+- S02~마지막 컷은 각각 별도 파일로 만들되 운영자 내부 QC로 진행한다. 매 컷 사용자 승인은 기본이 아니다.
 
 **장기: API_PRODUCTION**
 - `pipeline/render.py` 계열의 explicit provider adapter가 정식 raster 경로가 된다.
@@ -56,28 +56,34 @@ ChatGPT 구독과는 **별개 과금**이다. 실제 비용은 출력 크기·�
 
 ### 검수 기록하기
 
-그림을 확인한 뒤 `Actions` → `qc` → `Run workflow`
+`Actions` → `qc` → `Run workflow`.
 
-| 입력 | 설명 |
-|---|---|
-| slide | 방금 본 컷 번호 |
-| verdict | PASS 또는 FAIL |
-| note | FAIL이면 이유 한 줄 |
-| finish_mode | S01 PASS 뒤 `standard` 또는 `auto_finish`. 현재 MANUAL_VALIDATION 기본값은 `standard` |
+`scope=frame`:
+- S01 PASS는 `inspection_kind=user`로 기록한다.
+- S02 이후 PASS/FAIL은 보통 `inspection_kind=operator_internal`로 기록한다.
+- 이는 컷별 품질 증거이며, 사용자 승인 게이트를 뜻하지 않는다.
+
+`scope=raster_set`:
+- 모든 컷이 현재 artifact-bound PASS가 된 뒤 전체 무문자 세트를 사용자가 보고 PASS/FAIL한다.
+- PASS일 때만 `LETTERING`으로 이동한다.
+
+`finish_mode=auto_finish`은 S01 USER PASS 직후 자동 완주 실험을 선택할 때만 사용한다. MANUAL_VALIDATION 기본은 `standard`.
 
 ### 현재 순서 — MANUAL_VALIDATION
 
 ```
-structured contracts + preflight → 사람 승인
-→ S01 한 장 → 사람 QC
-→ S02 한 장 → 사람 QC
-→ ... 전 컷 반복
-→ separated lettering proof → 사람 QC
-→ final export → 사람 QC
+pre-raster content/storyboard/contracts → 사용자 승인
+→ S01 한 장 → 사용자 앵커 QC
+→ S02 ... 마지막 컷: 한 컷씩 생성 + 운영자 내부 QC
+→ complete text-free raster set → 사용자 전체 작화 QC
+→ separated lettering / final composition
+→ 사용자 최종 QC
 ```
 
+**한 컷=한 파일**은 유지하지만 **한 컷=한 사용자 승인**은 아니다.
+
 현재는 `finish_mode=standard`가 기본이다.
-AUTO_FINISH는 코드에서 제거하지 않지만 API_PRODUCTION 전환 전까지 기본 활성화하지 않는다.
+AUTO_FINISH는 코드에서 제거하지 않으며, S01 뒤 남은 사용자 게이트를 자동 QC로 대체하는 별도 실험 경로다.
 
 ---
 
@@ -91,10 +97,12 @@ AUTO_FINISH는 코드에서 제거하지 않지만 API_PRODUCTION 전환 전까�
 | S01 렌더 성공 | `RENDER_CONTRACT_READY` → `FIRST_FRAME_QC_PENDING` |
 | S01 QC PASS | `FIRST_FRAME_QC_PENDING` → `REMAINING_RENDER`, 해당 컷이 회차 앵커로 등록 |
 | S01 QC FAIL | `RENDER_CONTRACT_READY`로 복귀, 앵커 해제 |
-| 전 컷 QC PASS | `LETTERING` |
+| 전 컷 내부 QC PASS | `RASTER_SET_QC_PENDING` |
+| 전체 무문자 세트 USER PASS | `LETTERING` |
 
 `frame_qc` 항목은 `render_guard._require_persisted_qc`가 요구하는 형태
-(`slide_id` / `status` / `inspected_output` / `attempt_id` / `artifact_sha256`)로 기록된다.
+(`slide_id` / `status` / `inspected_output` / `attempt_id` / `artifact_sha256` / `inspector`)로 기록된다.
+S01의 정상 앵커 PASS는 `inspector=USER`, 후속 수동 제작 컷은 보통 `inspector=OPERATOR_INTERNAL`이다.
 
 ---
 
@@ -147,7 +155,7 @@ AUTO_FINISH는 코드에서 제거하지 않지만 API_PRODUCTION 전환 전까�
 
 ## 실험 모드: anchor-gated AUTO_FINISH
 
-목적은 **앵커 승인 이후의 반복 승인만 제거**하는 것이다. 콘티/대본 승인과 S01 앵커의 사람 승인은 그대로 둔다.
+목적은 STANDARD의 **S01 이후 전체 래스터 세트/레터링·최종 사용자 게이트까지 자동 QC로 대체**하는 것이다. 콘티/대본 승인과 S01 앵커의 사람 승인은 그대로 둔다.
 
 ### 활성화 조건
 
@@ -226,6 +234,9 @@ AUTO_FINISH용 별도 mutable state 파일은 만들지 않는다.
 - 첫 3개 API 완성 회차에서 실제 provider/model, attempts, first-pass rate, repair reasons, cost를 기록;
 - 예상 편당 달러 숫자를 영구 정책으로 하드코딩하지 않고 실측 후 예산 cap을 결정한다.
 
-장기 사용자 UX는 여전히:
-`콘티 승인 → 레퍼 확인 → S01 승인 → 완성본`.
+장기 API_PRODUCTION의 자동 경로 UX는:
+`콘티/계약 승인 → 레퍼 확인 → S01 승인 → 완성본`.
+
+현재 STANDARD MANUAL_VALIDATION의 사용자 UX는:
+`콘티/계약 승인 → S01 승인 → 전체 무문자 작화 승인 → 레터링/완성 승인`.
 API는 사용자가 매번 조작하는 외부 툴이 아니라 내부 격리 렌더 엔진이다.

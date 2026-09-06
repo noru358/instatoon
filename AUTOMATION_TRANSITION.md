@@ -250,9 +250,10 @@ This sidecar is intentionally a short-term bridge. The future AutoPipeline runti
 
 두 운영 모드를 공통 구조로 병렬 지원한다.
 
-**STANDARD**
-- 기존 수동 경로를 그대로 유지한다.
-- L8 승인 → S01 사람 QC → 후속 컷 render/QC → LETTERING → final QC/export.
+**STANDARD / MANUAL_VALIDATION**
+- 사용자 기본 흐름: 사전 내용/콘티·계약 승인 → S01 사람 앵커 QC → 후속 컷 render + 운영자 내부 QC → 전체 무문자 래스터 세트 사람 QC → LETTERING/final → 최종 사람 QC.
+- 후속 컷은 한 컷씩 별도 파일로 다루지만 매 컷 사용자 승인을 요구하지 않는다.
+- 모든 후속 컷이 artifact-bound PASS가 되면 `RASTER_SET_QC_PENDING`에 들어가고, 전체 세트 USER PASS 뒤에만 `LETTERING`으로 간다.
 
 **AUTO_FINISH (experimental default at the S01 QC action)**
 - L8/콘티 패키지 승인 유지;
@@ -330,105 +331,36 @@ AUTO_FINISH는 그 인물의 `appears_in`을 읽어 **첫 QC PASS 등장 컷**�
 - S01 전체 회차 앵커는 계속 고정 유지.
 
 
-## 9. 2026-09-06 operating decision — MANUAL_VALIDATION now, API_PRODUCTION later
+## 9. 2026-09-06 operating decision — MANUAL_VALIDATION approval topology
 
-The E007 native-chat continuation experiment changed the immediate operating policy.
+Current STANDARD policy is anchor-gated manual production, not per-slide user approval.
 
-### What failed
+The native-chat experiment established two separate facts:
+1. S01 user approval is valuable as a style/identity/render-direction anchor.
+2. A long contaminated conversation can still produce WRONG_SCENE / MULTI_PANEL / BAKED_TEXT failures on later isolated-slide requests.
 
-The user-provided reference images were not the failure source.
-S01 could be visually acceptable, but after S01 approval the long conversational native image context repeatedly produced:
-- one six-panel comic page instead of one slide file;
-- baked Korean dialogue / labels;
-- small-panel face/hand degradation;
-- recurring content drift because the renderer saw the global episode context.
+Therefore the current manual topology is:
 
-This means the current chat-native path is useful for taste/visual experiments but is not a reliable isolated batch renderer.
+`pre-raster content/plan USER gate → S01 USER anchor gate → S02..final operator internal QC → complete text-free raster-set USER gate → lettering/final USER gate`.
 
-Repeated MULTI_PANEL / BAKED_TEXT after a single-slide instruction is classified as a **renderer/context isolation failure**, not stochastic noise.
-Do not keep spending retries on that path.
+Operational consequences:
+- one slide = one file;
+- one slide != one user approval;
+- later frames remain sequential in conversation-inferred contexts so the operator can stop propagation;
+- local failures are repaired internally;
+- after two repeated hard-contract failures in one conversation-inferred render context, switch to a clean render context/provider rather than asking the user to approve each retry;
+- user re-entry before the full-set gate is reserved for unresolved material taste/contract decisions.
 
-### Immediate operating mode
+AUTO_FINISH remains a separate experimental mode. It keeps the S01 USER gate, then replaces the remaining STANDARD user gates with automatic vision QC, deterministic lettering and final automatic layout QC.
 
-Until the image API/provider adapter is connected:
-- STANDARD / manual validation is the default;
-- every material stage is explicitly user-reviewed;
-- every raster slide is generated and reviewed separately;
-- lettering is separate and reviewed separately;
-- final export is reviewed separately;
-- AUTO_FINISH remains implemented but is dormant by default.
+## 10. Active-episode state ownership
 
-This is intentionally slower. The purpose is to validate that each stage and contract actually works before paying for automated API runs.
+Do not duplicate an episode handoff in this root roadmap.
 
-ChatGPT subscription/native generation can be used for temporary manual tests where useful.
-A native output that is not persisted with an attempt/hash is not a machine-authoritative anchor even if the user likes it.
+The authoritative active-episode facts are:
+- `CURRENT_STATE.md` for current stage / next action;
+- `episodes/<ID>/README.md` for episode evidence and failure notes;
+- `EPISODE_PLAN.json`, `RENDER_MANIFEST.json`, `LETTERING_PLAN.json`, and `PRODUCTION_STATE.json` for executable contracts/state.
 
-### Long-term provider architecture
+Historical E005/E006/E007 findings may be described here only when they support a durable architecture decision. Stale cast/storyboard/next-session details must be removed from this root file rather than competing with CURRENT_STATE.
 
-The production engine should be provider-neutral.
-
-Initial benchmark candidates:
-- **image renderer:** GPT-Image-2;
-- **vision QC:** DeepSeek Flash Vision;
-- **lettering:** deterministic Python compositor already implemented.
-
-These model names are starting candidates, not permanent pipeline constants.
-
-Provider adapter responsibilities:
-1. accept only the compiled contract for one slide;
-2. load the exact required media binaries;
-3. issue one isolated provider request;
-4. persist request/model/media/output evidence;
-5. return cost/usage where available;
-6. never infer the next slide or the whole episode from conversation state.
-
-QC architecture:
-- QC-0 local/machine contract first: file mapping, aspect/dimensions, one-panel, no baked semantic text where detectable;
-- QC-1 vision style/identity;
-- QC-2 vision anatomy/scene;
-- retry only the failing slide;
-- hard renderer/context failures do not receive blind stochastic retries.
-
-### Cost/quality policy
-
-Do not optimize on sticker price per image alone.
-Measure **accepted final slide cost**:
-`total image generation spend / number of accepted slides`.
-
-Log:
-- provider/model;
-- quality tier;
-- attempts;
-- first-pass result;
-- retry/repair reason;
-- QC result;
-- actual usage/cost if the provider exposes it.
-
-Use the first three fully API-produced episodes to establish:
-- first-pass acceptance rate;
-- mean attempts per accepted slide;
-- mean episode cost;
-- anatomy-high-risk failure rate;
-- style/identity failure rate.
-
-Only then set the production budget cap.
-
-The current working hypothesis is medium/default image quality first, with higher-cost generation reserved for QC failures or anatomy-high-risk slides. This is a benchmark hypothesis, not a hardcoded rule.
-
-## 10. E007 handoff implication
-
-E007 is the manual validation episode.
-
-Already approved:
-- L1-L7;
-- Gaeun/Harin/Taemin cast for this episode;
-- six-slide storyboard/dialogue intent;
-- REF_V2_D + REF_V2_E as current visual authorities.
-
-Not yet machine-authoritative:
-- chat-native visually approved S01, because it lacks repository attempt/hash binding.
-
-Invalid:
-- all post-S01 six-panel/baked-text native continuation outputs.
-
-Next session starts by serializing the approved E007 package into EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN and asking the user to manually approve the structured contracts/preflight before any further raster work.

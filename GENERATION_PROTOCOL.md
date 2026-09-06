@@ -52,28 +52,40 @@ Reference handling:
 
 Never substitute obsolete/legacy refs.
 
-## 0.5 Current operating mode — MANUAL_VALIDATION (temporary, 2026-09-06)
+## 0.5 Current operating mode — MANUAL_VALIDATION (canonical, 2026-09-06)
 
-The long-term target remains anchor-gated automation, but the current learning phase is intentionally manual until the image API/provider adapter is connected and real cost/quality are measured.
+The current learning phase is manual, but **manual does not mean user approval after every slide**.
 
-User checkpoints now occur at every material stage:
-1. L1-L7 / source-dialogue-story package;
-2. cast + ordered storyboard + final dialogue intent;
-3. structured EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN + preflight;
-4. reference authority confirmation;
-5. each raster slide individually;
-6. lettering proof;
-7. final export.
+Default user-facing checkpoints are the major production gates:
+1. pre-raster content/plan approval: source/story/dialogue/storyboard/structured contract as applicable; unchanged subpackages are not re-approved;
+2. S01 anchor approval: the user checks the first real rendered frame for style, main identity and overall render direction;
+3. complete text-free raster-set approval: after S01 PASS, the operator produces S02 through the final slide as separate files with internal QC, then presents the whole art set to the user;
+4. lettering/final approval: only after the raster-set PASS are the approved text layers applied and the finished episode reviewed.
 
-Do not auto-continue merely because an earlier checkpoint passed.
-Do not ask the user to re-approve an unchanged package; preserve approvals and move only to the next unresolved checkpoint.
+During the learning phase, L8 may remain an earlier explicit sub-gate before storyboard construction. That internal layer ordering does not change the post-S01 approval topology above.
 
-During MANUAL_VALIDATION:
-- one raster request targets exactly one planned slide;
-- each returned slide is inspected before the next slide is attempted;
-- raster art and lettering remain separate;
-- AUTO_FINISH is disabled as the default operating path;
-- chat/native generation may be used as a temporary visual-validation renderer, but it is not a reproducible machine-bound attempt unless an explicit sanctioned ingest path records the artifact and evidence.
+Hard distinction:
+- **one slide = one image file** remains mandatory;
+- **one slide = one user approval gate** is NOT the default.
+
+After S01 USER PASS:
+- S02 through the final slide may be rendered sequentially without asking the user after each frame;
+- each frame still receives operator/internal QC for contract, style/identity, anatomy and scene correctness;
+- conversation-inferred rendering still proceeds one frame at a time so a bad frame cannot contaminate the next;
+- machine-bound QC records distinguish S01 `inspector=USER` from later `inspector=OPERATOR_INTERNAL` or `AUTO_VISION`;
+- once every raster has a current artifact-bound PASS, state moves to `RASTER_SET_QC_PENDING`;
+- only a USER PASS on the complete raster set authorizes `LETTERING`.
+
+User re-entry before the complete raster set is required only when the operator cannot resolve a material taste/contract decision internally, such as:
+- changing story/cast/approved dialogue;
+- changing the visual authority or S01 anchor direction;
+- a systemic renderer failure that requires a plan/prompt/provider decision rather than ordinary repair.
+
+A local hand, prop, extra, text-baking, wrong-scene or stochastic failure is normally an **operator repair/QC task**, not a new user gate.
+
+AUTO_FINISH is separate: after a machine-bound S01 USER PASS it intentionally bypasses the STANDARD full-raster-set and later manual gates, using automatic QC/lettering/final QC instead. It is preserved as experimental infrastructure and is not the default MANUAL_VALIDATION path.
+
+Chat/native generation may be used for temporary visual validation. A native result that is not persisted with an attempt/artifact hash can be a user-approved visual/taste anchor, but it must not be falsely recorded as a machine-authoritative anchor.
 
 ### Conversation-inferred renderer isolation rule
 
@@ -377,8 +389,9 @@ A stylish frame in the wrong story order = fail.
 An image from a different story/concept = semantic hard fail and immediate stop.
 
 Continuation authorization:
-- explicit compiled payload: first-frame QC PASS before remainder;
-- conversation-inferred: previous-frame QC PASS before every next frame.
+- S01 must receive the user-facing anchor PASS before the remaining raster stage begins;
+- explicit compiled payload: after the S01 user gate, remaining frames may be produced as an isolated batch, but each candidate still needs internal QC before the complete raster-set user gate;
+- conversation-inferred: after the S01 user gate, render one frame at a time and require the previous frame's internal artifact-bound QC PASS before the next call. This is an operator QC gate, not a user approval gate.
 
 ## 8. Last-known-good rule
 

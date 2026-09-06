@@ -199,6 +199,8 @@ During active production, do not silently jump across stages.
 
 After each meaningful pipeline stage completes, report it to the user even when they did not explicitly ask for a status report.
 
+**Stage report != user approval gate.** Reporting every internal render/QC stage does not authorize or require asking the user after every slide. Approval topology is owned by GENERATION_PROTOCOL §0.5: in STANDARD MANUAL_VALIDATION, S01 is the first-frame user gate, S02~final use operator internal QC, and the next normal user gate is the complete text-free raster set.
+
 For every reported stage include:
 - STAGE: canonical stage/layer name;
 - WORKER ROLE: researcher, story editor, dialogue writer, storyboard/cast director, character designer, visual director, renderer, letterer, QC, performance analyst, etc.;

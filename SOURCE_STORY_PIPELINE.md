@@ -74,6 +74,8 @@ Default worker roles:
 After each meaningful stage completes, report:
 STAGE / WORKER ROLE / EXECUTION ACTOR / INPUT / SOURCE-PROVENANCE / OUTPUT / STATUS / QC / NEXT.
 
+Stage reporting is audit visibility, **not an approval gate**. User approval frequency is owned by GENERATION_PROTOCOL §0.5; reporting S02/S03 internal QC does not mean asking the user to approve S02/S03.
+
 For visual generation, SOURCE-PROVENANCE must additionally name the exact style and character reference assets actually supplied to the renderer.
 
 ### L1 — SOURCE DISCOVERY / COLLECTION
@@ -379,8 +381,9 @@ Hard rules:
 - plan/manifest/active-episode mismatch blocks L13;
 - a stale manifest after any EPISODE_PLAN change blocks L13;
 - missing current reference binaries block L13;
-- conversation-inferred renderer paths must render one frame at a time and require semantic QC PASS before the next call;
-- explicit compiled-payload renderers may continue as a batch only after the first frame passes semantic QC.
+- S01 is the user-facing visual anchor gate;
+- after S01 USER PASS, conversation-inferred renderer paths still render one frame at a time and require **operator/internal semantic QC PASS** before the next call; this is not a per-frame user gate;
+- after S01 USER PASS, explicit compiled-payload renderers may continue the remaining raster work as an isolated batch, with internal QC before the complete raster-set user gate.
 
 ### L13 — TEXT-FREE ART GENERATION
 
@@ -400,6 +403,19 @@ It should normally NOT contain final readable:
 - source notes.
 
 This prevents typo risk and poster-like composition drift.
+
+### L13.5 — COMPLETE RASTER SET USER GATE — MANUAL_VALIDATION
+
+This gate exists in STANDARD MANUAL_VALIDATION after the first-frame anchor has already passed.
+
+1. S01 receives explicit user visual approval.
+2. S02 through the final slide are generated as separate files and internally QC'd by the operator/runtime.
+3. When every raster has a current PASS, present the complete **text-free art set** to the user.
+4. USER PASS authorizes L14 lettering.
+5. USER FAIL returns only the affected frame(s) to repair; do not discard accepted frames or restart the episode.
+
+This is a set-level taste/continuity gate, not a per-slide user gate.
+AUTO_FINISH intentionally bypasses this manual set gate after S01 and uses automatic QC instead.
 
 ### L14 — VECTOR LETTERING / COMPOSITION
 
