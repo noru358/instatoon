@@ -1,6 +1,6 @@
 # E007 — 엘리베이터 혼자 타면
 
-Status: S01 USER APPROVED — REMAINING RASTER INTERNAL QC / CLEAN CONTEXT REQUIRED
+Status: VISUAL-DIRECTION RULES LOCKED — FULL RASTER USER GATE NOT YET RECORDED
 Updated: 2026-09-06
 
 ## 0. Reset record
@@ -195,3 +195,35 @@ Exact resume action:
 4. if PASS, continue S03~S07 sequentially with the same internal-QC rule;
 5. after every raster is acceptable, present the complete text-free art set to the user;
 6. only that full-set USER PASS authorizes lettering.
+
+## 9. 2026-09-06 visual-direction / expression prototype — RULES APPROVED
+
+A clean session with REF_V2_D + REF_V2_E successfully produced S02-S07 prototypes and exposed/refined four cross-episode rules.
+
+Observed issues before the final rule decision:
+- viewer-perceived face/camera direction remained biased even when some frames were technically frontal;
+- mirror reflection geometry could produce mismatched face/arm poses;
+- accumulated restraint wording made reactions too visually quiet;
+- the supporting security character could receive a yellow/sepia skin cast that separated him from the main-cast color world.
+
+User-approved global interpretation:
+- do **not** hard-code left/right/front quotas or a mandatory opposite-facing frame;
+- plan and QC camera/framing across the episode as a set, selecting story-valid alternatives to reduce redundant perceived orientation;
+- expression amplitude is role-adaptive and may be clearly dynamic as long as identity/style are preserved and distortion does not become grotesque;
+- story-relevant mirror/reflection geometry must be plausible and visually checkable;
+- supporting characters use the same flat local-color grammar as the main cast, without an automatic yellow/sepia cast.
+
+Durable authorities updated:
+- VISUAL_GRAMMAR.md;
+- GENERATION_PROTOCOL.md;
+- MASTER_PROMPTS.md;
+- STYLE_LOCK.md;
+- AUTOMATION_TRANSITION.md;
+- schemas/episode_plan.schema.json;
+- E007 EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN bindings.
+
+Important gate distinction:
+the user approved these **rules**. This does not by itself constitute the COMPLETE_TEXT_FREE_RASTER_SET user PASS. Chat-native prototype images are not being falsely recorded as machine-bound raster artifacts.
+
+The previous clean-context blocker is resolved as an environment/context incident: rendering succeeded after restoring the actual reference media in a clean session. It should not be treated as an active episode blocker.
+
