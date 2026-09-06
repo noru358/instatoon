@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "episode_id": "E001",
-  "episode_plan_git_blob_sha": "a3e0aa91a2721b8b5487a9037795cff135fae500",
+  "episode_plan_git_blob_sha": "c976b97fb417dbf07d594b5e1deffdfd599dd974",
   "canonical_prompt_source": {
     "path": "MASTER_PROMPTS.md",
     "section_heading": "## 12. COMPILED PRODUCTION PROMPT"
@@ -95,25 +95,31 @@
       "index": 3,
       "slide_id": "E001_S03",
       "scene_contract": [
-        "same phone, clothing and body continuity from slide 2",
-        "the phone screen provides a clean blank chat bubble area for later vector lettering",
-        "the send gesture is simple and anatomically clear with no intricate finger pose",
-        "no actual message text, chat title, app logo, or system text is baked into the raster"
+        "worker_01 identity, apron, hair and clothing remain exactly continuous from slide 2",
+        "old separate send and realization beats are intentionally merged because their visual delta was too small",
+        "the physical phone remains naturally oriented toward worker_01; the audience does not need to read its physical display",
+        "screen information is carried by one separate UI inset/overlay inside the same panel, not by a second comic panel",
+        "the UI shell is KakaoTalk-inspired for contemporary Korean everyday messaging, without copied logo/wordmark",
+        "actual message text, room title, reaction text and decrementing/disappearing read-status numerals belong to vector/layout, not raster"
       ],
       "required_entities": [
-        "worker_01 hands",
+        "worker_01",
         "smartphone",
-        "send gesture"
+        "shocked realization",
+        "UI inset zone"
       ],
       "forbidden_entities": [
         "Gaeun",
         "Harin",
         "Taemin",
-        "extra people",
-        "readable text",
-        "speech bubbles",
+        "physical coworker",
+        "readable raster text",
+        "baked room title",
+        "baked read-count numerals",
+        "speech bubbles in raster",
         "app logo",
-        "complex fingers",
+        "device screen on phone back",
+        "audience-presentation phone pose",
         "cinematic lighting"
       ]
     },
@@ -121,24 +127,28 @@
       "index": 4,
       "slide_id": "E001_S04",
       "scene_contract": [
-        "worker_01 identity and outfit remain continuous",
-        "the phone is angled so a clean header/title area can receive later vector lettering identifying the workplace group",
-        "her expression jumps clearly from relaxed to shocked without grotesque distortion",
-        "no readable chat title, message, caption, or speech bubble is baked into the raster"
+        "worker_01 and phone remain continuous from slide 3",
+        "this is screen-information-led: choose a physically valid over-shoulder/POV screen-readable view",
+        "the physical display face is visible to worker_01 and camera from compatible directions",
+        "the UI shell is KakaoTalk-inspired; deleted-message state and read/unread count are later vector content",
+        "no readable system text, room title, message, logo, numeral or speech bubble is baked into the raster"
       ],
       "required_entities": [
-        "worker_01",
-        "smartphone",
-        "shocked realization"
+        "worker_01 partial silhouette or shoulder",
+        "smartphone display face",
+        "delete gesture",
+        "screen UI shell"
       ],
       "forbidden_entities": [
         "Gaeun",
         "Harin",
         "Taemin",
-        "other people",
-        "readable text",
-        "speech bubbles",
-        "dramatic screaming",
+        "recognizable recurring-cast avatars",
+        "readable raster text",
+        "app logo",
+        "phone back presented as screen",
+        "impossible character/camera screen geometry",
+        "complex fingers",
         "cinematic lighting"
       ]
     },
@@ -146,45 +156,17 @@
       "index": 5,
       "slide_id": "E001_S05",
       "scene_contract": [
-        "worker_01 and phone remain continuous",
-        "the interface must visually support a generic deleted-message/read-receipt concept without copying a branded app",
-        "reserve clean vector zones for a deleted-message system line and a 40-plus read indicator",
-        "the read indicators may be generic small avatar dots/icons, not recognizable recurring cast faces",
-        "no readable system text, number, message, app logo, or speech bubble is baked into the raster"
-      ],
-      "required_entities": [
-        "worker_01",
-        "smartphone",
-        "delete gesture",
-        "generic read indicators"
-      ],
-      "forbidden_entities": [
-        "Gaeun",
-        "Harin",
-        "Taemin",
-        "recognizable main-cast avatars",
-        "other physical people",
-        "readable text",
-        "speech bubbles",
-        "app logo",
-        "complex fingers",
-        "cinematic lighting"
-      ]
-    },
-    {
-      "index": 6,
-      "slide_id": "E001_S06",
-      "scene_contract": [
         "worker_01 identity and outfit remain continuous",
         "the coworker exists only through later vector chat text; do not invent a physical second person",
-        "reserve a clean phone/notification area for two short private messages",
-        "expression is mortified and frozen, not angry or tearful",
-        "no readable DM text, sender name, caption, or speech bubble is baked into the raster"
+        "the handset stays naturally oriented to worker_01; do not turn the screen toward the audience",
+        "a separate KakaoTalk-inspired DM inset reserves space for two short later messages",
+        "expression is mortified and frozen, not frantic, angry or tearful",
+        "no readable DM text, sender name, logo or speech bubble is baked into the raster"
       ],
       "required_entities": [
         "worker_01",
         "smartphone",
-        "private-message notification area"
+        "DM UI inset zone"
       ],
       "forbidden_entities": [
         "Gaeun",
@@ -192,20 +174,22 @@
         "Taemin",
         "physical coworker",
         "customer",
-        "readable text",
-        "speech bubbles",
+        "readable raster text",
+        "app logo",
+        "audience-presentation phone pose",
         "crying breakdown",
         "cinematic lighting"
       ]
     },
     {
-      "index": 7,
-      "slide_id": "E001_S07",
+      "index": 6,
+      "slide_id": "E001_S06",
       "scene_contract": [
-        "worker_01 identity, hair, apron and clothing remain continuous even with the face partly hidden",
-        "the final emotion must read as extreme embarrassment through whole-body pose rather than dialogue or narration",
-        "strong expressive pose is allowed within style; do not flatten the body language into a neutral seated pose",
-        "no reply, narration, internal monologue, reaction text, caption, message, or speech bubble appears in the final frame"
+        "worker_01 identity, hair, apron and clothing remain continuous even with face partly hidden",
+        "final emotion must read as extreme embarrassment through whole-body pose",
+        "strong expressive pose is allowed within style",
+        "phone is secondary and its screen is not story information",
+        "no reply, narration, internal monologue, reaction text, caption, message or speech bubble appears"
       ],
       "required_entities": [
         "worker_01",
