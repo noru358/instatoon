@@ -88,6 +88,9 @@ class RenderGuardTests(unittest.TestCase):
             if req.get("required") is True:
                 self.assertIn(req["requirement_id"], prompt)
                 self.assertIn(req["source_id"], prompt)
+        self.assertIn("VISUAL INFORMATION OWNER:", prompt)
+        self.assertIn("VISUAL DELTA FROM PREVIOUS:", prompt)
+        self.assertIn("SCREEN CONTRACT:", prompt)
 
     def test_blocks_renderer_without_explicit_media_support(self):
         eid, _, _ = self._active_plan_manifest()
@@ -170,6 +173,33 @@ class RenderGuardTests(unittest.TestCase):
                 authorize(root, eid, 2, "CONVERSATION_INFERRED", "PASS", True, ["image"], supply, require_active=False),
                 "AUTHORIZED_SEQUENTIAL_SINGLE_FRAME",
             )
+
+    def test_screen_bearing_slide_requires_screen_contract(self):
+        _, plan, _ = self._active_plan_manifest()
+        if not any(s.get("screen_bearing_prop") for s in plan["slides"]):
+            self.skipTest("active episode has no screen-bearing slide")
+        broken = json.loads(json.dumps(plan))
+        target = next(s for s in broken["slides"] if s.get("screen_bearing_prop"))
+        target["screen_contract"] = None
+        with self.assertRaisesRegex(GuardError, "needs screen_contract"):
+            validate_episode_plan(broken)
+
+    def test_non_screen_slide_rejects_stray_screen_contract(self):
+        _, plan, _ = self._active_plan_manifest()
+        if not any(not s.get("screen_bearing_prop") for s in plan["slides"]):
+            self.skipTest("active episode has no non-screen slide")
+        broken = json.loads(json.dumps(plan))
+        target = next(s for s in broken["slides"] if not s.get("screen_bearing_prop"))
+        target["screen_contract"] = {
+            "prop_id":"fake",
+            "subject_screen_relation":"subject sees display front",
+            "camera_screen_relation":"camera sees display front",
+            "geometry_contract":"synthetic invalid contract for guard test",
+            "ui_profile":"TEST",
+            "ui_delivery":"NONE"
+        }
+        with self.assertRaisesRegex(GuardError, "screen_contract=null"):
+            validate_episode_plan(broken)
 
     def test_multi_panel_or_combined_delivery_is_rejected(self):
         for field, bad in [("panels_per_image", 4), ("panels_per_image", None),
