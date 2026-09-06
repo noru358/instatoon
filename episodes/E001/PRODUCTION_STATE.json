@@ -1,0 +1,59 @@
+{
+  "state_version": "1.0",
+  "episode_id": "E001",
+  "current_stage": "VISUAL_PLAN_READY",
+  "voice_gate": {
+    "status": "PASS",
+    "approved_scope": "L1_L7_FULL_PACKAGE",
+    "approval_kind": "USER_EXPLICIT",
+    "evidence": "2026-09-06 user replied '합격' after reviewing the revised L1-L7 package with protagonist explanation removed and a silent embarrassment ending."
+  },
+  "decisions": [
+    {
+      "decision_id": "E001_RESET_20260906_V1",
+      "type": "EPISODE_RESET",
+      "status": "ACTIVE",
+      "value": "All prior concrete episodes retired from current execution; numbering restarted at E001 while structural/style/QC rules were preserved."
+    },
+    {
+      "decision_id": "E001_L8_APPROVED_20260906_V1",
+      "type": "USER_VOICE_GATE",
+      "status": "PASS",
+      "value": "Revised L1-L7 package explicitly approved by user."
+    },
+    {
+      "decision_id": "E001_CAST_ROUTING_20260906_V1",
+      "type": "CAST_STORYBOARD",
+      "status": "READY_FOR_USER_REVIEW",
+      "value": "No recurring main cast forced into the premise. worker_01 is an episode-only mid-20s service worker; customer/helper coworker are one-frame extras. Seven-slide storyboard follows the approved causal order."
+    },
+    {
+      "decision_id": "E001_ENDING_LOCK_20260906_V1",
+      "type": "DIALOGUE_VISUAL_LOCK",
+      "status": "APPROVED",
+      "value": "After the coworker DM there is no protagonist reply, narration or internal monologue; final slide is silent extreme embarrassment."
+    },
+    {
+      "decision_id": "E001_VISUAL_PLAN_20260906_V1",
+      "type": "VISUAL_PLAN",
+      "status": "READY_FOR_USER_REVIEW",
+      "value": "Seven-slide whole-episode visual plan uses story-first shot selection, redundancy-aware sequence QC and role-adaptive expression."
+    },
+    {
+      "decision_id": "E001_RENDER_CONTRACT_DRAFT_20260906_V1",
+      "type": "RENDER_CONTRACT",
+      "status": "BUILT_AWAITING_PRE_RASTER_USER_GATE",
+      "value": "EPISODE_PLAN, RENDER_MANIFEST and LETTERING_PLAN are materialized but raster authorization remains fail-closed until the pre-raster user gate passes and production state advances."
+    }
+  ],
+  "frame_qc": {},
+  "manual_validation": {
+    "status": "ACTIVE",
+    "auto_finish_allowed": false,
+    "current_checkpoint": "PRE_RASTER_PLAN_USER_GATE",
+    "next_user_gate": "PRE_RASTER_PLAN_APPROVAL",
+    "per_slide_user_approval": false,
+    "note": "L8 passed. L10-L12.5 package is built for review. Do not render S01 until user approves this pre-raster package and state is advanced/revalidated."
+  },
+  "raster_set_gate": null
+}
