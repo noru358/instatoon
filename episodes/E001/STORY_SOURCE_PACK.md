@@ -1,6 +1,6 @@
 # E001 STORY SOURCE PACK — L1-L7 DRAFT
 
-Status: AWAITING_L8_USER_VOICE_GATE
+Status: L8_APPROVED
 Date: 2026-09-06
 
 ## L1 — SOURCE DISCOVERY
@@ -87,4 +87,4 @@ Not added:
 - no protagonist explanatory dialogue after the DM.
 
 ## L8 USER VOICE GATE
-PENDING — explicit user approval required before L10 storyboard/cast routing.
+PASS — 2026-09-06 explicit user approval: "합격". Approved scope is the full revised L1-L7 package.
