@@ -1,7 +1,7 @@
 {
   "state_version": "1.0",
   "episode_id": "E007",
-  "current_stage": "STORYBOARD_AWAITING_APPROVAL",
+  "current_stage": "VISUAL_PLAN_READY",
   "voice_gate": {
     "status": "PASS",
     "approved_scope": "L1_L7_FULL_PACKAGE",
@@ -16,22 +16,34 @@
       "value": "Previous office-lunch E007 package and approvals are historical only; active production restarted at L1."
     },
     {
-      "decision_id": "E007_TOPIC_SELECTED_20260906_V2",
-      "type": "TOPIC",
-      "status": "APPROVED",
-      "value": "professional office worker acts goofy alone in elevator, then realizes security has seen it through CCTV"
-    },
-    {
       "decision_id": "E007_L8_APPROVED_20260906_V2",
       "type": "USER_VOICE_GATE",
       "status": "PASS",
       "value": "Fresh L1-L7 source/story/dialogue package approved by user."
     },
     {
-      "decision_id": "E007_CAST_STORYBOARD_DRAFT_20260906_V2",
+      "decision_id": "E007_CAST_STORYBOARD_APPROVED_20260906_V3",
       "type": "CAST_STORYBOARD",
+      "status": "APPROVED",
+      "value": "Harin is protagonist; security_01 episode-only; seven-slide storyboard approved with silent finger gesture and final !? reaction."
+    },
+    {
+      "decision_id": "E007_VISUAL_PLAN_APPROVED_20260906_V2",
+      "type": "VISUAL_PLAN",
+      "status": "APPROVED",
+      "value": "L11/L12 character and whole-episode visual plan approved by user."
+    },
+    {
+      "decision_id": "E007_REFERENCE_CONFIRMATION_20260906_V2",
+      "type": "REFERENCE_AUTHORITY",
+      "status": "CONFIRMED",
+      "value": "User-supplied images exactly match canonical REF_V2_D and REF_V2_E by SHA-256; both are BINARY_REQUIRED."
+    },
+    {
+      "decision_id": "E007_STRUCTURED_CONTRACT_BUILT_20260906_V2",
+      "type": "RENDER_CONTRACT",
       "status": "AWAITING_USER_APPROVAL",
-      "value": "Episode-only male office-worker protagonist + episode-only male security employee; seven-slide storyboard in episodes/E007/README.md"
+      "value": "EPISODE_PLAN, RENDER_MANIFEST and LETTERING_PLAN created and bound to canonical refs."
     },
     {
       "decision_id": "MANUAL_VALIDATION_MODE_20260906",
@@ -43,18 +55,21 @@
   "frame_qc": {},
   "blockers": [
     {
-      "blocker_id": "E007_STORYBOARD_APPROVAL_20260906_V2",
-      "stage": "L10",
+      "blocker_id": "E007_STRUCTURED_CONTRACT_APPROVAL_20260906_V2",
+      "stage": "L12.5",
       "status": "AWAITING_USER_APPROVAL",
-      "requirement": "CAST_AND_SEVEN_SLIDE_STORYBOARD",
-      "required_media": [],
-      "reason": "Manual validation requires user approval of cast/storyboard before character design, visual plan, render contract, or raster."
+      "requirement": "EPISODE_PLAN_RENDER_MANIFEST_LETTERING_PLAN",
+      "required_media": [
+        "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+        "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+      ],
+      "reason": "MANUAL_VALIDATION requires explicit user approval of the structured contract before stage RENDER_CONTRACT_READY and before any S01 raster call."
     }
   ],
   "episode_anchor": null,
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "L10_CAST_STORYBOARD_USER_GATE"
+    "current_checkpoint": "L12_5_STRUCTURED_CONTRACT_USER_GATE"
   }
 }
