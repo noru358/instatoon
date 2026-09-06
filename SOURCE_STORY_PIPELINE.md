@@ -298,154 +298,98 @@ Promote only explicit/repeated preferences.
 
 ### L10 — STORYBOARD + CAST ROUTER
 
-Only after story/dialogue is acceptable:
+Only after story/dialogue is acceptable.
 
 For every beat decide:
 - which character(s) are actually needed;
 - main-cast vs episode-only;
-- location;
-- key prop;
-- expression/reaction;
-- camera distance;
+- location / background need;
+- key prop or UI information;
+- expression / body action;
+- shot scale / framing role;
 - text role;
-- output composition.
+- primary visual-information owner.
 
-CAST PRINCIPLE:
-Story/context decides.
+Story/context decides cast. Do not insert recurring leads merely to fill a composition.
 
-Examples:
-- Harin may lead a dating anecdote if it naturally fits.
-- Taemin may appear in another episode if the story calls for him.
-- A blind-date man is not automatically Taemin.
-- A coworker, parent, stranger, boss, clerk, student, etc. may be episode-only.
+### L11 — EPISODE-LOCAL IDENTITY / ASSET NEEDS
 
-### L11 — EPISODE-LOCAL CHARACTER DESIGN
+If a non-main character appears repeatedly:
+1. derive a compact identity contract from story/social role;
+2. keep the person distinct from recurring leads;
+3. resolve whether approved reusable assets already cover the needed views/poses;
+4. open ASSET_GAP only for missing visual capability.
 
-Mandatory when a newly introduced non-main character appears in 2+ cuts.
-
-Before assembling the production batch:
-1. infer the character internally from the story, social role, and scene context;
-2. make age, face, hair, clothing, and role fit the story;
-3. ensure the design is visually distinct from main cast;
-4. reject generic smooth AI-face design;
-5. record one compact identity digest;
-6. reuse that digest consistently across every frame in the episode batch.
-
-This step is internal by default and does not produce a separate user-facing character sheet or approval gate.
-Create a temporary internal anchor image only when direct batch continuity fails. Ask for user approval only when identity itself becomes a material taste decision.
-
-One-frame background extras may skip it.
+This stage does not require a standalone character sheet by default.
 
 ### L12 — WHOLE-EPISODE VISUAL PLAN
 
-Do not render slide 1 and invent slide 2 afterward.
+Plan the entire sequence before final composition.
 
-Plan:
+Decide:
 - slide count from actual story density;
 - ordered beat role;
-- page archetype;
-- camera rhythm;
-- text role;
-- art-safe text area;
-- render mode;
-- continuity mode.
+- shot scale / focal owner / visual delta;
+- pose/expression/background/prop requirements;
+- text-safe regions;
+- which requirements are already covered by approved assets.
 
-No fixed 4-cut ideology.
-A 5, 6, 7, or 8-slide story is acceptable if every slide earns its place.
+Production slide count is story-driven. The separate renderer calibration fixture is four slides; that test number is not a content rule.
 
-### L12.5 — RENDER CONTRACT GATE
+### L12.5 — ASSET RESOLUTION GATE
 
-This is mandatory for every episode, renderer, client, and future automation path.
+Before any stochastic visual call:
+1. inspect `assets/production/registry.json`;
+2. map each visible requirement to an approved asset where semantically valid;
+3. use crop/scale/position/layering when existing assets can express the beat;
+4. create explicit ASSET_GAP entries only for missing pose/expression/background/prop/interaction capability;
+5. define each gap's category and scope.
 
-Materialize:
-- `episodes/<ID>/EPISODE_PLAN.json` from the accepted L1-L12 state;
-- `episodes/<ID>/RENDER_MANIFEST.json` bound to the exact EPISODE_PLAN Git blob SHA.
+Do not use free-form “generate slide N” as the default production action.
 
-The manifest must carry:
-- episode ID;
-- slide count/order;
-- output ratio and text-free-raster flag;
-- selected cast and episode-only continuity through the plan;
-- required canonical style/reference paths;
-- per-slide scene contract;
-- required entities;
-- forbidden/unplanned entities;
-- renderer prompt-binding policy;
-- FAIL_CLOSED unexpected-concept policy.
+### L13 — ASSET AUTHORING + QC
 
-Then run:
-`python pipeline/render_guard.py validate`
+For each ASSET_GAP:
+- use current authoring references and MASTER_PROMPTS;
+- generate/import the smallest missing asset;
+- run GENERATION_PROTOCOL QC;
+- user/authorized PASS binds to exact bytes;
+- register approved hash/dimensions/scope in `assets/production/registry.json`.
 
-Hard rules:
-- free-form render calls assembled from chat memory are prohibited;
-- plan/manifest/active-episode mismatch blocks L13;
-- a stale manifest after any EPISODE_PLAN change blocks L13;
-- missing current reference binaries block L13;
-- S01 is the user-facing visual anchor gate;
-- after S01 USER PASS, conversation-inferred renderer paths still render one frame at a time and require **operator/internal semantic QC PASS** before the next call; this is not a per-frame user gate;
-- after S01 USER PASS, explicit compiled-payload renderers may continue the remaining raster work as an isolated batch, with internal QC before the complete raster-set user gate.
+Rejected output is not a reference or production asset.
 
-### L13 — TEXT-FREE ART GENERATION
+A full-frame stochastic output is allowed only as an explicit EXCEPTION_OUTPUT under ASSET_COMPOSITION_PROTOCOL.
 
-L13 may start only after L12.5 PASS.
+### L13.5 — DETERMINISTIC ART COMPOSITION
 
-Production art should normally contain:
-- characters;
-- props;
-- environment;
-- non-text reaction marks when useful.
+Use the shared AutoPipeline compositor to assemble each text-free art frame from approved asset IDs + transforms.
 
-It should normally NOT contain final readable:
-- narration;
-- dialogue;
-- speech bubbles;
-- labels;
-- source notes.
+Requirements:
+- one slide = one image file;
+- no baked narration/dialogue;
+- frame count/order must match the approved storyboard;
+- composition variation comes from asset selection, crop, scale, x/y, layering and justified new pose assets;
+- do not regenerate accepted identity just to change framing.
 
-This prevents typo risk and poster-like composition drift.
+For the architecture pilot only, compose exactly four slides. Normal episodes remain variable-length.
 
-### L13.5 — COMPLETE RASTER SET USER GATE — MANUAL_VALIDATION
+### L14 — EDITABLE LETTERING / UI
 
-This gate exists in STANDARD MANUAL_VALIDATION after the first-frame anchor has already passed.
+Add title/hook, narration, dialogue bubbles, reaction text, SFX and meaning-bearing UI as editable deterministic layers.
 
-1. S01 receives explicit user visual approval.
-2. S02 through the final slide are generated as separate files and internally QC'd by the operator/runtime.
-3. When every raster has a current PASS, present the complete **text-free art set** to the user.
-4. USER PASS authorizes L14 lettering.
-5. USER FAIL returns only the affected frame(s) to repair; do not discard accepted frames or restart the episode.
-
-This is a set-level taste/continuity gate, not a per-slide user gate.
-AUTO_FINISH intentionally bypasses this manual set gate after S01 and uses automatic QC instead.
-
-### L14 — VECTOR LETTERING / COMPOSITION
-
-Add:
-- title/hook;
-- narration;
-- dialogue bubbles;
-- reaction text;
-- SFX;
-- source note
-
-as editable layout elements.
-
-See VISUAL_GRAMMAR.md for typography and placement rules.
+The old AUTO_FINISH/LETTERING_PLAN implementation is retired. The new implementation must consume the current composed scene/art contract rather than revive the old per-render episode state machine.
 
 ### L15 — QC
 
-QC order:
-1. story causality/order;
-2. dialogue naturalness;
-3. correct cast choice;
-4. episode-only character identity continuity;
-5. visual style;
-6. character identity;
-7. scene/blocking/object logic;
-8. text hierarchy/readability;
-9. output ratio.
+Run:
+1. hard output/asset identity checks;
+2. style/identity coherence;
+3. anatomy/geometry where relevant;
+4. sequence-level framing redundancy and semantic-intent review;
+5. text/UI legibility and occlusion review.
 
-A beautiful frame with wrong story order fails.
-A stylish frame with the wrong character fails.
+Repair the smallest invalid asset/scene/text layer.
+Do not restart or regenerate unrelated accepted work.
 
 ### L16 — PERFORMANCE FEEDBACK
 
