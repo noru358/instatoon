@@ -1,0 +1,249 @@
+{
+  "manifest_version": "1.0",
+  "episode_id": "E001",
+  "episode_plan_git_blob_sha": "a3e0aa91a2721b8b5487a9037795cff135fae500",
+  "canonical_prompt_source": {
+    "path": "MASTER_PROMPTS.md",
+    "section_heading": "## 12. COMPILED PRODUCTION PROMPT"
+  },
+  "output": {
+    "aspect_ratio": "4:5",
+    "width": 1080,
+    "height": 1350,
+    "text_free_raster": true,
+    "panels_per_image": 1,
+    "delivery_mode": "SEPARATE_FILES"
+  },
+  "style_refs": [
+    "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+    "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+  ],
+  "renderer_contract": {
+    "allowed_prompt_bindings": [
+      "EXPLICIT_COMPILED_PAYLOAD",
+      "CONVERSATION_INFERRED"
+    ],
+    "reference_conditioning_modes": [
+      "BINARY_CONDITIONED",
+      "AUTHORITY_INFORMED_NON_BINARY_CONDITIONED"
+    ],
+    "required_reference_conditioning": "BINARY_REQUIRED",
+    "unexpected_concept_policy": "FAIL_CLOSED"
+  },
+  "batch_policy": {
+    "explicit_payload": "FIRST_FRAME_GATE_THEN_BATCH",
+    "conversation_inferred": "FIRST_FRAME_USER_GATE_THEN_SEQUENTIAL_INTERNAL_QC"
+  },
+  "slides": [
+    {
+      "index": 1,
+      "slide_id": "E001_S01",
+      "scene_contract": [
+        "worker_01 must use the locked episode-only identity digest and v2 drawing language",
+        "the customer is a one-frame ordinary adult extra, not threateningly villainous or physically violent",
+        "a one-frame helper coworker calmly intervenes and is visually distinct from worker_01 and all recurring leads",
+        "the location is a simple generic service counter with low-detail background",
+        "no readable menu, logo, signage, caption, dialogue, or speech bubble is baked into the raster"
+      ],
+      "required_entities": [
+        "worker_01",
+        "agitated customer",
+        "helper coworker",
+        "service counter"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "physical assault",
+        "security guard",
+        "readable text",
+        "speech bubbles",
+        "readable logo",
+        "cinematic lighting",
+        "complex crowd"
+      ]
+    },
+    {
+      "index": 2,
+      "slide_id": "E001_S02",
+      "scene_contract": [
+        "worker_01 identity, apron, hair and clothing remain exactly continuous from slide 1",
+        "she is now alone and visibly decompressing rather than panicking",
+        "phone is present and clearly the next story object",
+        "staff nook is simple and lower-detail than the character",
+        "phone screen contains only blank/simple interface shapes; no readable text is baked into the raster"
+      ],
+      "required_entities": [
+        "worker_01",
+        "smartphone",
+        "staff nook"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "customer",
+        "helper coworker",
+        "other people",
+        "readable text",
+        "speech bubbles",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 3,
+      "slide_id": "E001_S03",
+      "scene_contract": [
+        "same phone, clothing and body continuity from slide 2",
+        "the phone screen provides a clean blank chat bubble area for later vector lettering",
+        "the send gesture is simple and anatomically clear with no intricate finger pose",
+        "no actual message text, chat title, app logo, or system text is baked into the raster"
+      ],
+      "required_entities": [
+        "worker_01 hands",
+        "smartphone",
+        "send gesture"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "extra people",
+        "readable text",
+        "speech bubbles",
+        "app logo",
+        "complex fingers",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 4,
+      "slide_id": "E001_S04",
+      "scene_contract": [
+        "worker_01 identity and outfit remain continuous",
+        "the phone is angled so a clean header/title area can receive later vector lettering identifying the workplace group",
+        "her expression jumps clearly from relaxed to shocked without grotesque distortion",
+        "no readable chat title, message, caption, or speech bubble is baked into the raster"
+      ],
+      "required_entities": [
+        "worker_01",
+        "smartphone",
+        "shocked realization"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "other people",
+        "readable text",
+        "speech bubbles",
+        "dramatic screaming",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 5,
+      "slide_id": "E001_S05",
+      "scene_contract": [
+        "worker_01 and phone remain continuous",
+        "the interface must visually support a generic deleted-message/read-receipt concept without copying a branded app",
+        "reserve clean vector zones for a deleted-message system line and a 40-plus read indicator",
+        "the read indicators may be generic small avatar dots/icons, not recognizable recurring cast faces",
+        "no readable system text, number, message, app logo, or speech bubble is baked into the raster"
+      ],
+      "required_entities": [
+        "worker_01",
+        "smartphone",
+        "delete gesture",
+        "generic read indicators"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "recognizable main-cast avatars",
+        "other physical people",
+        "readable text",
+        "speech bubbles",
+        "app logo",
+        "complex fingers",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 6,
+      "slide_id": "E001_S06",
+      "scene_contract": [
+        "worker_01 identity and outfit remain continuous",
+        "the coworker exists only through later vector chat text; do not invent a physical second person",
+        "reserve a clean phone/notification area for two short private messages",
+        "expression is mortified and frozen, not angry or tearful",
+        "no readable DM text, sender name, caption, or speech bubble is baked into the raster"
+      ],
+      "required_entities": [
+        "worker_01",
+        "smartphone",
+        "private-message notification area"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "physical coworker",
+        "customer",
+        "readable text",
+        "speech bubbles",
+        "crying breakdown",
+        "cinematic lighting"
+      ]
+    },
+    {
+      "index": 7,
+      "slide_id": "E001_S07",
+      "scene_contract": [
+        "worker_01 identity, hair, apron and clothing remain continuous even with the face partly hidden",
+        "the final emotion must read as extreme embarrassment through whole-body pose rather than dialogue or narration",
+        "strong expressive pose is allowed within style; do not flatten the body language into a neutral seated pose",
+        "no reply, narration, internal monologue, reaction text, caption, message, or speech bubble appears in the final frame"
+      ],
+      "required_entities": [
+        "worker_01",
+        "strong embarrassment pose",
+        "staff bench or stool"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Harin",
+        "Taemin",
+        "other people",
+        "readable text",
+        "speech bubbles",
+        "caption",
+        "sfx text",
+        "dramatic crying",
+        "cinematic lighting"
+      ]
+    }
+  ],
+  "media_requirements": [
+    {
+      "requirement_id": "style_ref_01",
+      "role": "style",
+      "media_type": "image",
+      "source_id": "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+      "conditioning": "MUST_SUPPLY_MEDIA",
+      "required": true,
+      "expected_hash": "dbddf458a97c89781075e6be03ab2c393eff75b95e8856f044bd81f29310ec07"
+    },
+    {
+      "requirement_id": "style_ref_02",
+      "role": "style",
+      "media_type": "image",
+      "source_id": "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg",
+      "conditioning": "MUST_SUPPLY_MEDIA",
+      "required": true,
+      "expected_hash": "b49683276f94ba5621e3602d7e3d714b0f2e637b2c41fc1fd132bdf6f336b049"
+    }
+  ]
+}
