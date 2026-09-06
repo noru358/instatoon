@@ -30,23 +30,33 @@ Approved:
 - L11/L12 visual plan;
 - L12.5 EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN;
 - canonical reference authority REF_V2_D + REF_V2_E;
-- S01 visual direction / Harin identity / overall quality.
+- S01 visual direction / Harin identity / overall quality;
+- 2026-09-06 global visual-direction / expression rule lock.
 
 S01 known exception:
 - the user explicitly chose to proceed even though readable raster text/signage was baked into the native image;
 - this remains a known contract defect and is NOT reclassified as text-free compliant;
 - the chat-native S01 is a visual/taste anchor only because it has no repository attempt/artifact hash.
 
-S02 failure evidence:
-- two consecutive native/chat attempts in the previous contaminated render context reproduced the S01 office-group scene instead of Harin alone in the elevator;
-- both outputs are INVALID WRONG_SCENE artifacts;
-- neither may be used as an anchor, repair base, or LAST_KNOWN_GOOD.
+Clean-context recovery:
+- the previous S02 WRONG_SCENE blocker was resolved in a clean session after actual REF_V2_D + REF_V2_E media were restored;
+- S02-S07 chat-native prototypes were produced and used to validate/refine global visual rules;
+- those prototypes are not being falsely recorded as machine-bound raster artifacts.
+
+Approved structural visual rules:
+- whole-episode shot direction is planned/QC'd as a viewer-perceived sequence;
+- do NOT hard-code left/right/front quotas or a mandatory opposite-facing frame;
+- when multiple story-valid shots exist, choose among alternatives using story clarity + continuity + redundancy awareness across camera side/height, shot distance, body orientation, face orientation and gaze;
+- a frontal camera is not automatically direction-neutral if the rendered face still appears repeatedly turned the same way;
+- expression amplitude is role-adaptive: anti-grotesque / anti-melodrama must not become a global low-energy acting lock;
+- story-relevant mirrors/reflections require plausible geometry;
+- supporting characters share the same flat local-color grammar as the main cast and do not receive an automatic yellow/sepia skin cast.
 
 Machine state:
-- `PRODUCTION_STATE.current_stage = REMAINING_RENDER`;
-- current work is remaining-raster production, not a user-approval wait;
-- the old render conversation context is blocked, not the episode;
-- next normal user gate = `COMPLETE_TEXT_FREE_RASTER_SET`.
+- PRODUCTION_STATE.current_stage = REMAINING_RENDER;
+- no COMPLETE_TEXT_FREE_RASTER_SET USER PASS has been persisted;
+- rule approval does not equal raster-set approval;
+- next normal user gate remains COMPLETE_TEXT_FREE_RASTER_SET.
 
 ## Reference binding
 
@@ -89,18 +99,17 @@ Validation:
 
 ## Exact next action
 
-Start E007 in a **clean dedicated render context**.
+Resume E007 from the current MANUAL_VALIDATION state using the newly locked visual-direction policy.
 
 1. restore this file + E007 README / EPISODE_PLAN / RENDER_MANIFEST / LETTERING_PLAN / PRODUCTION_STATE;
-2. restore actual REF_V2_D + REF_V2_E image media;
-3. resume at S02 only:
-   - Harin alone;
-   - closed office elevator interior;
-   - shoulders / face visibly relax;
-   - no coworkers or other passengers;
-   - no readable text/signage/labels;
-4. operator internally QC S02;
-5. if PASS, continue S03 → S07 sequentially with the same internal-QC rule;
-6. do **not** ask the user to approve S02/S03/etc. individually by default;
-7. after S02-S07 are all acceptable, present the complete text-free raster set for USER review;
-8. only after that PASS, apply LETTERING_PLAN and present the finished episode for final USER review.
+2. restore actual REF_V2_D + REF_V2_E media;
+3. use the active E007 visual_direction policy when producing/repairing any remaining canonical raster:
+   - story-first shot selection;
+   - no fixed direction quotas;
+   - sequence-level perceptual redundancy check;
+   - role-adaptive expression amplitude;
+   - reflection geometry QC where relevant;
+   - supporting-character skin/local-color coherence;
+4. do not ask for per-slide user approval by default;
+5. present the complete text-free raster set for USER review when canonical frame artifacts are ready;
+6. only after that USER PASS, apply LETTERING_PLAN and present the finished episode for final USER review.
