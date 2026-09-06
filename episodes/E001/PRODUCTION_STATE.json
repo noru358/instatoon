@@ -1,7 +1,7 @@
 {
   "state_version": "1.0",
   "episode_id": "E001",
-  "current_stage": "RENDER_CONTRACT_READY",
+  "current_stage": "FIRST_FRAME_QC_PENDING",
   "voice_gate": {
     "status": "PASS",
     "approved_scope": "L1_L7_FULL_PACKAGE",
@@ -26,25 +26,41 @@
       "type": "RENDER_QC",
       "status": "REJECTED_NON_AUTHORITATIVE",
       "value": "A native chat image was generated outside the required active-episode/binary-reference/geometry dispatch path. It is discarded and must not become an anchor or QC artifact."
+    },
+    {
+      "decision_id": "E001_S01_USER_VISUAL_PASS_20260907",
+      "type": "USER_GATE",
+      "status": "PASS_VISUAL_ONLY",
+      "value": "User replied '합격!' to the binary-conditioned native-chat S01 generated with the supplied D/E/sub1 references. The image is approved as a visual/taste anchor in this conversation, but no repository-bound artifact hash/attempt record exists, so it is not a machine-authoritative episode anchor."
+    },
+    {
+      "decision_id": "E001_NATIVE_RENDER_CONTEXT_FAILURE_20260907",
+      "type": "RENDER_CONTEXT",
+      "status": "BLOCKED",
+      "value": "After S01 approval, two consecutive S02 attempts were reinterpreted by the conversation-inferred native renderer as multi-panel/full-episode comic outputs. Both violate one-frame/one-file and slide isolation. Per renderer isolation policy, stop retrying this conversation path and resume S02 in a clean dedicated render context."
     }
   ],
   "frame_qc": {},
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "REFERENCE_MEDIA_DISPATCH_PREFLIGHT",
-    "next_user_gate": "S01_USER_ANCHOR_AFTER_AUTHORIZED_RENDER",
+    "current_checkpoint": "S01_VISUAL_PASS_CONTEXT_LOCAL__S02_BLOCKED_BY_RENDER_CONTEXT",
+    "next_user_gate": "RASTER_SET_QC_PENDING_AFTER_S02_S04",
     "per_slide_user_approval": false,
-    "note": "No raster is approved. S01 may be generated only after actual D/E/sub1 reference media are supplied to an eligible renderer and the screen geometry contract is bound."
+    "note": "S01 is user-approved visually in the active conversation. S02 has two consecutive hard isolation failures (multi-panel/full-episode reinterpretation). Do not retry S02 in this conversation context. Resume in a clean dedicated render session with S01 + D/E/sub1 as actual media; then produce S02-S04 sequentially with internal QC."
   },
   "raster_set_gate": null,
-  "episode_anchor": null,
+  "episode_anchor": {
+    "status": "VISUAL_TASTE_ANCHOR_ONLY",
+    "slide_id": "E001_S01",
+    "note": "User-approved native-chat S01 exists in the prior render conversation but is not repository-bound; reuse only if the exact image is re-attached/materialized in the new render context."
+  },
   "identity_anchors": {},
   "blockers": [
     {
-      "blocker_id": "CHAT_NATIVE_REFERENCE_BRIDGE",
+      "blocker_id": "NATIVE_CONVERSATION_RENDER_ISOLATION",
       "status": "OPEN",
-      "reason": "Git contains the required D/E/sub1 binaries, but ChatGPT native image generation must not be treated as binary-conditioned unless those exact images are actually available to the renderer in the active conversation/tool path."
+      "reason": "Two consecutive S02 native-chat attempts produced multi-panel/full-episode outputs instead of the requested single slide. Clean dedicated render context required before S02."
     }
   ]
 }

@@ -5,7 +5,7 @@ Repository: noru358/instatoon
 
 ## Production state — fresh E001 active
 
-Execution authorization: **PRE_RASTER_DISPATCH_REQUIRED**.
+Execution authorization: **RENDER_CONTEXT_BLOCKED_AFTER_S01_VISUAL_PASS**.
 
 Active episode: episodes/E001/README.md
 
@@ -44,14 +44,21 @@ One slide != one user approval gate.
 
 ## Current blocker
 
-`CHAT_NATIVE_REFERENCE_BRIDGE`: the repository contains and verifies the required D/E/sub1 binaries, but a native ChatGPT image render is canonical only if those exact binaries are actually supplied to the renderer in the active tool path.
+S01 visual direction is **USER PASS** in the active conversation, but it is not repository-bound as a machine-authoritative artifact.
 
-Do not claim BINARY_CONDITIONED based on repository inspection alone.
+After that approval, two consecutive native-chat S02 attempts violated slide isolation by producing multi-panel/full-episode outputs.
+
+Blocker:
+- `NATIVE_CONVERSATION_RENDER_ISOLATION`
+- status: **OPEN**
+- classification: renderer-context isolation failure, not story/style approval failure.
+
+Do not retry S02 again in the same conversation context.
 
 ## Exact next action
 
-1. Validate this active E001 package and repository contracts in CI.
-2. Make the exact D/E/sub1 reference binaries available to an eligible renderer.
-3. Authorize the E001 S01 asset dispatch with bound media evidence and the physical phone geometry contract.
-4. Generate **S01 only**.
-5. Present S01 for the USER anchor gate.
+1. Continue in a **clean dedicated render session/context**.
+2. Re-attach/materialize the approved S01 image plus exact D/E/sub1 binaries as actual media.
+3. Resume from **S02**, not S01.
+4. Generate S02 → S03 → S04 sequentially with internal QC.
+5. Return to the user only at the **complete text-free raster-set gate**, unless a new systemic blocker occurs.
