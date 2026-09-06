@@ -222,7 +222,11 @@
           "story_clarity",
           "required_entities",
           "forbidden_entities",
-          "composition"
+          "composition",
+          "visual_information_owner",
+          "visual_delta_from_previous",
+          "screen_bearing_prop",
+          "screen_contract"
         ],
         "properties": {
           "index": {
@@ -281,6 +285,68 @@
           "composition": {
             "type": "string",
             "minLength": 1
+          },
+          "visual_information_owner": {
+            "enum": [
+              "CHARACTER_REACTION",
+              "SCREEN_INFORMATION",
+              "PHYSICAL_ACTION",
+              "ENVIRONMENT",
+              "RELATIONSHIP",
+              "MIXED_WITH_DECLARED_PRIORITY"
+            ]
+          },
+          "visual_delta_from_previous": {
+            "type": "string",
+            "minLength": 3
+          },
+          "screen_bearing_prop": {
+            "type": "boolean"
+          },
+          "screen_contract": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "required": [
+              "prop_id",
+              "subject_screen_relation",
+              "camera_screen_relation",
+              "geometry_contract",
+              "ui_profile",
+              "ui_delivery"
+            ],
+            "properties": {
+              "prop_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "subject_screen_relation": {
+                "type": "string",
+                "minLength": 3
+              },
+              "camera_screen_relation": {
+                "type": "string",
+                "minLength": 3
+              },
+              "geometry_contract": {
+                "type": "string",
+                "minLength": 10
+              },
+              "ui_profile": {
+                "type": "string",
+                "minLength": 1
+              },
+              "ui_delivery": {
+                "enum": [
+                  "RASTER_SHELL_PLUS_VECTOR_CONTENT",
+                  "VECTOR_INSET",
+                  "RASTER_SHELL_ONLY",
+                  "NONE"
+                ]
+              }
+            }
           }
         }
       }
