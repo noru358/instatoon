@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "E001",
+  "episode_plan_git_blob_sha": "a3e0aa91a2721b8b5487a9037795cff135fae500",
+  "canvas": {
+    "width": 1080,
+    "height": 1350
+  },
+  "slides": [
+    {
+      "index": 1,
+      "slide_id": "E001_S01",
+      "items": []
+    },
+    {
+      "index": 2,
+      "slide_id": "E001_S02",
+      "items": []
+    },
+    {
+      "index": 3,
+      "slide_id": "E001_S03",
+      "items": [
+        {
+          "text_id": "E001_S03_CHAT_01",
+          "kind": "chat",
+          "speaker": "worker_01",
+          "text": "오늘 우리 매장 애들 진짜 미쳤다",
+          "box": [
+            0.18,
+            0.31,
+            0.64,
+            0.18
+          ],
+          "align": "left",
+          "font_size": 44,
+          "min_font_size": 34,
+          "padding": 18,
+          "line_spacing": 6,
+          "radius": 28
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "slide_id": "E001_S04",
+      "items": [
+        {
+          "text_id": "E001_S04_CHAT_TITLE_01",
+          "kind": "chat",
+          "text": "매장 전체 단톡방",
+          "box": [
+            0.22,
+            0.1,
+            0.56,
+            0.1
+          ],
+          "align": "center",
+          "font_size": 38,
+          "min_font_size": 30,
+          "padding": 10,
+          "line_spacing": 4,
+          "radius": 12
+        },
+        {
+          "text_id": "E001_S04_REACTION_01",
+          "kind": "speech",
+          "speaker": "worker_01",
+          "text": "...어?",
+          "box": [
+            0.08,
+            0.12,
+            0.26,
+            0.13
+          ],
+          "tail_to": [
+            0.34,
+            0.35
+          ],
+          "align": "center",
+          "font_size": 52,
+          "min_font_size": 42,
+          "padding": 16,
+          "line_spacing": 6,
+          "radius": 30
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "slide_id": "E001_S05",
+      "items": [
+        {
+          "text_id": "E001_S05_SYSTEM_01",
+          "kind": "chat",
+          "text": "메시지를 삭제했습니다",
+          "box": [
+            0.2,
+            0.28,
+            0.6,
+            0.12
+          ],
+          "align": "center",
+          "font_size": 34,
+          "min_font_size": 28,
+          "padding": 12,
+          "line_spacing": 4,
+          "radius": 18
+        },
+        {
+          "text_id": "E001_S05_READ_01",
+          "kind": "chat",
+          "text": "43명 읽음",
+          "box": [
+            0.5,
+            0.43,
+            0.3,
+            0.09
+          ],
+          "align": "right",
+          "font_size": 30,
+          "min_font_size": 26,
+          "padding": 8,
+          "line_spacing": 4,
+          "radius": 10
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "slide_id": "E001_S06",
+      "items": [
+        {
+          "text_id": "E001_S06_DM_01",
+          "kind": "chat",
+          "text": "괜찮아?",
+          "box": [
+            0.47,
+            0.13,
+            0.4,
+            0.11
+          ],
+          "align": "left",
+          "font_size": 42,
+          "min_font_size": 34,
+          "padding": 16,
+          "line_spacing": 6,
+          "radius": 24
+        },
+        {
+          "text_id": "E001_S06_DM_02",
+          "kind": "chat",
+          "text": "무슨 일 있었어?",
+          "box": [
+            0.41,
+            0.25,
+            0.46,
+            0.12
+          ],
+          "align": "left",
+          "font_size": 42,
+          "min_font_size": 34,
+          "padding": 16,
+          "line_spacing": 6,
+          "radius": 24
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "slide_id": "E001_S07",
+      "items": []
+    }
+  ]
+}
