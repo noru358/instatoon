@@ -1,12 +1,12 @@
 {
   "state_version": "1.0",
   "episode_id": "E007",
-  "current_stage": "L8_AWAITING_APPROVAL",
+  "current_stage": "STORYBOARD_AWAITING_APPROVAL",
   "voice_gate": {
-    "status": "PENDING",
-    "approved_scope": "NONE",
-    "approval_kind": "NONE",
-    "evidence": "2026-09-06 user explicitly reset E007 and requested a fresh MANUAL_VALIDATION production run; previous E007 approvals are superseded."
+    "status": "PASS",
+    "approved_scope": "L1_L7_FULL_PACKAGE",
+    "approval_kind": "USER_EXPLICIT",
+    "evidence": "2026-09-06 user replied 'ㅇㅋ' after reviewing the fresh E007 L1-L7 package."
   },
   "decisions": [
     {
@@ -18,8 +18,20 @@
     {
       "decision_id": "E007_TOPIC_SELECTED_20260906_V2",
       "type": "TOPIC",
-      "status": "SELECTED_PENDING_L8",
+      "status": "APPROVED",
       "value": "professional office worker acts goofy alone in elevator, then realizes security has seen it through CCTV"
+    },
+    {
+      "decision_id": "E007_L8_APPROVED_20260906_V2",
+      "type": "USER_VOICE_GATE",
+      "status": "PASS",
+      "value": "Fresh L1-L7 source/story/dialogue package approved by user."
+    },
+    {
+      "decision_id": "E007_CAST_STORYBOARD_DRAFT_20260906_V2",
+      "type": "CAST_STORYBOARD",
+      "status": "AWAITING_USER_APPROVAL",
+      "value": "Episode-only male office-worker protagonist + episode-only male security employee; seven-slide storyboard in episodes/E007/README.md"
     },
     {
       "decision_id": "MANUAL_VALIDATION_MODE_20260906",
@@ -31,18 +43,18 @@
   "frame_qc": {},
   "blockers": [
     {
-      "blocker_id": "E007_L8_APPROVAL_20260906_V2",
-      "stage": "L8",
+      "blocker_id": "E007_STORYBOARD_APPROVAL_20260906_V2",
+      "stage": "L10",
       "status": "AWAITING_USER_APPROVAL",
-      "requirement": "L1_L7_FULL_PACKAGE",
+      "requirement": "CAST_AND_SEVEN_SLIDE_STORYBOARD",
       "required_media": [],
-      "reason": "Fresh E007 L1-L7 package must pass the user voice gate before cast/storyboard/render work."
+      "reason": "Manual validation requires user approval of cast/storyboard before character design, visual plan, render contract, or raster."
     }
   ],
   "episode_anchor": null,
   "manual_validation": {
     "status": "ACTIVE",
     "auto_finish_allowed": false,
-    "current_checkpoint": "L8_USER_VOICE_GATE"
+    "current_checkpoint": "L10_CAST_STORYBOARD_USER_GATE"
   }
 }
