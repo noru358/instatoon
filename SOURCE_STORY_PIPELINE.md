@@ -259,7 +259,7 @@ Human texture > verbal smoothness.
 
 During the current learning phase, this is a mandatory pre-production human gate.
 
-Before storyboard/cast planning or any raster production, present the user with the accepted L1-L7 package in a compact reviewable form:
+Before storyboard/cast planning or any production-asset authoring, present the user with the accepted L1-L7 package in a compact reviewable form:
 - source/provenance;
 - why the source passed the human-interest gate;
 - normalized premise and important human details;
@@ -270,7 +270,7 @@ Before storyboard/cast planning or any raster production, present the user with 
 Then STOP and wait for explicit user approval.
 
 Hard rule:
-- do not continue to L10 STORYBOARD + CAST ROUTER, L11 character design, L12 visual planning, L12.5 render contract, or L13 raster generation until the user explicitly passes the package;
+- do not continue to L10 STORYBOARD + CAST ROUTER, L11 identity/asset needs, L12 visual planning, L12.5 asset resolution, or L13 asset authoring until the user explicitly passes the package;
 - terse approval such as “통과”, “ㄱ”, “좋음”, or equivalent is sufficient;
 - terse rejection/edit feedback is sufficient and must route back to the relevant L3-L7 stage;
 - never treat silence, prior general approval, or “make a new episode” as approval of the current episode package.
@@ -469,6 +469,8 @@ Do not use a large caption to explain a scene the image already communicates.
 
 ## 6. Current execution pointers
 
-CURRENT_STATE.md alone identifies the active episode. Episode numbers in historical records do not route production.
-GENERATION_PROTOCOL.md owns render-contract, actual-media, continuation and repair mechanics; L12.5 above places that gate in the story workflow.
-A `validate` PASS checks input consistency only. The current guard does not persist or verify L8 approval, actual renderer delivery or image QC.
+CURRENT_STATE.md identifies whether production is in calibration or an active episode.
+ASSET_COMPOSITION_PROTOCOL.md owns final-render routing.
+GENERATION_PROTOCOL.md owns stochastic asset/exception authoring and QC.
+AutoPipeline owns shared dispatch, asset evidence and deterministic composition.
+Git history does not route current production.
