@@ -1,6 +1,6 @@
 # MASTER_PROMPTS.md
 
-# CANONICAL — INSTATOON MASTER PROMPT v2.2
+# CANONICAL — INSTATOON MASTER PROMPT v2.3
 Updated: 2026-09-06
 
 This is the single authoritative visual-generation prompt source.
@@ -168,6 +168,31 @@ THEN, for every frame in the coordinated batch:
 Do not improvise a new version of the person panel by panel.
 Do not create or present a separate character sheet by default. Use a temporary internal image anchor only as an exception when direct batch continuity fails.
 
+## 7.5. SEQUENCE DIRECTION / EXPRESSION BLOCK
+
+Every frame belongs to an episode sequence. Do not let the renderer repeatedly fall back to the same apparent three-quarter face direction, camera side, camera height, or shot distance simply because that pose is easy.
+
+Use the whole-episode visual plan:
+- choose camera/framing from story-valid alternatives;
+- consider camera side, height, shot distance, body orientation, face orientation and gaze together;
+- reduce redundant visual similarity with neighboring/earlier frames when a different story-valid shot is available;
+- do NOT enforce left/right/front quotas or token minimums. The objective is viewer-perceived balance, not equal counts;
+- a front camera does not count as neutral if the actual face still reads strongly turned in one repeated direction.
+
+Expression amplitude is role-adaptive:
+- preserve identity/style, but allow facial expression, gaze, shoulders, torso, hands and stance to become clearly more dynamic when comedy, surprise, reveal, embarrassment or reaction needs it;
+- "not grotesque / not melodramatic" means no style-breaking distortion, NOT "keep the acting small";
+- phone-size emotional readability outranks a default safe pose.
+
+Mirror/reflection rule:
+- if a reflection matters to the story, reflected head/face/torso/limbs must correspond plausibly to the real subject and mirror plane;
+- do not fake reflection with a near-duplicate front-facing character that contradicts camera geometry;
+- when useful, use a side/rear camera relationship that makes the real body and reflected face anatomically checkable.
+
+Skin-color coherence:
+- main and supporting characters share the same flat local-color logic;
+- natural complexion differences are allowed, but do not give supporting/older characters an automatic yellow/orange/sepia cast.
+
 ## 8. SCENE PROMPT TEMPLATE
 
 SCENE:
@@ -178,6 +203,8 @@ SCENE:
 [essential props]
 [expression/reaction]
 [camera/composition]
+[sequence-direction context: nearby-frame redundancy to avoid, if relevant]
+[expression amplitude appropriate to beat]
 [negative space for later vector text]
 
 STORY CLARITY:
@@ -256,5 +283,14 @@ Use style-only references for drawing language, not their cast, room, pose, fram
 For a recurring character, preserve that selected person’s referenced identity. For an episode-only person, transfer drawing language only: use the story-specified age, gender/presentation, body, hair and clothing rather than copying the reference people. Simplified adult proportions describe the current adult cast, not a rule to turn children, older people or different physiques into those adults. Keep the same drawing language through these variations.
 
 Use the story-selected recurring-character reference or the internally derived episode-only identity digest consistently. Once an episode image is accepted, also use its actual image as the secondary identity/style anchor on later cuts; the current scene contract still controls action and composition. If this is a repair and a last-known-good frame exists, preserve it and change only the named defect.
+
+
+Sequence direction: treat this panel as one frame in a complete episode. Select camera side/height/distance, body orientation, face orientation and gaze from story-valid choices so the sequence does not accumulate a viewer-perceived directional bias. Do not satisfy this by fixed left/right/front quotas; avoid redundant default framing only when another valid shot serves the beat.
+
+Acting: allow expressions and poses to be clearly readable and energetic when the beat calls for it. Anti-grotesque / anti-melodrama constraints forbid style-breaking distortion, not expressive shoulders, torso lean, gaze, mouth/eye change, hand movement or stance.
+
+If a mirror/reflection is story-relevant, preserve plausible reflection geometry between the real subject, mirror plane and reflected face/limbs. Prefer a camera relationship that makes the reflection checkable over a decorative fake duplicate.
+
+Keep supporting-character skin colors inside the same flat local-color grammar as the main cast unless the story explicitly needs a complexion difference; do not introduce a yellow/sepia cast simply because a person is older or supporting cast.
 
 The compiler appends the exact story beat, scene contract, output format and required media below.
