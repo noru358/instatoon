@@ -33,8 +33,9 @@ FACE:
 - minimal eyelashes;
 - thin simple eyebrows;
 - nearly absent nose;
-- small graphic mouth;
-- open mouth = simple black oval/semicircle with small flat coral-red inner mouth/tongue;
+- graphic mouth whose size may expand naturally for laughter, surprise, or strong reaction;
+- do not enforce a fixed "small mouth" size when the approved drawing language supports a larger open expression;
+- open mouth remains a simple black oval/semicircle with flat coral-red inner mouth/tongue;
 - no realistic lips, cheek modeling, nose modeling, or facial sculpting.
 
 HAIR:
