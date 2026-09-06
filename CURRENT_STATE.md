@@ -25,8 +25,8 @@ Primary authority:
 - `ASSET_COMPOSITION_PROTOCOL.md`;
 - `assets/production/registry.json`;
 - `schemas/asset_registry.schema.json`;
-- `schemas/composition_scene.schema.json`;
-- `pipeline/compositor.py`.
+- AutoPipeline `schemas/composition_scene.schema.json`;
+- AutoPipeline `pipeline/compositor.py`.
 
 Existing authorities remain active in narrower roles:
 - `STYLE_LOCK.md`, `MASTER_PROMPTS.md`, `REFERENCE_SET.md`: asset-authoring/style/identity authority;
