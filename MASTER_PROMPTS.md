@@ -1,7 +1,7 @@
 # MASTER_PROMPTS.md
 
-# CANONICAL — INSTATOON MASTER PROMPT v2.4
-Updated: 2026-09-06
+# CANONICAL — INSTATOON MASTER PROMPT v2.5
+Updated: 2026-09-07
 
 This is the single authoritative visual-generation prompt source.
 This file owns prompt wording. If wording conflicts with an approved visual reference, the approved image wins; reconcile the wording rather than redesigning the reference.
@@ -183,6 +183,8 @@ Expression amplitude is role-adaptive:
 - preserve identity/style, but allow facial expression, gaze, shoulders, torso, hands and stance to become clearly more dynamic when comedy, surprise, reveal, embarrassment or reaction needs it;
 - "not grotesque / not melodramatic" means no style-breaking distortion, NOT "keep the acting small";
 - phone-size emotional readability outranks a default safe pose.
+- preserve the **semantic valence** of the beat: a resigned/hollow reaction must not be beautified into cheerful/cute laughter, and a quiet hesitation must not be inflated into panic; face and body language must agree on the same meaning;
+- when hands cross the face/torso or heavy occlusion makes anatomy fragile, prefer a simpler story-valid pose with a readable shoulder/arm/torso chain over a decorative but ambiguous pose.
 
 Mirror/reflection rule:
 - if a reflection matters to the story, reflected head/face/torso/limbs must correspond plausibly to the real subject and mirror plane;
@@ -219,6 +221,8 @@ SCENE:
 [camera/composition]
 [sequence-direction context: nearby-frame redundancy to avoid, if relevant]
 [expression amplitude appropriate to beat]
+[semantic acting target: valence / energy / body state]
+[high-risk anatomy or interaction chain, if any]
 [negative space for later vector text]
 [visual information owner]
 [visual delta from previous slide]
@@ -304,7 +308,11 @@ Use the story-selected recurring-character reference or the internally derived e
 
 Sequence direction: treat this panel as one frame in a complete episode. Select camera side/height/distance, body orientation, face orientation and gaze from story-valid choices so the sequence does not accumulate a viewer-perceived directional bias. Do not satisfy this by fixed left/right/front quotas; avoid redundant default framing only when another valid shot serves the beat.
 
-Acting: allow expressions and poses to be clearly readable and energetic when the beat calls for it. Anti-grotesque / anti-melodrama constraints forbid style-breaking distortion, not expressive shoulders, torso lean, gaze, mouth/eye change, hand movement or stance.
+Acting: allow expressions and poses to be clearly readable and energetic when the beat calls for it. Anti-grotesque / anti-melodrama constraints forbid style-breaking distortion, not expressive shoulders, torso lean, gaze, mouth/eye change, hand movement or stance. Preserve the exact emotional meaning, not a generic attractive reaction: do not convert resignation, hollow crying-laughter, embarrassment, hesitation or shock into a cuter/cheerier default. Let shoulders, torso, hands and prop position support the face.
+
+Anatomy: when a hand is near the face, crosses the torso, grips a device, or is partly occluded, keep the shoulder-to-arm-to-hand chain and torso/garment structure physically legible. If the pose cannot remain clear, choose a simpler story-valid pose rather than hiding a broken connection behind folds or cropping.
+
+Information graphics: when the scene contract assigns a concrete fact to an inset/overlay, use an orderly visual state change that carries that fact. Do not replace a specific archive/loss/state meaning with random floating icons or decorative data fragments. Keep meaning-bearing text editable and out of the raster.
 
 If a mirror/reflection is story-relevant, preserve plausible reflection geometry between the real subject, mirror plane and reflected face/limbs. Prefer a camera relationship that makes the reflection checkable over a decorative fake duplicate.
 
