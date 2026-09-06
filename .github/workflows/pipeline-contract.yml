@@ -8,24 +8,14 @@ on:
       - "schemas/**"
       - "assets/production/**"
       - "assets/style_refs/v2_current/**"
-      - "ASSET_COMPOSITION_PROTOCOL.md"
-      - "GENERATION_PROTOCOL.md"
-      - "MASTER_PROMPTS.md"
-      - "REFERENCE_SET.md"
-      - "STYLE_LOCK.md"
-      - "CURRENT_STATE.md"
+      - "*.md"
       - ".github/workflows/pipeline-contract.yml"
   pull_request:
     paths:
       - "pipeline/**"
       - "schemas/**"
       - "assets/production/**"
-      - "ASSET_COMPOSITION_PROTOCOL.md"
-      - "GENERATION_PROTOCOL.md"
-      - "MASTER_PROMPTS.md"
-      - "REFERENCE_SET.md"
-      - "STYLE_LOCK.md"
-      - "CURRENT_STATE.md"
+      - "*.md"
 
 jobs:
   contract:
@@ -36,13 +26,11 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install dependencies
-        run: pip install --quiet openai pillow
-      - name: Compile retained production Python
+        run: pip install --quiet pillow
+      - name: Compile retained deterministic helpers
         run: |
-          python -m py_compile             pipeline/render_guard.py             pipeline/render.py             pipeline/lettering.py             pipeline/reference_registry.py
+          python -m py_compile             pipeline/lettering.py             pipeline/reference_registry.py
       - name: Current authoring reference registry matches binaries
         run: python pipeline/reference_registry.py
-      - name: Exception-render guard regression
-        run: python -m unittest pipeline.test_render_guard
       - name: Production registry is valid JSON
         run: python -m json.tool assets/production/registry.json >/dev/null
