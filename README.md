@@ -9,9 +9,9 @@
 ## 작업 시작
 
 1. 이 파일과 CURRENT_STATE.md에서 활성 에피소드와 현재 작업을 확인한다.
-2. SOURCE_STORY_PIPELINE.md의 소재·대사·캐스팅 순서를 읽는다.
-3. MASTER_PROMPTS.md, STYLE_LOCK.md, REFERENCE_SET.md와 필요한 **실제 이미지**를 확인한다.
-4. VISUAL_GRAMMAR.md, GENERATION_PROTOCOL.md와 활성 에피소드 README/EPISODE_PLAN/RENDER_MANIFEST를 읽는다.
+2. `Active episode: NONE`이면 정상적인 fail-closed idle 상태다. 기존 회차를 임의로 복구하지 말고 SOURCE_STORY_PIPELINE.md의 L1-L7부터 새 회차 후보를 준비한다.
+3. 활성 회차가 있을 때만 해당 README/EPISODE_PLAN/RENDER_MANIFEST를 읽는다.
+4. SOURCE_STORY_PIPELINE.md, MASTER_PROMPTS.md, STYLE_LOCK.md, REFERENCE_SET.md, VISUAL_GRAMMAR.md, GENERATION_PROTOCOL.md와 필요한 **실제 이미지**를 확인한다.
 5. 제작 직전 `python pipeline/render_guard.py validate`를 실행한다.
 
 외부화 작업일 때만 AUTOMATION_TRANSITION.md, 환경 이동·갱신 시 WORKFLOW_PROTOCOL.md를 추가로 읽는다.
@@ -47,7 +47,7 @@
 
 사용자의 명시 지시가 우선이다. 시각적 충돌은 승인 이미지로 판단하고, 공통 문장이 인물 고유 눈매·표정을 덮어쓰지 않게 고친다.
 에피소드의 장면·배우·의상 지시는 이야기 내용을 정하며 공통 그림체를 재설계하지 않는다.
-과거 회차는 현행 실행 지시가 아니다. 활성 에피소드는 CURRENT_STATE의 단일 `Active episode:` 줄로만 결정한다.
+과거 회차와 `archive/pre_redesign/`은 현행 실행 지시가 아니다. 활성 에피소드는 CURRENT_STATE의 단일 `Active episode:` 줄로만 결정한다. 값이 `NONE`이면 렌더/auto-finish는 차단되며, L8 사용자 승인 뒤 새 회차 패키지를 만들 때만 활성화한다.
 
 ## 고정된 제작 원칙
 
@@ -63,8 +63,8 @@
 
 ## 코드가 현재 보장하는 범위
 
-`pipeline/render_guard.py`는 활성 회차, 계획/매니페스트 정합성, 로컬 필수 미디어 SHA-256,
-일부 필수 필드, 컴파일, 호출자가 제출한 미디어/QC 값의 일관성을 검사한다.
+`pipeline/render_guard.py`는 활성 회차 또는 명시적 idle 상태, 계획/매니페스트 정합성, 로컬 필수 미디어 SHA-256,
+일부 필수 필드, 컴파일, 호출자가 제출한 미디어/QC 값의 일관성을 검사한다. `Active episode: NONE`은 validate PASS이지만 `render_ready=false`이고 실제 렌더 명령은 fail-closed로 거부된다.
 
 **이 코드는 생성기를 호출하지 않으며, L8 승인·실제 미디어 전송·실제 이미지 QC를 증명하지 않는다.**
 `validate` PASS와 CI 통과는 만화 품질 PASS가 아니다. 실제 생성 연결 전에는 운영자가 GENERATION_PROTOCOL을 실행해야 한다.
@@ -72,7 +72,8 @@
 ```sh
 python -m unittest pipeline.test_render_guard
 python pipeline/render_guard.py validate
-python pipeline/render_guard.py compile --episode E005 --slide 1
+# 활성 회차가 있을 때만:
+python pipeline/render_guard.py compile --episode E001 --slide 1
 ```
 
 예시의 회차 번호는 실행할 때 CURRENT_STATE에서 읽는다. 과거 파일·실패 기록은 보존하되 현행 지시와 혼합하지 않는다.
