@@ -1,8 +1,8 @@
 name: qc
 
-# Human QC remains authoritative for the episode anchor. After a human PASS on
-# slide 1, finish_mode=auto_finish may continue the remaining production
-# internally. finish_mode=standard preserves the original manual path.
+# MANUAL_VALIDATION is the current operating mode.
+# Human QC remains authoritative at every slide. finish_mode=standard is the
+# default; auto_finish is preserved for later API_PRODUCTION experiments.
 on:
   workflow_dispatch:
     inputs:
@@ -25,7 +25,7 @@ on:
         required: true
         type: choice
         options: ["auto_finish", "standard"]
-        default: "auto_finish"
+        default: "standard"
       episode:
         description: "Episode ID. Leave empty to use the active episode"
         required: false
