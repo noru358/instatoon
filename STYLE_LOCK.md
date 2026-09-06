@@ -1,8 +1,9 @@
 # STYLE_LOCK.md
 
-# INSTATOON_STYLE_v2.0 — CURRENT VISUAL PASS/FAIL LOCK
+# INSTATOON_STYLE_v2.1 — CURRENT VISUAL PASS/FAIL LOCK
 Approved: 2026-09-04
 Continuity clarification: 2026-09-05
+Sequence-direction / expression clarification: 2026-09-06
 
 The pre-reset tiny-eye / thin brown-line style is retired.
 
@@ -58,6 +59,18 @@ No cinematic warm lighting.
 No soft realistic shadow system.
 
 A single simple contact shadow is allowed only when needed for spatial readability.
+
+## Expression interpretation
+
+Anti-drift is NOT anti-expression.
+
+The approved drawing language allows clearly readable facial, gaze, upper-body and pose changes when the beat benefits from them. Do not collapse "avoid grotesque/anime distortion" into "keep every reaction small." A larger mouth, stronger eyebrow change, wider eye state, shoulder movement, torso lean, hand movement, or visibly changed posture is allowed when it remains inside the approved identity and line/color grammar.
+
+Story role controls amplitude: quiet beats may stay restrained; comedy, surprise, reveal, embarrassment and reaction beats may be noticeably more expressive. Reject only expression that redesigns the face/body, becomes grotesque, or imports a different anime/webtoon grammar.
+
+## Character skin-color coherence
+
+Within one scene/episode, main and supporting characters use the same flat local-color logic for skin. Age or supporting-character status must not automatically introduce a yellow/orange/sepia cast. Natural complexion variation is allowed, but the supporting character must not look as if a different global color treatment was applied.
 
 ## Background rule
 
