@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0",
+  "episode_id": "E007",
+  "title": "엘리베이터 혼자 타면",
+  "status": "STORYBOARD_LOCKED",
+  "source": {
+    "provenance_class": "HUMAN_SEEDED_INSPIRATION",
+    "human_seeded": true,
+    "base_url": "https://www.reddit.com/r/tifu/comments/1ll61ou/tifu_forgetting_that_elevators_arent_private/",
+    "notes": "Korean-localized recomposition of a human-produced elevator-CCTV anecdote. Preserve the private-goofy-ritual to security-echo to CCTV-realization structure; do not invent punishment, viral exposure, named-company facts, or broader humiliation."
+  },
+  "continuity_mode": "STRICT_EPISODE",
+  "format": {
+    "aspect_ratio": "4:5",
+    "width": 1080,
+    "height": 1350,
+    "slide_count": 7,
+    "text_free_raster": true,
+    "panels_per_image": 1,
+    "delivery_mode": "SEPARATE_FILES"
+  },
+  "cast": {
+    "main_cast": [
+      "Harin"
+    ],
+    "episode_only": [
+      {
+        "id": "security_01",
+        "role": "building security employee who casually echoes Harin's private elevator phrase",
+        "appears_in": [
+          5,
+          6
+        ],
+        "identity_digest": "Korean man in his late forties to fifties; compact neat short dark hair with slight gray allowed; ordinary rectangular or softly rounded face; calm dry expression; simple navy or charcoal building-security uniform with no readable company logo, badge text, or decorative insignia; visually plain and non-threatening, not comedic caricature, not Taemin-like, no glasses unless required later."
+      }
+    ]
+  },
+  "style": {
+    "style_version": "INSTATOON_STYLE_v2.0",
+    "required_refs": [
+      "assets/style_refs/v2_current/REF_V2_D_MAIN_CAST_GAEUN_HARIN_TAEMIN.jpeg",
+      "assets/style_refs/v2_current/REF_V2_E_3PERSON_INDOOR_SCENE.jpeg"
+    ],
+    "forbidden_legacy_refs": [
+      "LEGACY_V1_STYLE"
+    ],
+    "reference_conditioning_requirement": "BINARY_REQUIRED"
+  },
+  "slides": [
+    {
+      "index": 1,
+      "slide_id": "E007_S01",
+      "role": "HOOK",
+      "beat": "Harin looks completely ordinary and composed at work.",
+      "location": "simple Korean office elevator lobby or hallway",
+      "action": "Harin stands or walks near one or two low-detail coworkers with straight posture and a polite neutral expression, reading as an ordinary composed office worker.",
+      "scene_facts": [
+        "Harin is the canonical main-cast Harin identity from REF_V2_D",
+        "Harin wears a neat office-casual version of her established wardrobe without changing face or hair identity",
+        "one or two background coworkers may appear only as low-detail extras and must not compete with Harin",
+        "the office elevator lobby is simple and lower-detail than the character",
+        "no readable text, caption, signage, logo, or speech bubble is baked into the raster"
+      ],
+      "story_clarity": "Public baseline: Harin appears normal, restrained, and professional before the private elevator switch.",
+      "required_entities": [
+        "Harin",
+        "office elevator lobby"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "readable company logo",
+        "romance-webtoon polish",
+        "cinematic lighting",
+        "complex crowd"
+      ],
+      "composition": "4:5 medium shot at eye level; Harin is the clear focal point with modest upper safe space reserved for a later caption."
+    },
+    {
+      "index": 2,
+      "slide_id": "E007_S02",
+      "role": "SWITCH",
+      "beat": "The elevator doors close and Harin's public persona immediately relaxes.",
+      "location": "inside a simple office elevator",
+      "action": "Harin is alone after the doors close; her shoulders drop and her face visibly loosens as she confirms nobody else is inside.",
+      "scene_facts": [
+        "Harin is alone in the elevator",
+        "the identity, face, hair, and outfit remain continuous from slide 1",
+        "the pose change is immediate but still small: relaxed shoulders, softened stance, loosened expression",
+        "the elevator interior is simple with one mirror surface or reflective panel available for later continuity",
+        "no readable floor labels, buttons, signs, captions, dialogue, or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "The viewer must immediately understand the public-to-private personality switch without dialogue.",
+      "required_entities": [
+        "Harin",
+        "elevator interior",
+        "closed elevator doors"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "other passengers",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "dramatic dance pose",
+        "cinematic lighting"
+      ],
+      "composition": "4:5 medium shot; closed doors and Harin's relaxed posture both readable; leave comfortable space around the body for the next pose beat."
+    },
+    {
+      "index": 3,
+      "slide_id": "E007_S03",
+      "role": "PRIVATE_RITUAL",
+      "beat": "Alone, Harin does a silly mirror pose and quietly hypes herself up.",
+      "location": "same office elevator interior",
+      "action": "Harin looks at herself in the mirror and does an intentionally dumb shoulder-flex, tiny dance, or model-like body pose with self-satisfied unserious energy.",
+      "scene_facts": [
+        "Harin preserves exact identity and outfit continuity from slides 1-2",
+        "a mirror or reflective elevator panel is visibly relevant to her pose",
+        "the comedy comes from shoulders, torso, stance, and expression rather than complicated finger choreography",
+        "the expression is playful and self-satisfied, not grotesque and not generic anime exaggeration",
+        "no readable dialogue, caption, button labels, or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "This is the private ritual the security employee will later reveal knowledge of.",
+      "required_entities": [
+        "Harin",
+        "elevator mirror",
+        "silly shoulder or body pose"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "other passengers",
+        "complex multi-finger hand pose",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "webtoon glamour pose",
+        "cinematic lighting"
+      ],
+      "composition": "4:5 medium-to-three-quarter body shot with mirror context visible; pose readable at phone size; reserve a clean upper-side region for later Harin dialogue."
+    },
+    {
+      "index": 4,
+      "slide_id": "E007_S04",
+      "role": "CONTRAST",
+      "beat": "The doors open and Harin instantly restores her composed public persona.",
+      "location": "elevator opening onto an office floor or lobby",
+      "action": "As the elevator doors open, Harin is already straight-backed and neutral-faced again, stepping out as if nothing happened.",
+      "scene_facts": [
+        "Harin remains the same identity and outfit",
+        "the elevator doors are visibly opening",
+        "Harin's expression and posture are clearly more restrained than slide 3",
+        "the visual contrast with slide 3 is the joke; no extra gag or character is needed",
+        "no readable signage, dialogue, caption, or speech bubble is baked into the raster"
+      ],
+      "story_clarity": "The private behavior is a practiced secret ritual that disappears the instant public space returns.",
+      "required_entities": [
+        "Harin",
+        "opening elevator doors",
+        "office floor or lobby"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "extra gag props",
+        "cinematic lighting"
+      ],
+      "composition": "4:5 medium shot; opening doors frame Harin; restrained posture is immediately legible and composition echoes the previous elevator shot without duplicating it."
+    },
+    {
+      "index": 5,
+      "slide_id": "E007_S05",
+      "role": "REVEAL_TRIGGER",
+      "beat": "Later, the security employee casually repeats Harin's supposedly private phrase.",
+      "location": "simple building lobby with a security desk",
+      "action": "Harin walks past the security desk; security_01 casually looks toward her and speaks, while Harin abruptly stops or turns in surprise.",
+      "scene_facts": [
+        "Harin preserves canonical identity and current episode outfit",
+        "security_01 appears in the locked episode-local identity and uniform",
+        "security_01 is calm and casual rather than mocking, sinister, or theatrical",
+        "a simple security desk establishes the building-lobby context",
+        "no readable dialogue, badge text, company logo, signage, or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "Private information unexpectedly enters public space through the security employee.",
+      "required_entities": [
+        "Harin",
+        "security_01",
+        "security desk",
+        "building lobby"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "extra security staff",
+        "laughing crowd",
+        "monitor showing Harin footage",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "readable badge or company logo",
+        "cinematic lighting"
+      ],
+      "composition": "4:5 medium two-shot with security_01 near the desk and Harin mid-stop; reserve clean space above security_01 for later speech lettering."
+    },
+    {
+      "index": 6,
+      "slide_id": "E007_S06",
+      "role": "SUSPICION",
+      "beat": "Harin says '…네?' and the security employee answers only with a quick finger gesture.",
+      "location": "same building lobby and security desk",
+      "action": "Harin is frozen and confused; security_01 gives one simple casual single-hand finger-gun-like flick or pointing gesture with no spoken response.",
+      "scene_facts": [
+        "Harin and security_01 preserve exact continuity from slide 5",
+        "Harin's face reads as confused and suspicious rather than angry",
+        "security_01 remains dry and casual with no mocking grin",
+        "the gesture uses one simplified hand silhouette and avoids two-handed or intricate finger anatomy",
+        "no readable dialogue, labels, signs, or speech bubbles are baked into the raster"
+      ],
+      "story_clarity": "The silent gesture makes the coincidence feel deliberate without explaining the CCTV reveal.",
+      "required_entities": [
+        "Harin",
+        "security_01",
+        "simple single-hand finger gesture",
+        "security desk"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "two-handed finger guns",
+        "complex exposed fingers",
+        "laughing crowd",
+        "monitor showing Harin footage",
+        "readable text",
+        "speech bubbles",
+        "readable logo",
+        "cinematic lighting"
+      ],
+      "composition": "4:5 tighter two-shot; Harin reaction is primary and the simplified security gesture is clearly readable; reserve a small clean area near Harin for later '…네?' lettering."
+    },
+    {
+      "index": 7,
+      "slide_id": "E007_S07",
+      "role": "LANDING",
+      "beat": "Harin looks up and notices the CCTV camera.",
+      "location": "building lobby or elevator-lobby threshold",
+      "action": "Harin slowly looks upward with a frozen, flushed realization; a small ceiling-mounted CCTV camera is clearly visible along her eyeline.",
+      "scene_facts": [
+        "Harin preserves the same face, hair, and outfit identity",
+        "the CCTV camera is visibly connected to Harin's upward eyeline",
+        "Harin's reaction is understated frozen realization rather than screaming or melodrama",
+        "security_01 does not need to appear in this frame",
+        "no security-room cutaway, footage monitor, explanatory caption, readable text, or speech bubble is baked into the raster"
+      ],
+      "story_clarity": "The viewer understands that security could see Harin's private elevator behavior; this visual realization is the ending.",
+      "required_entities": [
+        "Harin",
+        "ceiling-mounted CCTV camera",
+        "upward eyeline"
+      ],
+      "forbidden_entities": [
+        "Gaeun",
+        "Taemin",
+        "security_01",
+        "security-room cutaway",
+        "monitor showing recorded footage",
+        "laughing staff",
+        "punishment scene",
+        "bag or shoulder strap",
+        "readable text",
+        "speech bubbles",
+        "cinematic lighting"
+      ],
+      "composition": "4:5 medium-close shot with Harin in the lower-middle area and the CCTV clearly visible above in her eyeline; preserve a tiny clean reaction-text area near Harin without making the frame poster-like."
+    }
+  ]
+}
