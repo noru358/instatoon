@@ -62,6 +62,25 @@ It confirms:
 
 Do not classify this image as visual drift merely because it contains a full scene rather than a character sheet.
 
+### REF_V2_SUB_01 — user-supplied supplemental v2 reference
+
+Classification: **PROJECT_REUSABLE**  
+Role: **SUPPLEMENTAL_STYLE_REFERENCE**
+
+Binary:
+- path: `assets/style_refs/v2_current/sub1.png`
+- SHA-256: `1bd41fc701bc824ebe103954acb38f6d70e144886e48a152245af29f0c8c3486`
+- size: 1,971,514 bytes
+
+Authority:
+- secondary/supplemental only;
+- does not replace REF_V2_D / REF_V2_E;
+- use it only when the active episode/render contract explicitly binds it as a supplemental style input.
+
+Machine registry:
+- `assets/style_refs/v2_current/registry.json` is the executable inventory for current v2 binaries;
+- CI fails if a current reference binary is added, removed or changed without matching registry metadata.
+
 ## Reference asset classes and request policy
 
 Reference requests are routed by **role and reuse scope**, not by episode improvisation.
