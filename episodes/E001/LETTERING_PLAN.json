@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "episode_id": "E001",
-  "episode_plan_git_blob_sha": "a3e0aa91a2721b8b5487a9037795cff135fae500",
+  "episode_plan_git_blob_sha": "c976b97fb417dbf07d594b5e1deffdfd599dd974",
   "canvas": {
     "width": 1080,
     "height": 1350
@@ -22,22 +22,78 @@
       "slide_id": "E001_S03",
       "items": [
         {
+          "text_id": "E001_S03_CHAT_TITLE_01",
+          "kind": "chat",
+          "text": "매장 전체 단톡방",
+          "box": [
+            0.62,
+            0.08,
+            0.3,
+            0.08
+          ],
+          "align": "center",
+          "font_size": 32,
+          "min_font_size": 28,
+          "padding": 8,
+          "line_spacing": 4,
+          "radius": 10
+        },
+        {
           "text_id": "E001_S03_CHAT_01",
           "kind": "chat",
           "speaker": "worker_01",
           "text": "오늘 우리 매장 애들 진짜 미쳤다",
           "box": [
+            0.55,
             0.18,
-            0.31,
-            0.64,
-            0.18
+            0.38,
+            0.16
           ],
           "align": "left",
-          "font_size": 44,
-          "min_font_size": 34,
-          "padding": 18,
-          "line_spacing": 6,
+          "font_size": 38,
+          "min_font_size": 30,
+          "padding": 14,
+          "line_spacing": 5,
+          "radius": 22
+        },
+        {
+          "text_id": "E001_S03_REACTION_01",
+          "kind": "speech",
+          "speaker": "worker_01",
+          "text": "...어?",
+          "box": [
+            0.08,
+            0.12,
+            0.24,
+            0.12
+          ],
+          "tail_to": [
+            0.34,
+            0.34
+          ],
+          "align": "center",
+          "font_size": 50,
+          "min_font_size": 40,
+          "padding": 14,
+          "line_spacing": 5,
           "radius": 28
+        },
+        {
+          "text_id": "E001_S03_READ_DECAY_01",
+          "kind": "sfx",
+          "text": "43 → 12 → 1",
+          "box": [
+            0.6,
+            0.36,
+            0.28,
+            0.08
+          ],
+          "align": "center",
+          "font_size": 34,
+          "min_font_size": 28,
+          "padding": 4,
+          "line_spacing": 3,
+          "radius": 0
         }
       ]
     },
@@ -46,54 +102,9 @@
       "slide_id": "E001_S04",
       "items": [
         {
-          "text_id": "E001_S04_CHAT_TITLE_01",
+          "text_id": "E001_S04_SYSTEM_01",
           "kind": "chat",
-          "text": "매장 전체 단톡방",
-          "box": [
-            0.22,
-            0.1,
-            0.56,
-            0.1
-          ],
-          "align": "center",
-          "font_size": 38,
-          "min_font_size": 30,
-          "padding": 10,
-          "line_spacing": 4,
-          "radius": 12
-        },
-        {
-          "text_id": "E001_S04_REACTION_01",
-          "kind": "speech",
-          "speaker": "worker_01",
-          "text": "...어?",
-          "box": [
-            0.08,
-            0.12,
-            0.26,
-            0.13
-          ],
-          "tail_to": [
-            0.34,
-            0.35
-          ],
-          "align": "center",
-          "font_size": 52,
-          "min_font_size": 42,
-          "padding": 16,
-          "line_spacing": 6,
-          "radius": 30
-        }
-      ]
-    },
-    {
-      "index": 5,
-      "slide_id": "E001_S05",
-      "items": [
-        {
-          "text_id": "E001_S05_SYSTEM_01",
-          "kind": "chat",
-          "text": "메시지를 삭제했습니다",
+          "text": "삭제된 메시지입니다",
           "box": [
             0.2,
             0.28,
@@ -108,67 +119,67 @@
           "radius": 18
         },
         {
-          "text_id": "E001_S05_READ_01",
+          "text_id": "E001_S04_READ_01",
           "kind": "chat",
-          "text": "43명 읽음",
+          "text": "1",
           "box": [
-            0.5,
+            0.72,
             0.43,
-            0.3,
-            0.09
+            0.1,
+            0.08
           ],
-          "align": "right",
-          "font_size": 30,
-          "min_font_size": 26,
-          "padding": 8,
-          "line_spacing": 4,
-          "radius": 10
+          "align": "center",
+          "font_size": 32,
+          "min_font_size": 28,
+          "padding": 4,
+          "line_spacing": 3,
+          "radius": 0
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "slide_id": "E001_S05",
+      "items": [
+        {
+          "text_id": "E001_S05_DM_01",
+          "kind": "chat",
+          "text": "괜찮아?",
+          "box": [
+            0.58,
+            0.12,
+            0.3,
+            0.1
+          ],
+          "align": "left",
+          "font_size": 40,
+          "min_font_size": 32,
+          "padding": 14,
+          "line_spacing": 5,
+          "radius": 22
+        },
+        {
+          "text_id": "E001_S05_DM_02",
+          "kind": "chat",
+          "text": "무슨 일 있었어?",
+          "box": [
+            0.51,
+            0.23,
+            0.37,
+            0.11
+          ],
+          "align": "left",
+          "font_size": 40,
+          "min_font_size": 32,
+          "padding": 14,
+          "line_spacing": 5,
+          "radius": 22
         }
       ]
     },
     {
       "index": 6,
       "slide_id": "E001_S06",
-      "items": [
-        {
-          "text_id": "E001_S06_DM_01",
-          "kind": "chat",
-          "text": "괜찮아?",
-          "box": [
-            0.47,
-            0.13,
-            0.4,
-            0.11
-          ],
-          "align": "left",
-          "font_size": 42,
-          "min_font_size": 34,
-          "padding": 16,
-          "line_spacing": 6,
-          "radius": 24
-        },
-        {
-          "text_id": "E001_S06_DM_02",
-          "kind": "chat",
-          "text": "무슨 일 있었어?",
-          "box": [
-            0.41,
-            0.25,
-            0.46,
-            0.12
-          ],
-          "align": "left",
-          "font_size": 42,
-          "min_font_size": 34,
-          "padding": 16,
-          "line_spacing": 6,
-          "radius": 24
-        }
-      ]
-    },
-    {
-      "index": 7,
-      "slide_id": "E001_S07",
       "items": []
     }
   ]
