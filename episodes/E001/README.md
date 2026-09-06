@@ -1,6 +1,6 @@
 # E001 — RESET START
 
-Status: L1_SOURCE_DISCOVERY
+Status: AWAITING_L8_USER_VOICE_GATE
 Created: 2026-09-06
 
 This is the first episode after the user-directed episode reset.
@@ -12,10 +12,14 @@ This is the first episode after the user-directed episode reset.
 
 ## Current pipeline state
 - Episode ID: E001
-- Stage: L1 SOURCE DISCOVERY / COLLECTION
-- L8 USER VOICE GATE: NOT REACHED
-- Story/cast/storyboard/render contract: NOT YET CREATED
-- Raster generation: BLOCKED until canonical gates are passed
+- L1-L7: DRAFT COMPLETE
+- Source pack: STORY_SOURCE_PACK.md
+- L8 USER VOICE GATE: PENDING
+- Storyboard/cast/render contract: NOT YET CREATED
+- Raster generation: BLOCKED
+
+## Current premise
+A worker accidentally sends an ambiguous message intended for friends to the workplace group chat, deletes it almost immediately, but dozens of coworkers have already seen it.
 
 ## Next action
-Run fresh L1-L7 from human-source-first discovery, present the compact package at L8, and stop for explicit user approval before storyboard/cast/render planning.
+Present STORY_SOURCE_PACK.md at L8 and wait for explicit user approval. Only after PASS proceed to L10 storyboard + cast routing.
