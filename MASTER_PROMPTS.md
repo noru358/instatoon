@@ -1,6 +1,6 @@
 # MASTER_PROMPTS.md
 
-# CANONICAL — INSTATOON MASTER PROMPT v2.3
+# CANONICAL — INSTATOON MASTER PROMPT v2.4
 Updated: 2026-09-06
 
 This is the single authoritative visual-generation prompt source.
@@ -193,6 +193,20 @@ Skin-color coherence:
 - main and supporting characters share the same flat local-color logic;
 - natural complexion differences are allowed, but do not give supporting/older characters an automatic yellow/orange/sepia cast.
 
+## 7.6. SCREEN / DEVICE GEOMETRY BLOCK
+
+For any screen-bearing prop, obey the episode screen contract.
+
+- a display exists only on the device's actual display face;
+- character gaze, device orientation and camera visibility must be physically compatible;
+- never put UI on the back/case of a phone or other device;
+- never twist a private device toward the audience merely so both face and screen are visible;
+- when CHARACTER_REACTION owns the frame, keep the device natural and use a separate UI inset/overlay if screen information is needed;
+- when SCREEN_INFORMATION owns the frame, choose a physically valid POV/over-shoulder/other screen-readable camera;
+- UI inset/overlay is an information layer inside one panel, not a second comic panel;
+- use the resolved contextual UI profile. For contemporary Korean ordinary messaging with no named service, use a KakaoTalk-inspired visual grammar without requiring copied branding;
+- keep meaning-bearing message text, room names, read/unread numerals and animated/decrementing read indicators out of the raster when the lettering/vector plan owns them.
+
 ## 8. SCENE PROMPT TEMPLATE
 
 SCENE:
@@ -206,6 +220,9 @@ SCENE:
 [sequence-direction context: nearby-frame redundancy to avoid, if relevant]
 [expression amplitude appropriate to beat]
 [negative space for later vector text]
+[visual information owner]
+[visual delta from previous slide]
+[screen contract / UI profile when screen-bearing]
 
 STORY CLARITY:
 [one thing the viewer must understand instantly]
@@ -293,4 +310,6 @@ If a mirror/reflection is story-relevant, preserve plausible reflection geometry
 
 Keep supporting-character skin colors inside the same flat local-color grammar as the main cast unless the story explicitly needs a complexion difference; do not introduce a yellow/sepia cast simply because a person is older or supporting cast.
 
-The compiler appends the exact story beat, scene contract, output format and required media below.
+For screen-bearing props, obey the compiled SCREEN CONTRACT literally. The display can appear only on the physical display face; character gaze, device orientation and camera view must be mutually possible. Do not rotate a private device toward the audience just to expose UI. If the frame is reaction-led, keep the handset natural and use the declared UI inset/overlay. If the frame is screen-information-led, use a physically valid screen-readable camera. UI inset is not a second panel.
+
+The compiler appends the exact story beat, visual-information owner, visual delta, screen contract, scene contract, output format and required media below.
