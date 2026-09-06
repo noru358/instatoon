@@ -63,20 +63,21 @@ Default worker roles:
 - L8 USER VOICE GATE → User / Human Editor
 - L9 VOICE LEDGER → Voice Editor
 - L10 STORYBOARD + CAST ROUTER → Storyboard & Cast Director
-- L11 EPISODE-LOCAL CHARACTER DESIGN → Character Designer
+- L11 EPISODE-LOCAL IDENTITY / ASSET NEEDS → Character & Asset Planner
 - L12 WHOLE-EPISODE VISUAL PLAN → Visual Director
-- L12.5 RENDER CONTRACT GATE → Render Contract Compiler / Validator
-- L13 TEXT-FREE ART GENERATION → Raster Renderer
-- L14 VECTOR LETTERING / COMPOSITION → Lettering & Layout Designer
+- L12.5 ASSET RESOLUTION GATE → Asset Resolver
+- L13 ASSET AUTHORING + QC → Asset Author / QC Reviewer
+- L13.5 DETERMINISTIC ART COMPOSITION → Composition Runtime
+- L14 EDITABLE LETTERING / UI → Lettering & Layout Designer
 - L15 QC → QC Reviewer
 - L16 PERFORMANCE FEEDBACK → Performance Analyst
 
 After each meaningful stage completes, report:
 STAGE / WORKER ROLE / EXECUTION ACTOR / INPUT / SOURCE-PROVENANCE / OUTPUT / STATUS / QC / NEXT.
 
-Stage reporting is audit visibility, **not an approval gate**. User approval frequency is owned by GENERATION_PROTOCOL §0.5; reporting S02/S03 internal QC does not mean asking the user to approve S02/S03.
+Stage reporting is audit visibility, **not an approval gate**. User gates are attached to material content/taste decisions and to newly authored production assets, not to every slide.
 
-For visual generation, SOURCE-PROVENANCE must additionally name the exact style and character reference assets actually supplied to the renderer.
+For stochastic asset authoring, SOURCE-PROVENANCE must name the exact reference assets/media actually supplied. Deterministic composition must name the approved production asset IDs it consumes.
 
 ### L1 — SOURCE DISCOVERY / COLLECTION
 
